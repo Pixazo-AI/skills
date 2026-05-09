@@ -30,11 +30,11 @@ A Pixazo API key. Get one free at **https://api-console.pixazo.ai/api_keys** —
 
 ### Image generation & editing
 
-`auraflow` · `bria` · `dalle` · `firered-image-edit` · `flux` · `genflare` · `gpt-image` · `grok-imagine` · `hunyuan` · `ideogram` · `longcat-image` · `nano-banana` · `p-image` · `pixelforge` · `qwen-image` · `recraft` · `reve-image` · `sdxl` · `seedream` · `stable-diffusion` · `studio-ghibli` · `tracks` · `z-image` · `kandinsky` · `gemini` · `mochi`
+`auraflow` · `bria` · `dalle` · `ernie-image` · `firered-image-edit` · `flux` · `genflare` · `glm-image` · `gpt-image` · `grok-imagine` · `hidream` · `hunyuan` · `ideogram` · `longcat-image` · `nano-banana` · `nucleus` · `p-image` · `pixelforge` · `qwen-image` · `recraft` · `reve-image` · `sdxl` · `seedream` · `smart-resize` · `stable-diffusion` · `studio-ghibli` · `tracks` · `z-image` · `kandinsky` · `gemini` · `mochi`
 
 ### Video generation
 
-`hailuo` · `higgsfield` · `kling` · `ltx` · `lucy-edit` · `luma` · `minimax` · `omnihuman` · `p-video` · `pika` · `pixverse` · `runway` · `seedance` · `sora` · `veed` · `veo` · `vidu` · `wan`
+`hailuo` · `higgsfield` · `hunyuan-video` · `kling` · `ltx` · `lucy-edit` · `luma` · `minimax` · `omnihuman` · `p-video` · `pika` · `pixverse` · `runway` · `seedance` · `sora` · `veed` · `veo` · `vidu` · `wan`
 
 ### Music & audio
 
@@ -46,7 +46,7 @@ A Pixazo API key. Get one free at **https://api-console.pixazo.ai/api_keys** —
 
 ### 3D model generation
 
-`hyper3d` · `trellis3d` · `tripo3d`
+`hyper3d` · `meshy-3d` · `trellis3d` · `tripo3d`
 
 ### Virtual try-on
 
@@ -54,7 +54,7 @@ A Pixazo API key. Get one free at **https://api-console.pixazo.ai/api_keys** —
 
 ### Image / video upscaling & enhancement
 
-`crystal-upscaler` · `seedvr` · `topaz`
+`codeformer` · `crystal-upscaler` · `gfpgan` · `seedvr` · `seedvr2-upscale` · `topaz`
 
 ## How each skill works
 

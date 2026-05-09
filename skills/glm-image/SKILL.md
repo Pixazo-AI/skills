@@ -1,13 +1,13 @@
 ---
-name: studio-ghibli
-description: Image generation/editing with Studio Ghibli API (by Ghibli) via the Pixazo API. TRIGGER when the user mentions "Studio Ghibli" or "Studio Ghibli API", or when the user asks to generate / make / create / edit / restyle an image and Studio Ghibli is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: glm-image
+description: Image generation/editing with GLM Image API (by Z.ai) via the Pixazo API. TRIGGER when the user mentions "GLM Image" or "GLM Image API", or when the user asks to generate / make / create / edit / restyle an image and GLM Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Studio Ghibli API
+# GLM Image API
 
-Ghibli-style image generation.
+Text-to-image and image-editing model from Z.ai with accurate text rendering, style transfer, and consistent character generation across multiple reference images.
 
-You can ask Studio Ghibli to handle image generation/editing. Powered by Ghibli via the Pixazo API gateway.
+You can ask GLM Image to handle image generation/editing. Powered by Z.ai via the Pixazo API gateway.
 
 ---
 
@@ -32,22 +32,32 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Studio Ghibli v1 | Text to Image | `studio-ghibli` / `generate-image-request` |
+| GLM Image v1 | Text to Image | `glm-image` / `glm-image-request` |
+| GLM Image v1 | Image to Image | `glm-image-image-to-image` / `glm-image-image-to-image-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/studio-ghibli/v1/studio-ghibli/generate`
+- `POST https://gateway.pixazo.ai/glm-image/v1/glm-image-request`
+- `POST https://gateway.pixazo.ai/v2/requests/status/glm-image_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+- `POST https://gateway.pixazo.ai/glm-image-image-to-image/v1/glm-image-image-to-image-request`
+- `POST https://gateway.pixazo.ai/glm-image-image-to-image/v1/glm-image-image-to-image-request-result`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/studio-ghibli/v1/studio-ghibli/generate' \
+curl -X POST 'https://gateway.pixazo.ai/glm-image/v1/glm-image-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A peaceful village in the mountains at sunset, Studio Ghibli style"
+  "prompt": "An elegant watercolor menu card painted on textured cream paper, soft turquoise washes, golden accents, dreamy bokeh background, editorial photography style",
+  "image_size": "square_hd",
+  "num_inference_steps": 30,
+  "guidance_scale": 1.5,
+  "num_images": 1,
+  "enable_safety_checker": true,
+  "output_format": "jpeg"
 }'
 ```
 
@@ -56,13 +66,19 @@ curl -X POST 'https://gateway.pixazo.ai/studio-ghibli/v1/studio-ghibli/generate'
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/studio-ghibli/v1/studio-ghibli/generate",
+    "https://gateway.pixazo.ai/glm-image/v1/glm-image-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A peaceful village in the mountains at sunset, Studio Ghibli style"
+  "prompt": "An elegant watercolor menu card painted on textured cream paper, soft turquoise washes, golden accents, dreamy bokeh background, editorial photography style",
+  "image_size": "square_hd",
+  "num_inference_steps": 30,
+  "guidance_scale": 1.5,
+  "num_images": 1,
+  "enable_safety_checker": true,
+  "output_format": "jpeg"
 },
     timeout=300,
 )
@@ -73,14 +89,20 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/studio-ghibli/v1/studio-ghibli/generate', {
+const res = await fetch('https://gateway.pixazo.ai/glm-image/v1/glm-image-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A peaceful village in the mountains at sunset, Studio Ghibli style"
+  "prompt": "An elegant watercolor menu card painted on textured cream paper, soft turquoise washes, golden accents, dreamy bokeh background, editorial photography style",
+  "image_size": "square_hd",
+  "num_inference_steps": 30,
+  "guidance_scale": 1.5,
+  "num_images": 1,
+  "enable_safety_checker": true,
+  "output_format": "jpeg"
 }),
 });
 console.log(await res.json());
@@ -135,13 +157,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/studio-ghibli.md`
+> **Fetch:** `https://www.pixazo.ai/models/glm-image.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/studio-ghibli`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/glm-image`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `auraflow`, `z-image`, `bria`, `dalle`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `dalle`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `hidream`, `ernie-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

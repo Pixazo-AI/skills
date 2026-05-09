@@ -1,13 +1,13 @@
 ---
-name: p-image
-description: Image upscaling / enhancement with P Image API (by Pruna AI) via the Pixazo API. TRIGGER when the user mentions "P Image" or "P Image API", or when the user asks to enhance / upscale / improve / sharpen an image or video and P Image is named or implied. DO NOT TRIGGER for image / video / music / voice / 3d / try-on — each has its own skill.
+name: seedvr2-upscale
+description: Image upscaling / enhancement with SeedVR2 Upscaler API (by Seed VR) via the Pixazo API. TRIGGER when the user mentions "SeedVR2 Upscaler" or "SeedVR2 Upscaler API", or when the user asks to enhance / upscale / improve / sharpen an image or video and SeedVR2 Upscaler is named or implied. DO NOT TRIGGER for image / video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# P Image API
+# SeedVR2 Upscaler API
 
-AI-powered image editing and transformation model by Pruna AI.
+High-quality image super-resolution / upscaling powered by SeedVR2. Submit an image URL, optionally specify target resolution and seed; receive an upscaled image when ready.
 
-You can ask P Image to handle image upscaling / enhancement. Powered by Pruna AI via the Pixazo API gateway.
+You can ask SeedVR2 Upscaler to handle image upscaling / enhancement. Powered by Seed VR via the Pixazo API gateway.
 
 ---
 
@@ -32,27 +32,22 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| P Image v1 | Image to Image (Image Editing) | `p-image` / `image-request` |
-| P Image Upscale | Image to Image (Image Upscaler) | `p-image-upscale` / `image-request` |
+| SeedVR2 Upscaler | Image to Image (Image Upscaler) | `seedvr2-upscale` / `seedvr2-upscale-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate`
-- `POST https://gateway.pixazo.ai/p-image-upscale/v1/p-image-upscale/generate`
+- `POST https://gateway.pixazo.ai/seedvr2-upscale/v1/seedvr2-upscale/image-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate' \
+curl -X POST 'https://gateway.pixazo.ai/seedvr2-upscale/v1/seedvr2-upscale/image-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "The woman dress is changed to black",
-  "images": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
-  ]
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/unblur-sharpener-hero-before.webp"
 }'
 ```
 
@@ -61,16 +56,13 @@ curl -X POST 'https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate",
+    "https://gateway.pixazo.ai/seedvr2-upscale/v1/seedvr2-upscale/image-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "The woman dress is changed to black",
-  "images": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
-  ]
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/unblur-sharpener-hero-before.webp"
 },
     timeout=300,
 )
@@ -81,17 +73,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate', {
+const res = await fetch('https://gateway.pixazo.ai/seedvr2-upscale/v1/seedvr2-upscale/image-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "The woman dress is changed to black",
-  "images": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
-  ]
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/unblur-sharpener-hero-before.webp"
 }),
 });
 console.log(await res.json());
@@ -133,13 +122,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/p-image.md`
+> **Fetch:** `https://www.pixazo.ai/models/seedvr2-upscale.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/p-image`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/seedvr2-upscale`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image upscaling / enhancement models:** `crystal-upscaler`, `seedvr`, `seedvr2-upscale`, `topaz`
+- **Other image upscaling / enhancement models:** `crystal-upscaler`, `seedvr`, `topaz`, `p-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

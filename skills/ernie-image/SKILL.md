@@ -1,13 +1,13 @@
 ---
-name: p-image
-description: Image upscaling / enhancement with P Image API (by Pruna AI) via the Pixazo API. TRIGGER when the user mentions "P Image" or "P Image API", or when the user asks to enhance / upscale / improve / sharpen an image or video and P Image is named or implied. DO NOT TRIGGER for image / video / music / voice / 3d / try-on — each has its own skill.
+name: ernie-image
+description: Image generation/editing with Ernie Image API (by Baidu) via the Pixazo API. TRIGGER when the user mentions "Ernie Image" or "Ernie Image API", or when the user asks to generate / make / create / edit / restyle an image and Ernie Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# P Image API
+# Ernie Image API
 
-AI-powered image editing and transformation model by Pruna AI.
+Baidu's Ernie Image generates high-quality images from text prompts using the ERNIE multimodal foundation model.
 
-You can ask P Image to handle image upscaling / enhancement. Powered by Pruna AI via the Pixazo API gateway.
+You can ask Ernie Image to handle image generation/editing. Powered by Baidu via the Pixazo API gateway.
 
 ---
 
@@ -32,27 +32,23 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| P Image v1 | Image to Image (Image Editing) | `p-image` / `image-request` |
-| P Image Upscale | Image to Image (Image Upscaler) | `p-image-upscale` / `image-request` |
+| Ernie Image 1.0 | Text to Image | `ernie-image` / `ernie-image-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate`
-- `POST https://gateway.pixazo.ai/p-image-upscale/v1/p-image-upscale/generate`
+- `POST https://gateway.pixazo.ai/ernie-image/v1/ernie-image-request`
+- `POST https://gateway.pixazo.ai/v2/requests/status/ernie-image_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate' \
+curl -X POST 'https://gateway.pixazo.ai/ernie-image/v1/ernie-image-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "The woman dress is changed to black",
-  "images": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
-  ]
+  "prompt": "A serene mountain landscape at sunset with golden light"
 }'
 ```
 
@@ -61,16 +57,13 @@ curl -X POST 'https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate",
+    "https://gateway.pixazo.ai/ernie-image/v1/ernie-image-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "The woman dress is changed to black",
-  "images": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
-  ]
+  "prompt": "A serene mountain landscape at sunset with golden light"
 },
     timeout=300,
 )
@@ -81,17 +74,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate', {
+const res = await fetch('https://gateway.pixazo.ai/ernie-image/v1/ernie-image-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "The woman dress is changed to black",
-  "images": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
-  ]
+  "prompt": "A serene mountain landscape at sunset with golden light"
 }),
 });
 console.log(await res.json());
@@ -99,14 +89,27 @@ console.log(await res.json());
 
 ### Step 4 — Show the user the result
 
-image upscaling / enhancement via this model is **synchronous** — no polling. The response is JSON, e.g.:
+image generation/editing via this model is **synchronous** — no polling. The response is JSON, e.g.:
 
 ```json
-{ "output": [{ "url": "https://…" }] }
+{ "images": [{ "url": "https://…" }] }
 ```
 
 Pull the URL out and show it to the user (in chat, render inline if your environment supports it). Offer to: download it, edit it further, or generate variations.
 
+
+---
+
+### Inputs the user might give you
+
+- **Prompt only** — a description. Build the request from Step 3.
+- **A reference image** — passed as a URL or base64 data URL. Use the edit endpoint.
+- **Image size** — translate user phrases to the API's `image_size` enum:
+  - "square / Instagram" → `square_hd`
+  - "portrait / vertical / 9:16" → `portrait_16_9`
+  - "landscape / horizontal / 16:9" → `landscape_16_9`
+- **Number of variations** — `num_images` (1–4). Default 1.
+- **Seed** — for reproducibility. Default 42, or pass through if the user says "same seed".
 
 
 ---
@@ -133,13 +136,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/p-image.md`
+> **Fetch:** `https://www.pixazo.ai/models/ernie-image.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/p-image`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/ernie-image`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image upscaling / enhancement models:** `crystal-upscaler`, `seedvr`, `seedvr2-upscale`, `topaz`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `dalle`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

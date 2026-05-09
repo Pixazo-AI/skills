@@ -34,6 +34,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 |---|---|---|
 | SeedVR2 | Image to Image (Image Upscaler) | `seedvr-upscale` / `upscale-image-request` |
 | SeedVR2 | Video to Video (Video Upscaler) | `seedvr-upscale` / `upscale-video` |
+| SeedVR2 7B | Image to Image (Image Upscaler) | `seedvr2-upscale` / `seedvr2-upscale-request` |
 
 ### Step 3 — Make the API call
 
@@ -42,6 +43,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/seedvr-upscale/v1/upscale-image/generate`
 - `POST https://gateway.pixazo.ai/seedvr-upscale/v1/upscale-video/generate`
 - `POST https://gateway.pixazo.ai/seedvr-upscale/v1/upscale-video/prediction`
+- `POST https://gateway.pixazo.ai/seedvr2-upscale/v1/seedvr2-upscale/image-request`
 
 **Sample request (primary operation)**
 
@@ -139,5 +141,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image upscaling / enhancement models:** `crystal-upscaler`, `topaz`, `p-image`
+- **Other image upscaling / enhancement models:** `crystal-upscaler`, `seedvr2-upscale`, `topaz`, `p-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

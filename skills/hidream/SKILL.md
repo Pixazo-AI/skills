@@ -1,13 +1,13 @@
 ---
-name: studio-ghibli
-description: Image generation/editing with Studio Ghibli API (by Ghibli) via the Pixazo API. TRIGGER when the user mentions "Studio Ghibli" or "Studio Ghibli API", or when the user asks to generate / make / create / edit / restyle an image and Studio Ghibli is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: hidream
+description: Image generation/editing with HiDream I1 Full API (by HiDream) via the Pixazo API. TRIGGER when the user mentions "HiDream I1 Full" or "HiDream I1 Full API", or when the user asks to generate / make / create / edit / restyle an image and HiDream I1 Full is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Studio Ghibli API
+# HiDream I1 Full API
 
-Ghibli-style image generation.
+Open-source 17B-parameter image generative foundation model delivering state-of-the-art text-to-image and image-to-image generation in seconds.
 
-You can ask Studio Ghibli to handle image generation/editing. Powered by Ghibli via the Pixazo API gateway.
+You can ask HiDream I1 Full to handle image generation/editing. Powered by HiDream via the Pixazo API gateway.
 
 ---
 
@@ -32,22 +32,37 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Studio Ghibli v1 | Text to Image | `studio-ghibli` / `generate-image-request` |
+| HiDream I1 Full | Text to Image | `hidream-i1-full` / `hidream-i1-full-request` |
+| HiDream I1 Full | Image to Image | `hidream-i1-full-image-to-image` / `hidream-i1-full-image-to-image-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/studio-ghibli/v1/studio-ghibli/generate`
+- `POST https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request`
+- `POST https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request-result`
+- `POST https://gateway.pixazo.ai/hidream-i1-full-image-to-image/v1/hidream-i1-full-image-to-image-request`
+- `POST https://gateway.pixazo.ai/v2/requests/status`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/studio-ghibli/v1/studio-ghibli/generate' \
+curl -X POST 'https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A peaceful village in the mountains at sunset, Studio Ghibli style"
+  "prompt": "a cat holding a skateboard which has fal written on it in red spray paint",
+  "negative_prompt": "",
+  "image_size": {
+    "height": 1024,
+    "width": 1024
+  },
+  "num_inference_steps": 50,
+  "guidance_scale": 5,
+  "num_images": 1,
+  "enable_safety_checker": true,
+  "output_format": "jpeg",
+  "loras": []
 }'
 ```
 
@@ -56,13 +71,24 @@ curl -X POST 'https://gateway.pixazo.ai/studio-ghibli/v1/studio-ghibli/generate'
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/studio-ghibli/v1/studio-ghibli/generate",
+    "https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A peaceful village in the mountains at sunset, Studio Ghibli style"
+  "prompt": "a cat holding a skateboard which has fal written on it in red spray paint",
+  "negative_prompt": "",
+  "image_size": {
+    "height": 1024,
+    "width": 1024
+  },
+  "num_inference_steps": 50,
+  "guidance_scale": 5,
+  "num_images": 1,
+  "enable_safety_checker": true,
+  "output_format": "jpeg",
+  "loras": []
 },
     timeout=300,
 )
@@ -73,14 +99,25 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/studio-ghibli/v1/studio-ghibli/generate', {
+const res = await fetch('https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A peaceful village in the mountains at sunset, Studio Ghibli style"
+  "prompt": "a cat holding a skateboard which has fal written on it in red spray paint",
+  "negative_prompt": "",
+  "image_size": {
+    "height": 1024,
+    "width": 1024
+  },
+  "num_inference_steps": 50,
+  "guidance_scale": 5,
+  "num_images": 1,
+  "enable_safety_checker": true,
+  "output_format": "jpeg",
+  "loras": []
 }),
 });
 console.log(await res.json());
@@ -135,13 +172,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/studio-ghibli.md`
+> **Fetch:** `https://www.pixazo.ai/models/hidream.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/studio-ghibli`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/hidream`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `auraflow`, `z-image`, `bria`, `dalle`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `dalle`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `ernie-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

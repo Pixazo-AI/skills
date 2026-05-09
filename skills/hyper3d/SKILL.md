@@ -179,5 +179,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other 3D model generation models:** `hunyuan`, `tripo3d`, `trellis3d`
+- **Other 3D model generation models:** `hunyuan`, `tripo3d`, `trellis3d`, `meshy-3d`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

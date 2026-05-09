@@ -32,6 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Ideogram Remove Background | Image to Image (Image Background Removal) | `ideogram-remove-background` / `ideogram-remove-background-request` |
 | Ideogram v2 | Text to Image | `ideogram-generate` / `get-image` |
 | Ideogram v2 | Utility (Image to Text — Captioning) | `ideogram-generate` / `describe-image` |
 | Ideogram v2 | Image to Image (Image Editing) | `ideogram-generate` / `edit-image` |
@@ -45,6 +46,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-remove-background-request`
+- `POST https://gateway.pixazo.ai/v2/requests/status/ideogram-remove-background_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 - `POST https://gateway.pixazo.ai/ideogramV_2/v1/generate`
 - `POST https://gateway.pixazo.ai/ideogramV_2/v1/describe`
 - `POST https://gateway.pixazo.ai/ideogramV_2/v1/edit`
@@ -57,22 +60,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/ideogramV_2/v1/generate' \
+curl -X POST 'https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-remove-background-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-    "image_request": {
-        "prompt": "A serene tropical beach scene. Dominating the foreground are tall palm trees with lush green leaves, standing tall against a backdrop of a sandy beach. The beach leads to the azure waters of the sea, which gently kisses the shoreline. In the distance, there is an island or landmass with a silhouette of what appears to be a lighthouse or tower. The sky above is painted with fluffy white clouds, some of which are tinged with hues of pink and orange, suggesting either a sunrise or sunset.",
-        "negative_prompt": "blur",
-        "model": "V_2",
-        "aspect_ratio": "ASPECT_10_16",
-        "magic_prompt_option": "AUTO",
-        "seed": 212,
-        "style_type": "AUTO",
-        "color_palette": {
-            "name": "JUNGLE"
-        }
-    }
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg"
 }'
 ```
 
@@ -81,24 +73,13 @@ curl -X POST 'https://gateway.pixazo.ai/ideogramV_2/v1/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/ideogramV_2/v1/generate",
+    "https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-remove-background-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-    "image_request": {
-        "prompt": "A serene tropical beach scene. Dominating the foreground are tall palm trees with lush green leaves, standing tall against a backdrop of a sandy beach. The beach leads to the azure waters of the sea, which gently kisses the shoreline. In the distance, there is an island or landmass with a silhouette of what appears to be a lighthouse or tower. The sky above is painted with fluffy white clouds, some of which are tinged with hues of pink and orange, suggesting either a sunrise or sunset.",
-        "negative_prompt": "blur",
-        "model": "V_2",
-        "aspect_ratio": "ASPECT_10_16",
-        "magic_prompt_option": "AUTO",
-        "seed": 212,
-        "style_type": "AUTO",
-        "color_palette": {
-            "name": "JUNGLE"
-        }
-    }
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg"
 },
     timeout=300,
 )
@@ -109,25 +90,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/ideogramV_2/v1/generate', {
+const res = await fetch('https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-remove-background-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    "image_request": {
-        "prompt": "A serene tropical beach scene. Dominating the foreground are tall palm trees with lush green leaves, standing tall against a backdrop of a sandy beach. The beach leads to the azure waters of the sea, which gently kisses the shoreline. In the distance, there is an island or landmass with a silhouette of what appears to be a lighthouse or tower. The sky above is painted with fluffy white clouds, some of which are tinged with hues of pink and orange, suggesting either a sunrise or sunset.",
-        "negative_prompt": "blur",
-        "model": "V_2",
-        "aspect_ratio": "ASPECT_10_16",
-        "magic_prompt_option": "AUTO",
-        "seed": 212,
-        "style_type": "AUTO",
-        "color_palette": {
-            "name": "JUNGLE"
-        }
-    }
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg"
 }),
 });
 console.log(await res.json());
@@ -190,5 +160,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `dalle`, `sdxl`, `firered-image-edit`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `dalle`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

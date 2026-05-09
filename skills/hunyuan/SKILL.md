@@ -32,34 +32,28 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Hunyuan v3.0 | Text to Image | `hunyuan-image` / `generate-image-request` |
-| Hunyuan v3.0 | Image to Image (3D Models — Image to 3D) | `hunyuan3d-3-0-api-294` / `hunyuan3d-3-0-api-request` |
+| Hunyuan3D 3.1 Pro | Text to 3D | `hunyuan-3d` / `hunyuan-3d-request` |
+| Hunyuan3D 3.0 | Sketch to 3D | `hunyuan3d-3-0-api-294` / `hunyuan3d-3-0-api-request` |
+| Hunyuan Image 3.0 | Text to Image | `hunyuan-image` / `generate-image-request` |
 | Hunyuan Image 3.0 Instruct | Text to Image | `hunyuan-image-3-0-instruct` / `hunyuan-image-3-0-instruct-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/hunyuan-image/v1/hunyuan-image/generateRequest`
+- `POST https://gateway.pixazo.ai/hunyuan-3d/v1/hunyuan-3d-request`
 - `POST https://gateway.pixazo.ai/hunyuan3d-3-0-api-294/v1/hunyuan3d-3-0-api-request`
+- `POST https://gateway.pixazo.ai/hunyuan-image/v1/hunyuan-image/generateRequest`
 - `POST https://gateway.pixazo.ai/hunyuan-image-3-0-instruct/v1/hunyuan-image-3-0-instruct-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/hunyuan-image/v1/hunyuan-image/generateRequest' \
+curl -X POST 'https://gateway.pixazo.ai/hunyuan-3d/v1/hunyuan-3d-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A vibrant sunflower field at golden hour, with bees hovering above, soft wind rustling petals, ultra-detailed, photorealistic",
-  "negative_prompt": "blurry, cartoon, low quality, watermark",
-  "image_size": "landscape_16_9",
-  "num_images": 1,
-  "num_inference_steps": 28,
-  "guidance_scale": 7.5,
-  "enable_safety_checker": true,
-  "output_format": "png",
-  "enable_prompt_expansion": true
+  "prompt": "A medieval stone castle tower with moss-covered walls and a spiral staircase"
 }'
 ```
 
@@ -68,21 +62,13 @@ curl -X POST 'https://gateway.pixazo.ai/hunyuan-image/v1/hunyuan-image/generateR
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/hunyuan-image/v1/hunyuan-image/generateRequest",
+    "https://gateway.pixazo.ai/hunyuan-3d/v1/hunyuan-3d-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A vibrant sunflower field at golden hour, with bees hovering above, soft wind rustling petals, ultra-detailed, photorealistic",
-  "negative_prompt": "blurry, cartoon, low quality, watermark",
-  "image_size": "landscape_16_9",
-  "num_images": 1,
-  "num_inference_steps": 28,
-  "guidance_scale": 7.5,
-  "enable_safety_checker": true,
-  "output_format": "png",
-  "enable_prompt_expansion": true
+  "prompt": "A medieval stone castle tower with moss-covered walls and a spiral staircase"
 },
     timeout=300,
 )
@@ -93,22 +79,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/hunyuan-image/v1/hunyuan-image/generateRequest', {
+const res = await fetch('https://gateway.pixazo.ai/hunyuan-3d/v1/hunyuan-3d-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A vibrant sunflower field at golden hour, with bees hovering above, soft wind rustling petals, ultra-detailed, photorealistic",
-  "negative_prompt": "blurry, cartoon, low quality, watermark",
-  "image_size": "landscape_16_9",
-  "num_images": 1,
-  "num_inference_steps": 28,
-  "guidance_scale": 7.5,
-  "enable_safety_checker": true,
-  "output_format": "png",
-  "enable_prompt_expansion": true
+  "prompt": "A medieval stone castle tower with moss-covered walls and a spiral staircase"
 }),
 });
 console.log(await res.json());
@@ -127,12 +105,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/hunyuan-image/v1/hunyuan-image/generateRequest", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/hunyuan-3d/v1/hunyuan-3d-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/hunyuan-image/v1/hunyuan-image/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/hunyuan-3d/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -183,5 +161,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other 3D model generation models:** `hyper3d`, `tripo3d`, `trellis3d`
+- **Other 3D model generation models:** `hyper3d`, `tripo3d`, `trellis3d`, `meshy-3d`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

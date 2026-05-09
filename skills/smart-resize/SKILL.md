@@ -1,13 +1,13 @@
 ---
-name: p-image
-description: Image upscaling / enhancement with P Image API (by Pruna AI) via the Pixazo API. TRIGGER when the user mentions "P Image" or "P Image API", or when the user asks to enhance / upscale / improve / sharpen an image or video and P Image is named or implied. DO NOT TRIGGER for image / video / music / voice / 3d / try-on — each has its own skill.
+name: smart-resize
+description: Image generation/editing with Smart Resize API (by Smart Resize) via the Pixazo API. TRIGGER when the user mentions "Smart Resize" or "Smart Resize API", or when the user asks to generate / make / create / edit / restyle an image and Smart Resize is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# P Image API
+# Smart Resize API
 
-AI-powered image editing and transformation model by Pruna AI.
+Intelligently resize images while preserving important content and visual quality.
 
-You can ask P Image to handle image upscaling / enhancement. Powered by Pruna AI via the Pixazo API gateway.
+You can ask Smart Resize to handle image generation/editing. Powered by Smart Resize via the Pixazo API gateway.
 
 ---
 
@@ -32,44 +32,33 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| P Image v1 | Image to Image (Image Editing) | `p-image` / `image-request` |
-| P Image Upscale | Image to Image (Image Upscaler) | `p-image-upscale` / `image-request` |
+| Smart Resize 1.0 | Image to Image | `smart-resize` / `smart-resize-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate`
-- `POST https://gateway.pixazo.ai/p-image-upscale/v1/p-image-upscale/generate`
+_See the full reference for endpoint URLs._
 
 **Sample request (primary operation)**
 
-```bash
-curl -X POST 'https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate' \
-  -H 'Content-Type: application/json' \
-  -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
-  -d '{
-  "prompt": "The woman dress is changed to black",
-  "images": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
-  ]
-}'
-```
+_The full reference includes ready-to-paste curl, Python, and JavaScript examples for each operation._
 
 **Python**
 
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate",
+    "<endpoint>",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "The woman dress is changed to black",
-  "images": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg",
+  "target_sizes": [
+    "1024x1024",
+    "1920x1080"
   ]
 },
     timeout=300,
@@ -81,16 +70,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/p-image/v1/p-image-edit/generate', {
+const res = await fetch('<endpoint>', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "The woman dress is changed to black",
-  "images": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg",
+  "target_sizes": [
+    "1024x1024",
+    "1920x1080"
   ]
 }),
 });
@@ -99,14 +89,27 @@ console.log(await res.json());
 
 ### Step 4 — Show the user the result
 
-image upscaling / enhancement via this model is **synchronous** — no polling. The response is JSON, e.g.:
+image generation/editing via this model is **synchronous** — no polling. The response is JSON, e.g.:
 
 ```json
-{ "output": [{ "url": "https://…" }] }
+{ "images": [{ "url": "https://…" }] }
 ```
 
 Pull the URL out and show it to the user (in chat, render inline if your environment supports it). Offer to: download it, edit it further, or generate variations.
 
+
+---
+
+### Inputs the user might give you
+
+- **Prompt only** — a description. Build the request from Step 3.
+- **A reference image** — passed as a URL or base64 data URL. Use the edit endpoint.
+- **Image size** — translate user phrases to the API's `image_size` enum:
+  - "square / Instagram" → `square_hd`
+  - "portrait / vertical / 9:16" → `portrait_16_9`
+  - "landscape / horizontal / 16:9" → `landscape_16_9`
+- **Number of variations** — `num_images` (1–4). Default 1.
+- **Seed** — for reproducibility. Default 42, or pass through if the user says "same seed".
 
 
 ---
@@ -133,13 +136,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/p-image.md`
+> **Fetch:** `https://www.pixazo.ai/models/smart-resize.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/p-image`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/smart-resize`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image upscaling / enhancement models:** `crystal-upscaler`, `seedvr`, `seedvr2-upscale`, `topaz`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `dalle`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `nucleus`, `glm-image`, `hidream`, `ernie-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

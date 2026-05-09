@@ -36,7 +36,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Flux 2 Pro | Image to Image (LoRA Trainer) | `flux-2-pro-image-to-image-trainer-831` / `flux-2-pro-image-to-image-trainer-request` |
 | Flux 2 Pro | Text to Image | `flux-2-pro-text-to-image-799` / `flux-2-pro-text-to-image-request` |
 | Flux 2 Pro | Image to Image (LoRA Trainer) | `flux-2-pro-text-to-image-trainer-712` / `flux-2-pro-text-to-image-trainer-request` |
-| Flux | Image Restoration | `flux-kontext-restore-image` / `image-restore-request` |
+| Flux Kontext | Image Restoration | `flux-kontext-restore-image` / `image-restore-request` |
 | Flux 2 Klein | Text to Image | `flux-2-klein-4b` / `text-to-image` |
 | Flux 2 Dev | Text to Image | `flux-2-dev` / `generatet2i` |
 | Flux Pro 1.1 | Text to Image | `flux-pro-1-1` / `pro1-1-ultra-generaterequest` |
@@ -191,5 +191,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `dalle`, `sdxl`, `firered-image-edit`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `dalle`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

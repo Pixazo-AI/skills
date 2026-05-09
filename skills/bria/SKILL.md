@@ -32,22 +32,24 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| BRIA FIBO | Text to Image | `bria-fibo-bbq-preview` / `bria-fibo-bbq-preview-request` |
 | Bria RMBG 2.0 | Image to Image (Image Background Removal) | `bria-rmbg-2-0-682` / `bria-rmbg-2-0-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/bria-fibo-bbq-preview/v1/bria-fibo-bbq-preview-request`
 - `POST https://gateway.pixazo.ai/bria-rmbg-2-0-682/v1/bria-rmbg-2-0-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/bria-rmbg-2-0-682/v1/bria-rmbg-2-0-request' \
+curl -X POST 'https://gateway.pixazo.ai/bria-fibo-bbq-preview/v1/bria-fibo-bbq-preview-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://storage.googleapis.com/generativeai-downloads/images/cat.jpg"
+  "prompt": "A magnificent hot air balloon festival at sunrise, dozens of colorful balloons floating over a misty valley with rolling hills"
 }'
 ```
 
@@ -56,13 +58,13 @@ curl -X POST 'https://gateway.pixazo.ai/bria-rmbg-2-0-682/v1/bria-rmbg-2-0-reque
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/bria-rmbg-2-0-682/v1/bria-rmbg-2-0-request",
+    "https://gateway.pixazo.ai/bria-fibo-bbq-preview/v1/bria-fibo-bbq-preview-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://storage.googleapis.com/generativeai-downloads/images/cat.jpg"
+  "prompt": "A magnificent hot air balloon festival at sunrise, dozens of colorful balloons floating over a misty valley with rolling hills"
 },
     timeout=300,
 )
@@ -73,14 +75,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/bria-rmbg-2-0-682/v1/bria-rmbg-2-0-request', {
+const res = await fetch('https://gateway.pixazo.ai/bria-fibo-bbq-preview/v1/bria-fibo-bbq-preview-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://storage.googleapis.com/generativeai-downloads/images/cat.jpg"
+  "prompt": "A magnificent hot air balloon festival at sunrise, dozens of colorful balloons floating over a misty valley with rolling hills"
 }),
 });
 console.log(await res.json());
@@ -143,5 +145,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `dalle`, `sdxl`, `firered-image-edit`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `dalle`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

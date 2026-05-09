@@ -1,13 +1,13 @@
 ---
-name: veed
-description: Video generation with Veed AI API (by Veed) via the Pixazo API. TRIGGER when the user mentions "Veed" or "Veed AI API", or when the user asks to generate / make / create a video / clip / animation and Veed is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+name: meshy-3d
+description: 3D model generation with Meshy 6 API (by Meshy) via the Pixazo API. TRIGGER when the user mentions "Meshy 6" or "Meshy 6 API", or when the user asks to generate / make a 3D model / mesh / asset and Meshy 6 is named or implied. DO NOT TRIGGER for image / video / music / voice / try-on — each has its own skill.
 ---
 
-# Veed AI API
+# Meshy 6 API
 
-Video editing and processing capabilities.
+Meshy 6 — production-ready 3D model generation from text prompts or reference images.
 
-You can ask Veed to handle video generation. Powered by Veed via the Pixazo API gateway.
+You can ask Meshy 6 to handle 3D model generation. Powered by Meshy via the Pixazo API gateway.
 
 ---
 
@@ -32,25 +32,34 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Veed Fabric v1.0 | Audio to Video (Ref Image + Ref Audio to Video — Talking Avatar) | `veed-fabric-1-0-api-130` / `veed-fabric-1-0-api-request` |
-| Veed v1 | Video to Video (Video Background Remover) | `veed-video-background-remover-541` / `veed-video-background-remover-request` |
+| Meshy 6 | Text to Image (3D Models — Text to 3D) | `meshy-6-text-to-3d` / `meshy-6-text-to-3d-request` |
+| Meshy 6 | Image to Image (3D Models — Image to 3D) | `meshy-6-image-to-3d` / `meshy-6-image-to-3d-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request`
+- `POST https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request`
+- `POST https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request-result`
+- `POST https://gateway.pixazo.ai/meshy-6-image-to-3d/v1/meshy-6-image-to-3d-request`
+- `POST https://gateway.pixazo.ai/v2/requests/status/your-request-id`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request' \
+curl -X POST 'https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Oz_g4AwQvXtXpUHL3Pa7u_Hope.mp3",
-  "resolution": "720p"
+  "prompt": "A rustic antique wooden treasure chest with iron bands and ornate metalwork",
+  "mode": "full",
+  "topology": "triangle",
+  "target_polycount": 30000,
+  "should_remesh": true,
+  "symmetry_mode": "auto",
+  "rigging_height_meters": 1.7,
+  "animation_action_id": 1001,
+  "enable_safety_checker": true
 }'
 ```
 
@@ -59,15 +68,21 @@ curl -X POST 'https://gateway.pixazo.ai/veed-video-background-remover-541/v1/vee
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request",
+    "https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Oz_g4AwQvXtXpUHL3Pa7u_Hope.mp3",
-  "resolution": "720p"
+  "prompt": "A rustic antique wooden treasure chest with iron bands and ornate metalwork",
+  "mode": "full",
+  "topology": "triangle",
+  "target_polycount": 30000,
+  "should_remesh": true,
+  "symmetry_mode": "auto",
+  "rigging_height_meters": 1.7,
+  "animation_action_id": 1001,
+  "enable_safety_checker": true
 },
     timeout=300,
 )
@@ -78,16 +93,22 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request', {
+const res = await fetch('https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Oz_g4AwQvXtXpUHL3Pa7u_Hope.mp3",
-  "resolution": "720p"
+  "prompt": "A rustic antique wooden treasure chest with iron bands and ornate metalwork",
+  "mode": "full",
+  "topology": "triangle",
+  "target_polycount": 30000,
+  "should_remesh": true,
+  "symmetry_mode": "auto",
+  "rigging_height_meters": 1.7,
+  "animation_action_id": 1001,
+  "enable_safety_checker": true
 }),
 });
 console.log(await res.json());
@@ -95,7 +116,7 @@ console.log(await res.json());
 
 ### Step 4 — Poll until ready, then show the user
 
-Video generation is **asynchronous**. The first response returns a `task_id` (or `request_id`). Then poll a status endpoint until the video is ready.
+3d generation is **asynchronous**. The first response returns a `task_id` (or `request_id`). Then poll a status endpoint until the 3d is ready.
 
 Typical loop:
 
@@ -106,12 +127,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/veed-video-background-remover-541/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -124,7 +145,7 @@ result_url = status.get("output_url") or status.get("video_url") or status.get("
 
 The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
 
-> **Fetch:** `https://www.pixazo.ai/models/veed.md`
+> **Fetch:** `https://www.pixazo.ai/models/meshy-3d.md`
 
 Show the result URL to the user when ready (offer to download, share, or generate variations).
 
@@ -154,13 +175,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/veed.md`
+> **Fetch:** `https://www.pixazo.ai/models/meshy-3d.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/veed`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/meshy-3d`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `grok-imagine`, `ltx`, `luma`, `hailuo`, `mochi`, `stable-diffusion`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`
+- **Other 3D model generation models:** `hunyuan`, `hyper3d`, `tripo3d`, `trellis3d`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
