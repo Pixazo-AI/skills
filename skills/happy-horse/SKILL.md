@@ -34,7 +34,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 |---|---|---|
 | Happy Horse 1.0 | Text to Video | `happy-horse-1-0` / `text-to-video` |
 | Happy Horse 1.0 | Image to Video | `happy-horse-1-0` / `image-to-video` |
-| Happy Horse 1.0 | Reference to Video (Ref Image to Video) | `happy-horse-1-0` / `reference-to-video` |
+| Happy Horse 1.0 | Reference to Video (Ref Images to Video) | `happy-horse-1-0` / `reference-to-video` |
 | Happy Horse 1.0 | Video to Video (Video Editing) | `happy-horse-1-0` / `video-to-video` |
 
 ### Step 3 — Make the API call

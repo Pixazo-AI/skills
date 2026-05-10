@@ -42,7 +42,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Kling O1 | Video to Video (Video Editing) | `kling-o1-edit-video-video-to-video-634` / `kling-o1-edit-video-video-to-video-request` |
 | Kling O1 | Image to Video (First/Last Frame to Video) | `kling-o1-first-frame-last-frame-to-video-857` / `kling-o1-first-frame-last-frame-to-video-request` |
 | Kling O1 | Image to Image | `kling-o1-image-208` / `kling-o1-image-request` |
-| Kling O1 | Reference to Video (Ref Image to Video) | `kling-o1-reference-image-to-video-382` / `kling-o1-reference-image-to-video-request` |
+| Kling O1 | Reference to Video (Ref Images to Video) | `kling-o1-reference-image-to-video-382` / `kling-o1-reference-image-to-video-request` |
 | Kling O1 | Reference to Video (Ref Video to Video) | `kling-o1-reference-video-to-video-315` / `kling-o1-reference-video-to-video-request` |
 | Kling v2.6 Standard | Video to Video (Video Editing — Motion Control) | `kling-video-v2-6-standard-motion-control` / `kling-video-v2-6-standard-motion-control-request` |
 | Kling v1 | Image to Image (Virtual Try On) | `kling-virtual-try-on` / `generate-image-request` |
