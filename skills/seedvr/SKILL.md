@@ -141,5 +141,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image upscaling / enhancement models:** `crystal-upscaler`, `seedvr2-upscale`, `topaz`, `p-image`
+- **Other image upscaling / enhancement models:** `crystal-upscaler`, `topaz`, `p-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
