@@ -5,7 +5,7 @@ description: Video generation with Pika Video API (by Pika Labs) via the Pixazo 
 
 # Pika Video API
 
-Pika Video API by Pika Labs.
+Pika 2.2 — text-to-video, image-to-video, and Pika Scenes (multi-image reference) video generation by Pika Labs.
 
 You can ask Pika to handle video generation. Powered by Pika Labs via the Pixazo API gateway.
 
@@ -30,29 +30,47 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 ### Step 2 — Pick the right operation
 
-_See the full reference for the operation list._
+| Version | Operation | apiId / operationId |
+|---|---|---|
+| Pika 2.2 | Text to Video | `pika-2-2-text-to-video` / `pika-2-2-text-to-video-request` |
+| Pika 2.2 | Image to Video | `pika-2-2-image-to-video` / `pika-2-2-image-to-video-request` |
+| Pika 2.2 | Reference to Video (Ref Images to Video) | `pika-scenes-2-2` / `pika-scenes-2-2-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-_See the full reference for endpoint URLs._
+- `POST https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/pika-2-2-text-to-video-request`
+- `POST https://gateway.pixazo.ai/v2/requests/status/pika-2-2-text-to-video_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+- `POST https://gateway.pixazo.ai/pika-2-2-image-to-video/v1/pika-2-2-image-to-video-request`
+- `POST https://gateway.pixazo.ai/v2/requests/status/pika-2-2-image-to-video_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+- `POST https://gateway.pixazo.ai/pika-scenes-2-2/v1/pika-scenes-2-2-request`
+- `POST https://gateway.pixazo.ai/v2/requests/status/pika-scenes-2-2_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 
 **Sample request (primary operation)**
 
-_The full reference includes ready-to-paste curl, Python, and JavaScript examples for each operation._
+```bash
+curl -X POST 'https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/pika-2-2-text-to-video-request' \
+  -H 'Content-Type: application/json' \
+  -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
+  -d '{
+  "prompt": "A large elegant white poodle on the deck of a yacht wearing oversized sunglasses, glossy magazine style, slow camera orbit"
+}'
+```
 
 **Python**
 
 ```python
 import os, requests
 r = requests.post(
-    "<endpoint>",
+    "https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/pika-2-2-text-to-video-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
-    json={},
+    json={
+  "prompt": "A large elegant white poodle on the deck of a yacht wearing oversized sunglasses, glossy magazine style, slow camera orbit"
+},
     timeout=300,
 )
 r.raise_for_status()
@@ -62,13 +80,15 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('<endpoint>', {
+const res = await fetch('https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/pika-2-2-text-to-video-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({}),
+  body: JSON.stringify({
+  "prompt": "A large elegant white poodle on the deck of a yacht wearing oversized sunglasses, glossy magazine style, slow camera orbit"
+}),
 });
 console.log(await res.json());
 ```
@@ -86,12 +106,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("PRIMARY_ENDPOINT", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/pika-2-2-text-to-video-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"RESULT_ENDPOINT/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
