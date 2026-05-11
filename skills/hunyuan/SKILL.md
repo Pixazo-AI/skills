@@ -33,6 +33,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Hunyuan3D 3.1 Pro | Text to Image (3D Models — Text to 3D) | `hunyuan-3d` / `hunyuan-3d-request` |
+| Hunyuan3D 3.1 Pro | Image to Image (3D Models — Image to 3D) | `hunyuan-3d-v3-1-pro-image-to-3d` / `hunyuan-3d-v3-1-pro-image-to-3d-request` |
 | Hunyuan3D 3.0 | Image to Image (3D Models — Image to 3D) | `hunyuan3d-3-0-api-294` / `hunyuan3d-3-0-api-request` |
 | Hunyuan Image 3.0 | Text to Image | `hunyuan-image` / `generate-image-request` |
 | Hunyuan Image 3.0 Instruct | Text to Image | `hunyuan-image-3-0-instruct` / `hunyuan-image-3-0-instruct-request` |
@@ -42,6 +43,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/hunyuan-3d/v1/hunyuan-3d-request`
+- `POST https://gateway.pixazo.ai/hunyuan-3d-v3-1-pro-image-to-3d/v1/hunyuan-3d-v3-1-pro-image-to-3d-request`
 - `POST https://gateway.pixazo.ai/hunyuan3d-3-0-api-294/v1/hunyuan3d-3-0-api-request`
 - `POST https://gateway.pixazo.ai/hunyuan-image/v1/hunyuan-image/generateRequest`
 - `POST https://gateway.pixazo.ai/hunyuan-image-3-0-instruct/v1/hunyuan-image-3-0-instruct-request`
@@ -49,7 +51,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/hunyuan-3d/v1/hunyuan-3d-request' \
+curl -X POST 'https://gateway.pixazo.ai/hunyuan-3d-v3-1-pro-image-to-3d/v1/hunyuan-3d-v3-1-pro-image-to-3d-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -62,7 +64,7 @@ curl -X POST 'https://gateway.pixazo.ai/hunyuan-3d/v1/hunyuan-3d-request' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/hunyuan-3d/v1/hunyuan-3d-request",
+    "https://gateway.pixazo.ai/hunyuan-3d-v3-1-pro-image-to-3d/v1/hunyuan-3d-v3-1-pro-image-to-3d-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -79,7 +81,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/hunyuan-3d/v1/hunyuan-3d-request', {
+const res = await fetch('https://gateway.pixazo.ai/hunyuan-3d-v3-1-pro-image-to-3d/v1/hunyuan-3d-v3-1-pro-image-to-3d-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -105,12 +107,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/hunyuan-3d/v1/hunyuan-3d-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/hunyuan-3d-v3-1-pro-image-to-3d/v1/hunyuan-3d-v3-1-pro-image-to-3d-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/hunyuan-3d/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/hunyuan-3d-v3-1-pro-image-to-3d/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):

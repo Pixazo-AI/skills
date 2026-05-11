@@ -50,7 +50,7 @@ curl -X POST 'https://gateway.pixazo.ai/tripo3d-v2-5-413/v1/tripo3d-v2-5-request
   "texture": "standard",
   "texture_alignment": "original_image",
   "orientation": "default",
-  "image_url": "https://platform.tripo3d.ai/assets/front-235queJB.jpg"
+  "image_url": "https://api-assets.pixazo.ai/media/tripo3d.png"
 }'
 ```
 
@@ -68,7 +68,7 @@ r = requests.post(
   "texture": "standard",
   "texture_alignment": "original_image",
   "orientation": "default",
-  "image_url": "https://platform.tripo3d.ai/assets/front-235queJB.jpg"
+  "image_url": "https://api-assets.pixazo.ai/media/tripo3d.png"
 },
     timeout=300,
 )
@@ -89,7 +89,7 @@ const res = await fetch('https://gateway.pixazo.ai/tripo3d-v2-5-413/v1/tripo3d-v
   "texture": "standard",
   "texture_alignment": "original_image",
   "orientation": "default",
-  "image_url": "https://platform.tripo3d.ai/assets/front-235queJB.jpg"
+  "image_url": "https://api-assets.pixazo.ai/media/tripo3d.png"
 }),
 });
 console.log(await res.json());
