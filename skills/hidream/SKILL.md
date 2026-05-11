@@ -1,13 +1,13 @@
 ---
 name: hidream
-description: Image generation/editing with HiDream I1 Full API (by HiDream) via the Pixazo API. TRIGGER when the user mentions "HiDream I1 Full" or "HiDream I1 Full API", or when the user asks to generate / make / create / edit / restyle an image and HiDream I1 Full is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+description: Image generation/editing with HiDream API (by HiDream) via the Pixazo API. TRIGGER when the user mentions "HiDream" or "HiDream API", or when the user asks to generate / make / create / edit / restyle an image and HiDream is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# HiDream I1 Full API
+# HiDream API
 
-Open-source 17B-parameter image generative foundation model delivering state-of-the-art text-to-image and image-to-image generation in seconds.
+Open-source image generative foundation model family from HiDream-ai. The I1 Full (17B) and O1 / O1 Dev variants deliver state-of-the-art text-to-image and image-to-image (edit) generation.
 
-You can ask HiDream I1 Full to handle image generation/editing. Powered by HiDream via the Pixazo API gateway.
+You can ask HiDream to handle image generation/editing. Powered by HiDream via the Pixazo API gateway.
 
 ---
 
@@ -32,6 +32,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| HiDream O1 | Text to Image | `hidream-o1-image` / `hidream-o1-image-request` |
+| HiDream O1 | Image to Image (Image Editing) | `hidream-o1-image-edit` / `hidream-o1-image-edit-request` |
+| HiDream O1 Dev | Text to Image | `hidream-o1-image-dev` / `hidream-o1-image-dev-request` |
+| HiDream O1 Dev | Image to Image (Image Editing) | `hidream-o1-image-dev-edit` / `hidream-o1-image-dev-edit-request` |
 | HiDream I1 Full | Text to Image | `hidream-i1-full` / `hidream-i1-full-request` |
 | HiDream I1 Full | Image to Image | `hidream-i1-full-image-to-image` / `hidream-i1-full-image-to-image-request` |
 
@@ -39,6 +43,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/hidream-o1-image/v1/hidream-o1-image-request`
+- `POST https://gateway.pixazo.ai/hidream-o1-image-edit/v1/hidream-o1-image-edit-request`
+- `POST https://gateway.pixazo.ai/hidream-o1-image-dev/v1/hidream-o1-image-dev-request`
+- `POST https://gateway.pixazo.ai/hidream-o1-image-dev-edit/v1/hidream-o1-image-dev-edit-request`
 - `POST https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request`
 - `POST https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request-result`
 - `POST https://gateway.pixazo.ai/hidream-i1-full-image-to-image/v1/hidream-i1-full-image-to-image-request`
@@ -47,22 +55,20 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request' \
+curl -X POST 'https://gateway.pixazo.ai/hidream-o1-image/v1/hidream-o1-image-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "a cat holding a skateboard which has fal written on it in red spray paint",
-  "negative_prompt": "",
+  "prompt": "A cinematic product photo of a ceramic mug on a marble counter, soft window light, shallow depth of field",
   "image_size": {
-    "height": 1024,
-    "width": 1024
+    "width": 2048,
+    "height": 2048
   },
   "num_inference_steps": 50,
   "guidance_scale": 5,
   "num_images": 1,
-  "enable_safety_checker": true,
-  "output_format": "jpeg",
-  "loras": []
+  "output_format": "png",
+  "enable_safety_checker": true
 }'
 ```
 
@@ -71,24 +77,22 @@ curl -X POST 'https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-reque
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request",
+    "https://gateway.pixazo.ai/hidream-o1-image/v1/hidream-o1-image-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "a cat holding a skateboard which has fal written on it in red spray paint",
-  "negative_prompt": "",
+  "prompt": "A cinematic product photo of a ceramic mug on a marble counter, soft window light, shallow depth of field",
   "image_size": {
-    "height": 1024,
-    "width": 1024
+    "width": 2048,
+    "height": 2048
   },
   "num_inference_steps": 50,
   "guidance_scale": 5,
   "num_images": 1,
-  "enable_safety_checker": true,
-  "output_format": "jpeg",
-  "loras": []
+  "output_format": "png",
+  "enable_safety_checker": true
 },
     timeout=300,
 )
@@ -99,25 +103,23 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request', {
+const res = await fetch('https://gateway.pixazo.ai/hidream-o1-image/v1/hidream-o1-image-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "a cat holding a skateboard which has fal written on it in red spray paint",
-  "negative_prompt": "",
+  "prompt": "A cinematic product photo of a ceramic mug on a marble counter, soft window light, shallow depth of field",
   "image_size": {
-    "height": 1024,
-    "width": 1024
+    "width": 2048,
+    "height": 2048
   },
   "num_inference_steps": 50,
   "guidance_scale": 5,
   "num_images": 1,
-  "enable_safety_checker": true,
-  "output_format": "jpeg",
-  "loras": []
+  "output_format": "png",
+  "enable_safety_checker": true
 }),
 });
 console.log(await res.json());
