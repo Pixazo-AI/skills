@@ -1,13 +1,13 @@
 ---
-name: vidu
-description: Video generation with Vidu Video API (by Vidu) via the Pixazo API. TRIGGER when the user mentions "Vidu" or "Vidu Video API", or when the user asks to generate / make / create a video / clip / animation and Vidu is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+name: heygen
+description: Video generation with Heygen Video Agent API (by HeyGen) via the Pixazo API. TRIGGER when the user mentions "Heygen Video Agent" or "Heygen Video Agent API", or when the user asks to generate / make / create a video / clip / animation and Heygen Video Agent is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Vidu Video API
+# Heygen Video Agent API
 
-Advanced video generation.
+HeyGen Video Agent generates lifelike avatar-driven videos from text prompts with natural lip-sync and expressive delivery.
 
-You can ask Vidu to handle video generation. Powered by Vidu via the Pixazo API gateway.
+You can ask Heygen Video Agent to handle video generation. Powered by HeyGen via the Pixazo API gateway.
 
 ---
 
@@ -32,28 +32,24 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Vidu Q3 | Text to Video | `vidu` / `vidu-request` |
-| Vidu v1 | Image to Image (Image Background Remover) | `vidu-q2-reference-to-video-pro-api-454` / `vidu-q2-reference-to-video-pro-api-request` |
+| Heygen Video Agent 3.0 | Text to Video | `heygen-video-agent` / `heygen-video-agent-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/vidu/v1/vidu-request`
-- `POST https://gateway.pixazo.ai/vidu-q2-reference-to-video-pro-api-454/v1/vidu-q2-reference-to-video-pro-api-request`
+- `POST https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/vidu/v1/vidu-request' \
+curl -X POST 'https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A slow-motion capture of a hummingbird hovering beside a vibrant red hibiscus flower, iridescent feathers catching sunlight, shallow depth of field, garden background",
-  "duration": 5,
-  "aspect_ratio": "16:9",
-  "resolution": "720p",
-  "audio": true
+  "prompt": "Create a 30-second product demo video showcasing our new AI features with professional lighting and modern graphics.",
+  "avatar": "auto",
+  "voice": "auto"
 }'
 ```
 
@@ -62,17 +58,15 @@ curl -X POST 'https://gateway.pixazo.ai/vidu/v1/vidu-request' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/vidu/v1/vidu-request",
+    "https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A slow-motion capture of a hummingbird hovering beside a vibrant red hibiscus flower, iridescent feathers catching sunlight, shallow depth of field, garden background",
-  "duration": 5,
-  "aspect_ratio": "16:9",
-  "resolution": "720p",
-  "audio": true
+  "prompt": "Create a 30-second product demo video showcasing our new AI features with professional lighting and modern graphics.",
+  "avatar": "auto",
+  "voice": "auto"
 },
     timeout=300,
 )
@@ -83,18 +77,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/vidu/v1/vidu-request', {
+const res = await fetch('https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A slow-motion capture of a hummingbird hovering beside a vibrant red hibiscus flower, iridescent feathers catching sunlight, shallow depth of field, garden background",
-  "duration": 5,
-  "aspect_ratio": "16:9",
-  "resolution": "720p",
-  "audio": true
+  "prompt": "Create a 30-second product demo video showcasing our new AI features with professional lighting and modern graphics.",
+  "avatar": "auto",
+  "voice": "auto"
 }),
 });
 console.log(await res.json());
@@ -113,12 +105,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/vidu/v1/vidu-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/vidu/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/heygen-video-agent/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -131,7 +123,7 @@ result_url = status.get("output_url") or status.get("video_url") or status.get("
 
 The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
 
-> **Fetch:** `https://www.pixazo.ai/models/vidu.md`
+> **Fetch:** `https://www.pixazo.ai/models/heygen.md`
 
 Show the result URL to the user when ready (offer to download, share, or generate variations).
 
@@ -161,13 +153,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/vidu.md`
+> **Fetch:** `https://www.pixazo.ai/models/heygen.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/vidu`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/heygen`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `grok-imagine`, `ltx`, `luma`, `hailuo`, `mochi`, `stable-diffusion`, `veed`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`
+- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `grok-imagine`, `ltx`, `luma`, `hailuo`, `mochi`, `stable-diffusion`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

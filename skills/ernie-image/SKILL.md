@@ -32,23 +32,34 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Ernie Image Turbo | Text to Image | `ernie-image-turbo` / `ernie-image-turbo-request` |
 | Ernie Image 1.0 | Text to Image | `ernie-image` / `ernie-image-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/ernie-image-turbo/v1/ernie-image-turbo-request`
 - `POST https://gateway.pixazo.ai/ernie-image/v1/ernie-image-request`
 - `POST https://gateway.pixazo.ai/v2/requests/status/ernie-image_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/ernie-image/v1/ernie-image-request' \
+curl -X POST 'https://gateway.pixazo.ai/ernie-image-turbo/v1/ernie-image-turbo-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A serene mountain landscape at sunset with golden light"
+  "prompt": "A serene mountain landscape at sunset with golden light",
+  "negative_prompt": "",
+  "image_size": "square_hd",
+  "num_inference_steps": 8,
+  "guidance_scale": 1,
+  "num_images": 1,
+  "enable_prompt_expansion": true,
+  "enable_safety_checker": true,
+  "output_format": "jpeg",
+  "acceleration": "regular"
 }'
 ```
 
@@ -57,13 +68,22 @@ curl -X POST 'https://gateway.pixazo.ai/ernie-image/v1/ernie-image-request' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/ernie-image/v1/ernie-image-request",
+    "https://gateway.pixazo.ai/ernie-image-turbo/v1/ernie-image-turbo-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A serene mountain landscape at sunset with golden light"
+  "prompt": "A serene mountain landscape at sunset with golden light",
+  "negative_prompt": "",
+  "image_size": "square_hd",
+  "num_inference_steps": 8,
+  "guidance_scale": 1,
+  "num_images": 1,
+  "enable_prompt_expansion": true,
+  "enable_safety_checker": true,
+  "output_format": "jpeg",
+  "acceleration": "regular"
 },
     timeout=300,
 )
@@ -74,14 +94,23 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/ernie-image/v1/ernie-image-request', {
+const res = await fetch('https://gateway.pixazo.ai/ernie-image-turbo/v1/ernie-image-turbo-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A serene mountain landscape at sunset with golden light"
+  "prompt": "A serene mountain landscape at sunset with golden light",
+  "negative_prompt": "",
+  "image_size": "square_hd",
+  "num_inference_steps": 8,
+  "guidance_scale": 1,
+  "num_images": 1,
+  "enable_prompt_expansion": true,
+  "enable_safety_checker": true,
+  "output_format": "jpeg",
+  "acceleration": "regular"
 }),
 });
 console.log(await res.json());

@@ -159,5 +159,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other music/audio generation models:** `tracks`, `ace-step`
+- **Other music/audio generation models:** `tracks`, `ace-step`, `mmaudio`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
