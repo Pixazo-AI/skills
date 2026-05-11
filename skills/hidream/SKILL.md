@@ -5,7 +5,7 @@ description: Image generation/editing with HiDream API (by HiDream) via the Pixa
 
 # HiDream API
 
-Open-source image generative foundation model family from HiDream-ai. The I1 Full (17B) and O1 / O1 Dev variants deliver state-of-the-art text-to-image and image-to-image (edit) generation.
+Open-source image generative foundation model family from HiDream-ai. The O1 and O1 Dev variants deliver state-of-the-art text-to-image and image-to-image (edit) generation.
 
 You can ask HiDream to handle image generation/editing. Powered by HiDream via the Pixazo API gateway.
 
@@ -36,8 +36,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | HiDream O1 | Image to Image (Image Editing) | `hidream-o1-image-edit` / `hidream-o1-image-edit-request` |
 | HiDream O1 Dev | Text to Image | `hidream-o1-image-dev` / `hidream-o1-image-dev-request` |
 | HiDream O1 Dev | Image to Image (Image Editing) | `hidream-o1-image-dev-edit` / `hidream-o1-image-dev-edit-request` |
-| HiDream I1 Full | Text to Image | `hidream-i1-full` / `hidream-i1-full-request` |
-| HiDream I1 Full | Image to Image | `hidream-i1-full-image-to-image` / `hidream-i1-full-image-to-image-request` |
 
 ### Step 3 — Make the API call
 
@@ -47,10 +45,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/hidream-o1-image-edit/v1/hidream-o1-image-edit-request`
 - `POST https://gateway.pixazo.ai/hidream-o1-image-dev/v1/hidream-o1-image-dev-request`
 - `POST https://gateway.pixazo.ai/hidream-o1-image-dev-edit/v1/hidream-o1-image-dev-edit-request`
-- `POST https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request`
-- `POST https://gateway.pixazo.ai/hidream-i1-full/v1/hidream-i1-full-request-result`
-- `POST https://gateway.pixazo.ai/hidream-i1-full-image-to-image/v1/hidream-i1-full-image-to-image-request`
-- `POST https://gateway.pixazo.ai/v2/requests/status`
 
 **Sample request (primary operation)**
 
