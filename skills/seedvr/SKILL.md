@@ -32,8 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| SeedVR2 | Image to Image (Image Upscaler) | `seedvr-upscale` / `upscale-image-request` |
-| SeedVR2 | Video to Video (Video Upscaler) | `seedvr-upscale` / `upscale-video` |
+| SeedVR2 3B | Image to Image (Image Upscaler) | `seedvr-upscale` / `upscale-image-request` |
+| SeedVR2 3B | Video to Video (Video Upscaler) | `seedvr-upscale` / `upscale-video` |
 | SeedVR2 7B | Image to Image (Image Upscaler) | `seedvr2-upscale` / `seedvr2-upscale-request` |
 
 ### Step 3 — Make the API call
