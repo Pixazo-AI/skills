@@ -33,6 +33,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Veo v3.1 Fast | Text to Video | `veo-3-1-fast` / `video-generation-request` |
+| Veo v3.1 Fast | Reference to Video (Reference Images to Video) | `veo-3-1-fast-reference-to-video` / `veo-3-1-fast-reference-to-video-request` |
 | Veo v3.1 | Text to Video | `veo-3-1` / `video-generation-request` |
 
 ### Step 3 — Make the API call
@@ -40,6 +41,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/veo31f/v1/veo-3.1-fast/generate`
+- `POST https://gateway.pixazo.ai/veo-3-1-fast-reference-to-video/v1/veo-3-1-fast-reference-to-video-request`
 - `POST https://gateway.pixazo.ai/veo/v1/veo-3.1/generate`
 
 **Sample request (primary operation)**
