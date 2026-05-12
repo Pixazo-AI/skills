@@ -32,7 +32,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Pixverse v6 | Text to Video | `pixverse-v6-text-to-video` / `pixverse-v6-text-to-video-request` |
 | Pixverse v6 | Image to Video | `pixverse-v6-image-to-video` / `pixverse-v6-image-to-video-request` |
+| Pixverse c1 | Text to Video | `pixverse-c1-text-to-video` / `pixverse-c1-text-to-video-request` |
+| Pixverse c1 | Image to Video | `pixverse-c1-image-to-video` / `pixverse-c1-image-to-video-request` |
 | Pixverse v5.6 | Text to Video | `pixverse` / `pixverse-request` |
 | Pixverse v5.6 | Image to Video | `pixverse-i2v` / `pixverse-i2v-request` |
 
@@ -40,19 +43,25 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/pixverse-v6-text-to-video/v1/pixverse-v6-text-to-video-request`
+- `POST https://gateway.pixazo.ai/pixverse-c1-text-to-video/v1/pixverse-c1-text-to-video-request`
+- `POST https://gateway.pixazo.ai/pixverse-c1-image-to-video/v1/pixverse-c1-image-to-video-request`
 - `POST https://gateway.pixazo.ai/pixverse-i2v/v1/pixverse-i2v-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/pixverse-i2v/v1/pixverse-i2v-request' \
+curl -X POST 'https://gateway.pixazo.ai/pixverse-v6-text-to-video/v1/pixverse-v6-text-to-video-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A gentle snowfall begins around the snow-covered tree, with soft flakes drifting down while the branches sway slightly in the winter breeze. The camera slowly orbits the tree, cinematic, peaceful winter atmosphere.",
+  "prompt": "A cat sitting by a window watching birds outside, warm afternoon sunlight, cinematic",
+  "negative_prompt": "blurry, low quality, pixelated",
+  "aspect_ratio": "16:9",
   "resolution": "720p",
   "duration": 5,
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
+  "style": "cyberpunk",
+  "generate_audio_switch": true
 }'
 ```
 
@@ -61,16 +70,19 @@ curl -X POST 'https://gateway.pixazo.ai/pixverse-i2v/v1/pixverse-i2v-request' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/pixverse-i2v/v1/pixverse-i2v-request",
+    "https://gateway.pixazo.ai/pixverse-v6-text-to-video/v1/pixverse-v6-text-to-video-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A gentle snowfall begins around the snow-covered tree, with soft flakes drifting down while the branches sway slightly in the winter breeze. The camera slowly orbits the tree, cinematic, peaceful winter atmosphere.",
+  "prompt": "A cat sitting by a window watching birds outside, warm afternoon sunlight, cinematic",
+  "negative_prompt": "blurry, low quality, pixelated",
+  "aspect_ratio": "16:9",
   "resolution": "720p",
   "duration": 5,
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
+  "style": "cyberpunk",
+  "generate_audio_switch": true
 },
     timeout=300,
 )
@@ -81,17 +93,20 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/pixverse-i2v/v1/pixverse-i2v-request', {
+const res = await fetch('https://gateway.pixazo.ai/pixverse-v6-text-to-video/v1/pixverse-v6-text-to-video-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A gentle snowfall begins around the snow-covered tree, with soft flakes drifting down while the branches sway slightly in the winter breeze. The camera slowly orbits the tree, cinematic, peaceful winter atmosphere.",
+  "prompt": "A cat sitting by a window watching birds outside, warm afternoon sunlight, cinematic",
+  "negative_prompt": "blurry, low quality, pixelated",
+  "aspect_ratio": "16:9",
   "resolution": "720p",
   "duration": 5,
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png"
+  "style": "cyberpunk",
+  "generate_audio_switch": true
 }),
 });
 console.log(await res.json());
@@ -110,12 +125,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/pixverse-i2v/v1/pixverse-i2v-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/pixverse-v6-text-to-video/v1/pixverse-v6-text-to-video-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/pixverse-i2v/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/pixverse-v6-text-to-video/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
