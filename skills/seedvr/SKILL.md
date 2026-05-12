@@ -34,7 +34,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 |---|---|---|
 | SeedVR2 3B | Image to Image (Image Upscaler) | `seedvr-upscale` / `upscale-image-request` |
 | SeedVR2 3B | Video to Video (Video Upscaler) | `seedvr-upscale` / `upscale-video` |
-| SeedVR2 7B | Image to Image (Image Upscaler) | `seedvr2-upscale` / `seedvr2-upscale-request` |
+| SeedVR2 7B | Image to Image (Image Upscaler) | `seedvr2-7b-upscale` / `image-upscale-request` |
 
 ### Step 3 — Make the API call
 
@@ -43,7 +43,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/seedvr-upscale/v1/upscale-image/generate`
 - `POST https://gateway.pixazo.ai/seedvr-upscale/v1/upscale-video/generate`
 - `POST https://gateway.pixazo.ai/seedvr-upscale/v1/upscale-video/prediction`
-- `POST https://gateway.pixazo.ai/seedvr2-upscale/v1/seedvr2-upscale/image-request`
+- `POST https://gateway.pixazo.ai/seedvr2-7b-upscale/image-request`
 
 **Sample request (primary operation)**
 
