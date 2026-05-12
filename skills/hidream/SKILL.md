@@ -5,7 +5,7 @@ description: Image generation/editing with HiDream API (by HiDream) via the Pixa
 
 # HiDream API
 
-Open-source image generative foundation model family from HiDream-ai. The O1 and O1 Dev variants deliver state-of-the-art text-to-image and image-to-image (edit) generation.
+Open-source image generative foundation model family from HiDream-ai. The I1 Full (17B) and O1 / O1 Dev variants deliver state-of-the-art text-to-image and image-to-image (edit) generation.
 
 You can ask HiDream to handle image generation/editing. Powered by HiDream via the Pixazo API gateway.
 
@@ -34,6 +34,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 |---|---|---|
 | HiDream O1 | Text to Image | `hidream-o1-image` / `hidream-o1-image-request` |
 | HiDream O1 | Image to Image (Image Editing) | `hidream-o1-image-edit` / `hidream-o1-image-edit-request` |
+| HiDream O1 Dev | Text to Image | `hidream-o1-image-dev` / `hidream-o1-image-dev-request` |
+| HiDream O1 Dev | Image to Image (Image Editing) | `hidream-o1-image-dev-edit` / `hidream-o1-image-dev-edit-request` |
+| HiDream I1 Full | Text to Image | `hidream-o1-image` / `hidream-o1-image-request` |
+| HiDream I1 Full | Image to Image (Image Editing) | `hidream-o1-image-edit` / `hidream-o1-image-edit-request` |
 | HiDream O1 Dev | Text to Image | `hidream-o1-image-dev` / `hidream-o1-image-dev-request` |
 | HiDream O1 Dev | Image to Image (Image Editing) | `hidream-o1-image-dev-edit` / `hidream-o1-image-dev-edit-request` |
 
