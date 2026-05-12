@@ -1,13 +1,13 @@
 ---
-name: longcat-image
-description: Image generation/editing with LongCat Image API (by LongCat) via the Pixazo API. TRIGGER when the user mentions "LongCat Image" or "LongCat Image API", or when the user asks to generate / make / create / edit / restyle an image and LongCat Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: mirelo
+description: Image generation/editing with Mirelo SFX API (by Mirelo AI) via the Pixazo API. TRIGGER when the user mentions "Mirelo SFX" or "Mirelo SFX API", or when the user asks to generate / make / create / edit / restyle an image and Mirelo SFX is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# LongCat Image API
+# Mirelo SFX API
 
-Image generation capabilities.
+Mirelo SFX generates ambient audio and sound effects from video input, producing synchronized soundscapes that match visual content.
 
-You can ask LongCat Image to handle image generation/editing. Powered by LongCat via the Pixazo API gateway.
+You can ask Mirelo SFX to handle image generation/editing. Powered by Mirelo AI via the Pixazo API gateway.
 
 ---
 
@@ -32,29 +32,26 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| LongCat v1 | Text to Image | `longcat-image-498` / `longcat-image-request` |
+| Mirelo SFX 1.0 | Video to Audio | `mirelo-sfx-video-to-audio` / `mirelo-sfx-video-to-audio-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/longcat-image-498/v1/longcat-image-request`
+- `POST https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-video-to-audio-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/longcat-image-498/v1/longcat-image-request' \
+curl -X POST 'https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-video-to-audio-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A lioness crouching in the tall dry grass of the Serengeti during golden hour, intense gaze, telephoto lens with shallow depth of field",
-  "image_size": "landscape_4_3",
-  "num_inference_steps": 28,
-  "guidance_scale": 4.5,
-  "num_images": 1,
-  "enable_safety_checker": true,
-  "output_format": "png",
-  "acceleration": "regular"
+  "video_url": "https://di3otfzjg1gxa.cloudfront.net/input_example.mp4",
+  "text_prompt": "",
+  "num_samples": 2,
+  "seed": 2105,
+  "duration": 10
 }'
 ```
 
@@ -63,20 +60,17 @@ curl -X POST 'https://gateway.pixazo.ai/longcat-image-498/v1/longcat-image-reque
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/longcat-image-498/v1/longcat-image-request",
+    "https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-video-to-audio-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A lioness crouching in the tall dry grass of the Serengeti during golden hour, intense gaze, telephoto lens with shallow depth of field",
-  "image_size": "landscape_4_3",
-  "num_inference_steps": 28,
-  "guidance_scale": 4.5,
-  "num_images": 1,
-  "enable_safety_checker": true,
-  "output_format": "png",
-  "acceleration": "regular"
+  "video_url": "https://di3otfzjg1gxa.cloudfront.net/input_example.mp4",
+  "text_prompt": "",
+  "num_samples": 2,
+  "seed": 2105,
+  "duration": 10
 },
     timeout=300,
 )
@@ -87,21 +81,18 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/longcat-image-498/v1/longcat-image-request', {
+const res = await fetch('https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-video-to-audio-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A lioness crouching in the tall dry grass of the Serengeti during golden hour, intense gaze, telephoto lens with shallow depth of field",
-  "image_size": "landscape_4_3",
-  "num_inference_steps": 28,
-  "guidance_scale": 4.5,
-  "num_images": 1,
-  "enable_safety_checker": true,
-  "output_format": "png",
-  "acceleration": "regular"
+  "video_url": "https://di3otfzjg1gxa.cloudfront.net/input_example.mp4",
+  "text_prompt": "",
+  "num_samples": 2,
+  "seed": 2105,
+  "duration": 10
 }),
 });
 console.log(await res.json());
@@ -156,13 +147,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/longcat-image.md`
+> **Fetch:** `https://www.pixazo.ai/models/mirelo.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/longcat-image`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/mirelo`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `ideogram`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
