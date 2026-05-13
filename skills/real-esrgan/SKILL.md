@@ -1,13 +1,13 @@
 ---
-name: crystal-upscaler
-description: Image upscaling / enhancement with Crystal Upscaler API (by Clarityai) via the Pixazo API. TRIGGER when the user mentions "Crystal Upscaler" or "Crystal Upscaler API", or when the user asks to enhance / upscale / improve / sharpen an image or video and Crystal Upscaler is named or implied. DO NOT TRIGGER for image / video / music / voice / 3d / try-on — each has its own skill.
+name: real-esrgan
+description: Image upscaling / enhancement with Real Esrgan API (by NightmareAI) via the Pixazo API. TRIGGER when the user mentions "Real Esrgan API", or when the user asks to enhance / upscale / improve / sharpen an image or video and Real Esrgan API is named or implied. DO NOT TRIGGER for image / video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Crystal Upscaler API
+# Real Esrgan API
 
-High-quality image upscaling capabilities.
+Real-ESRGAN image upscaler / super-resolution. Hosted on Replicate by NightmareAI.
 
-You can ask Crystal Upscaler to handle image upscaling / enhancement. Powered by Clarityai via the Pixazo API gateway.
+You can ask Real Esrgan API to handle image upscaling / enhancement. Powered by NightmareAI via the Pixazo API gateway.
 
 ---
 
@@ -32,23 +32,22 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Crystal Upscaler v1 | Image to Image (Image Upscaler) | `crystal-upscaler` / `image-request` |
+| Real-ESRGAN | Image Restore | `real-esrgan` / `real-esrgan-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/upscaler/v1/crystal-upscaler/generate`
+- `POST https://gateway.pixazo.ai/real-esrgan/v1/real-esrgan/generate`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/upscaler/v1/crystal-upscaler/generate' \
+curl -X POST 'https://gateway.pixazo.ai/real-esrgan/v1/real-esrgan/generate' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image": "https://example.com/portrait.jpg",
-  "scale_factor": 4
+  "image": "https://replicate.delivery/pbxt/Ing7Fa4YMk6YtcoG1YZnaK3UwbgDB5guRc5M2dEjV6ODNLMl/cat.jpg"
 }'
 ```
 
@@ -57,14 +56,13 @@ curl -X POST 'https://gateway.pixazo.ai/upscaler/v1/crystal-upscaler/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/upscaler/v1/crystal-upscaler/generate",
+    "https://gateway.pixazo.ai/real-esrgan/v1/real-esrgan/generate",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "image": "https://example.com/portrait.jpg",
-  "scale_factor": 4
+  "image": "https://replicate.delivery/pbxt/Ing7Fa4YMk6YtcoG1YZnaK3UwbgDB5guRc5M2dEjV6ODNLMl/cat.jpg"
 },
     timeout=300,
 )
@@ -75,15 +73,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/upscaler/v1/crystal-upscaler/generate', {
+const res = await fetch('https://gateway.pixazo.ai/real-esrgan/v1/real-esrgan/generate', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image": "https://example.com/portrait.jpg",
-  "scale_factor": 4
+  "image": "https://replicate.delivery/pbxt/Ing7Fa4YMk6YtcoG1YZnaK3UwbgDB5guRc5M2dEjV6ODNLMl/cat.jpg"
 }),
 });
 console.log(await res.json());
@@ -125,13 +122,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/crystal-upscaler.md`
+> **Fetch:** `https://www.pixazo.ai/models/real-esrgan.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/crystal-upscaler`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/real-esrgan`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image upscaling / enhancement models:** `seedvr`, `topaz`, `p-image`, `real-esrgan`
+- **Other image upscaling / enhancement models:** `crystal-upscaler`, `seedvr`, `topaz`, `p-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
