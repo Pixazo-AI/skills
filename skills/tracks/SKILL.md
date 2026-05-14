@@ -176,5 +176,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other music/audio generation models:** `ace-step`, `lyria`, `mmaudio`
+- **Other music/audio generation models:** `minimax`, `ace-step`, `elevenlabs`, `lyria`, `mmaudio`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

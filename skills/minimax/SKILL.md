@@ -1,13 +1,13 @@
 ---
 name: minimax
-description: Text-to-speech / voice synthesis with MiniMax AI API (by MiniMax) via the Pixazo API. TRIGGER when the user mentions "Minimax" or "MiniMax AI API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Minimax is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+description: Music/audio generation with MiniMax AI API (by MiniMax) via the Pixazo API. TRIGGER when the user mentions "Minimax" or "MiniMax AI API", or when the user asks to generate / make music / a song / a beat / audio track and Minimax is named or implied. DO NOT TRIGGER for image / video / voice / 3d / try-on — each has its own skill.
 ---
 
 # MiniMax AI API
 
 Comprehensive multimodal AI generation for video, image, and audio by MiniMax.
 
-You can ask Minimax to handle text-to-speech / voice synthesis. Powered by MiniMax via the Pixazo API gateway.
+You can ask Minimax to handle music/audio generation. Powered by MiniMax via the Pixazo API gateway.
 
 ---
 
@@ -98,15 +98,40 @@ const res = await fetch('https://gateway.pixazo.ai/minimax-music-generation-2-6/
 console.log(await res.json());
 ```
 
-### Step 4 — Show the user the result
+### Step 4 — Poll until ready, then show the user
 
-text-to-speech / voice synthesis via this model is **synchronous** — no polling. The response is JSON, e.g.:
+Music generation is **asynchronous**. The first response returns a `task_id` (or `request_id`). Then poll a status endpoint until the music is ready.
 
-```json
-{ "audio": [{ "url": "https://…" }] }
+Typical loop:
+
+```python
+import time, requests, os
+
+KEY = os.environ["PIXAZO_API_KEY"]
+HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
+
+# 1) Submit
+submit = requests.post("https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/generate", headers=HEADERS, json={...}).json()
+task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
+
+# 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
+while True:
+    status = requests.get(f"https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/result/{task_id}", headers=HEADERS).json()
+    if status.get("status") in ("completed", "succeeded", "ready", "done"):
+        break
+    if status.get("status") in ("failed", "error"):
+        raise RuntimeError(status.get("error") or "generation failed")
+    time.sleep(8)
+
+# 3) Pull the result URL out (field varies — usually output_url, video_url, audio_url, or url)
+result_url = status.get("output_url") or status.get("video_url") or status.get("audio_url") or status.get("url")
 ```
 
-Pull the URL out and show it to the user (in chat, render inline if your environment supports it). Offer to: download it, edit it further, or generate variations.
+The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
+
+> **Fetch:** `https://www.pixazo.ai/models/minimax.md`
+
+Show the result URL to the user when ready (offer to download, share, or generate variations).
 
 
 
@@ -142,5 +167,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-tts`
+- **Other music/audio generation models:** `tracks`, `ace-step`, `elevenlabs`, `lyria`, `mmaudio`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
