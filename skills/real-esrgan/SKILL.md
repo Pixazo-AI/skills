@@ -1,13 +1,13 @@
 ---
 name: real-esrgan
-description: Image upscaling / enhancement with Real Esrgan API (by NightmareAI) via the Pixazo API. TRIGGER when the user mentions "Real Esrgan API", or when the user asks to enhance / upscale / improve / sharpen an image or video and Real Esrgan API is named or implied. DO NOT TRIGGER for image / video / music / voice / 3d / try-on — each has its own skill.
+description: Image generation/editing with Real Esrgan API (by NightmareAI) via the Pixazo API. TRIGGER when the user mentions "Real Esrgan API", or when the user asks to generate / make / create / edit / restyle an image and Real Esrgan API is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # Real Esrgan API
 
 Real-ESRGAN image upscaler / super-resolution. Hosted on Replicate by NightmareAI.
 
-You can ask Real Esrgan API to handle image upscaling / enhancement. Powered by NightmareAI via the Pixazo API gateway.
+You can ask Real Esrgan API to handle image generation/editing. Powered by NightmareAI via the Pixazo API gateway.
 
 ---
 
@@ -88,14 +88,27 @@ console.log(await res.json());
 
 ### Step 4 — Show the user the result
 
-image upscaling / enhancement via this model is **synchronous** — no polling. The response is JSON, e.g.:
+image generation/editing via this model is **synchronous** — no polling. The response is JSON, e.g.:
 
 ```json
-{ "output": [{ "url": "https://…" }] }
+{ "images": [{ "url": "https://…" }] }
 ```
 
 Pull the URL out and show it to the user (in chat, render inline if your environment supports it). Offer to: download it, edit it further, or generate variations.
 
+
+---
+
+### Inputs the user might give you
+
+- **Prompt only** — a description. Build the request from Step 3.
+- **A reference image** — passed as a URL or base64 data URL. Use the edit endpoint.
+- **Image size** — translate user phrases to the API's `image_size` enum:
+  - "square / Instagram" → `square_hd`
+  - "portrait / vertical / 9:16" → `portrait_16_9`
+  - "landscape / horizontal / 16:9" → `landscape_16_9`
+- **Number of variations** — `num_images` (1–4). Default 1.
+- **Seed** — for reproducibility. Default 42, or pass through if the user says "same seed".
 
 
 ---
@@ -130,5 +143,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image upscaling / enhancement models:** `crystal-upscaler`, `seedvr`, `topaz`, `p-image`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
