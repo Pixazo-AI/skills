@@ -32,6 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Kling Video O3 4K | Text to Video | `kling-video-o3-4k-image-to-video` / `kling-video-o3-4k-text-to-video-request` |
 | Kling Video O3 4K | Image to Video | `kling-video-o3-4k-image-to-video` / `kling-video-o3-4k-image-to-video-request` |
 | Kling Video O3 4K | Reference to Video (Ref Images to Video) | `kling-video-o3-4k-reference-to-video` / `kling-video-o3-4k-reference-to-video-request` |
 | Kling Image O3 | Text to Image | `kling-image` / `kling-image-request` |
