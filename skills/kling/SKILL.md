@@ -36,10 +36,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Kling Video O3 4K | Reference to Video (Ref Images to Video) | `kling-video-o3-4k-reference-to-video` / `kling-video-o3-4k-reference-to-video-request` |
 | Kling Image O3 | Text to Image | `kling-image` / `kling-image-request` |
 | Kling Image O3 | Image to Image (Image Editing) | `kling-image-o3-i2i` / `kling-image-o3-i2i-request` |
-| Kling Image V3 t2i | Text to Image | `kling-image-t2i` / `kling-image-t2i-request` |
-| Kling Image V3 t2i | Text To Image | `kling-image-t2i` / `kling-image-t2i-request` |
 | Kling 3.0 | Text to Video | `kling-3-0-text-to-video-standard` / `kling-3-0-text-to-video-standard-request` |
 | Kling 3.0 | Image to Video | `kling-3-0-image-to-video-standard` / `kling-3-0-image-to-video-standard-request` |
+| Kling Image V3 t2i | Text to Image | `kling-image-t2i` / `kling-image-t2i-request` |
+| Kling Image V3 t2i | Text To Image | `kling-image-t2i` / `kling-image-t2i-request` |
 | Kling Avatar v2 Pro | Audio to Video (Ref Image + Ref Audio to Video — Avatar) | `kling-ai-avatar-v2-pro-789` / `kling-ai-avatar-v2-pro-request` |
 | Kling O1 | Video to Video (Video Editing) | `kling-o1-edit-video-video-to-video-634` / `kling-o1-edit-video-video-to-video-request` |
 | Kling O1 | Image to Video (First/Last Frame to Video) | `kling-o1-first-frame-last-frame-to-video-857` / `kling-o1-first-frame-last-frame-to-video-request` |
@@ -59,11 +59,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/kling-video-o3-4k-reference-to-video/v1/kling-video-o3-4k-reference-to-video-request`
 - `POST https://gateway.pixazo.ai/kling-image/v1/kling-image-request`
 - `POST https://gateway.pixazo.ai/kling-image-o3-i2i/v1/kling-image-o3-i2i-request`
-- `POST https://gateway.pixazo.ai/kling-image-t2i/v1/kling-image-t2i-request`
 - `POST https://gateway.pixazo.ai/kling-3-0-text-to-video-standard/v1/kling-3-0-text-to-video-standard-request`
 - `POST https://gateway.pixazo.ai/kling-3-0-text-to-video-standard/v1/kling-3-0-text-to-video-standard-request-result`
 - `POST https://gateway.pixazo.ai/kling-3-0-image-to-video-standard/v1/kling-3-0-image-to-video-standard-request`
 - `POST https://gateway.pixazo.ai/kling-3-0-image-to-video-standard/v1/kling-3-0-image-to-video-standard-request-result`
+- `POST https://gateway.pixazo.ai/kling-image-t2i/v1/kling-image-t2i-request`
 - `POST https://gateway.pixazo.ai/kling-ai-avatar-v2-pro-789/v1/kling-ai-avatar-v2-pro-request`
 - `POST https://gateway.pixazo.ai/kling-o1-edit-video-video-to-video-634/v1/kling-o1-edit-video-video-to-video-request`
 - `POST https://gateway.pixazo.ai/kling-o1-first-frame-last-frame-to-video-857/v1/kling-o1-first-frame-last-frame-to-video-request`
