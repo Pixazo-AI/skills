@@ -32,7 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Tripo3D v2.5 | Image to Image (3D Models — Image to 3D) | `tripo3d-v2-5-413` / `tripo3d-v2-5-request` |
+| Tripo3D v2.5 | Image to Image ( 3D Models - Image to 3D) | `tripo3d-v2-5-413` / `tripo3d-v2-5-request` |
 
 ### Step 3 — Make the API call
 

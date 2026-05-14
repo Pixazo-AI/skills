@@ -32,8 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Meshy 6 | Text to Image (3D Models — Text to 3D) | `meshy-6-text-to-3d` / `meshy-6-text-to-3d-request` |
-| Meshy 6 | Image to Image (3D Models — Image to 3D) | `meshy-6-image-to-3d` / `meshy-6-image-to-3d-request` |
+| Meshy 6 | Text to Image ( 3D Models - Text to 3D) | `meshy-6-text-to-3d` / `meshy-6-text-to-3d-request` |
+| Meshy 6 | Image to Image ( 3D Models - Image to 3D) | `meshy-6-image-to-3d` / `meshy-6-image-to-3d-request` |
 
 ### Step 3 — Make the API call
 

@@ -5,7 +5,7 @@ description: Video generation with LTX Video API (by Lightricks) via the Pixazo 
 
 # LTX Video API
 
-Advanced video generation by Lightricks.
+Advanced video generation by Lightricks. The LTX 2.3 family adds audio-conditioned video synthesis and retake (video-to-video) editing on top of the existing T2V / I2V pipeline.
 
 You can ask LTX to handle video generation. Powered by Lightricks via the Pixazo API gateway.
 
@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| LTX v2.3 | Audio to Video | `ltx-2-3-audio-to-video` / `ltx-2-3-audio-to-video-request` |
+| LTX v2.3 | Video to Video (Retake) | `ltx-2-3-retake-video` / `ltx-2-3-retake-video-request` |
 | LTX v2 Pro | Text to Video | `lightricks-video` / `ltx-v2-video-generate` |
 | LTX v2 19B | Image to Video | `ltx-2-19b-api-513` / `ltx-2-19b-api-request` |
 | LTX v2 | Image to Video | `ltx-2-video-api-581` / `ltx-2-video-api-request` |
@@ -40,6 +42,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/ltx-2-3-audio-to-video/v1/ltx-2-3-audio-to-video-request`
+- `POST https://gateway.pixazo.ai/ltx-2-3-retake-video/v1/ltx-2-3-retake-video-request`
 - `POST https://gateway.pixazo.ai/lightricks/v1/ltx/generate`
 - `POST https://gateway.pixazo.ai/ltx-2-19b-api-513/v1/ltx-2-19b-api-request`
 - `POST https://gateway.pixazo.ai/ltx-2-video-api-581/v1/ltx-2-video-api-request`
@@ -47,14 +51,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/lightricks/v1/ltx/generate' \
+curl -X POST 'https://gateway.pixazo.ai/ltx-2-3-audio-to-video/v1/ltx-2-3-audio-to-video-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-    "prompt": "A cinematic drone shot of a futuristic city at night with flying cars and neon lights",
-    "duration": 10,
-    "resolution": "1080p",
-    "generate_audio": true
+  "prompt": "A musician passionately playing piano in a dimly lit jazz club",
+  "audio_url": "https://imagesai.appypie.com/7686410/wGrZmX6DC6QbKdp73zyK_017727945871303.mp3",
+  "image_url": "https://imagesai.appypie.com/7686410/PaESYuZM3mrXtc08U2vh_017731442751326.png",
+  "guidance_scale": 9
 }'
 ```
 
@@ -63,16 +67,16 @@ curl -X POST 'https://gateway.pixazo.ai/lightricks/v1/ltx/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/lightricks/v1/ltx/generate",
+    "https://gateway.pixazo.ai/ltx-2-3-audio-to-video/v1/ltx-2-3-audio-to-video-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-    "prompt": "A cinematic drone shot of a futuristic city at night with flying cars and neon lights",
-    "duration": 10,
-    "resolution": "1080p",
-    "generate_audio": true
+  "prompt": "A musician passionately playing piano in a dimly lit jazz club",
+  "audio_url": "https://imagesai.appypie.com/7686410/wGrZmX6DC6QbKdp73zyK_017727945871303.mp3",
+  "image_url": "https://imagesai.appypie.com/7686410/PaESYuZM3mrXtc08U2vh_017731442751326.png",
+  "guidance_scale": 9
 },
     timeout=300,
 )
@@ -83,17 +87,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/lightricks/v1/ltx/generate', {
+const res = await fetch('https://gateway.pixazo.ai/ltx-2-3-audio-to-video/v1/ltx-2-3-audio-to-video-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    "prompt": "A cinematic drone shot of a futuristic city at night with flying cars and neon lights",
-    "duration": 10,
-    "resolution": "1080p",
-    "generate_audio": true
+  "prompt": "A musician passionately playing piano in a dimly lit jazz club",
+  "audio_url": "https://imagesai.appypie.com/7686410/wGrZmX6DC6QbKdp73zyK_017727945871303.mp3",
+  "image_url": "https://imagesai.appypie.com/7686410/PaESYuZM3mrXtc08U2vh_017731442751326.png",
+  "guidance_scale": 9
 }),
 });
 console.log(await res.json());
@@ -112,12 +116,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/lightricks/v1/ltx/generate", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/ltx-2-3-audio-to-video/v1/ltx-2-3-audio-to-video-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/lightricks/v1/ltx/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/ltx-2-3-audio-to-video/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
