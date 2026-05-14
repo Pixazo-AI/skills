@@ -32,8 +32,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Grok Imagine Pro Quality | Text to Image | `grok-imagine-pro-text-to-image-quality` / `grok-imagine-pro-text-to-image-quality-request` |
-| Grok Imagine Pro Quality | Image to Image (Image Editing) | `grok-imagine-pro-edit-quality` / `grok-imagine-pro-edit-quality-request` |
 | Grok v1 | Text to Image | `grok-imagine-api-641` / `grok-imagine-api-request` |
 | Grok Imagine Video t2v | Text to Video | `grok-imagine-video` / `grok-imagine-video-request` |
 
@@ -41,22 +39,19 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request`
-- `POST https://gateway.pixazo.ai/grok-imagine-pro-edit-quality/v1/grok-imagine-pro-edit-quality-request`
 - `POST https://gateway.pixazo.ai/grok-imagine-api-641/v1/grok-imagine-api-request`
 - `POST https://gateway.pixazo.ai/grok-imagine-video/v1/grok-imagine-video-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request' \
+curl -X POST 'https://gateway.pixazo.ai/grok-imagine-api-641/v1/grok-imagine-api-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
+  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style, emotional expression through particles, artistic scientific",
   "num_images": 1,
   "aspect_ratio": "1:1",
-  "resolution": "1k",
   "output_format": "jpeg"
 }'
 ```
@@ -66,16 +61,15 @@ curl -X POST 'https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request",
+    "https://gateway.pixazo.ai/grok-imagine-api-641/v1/grok-imagine-api-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
+  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style, emotional expression through particles, artistic scientific",
   "num_images": 1,
   "aspect_ratio": "1:1",
-  "resolution": "1k",
   "output_format": "jpeg"
 },
     timeout=300,
@@ -87,17 +81,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request', {
+const res = await fetch('https://gateway.pixazo.ai/grok-imagine-api-641/v1/grok-imagine-api-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
+  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style, emotional expression through particles, artistic scientific",
   "num_images": 1,
   "aspect_ratio": "1:1",
-  "resolution": "1k",
   "output_format": "jpeg"
 }),
 });
@@ -117,12 +110,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/grok-imagine-api-641/v1/grok-imagine-api-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/grok-imagine-api-641/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
