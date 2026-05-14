@@ -32,6 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Nano Banana 2 | Text to Image | `nano-banana-2` / `nano-banana-2-request` |
 | Nano Banana 2 | Image to Image (Image Editing) | `nano-banana-2` / `image-request` |
 | Nano Banana Standard | Image to Image (Image Editing) | `nano-banana` / `edit-image-request` |
 | Nano Banana Standard | Text to Image | `nano-banana` / `text-to-image-request` |
@@ -44,6 +45,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/nano-banana-2/v1/nano-banana-2-request`
 - `POST https://gateway.pixazo.ai/nano-banana-2/v1/nano-banana-2/generate`
 - `POST https://gateway.pixazo.ai/nano-banana/v1/nano-banana/generateEditImageRequest`
 - `POST https://gateway.pixazo.ai/nano-banana/v1/nano-banana/generateTextToImageRequest`
@@ -59,8 +61,15 @@ curl -X POST 'https://gateway.pixazo.ai/nano-banana-pro-async/v1/nano-banana-pro
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Photorealistic DSLR portrait of a man wearing a black cap, standing in a lush green park with trees and soft sunlight, natural lighting, realistic skin texture, shallow depth of field, ultra-detailed, no stylization.",
-  "aspect_ratio": "1:1"
+  "prompt": "A futuristic cityscape at golden hour with neon-lit skyscrapers and reflections on wet streets",
+  "num_images": 1,
+  "aspect_ratio": "16:9",
+  "output_format": "png",
+  "safety_tolerance": "4",
+  "resolution": "1K",
+  "sync_mode": false,
+  "limit_generations": true,
+  "enable_web_search": false
 }'
 ```
 
@@ -75,8 +84,15 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Photorealistic DSLR portrait of a man wearing a black cap, standing in a lush green park with trees and soft sunlight, natural lighting, realistic skin texture, shallow depth of field, ultra-detailed, no stylization.",
-  "aspect_ratio": "1:1"
+  "prompt": "A futuristic cityscape at golden hour with neon-lit skyscrapers and reflections on wet streets",
+  "num_images": 1,
+  "aspect_ratio": "16:9",
+  "output_format": "png",
+  "safety_tolerance": "4",
+  "resolution": "1K",
+  "sync_mode": false,
+  "limit_generations": true,
+  "enable_web_search": false
 },
     timeout=300,
 )
@@ -94,8 +110,15 @@ const res = await fetch('https://gateway.pixazo.ai/nano-banana-pro-async/v1/nano
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Photorealistic DSLR portrait of a man wearing a black cap, standing in a lush green park with trees and soft sunlight, natural lighting, realistic skin texture, shallow depth of field, ultra-detailed, no stylization.",
-  "aspect_ratio": "1:1"
+  "prompt": "A futuristic cityscape at golden hour with neon-lit skyscrapers and reflections on wet streets",
+  "num_images": 1,
+  "aspect_ratio": "16:9",
+  "output_format": "png",
+  "safety_tolerance": "4",
+  "resolution": "1K",
+  "sync_mode": false,
+  "limit_generations": true,
+  "enable_web_search": false
 }),
 });
 console.log(await res.json());
