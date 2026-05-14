@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Kling Video O3 4K | Image to Video | `kling-video-o3-4k-image-to-video` / `kling-video-o3-4k-image-to-video-request` |
+| Kling Video O3 4K | Reference to Video (Ref Images to Video) | `kling-video-o3-4k-reference-to-video` / `kling-video-o3-4k-reference-to-video-request` |
 | Kling Image O3 | Text to Image | `kling-image` / `kling-image-request` |
 | Kling Image O3 | Image to Image (Image Editing) | `kling-image-o3-i2i` / `kling-image-o3-i2i-request` |
 | Kling Image V3 t2i | Text to Image | `kling-image-t2i` / `kling-image-t2i-request` |
@@ -53,6 +55,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/kling-video-o3-4k-image-to-video/v1/kling-video-o3-4k-image-to-video-request`
+- `POST https://gateway.pixazo.ai/kling-video-o3-4k-reference-to-video/v1/kling-video-o3-4k-reference-to-video-request`
 - `POST https://gateway.pixazo.ai/kling-image/v1/kling-image-request`
 - `POST https://gateway.pixazo.ai/kling-image-o3-i2i/v1/kling-image-o3-i2i-request`
 - `POST https://gateway.pixazo.ai/kling-image-t2i/v1/kling-image-t2i-request`
@@ -78,11 +82,11 @@ curl -X POST 'https://gateway.pixazo.ai/kling-3-0-text-to-video-standard/v1/klin
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A serene mountain lake at sunset with golden reflections, painterly style",
-  "resolution": "1K",
-  "aspect_ratio": "auto",
-  "num_images": 1,
-  "output_format": "png"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg",
+  "prompt": "Cinematic camera move; the subject comes to life, anime style",
+  "duration": "5",
+  "generate_audio": false,
+  "shot_type": "customize"
 }'
 ```
 
@@ -97,11 +101,11 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A serene mountain lake at sunset with golden reflections, painterly style",
-  "resolution": "1K",
-  "aspect_ratio": "auto",
-  "num_images": 1,
-  "output_format": "png"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg",
+  "prompt": "Cinematic camera move; the subject comes to life, anime style",
+  "duration": "5",
+  "generate_audio": false,
+  "shot_type": "customize"
 },
     timeout=300,
 )
@@ -119,11 +123,11 @@ const res = await fetch('https://gateway.pixazo.ai/kling-3-0-text-to-video-stand
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A serene mountain lake at sunset with golden reflections, painterly style",
-  "resolution": "1K",
-  "aspect_ratio": "auto",
-  "num_images": 1,
-  "output_format": "png"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg",
+  "prompt": "Cinematic camera move; the subject comes to life, anime style",
+  "duration": "5",
+  "generate_audio": false,
+  "shot_type": "customize"
 }),
 });
 console.log(await res.json());
