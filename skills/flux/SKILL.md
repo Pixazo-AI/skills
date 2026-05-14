@@ -57,7 +57,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/flux-2-pro-text-to-image-trainer-712/v1/flux-2-pro-text-to-image-trainer-request`
 - `POST https://gateway.pixazo.ai/flux-kontext-restore-image/v1/flux-kontext-restore-image/generate`
 - `POST https://gateway.pixazo.ai/flux-2-klein-4b/v1/generateImage`
-- `POST https://gateway.pixazo.ai/generateT2I`
+- `POST https://gateway.pixazo.ai/flux-2-dev/v1/generateT2I`
 - `POST https://gateway.pixazo.ai/pro1.1/v1/pro1.1ultra/generateRequest`
 - `POST https://gateway.pixazo.ai/flux-1-schnell/v1/getData`
 - `POST https://gateway.pixazo.ai/flux-1-schnell/v1/getDataBatch`

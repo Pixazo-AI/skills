@@ -1,13 +1,13 @@
 ---
-name: hyper3d
-description: 3D model generation with Hyper3D API (by Hyper3D) via the Pixazo API. TRIGGER when the user mentions "Hyper3D" or "Hyper3D API", or when the user asks to generate / make a 3D model / mesh / asset and Hyper3D is named or implied. DO NOT TRIGGER for image / video / music / voice / try-on — each has its own skill.
+name: pixal3d
+description: 3D model generation with Pixal3D API (by Pixal3D) via the Pixazo API. TRIGGER when the user mentions "Pixal3D" or "Pixal3D API", or when the user asks to generate / make a 3D model / mesh / asset and Pixal3D is named or implied. DO NOT TRIGGER for image / video / music / voice / try-on — each has its own skill.
 ---
 
-# Hyper3D API
+# Pixal3D API
 
-3D generation capabilities.
+Pixal3D — generate a single GLB 3D model from a reference image. Backed by fal.ai's pixal3d endpoint.
 
-You can ask Hyper3D to handle 3D model generation. Powered by Hyper3D via the Pixazo API gateway.
+You can ask Pixal3D to handle 3D model generation. Powered by Pixal3D via the Pixazo API gateway.
 
 ---
 
@@ -32,30 +32,39 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Hyper3D Rodin v1 | Image to Image (3D Models — Text & Image to 3D) | `hyper3d-rodin-259` / `hyper3d-rodin-request` |
+| Pixal3D | Image to Image ( 3D Models - Image to 3D) | `pixal3d` / `pixal3d-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/hyper3d-rodin-259/v1/hyper3d-rodin-request`
+- `POST https://gateway.pixazo.ai/pixal3d/v1/pixal3d-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/hyper3d-rodin-259/v1/hyper3d-rodin-request' \
+curl -X POST 'https://gateway.pixazo.ai/pixal3d/v1/pixal3d-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A futuristic robot with sleek metallic design and glowing blue accents",
-  "input_image_urls": [
-    "https://pub-5e7dd3f6986243de990b46ce581cf66e.r2.dev/v1/hyper3d-rodin-259_019dde5c-1240-78d7-9df5-2b73b4629b522/input_0.png"
-  ],
-  "condition_mode": "concat",
-  "geometry_file_format": "glb",
-  "material": "Shaded",
-  "quality": "medium",
-  "tier": "Regular"
+  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/dog.png",
+  "resolution": 1024,
+  "ss_guidance_strength": 7.5,
+  "ss_guidance_rescale": 0.7,
+  "ss_sampling_steps": 12,
+  "ss_rescale_t": 5,
+  "shape_slat_guidance_strength": 7.5,
+  "shape_slat_guidance_rescale": 0.5,
+  "shape_slat_sampling_steps": 12,
+  "shape_slat_rescale_t": 3,
+  "tex_slat_guidance_strength": 1,
+  "tex_slat_sampling_steps": 12,
+  "tex_slat_rescale_t": 3,
+  "mesh_scale": 1,
+  "max_num_tokens": 49152,
+  "decimation_target": 200000,
+  "texture_size": 2048,
+  "remesh": true
 }'
 ```
 
@@ -64,21 +73,30 @@ curl -X POST 'https://gateway.pixazo.ai/hyper3d-rodin-259/v1/hyper3d-rodin-reque
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/hyper3d-rodin-259/v1/hyper3d-rodin-request",
+    "https://gateway.pixazo.ai/pixal3d/v1/pixal3d-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A futuristic robot with sleek metallic design and glowing blue accents",
-  "input_image_urls": [
-    "https://pub-5e7dd3f6986243de990b46ce581cf66e.r2.dev/v1/hyper3d-rodin-259_019dde5c-1240-78d7-9df5-2b73b4629b522/input_0.png"
-  ],
-  "condition_mode": "concat",
-  "geometry_file_format": "glb",
-  "material": "Shaded",
-  "quality": "medium",
-  "tier": "Regular"
+  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/dog.png",
+  "resolution": 1024,
+  "ss_guidance_strength": 7.5,
+  "ss_guidance_rescale": 0.7,
+  "ss_sampling_steps": 12,
+  "ss_rescale_t": 5,
+  "shape_slat_guidance_strength": 7.5,
+  "shape_slat_guidance_rescale": 0.5,
+  "shape_slat_sampling_steps": 12,
+  "shape_slat_rescale_t": 3,
+  "tex_slat_guidance_strength": 1,
+  "tex_slat_sampling_steps": 12,
+  "tex_slat_rescale_t": 3,
+  "mesh_scale": 1,
+  "max_num_tokens": 49152,
+  "decimation_target": 200000,
+  "texture_size": 2048,
+  "remesh": true
 },
     timeout=300,
 )
@@ -89,22 +107,31 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/hyper3d-rodin-259/v1/hyper3d-rodin-request', {
+const res = await fetch('https://gateway.pixazo.ai/pixal3d/v1/pixal3d-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A futuristic robot with sleek metallic design and glowing blue accents",
-  "input_image_urls": [
-    "https://pub-5e7dd3f6986243de990b46ce581cf66e.r2.dev/v1/hyper3d-rodin-259_019dde5c-1240-78d7-9df5-2b73b4629b522/input_0.png"
-  ],
-  "condition_mode": "concat",
-  "geometry_file_format": "glb",
-  "material": "Shaded",
-  "quality": "medium",
-  "tier": "Regular"
+  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/dog.png",
+  "resolution": 1024,
+  "ss_guidance_strength": 7.5,
+  "ss_guidance_rescale": 0.7,
+  "ss_sampling_steps": 12,
+  "ss_rescale_t": 5,
+  "shape_slat_guidance_strength": 7.5,
+  "shape_slat_guidance_rescale": 0.5,
+  "shape_slat_sampling_steps": 12,
+  "shape_slat_rescale_t": 3,
+  "tex_slat_guidance_strength": 1,
+  "tex_slat_sampling_steps": 12,
+  "tex_slat_rescale_t": 3,
+  "mesh_scale": 1,
+  "max_num_tokens": 49152,
+  "decimation_target": 200000,
+  "texture_size": 2048,
+  "remesh": true
 }),
 });
 console.log(await res.json());
@@ -123,12 +150,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/hyper3d-rodin-259/v1/hyper3d-rodin-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/pixal3d/v1/pixal3d-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/hyper3d-rodin-259/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/pixal3d/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -141,7 +168,7 @@ result_url = status.get("output_url") or status.get("video_url") or status.get("
 
 The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
 
-> **Fetch:** `https://www.pixazo.ai/models/hyper3d.md`
+> **Fetch:** `https://www.pixazo.ai/models/pixal3d.md`
 
 Show the result URL to the user when ready (offer to download, share, or generate variations).
 
@@ -171,13 +198,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/hyper3d.md`
+> **Fetch:** `https://www.pixazo.ai/models/pixal3d.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/hyper3d`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/pixal3d`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other 3D model generation models:** `hunyuan`, `tripo3d`, `trellis3d`, `meshy-3d`, `pixal3d`
+- **Other 3D model generation models:** `hunyuan`, `hyper3d`, `tripo3d`, `trellis3d`, `meshy-3d`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
