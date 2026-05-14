@@ -1,13 +1,13 @@
 ---
 name: gpt-image
-description: Image generation/editing with GPT Image API (by OpenAI) via the Pixazo API. TRIGGER when the user mentions "GPT Image" or "GPT Image API", or when the user asks to generate / make / create / edit / restyle an image and GPT Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+description: Image generation/editing with GPT Image API (by OpenAI) via the Pixazo API. TRIGGER when the user mentions "GPT Image 2" or "GPT Image API", or when the user asks to generate / make / create / edit / restyle an image and GPT Image 2 is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # GPT Image API
 
 Advanced image generation by OpenAI.
 
-You can ask GPT Image to handle image generation/editing. Powered by OpenAI via the Pixazo API gateway.
+You can ask GPT Image 2 to handle image generation/editing. Powered by OpenAI via the Pixazo API gateway.
 
 ---
 

@@ -1,13 +1,13 @@
 ---
 name: nano-banana
-description: Image generation/editing with Nano Banana API (by Google) via the Pixazo API. TRIGGER when the user mentions "Nano Banana" or "Nano Banana API", or when the user asks to generate / make / create / edit / restyle an image and Nano Banana is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+description: Image generation/editing with Nano Banana API (by Google) via the Pixazo API. TRIGGER when the user mentions "Nano Banana 2" or "Nano Banana API", or when the user asks to generate / make / create / edit / restyle an image and Nano Banana 2 is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # Nano Banana API
 
 Advanced image generation and editing by Google.
 
-You can ask Nano Banana to handle image generation/editing. Powered by Google via the Pixazo API gateway.
+You can ask Nano Banana 2 to handle image generation/editing. Powered by Google via the Pixazo API gateway.
 
 ---
 
