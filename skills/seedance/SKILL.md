@@ -1,13 +1,13 @@
 ---
 name: seedance
-description: Video generation with Seedance AI API (by BytePlus) via the Pixazo API. TRIGGER when the user mentions "Seedance" or "Seedance AI API", or when the user asks to generate / make / create a video / clip / animation and Seedance is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+description: Video generation with Seedance AI API (by BytePlus) via the Pixazo API. TRIGGER when the user mentions "Seedance 2" or "Seedance AI API", or when the user asks to generate / make / create a video / clip / animation and Seedance 2 is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # Seedance AI API
 
 Advanced video generation capabilities by ByteDance.
 
-You can ask Seedance to handle video generation. Powered by BytePlus via the Pixazo API gateway.
+You can ask Seedance 2 to handle video generation. Powered by BytePlus via the Pixazo API gateway.
 
 ---
 

@@ -1,13 +1,13 @@
 ---
 name: veo
-description: Video generation with Veo Video API (by Google) via the Pixazo API. TRIGGER when the user mentions "Veo" or "Veo Video API", or when the user asks to generate / make / create a video / clip / animation and Veo is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+description: Video generation with Veo Video API (by Google) via the Pixazo API. TRIGGER when the user mentions "Veo 3.1" or "Veo Video API", or when the user asks to generate / make / create a video / clip / animation and Veo 3.1 is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # Veo Video API
 
 Advanced video generation by Google DeepMind.
 
-You can ask Veo to handle video generation. Powered by Google via the Pixazo API gateway.
+You can ask Veo 3.1 to handle video generation. Powered by Google via the Pixazo API gateway.
 
 ---
 
