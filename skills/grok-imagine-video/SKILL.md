@@ -1,13 +1,13 @@
 ---
-name: pika
-description: Video generation with Pika Video API (by Pika Labs) via the Pixazo API. TRIGGER when the user mentions "Pika" or "Pika Video API", or when the user asks to generate / make / create a video / clip / animation and Pika is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+name: grok-imagine-video
+description: Video generation with Grok Imagine Video API (by xAI) via the Pixazo API. TRIGGER when the user mentions "Grok Imagine Video" or "Grok Imagine Video API", or when the user asks to generate / make / create a video / clip / animation and Grok Imagine Video is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Pika Video API
+# Grok Imagine Video API
 
-Pika 2.2 — text-to-video, image-to-video, and Pika Scenes (multi-image reference) video generation by Pika Labs.
+Video generation and editing by xAI. Grok Imagine Video supports text-to-video, image-to-video, video-to-video editing, and reference-driven multi-image video synthesis (uses @Image1..@ImageN syntax to position reference images in the prompt).
 
-You can ask Pika to handle video generation. Powered by Pika Labs via the Pixazo API gateway.
+You can ask Grok Imagine Video to handle video generation. Powered by xAI via the Pixazo API gateway.
 
 ---
 
@@ -32,29 +32,31 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Pika 2.2 | Text to Video | `pika-2-2-text-to-video` / `pika-2-2-text-to-video-request` |
-| Pika 2.2 | Image to Video | `pika-2-2-image-to-video` / `pika-2-2-image-to-video-request` |
-| Pika 2.2 | Reference to Video (Ref Images to Video) | `pika-scenes-2-2` / `pika-scenes-2-2-request` |
+| Grok Imagine Video v1 | Text to Video | `grok-imagine-video-text-to-video` / `grok-imagine-video-text-to-video-request` |
+| Grok Imagine Video v1 | Image to Video | `grok-imagine-video-image-to-video` / `grok-imagine-video-image-to-video-request` |
+| Grok Imagine Video v1 | Video to Video (Video Editing) | `grok-imagine-video-edit-video` / `grok-imagine-video-edit-video-request` |
+| Grok Imagine Video v1 | Reference to Video (Ref Images to Video) | `grok-imagine-video-reference-to-video` / `grok-imagine-video-reference-to-video-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/pika-2-2-text-to-video-request`
-- `POST https://gateway.pixazo.ai/v2/requests/status/pika-2-2-text-to-video_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
-- `POST https://gateway.pixazo.ai/pika-2-2-image-to-video/v1/pika-2-2-image-to-video-request`
-- `POST https://gateway.pixazo.ai/v2/requests/status/pika-2-2-image-to-video_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
-- `POST https://gateway.pixazo.ai/pika-scenes-2-2/v1/pika-scenes-2-2-request`
-- `POST https://gateway.pixazo.ai/v2/requests/status/pika-scenes-2-2_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+- `POST https://gateway.pixazo.ai/grok-imagine-video-text-to-video/v1/grok-imagine-video-text-to-video-request`
+- `POST https://gateway.pixazo.ai/grok-imagine-video-image-to-video/v1/grok-imagine-video-image-to-video-request`
+- `POST https://gateway.pixazo.ai/grok-imagine-video-edit-video/v1/grok-imagine-video-edit-video-request`
+- `POST https://gateway.pixazo.ai/grok-imagine-video-reference-to-video/v1/grok-imagine-video-reference-to-video-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/pika-2-2-text-to-video-request' \
+curl -X POST 'https://gateway.pixazo.ai/grok-imagine-video-text-to-video/v1/grok-imagine-video-text-to-video-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A large elegant white poodle on the deck of a yacht wearing oversized sunglasses, glossy magazine style, slow camera orbit"
+  "prompt": "Anime schoolgirl bursting out of house door, cherry blossoms blowing, morning light, speed lines, vibrant colors",
+  "duration": 6,
+  "aspect_ratio": "16:9",
+  "resolution": "720p"
 }'
 ```
 
@@ -63,13 +65,16 @@ curl -X POST 'https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/pika-2-2-text-
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/pika-2-2-text-to-video-request",
+    "https://gateway.pixazo.ai/grok-imagine-video-text-to-video/v1/grok-imagine-video-text-to-video-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A large elegant white poodle on the deck of a yacht wearing oversized sunglasses, glossy magazine style, slow camera orbit"
+  "prompt": "Anime schoolgirl bursting out of house door, cherry blossoms blowing, morning light, speed lines, vibrant colors",
+  "duration": 6,
+  "aspect_ratio": "16:9",
+  "resolution": "720p"
 },
     timeout=300,
 )
@@ -80,14 +85,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/pika-2-2-text-to-video-request', {
+const res = await fetch('https://gateway.pixazo.ai/grok-imagine-video-text-to-video/v1/grok-imagine-video-text-to-video-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A large elegant white poodle on the deck of a yacht wearing oversized sunglasses, glossy magazine style, slow camera orbit"
+  "prompt": "Anime schoolgirl bursting out of house door, cherry blossoms blowing, morning light, speed lines, vibrant colors",
+  "duration": 6,
+  "aspect_ratio": "16:9",
+  "resolution": "720p"
 }),
 });
 console.log(await res.json());
@@ -106,12 +114,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/pika-2-2-text-to-video-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/grok-imagine-video-text-to-video/v1/grok-imagine-video-text-to-video-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/pika-2-2-text-to-video/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/grok-imagine-video-text-to-video/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -124,7 +132,7 @@ result_url = status.get("output_url") or status.get("video_url") or status.get("
 
 The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
 
-> **Fetch:** `https://www.pixazo.ai/models/pika.md`
+> **Fetch:** `https://www.pixazo.ai/models/grok-imagine-video.md`
 
 Show the result URL to the user when ready (offer to download, share, or generate variations).
 
@@ -154,13 +162,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/pika.md`
+> **Fetch:** `https://www.pixazo.ai/models/grok-imagine-video.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/pika`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/grok-imagine-video`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `stable-diffusion`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`
+- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `stable-diffusion`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
