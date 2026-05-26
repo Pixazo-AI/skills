@@ -1,5 +1,5 @@
 ---
-name: openbmb-voxcpm2
+name: voxcpm
 description: Text-to-speech / voice synthesis with Openbmb VoxCPM2 API (by Openbmb) via the Pixazo API. TRIGGER when the user mentions "Openbmb VoxCPM2" or "Openbmb VoxCPM2 API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Openbmb VoxCPM2 is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
@@ -32,30 +32,44 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Openbmb VoxCPM2 v1.0 | Text to Speech | `openbmb-voxcpm2` / `text-to-speech` |
-| Openbmb VoxCPM2 v1.0 | Text to Speech (Voice Design) | `openbmb-voxcpm2` / `voice-cloning` |
+| Openbmb VoxCPM 2.0 | Text to Speech | `openbmb-voxcpm2` / `text-to-speech` |
+| Openbmb VoxCPM 2.0 | Text to Speech (Voice Design) | `openbmb-voxcpm2` / `voice-cloning` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-_See the full reference for endpoint URLs._
+- `POST https://gateway.pixazo.ai/voxcpm/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/voxcpm/v1/voice-cloning`
 
 **Sample request (primary operation)**
 
-_The full reference includes ready-to-paste curl, Python, and JavaScript examples for each operation._
+```bash
+curl -X POST 'https://gateway.pixazo.ai/voxcpm/v1/text-to-speech' \
+  -H 'Content-Type: application/json' \
+  -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
+  -d '{
+  "text": "Hello, from Pixazo.",
+  "cfg_value": 2.0,
+  "dit_steps": 10
+}'
+```
 
 **Python**
 
 ```python
 import os, requests
 r = requests.post(
-    "<endpoint>",
+    "https://gateway.pixazo.ai/voxcpm/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
-    json={},
+    json={
+  "text": "Hello, from Pixazo.",
+  "cfg_value": 2.0,
+  "dit_steps": 10
+},
     timeout=300,
 )
 r.raise_for_status()
@@ -65,13 +79,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('<endpoint>', {
+const res = await fetch('https://gateway.pixazo.ai/voxcpm/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({}),
+  body: JSON.stringify({
+  "text": "Hello, from Pixazo.",
+  "cfg_value": 2.0,
+  "dit_steps": 10
+}),
 });
 console.log(await res.json());
 ```
@@ -112,9 +130,9 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/openbmb-voxcpm2.md`
+> **Fetch:** `https://www.pixazo.ai/models/voxcpm.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/openbmb-voxcpm2`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/voxcpm`.
 
 ---
 
