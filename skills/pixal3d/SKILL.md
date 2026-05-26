@@ -32,7 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Pixal3D | Image to Image ( 3D Models - Image to 3D) | `pixal3d` / `pixal3d-request` |
+| Pixal3D | Image to Image (3D Models — Image to 3D) | `pixal3d` / `pixal3d-request` |
 
 ### Step 3 — Make the API call
 
@@ -47,7 +47,7 @@ curl -X POST 'https://gateway.pixazo.ai/pixal3d/v1/pixal3d-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/dog.png",
+  "image_url": "https://example.com/example_inputs/dog.png",
   "resolution": 1024,
   "ss_guidance_strength": 7.5,
   "ss_guidance_rescale": 0.7,
@@ -79,7 +79,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/dog.png",
+  "image_url": "https://example.com/example_inputs/dog.png",
   "resolution": 1024,
   "ss_guidance_strength": 7.5,
   "ss_guidance_rescale": 0.7,
@@ -114,7 +114,7 @@ const res = await fetch('https://gateway.pixazo.ai/pixal3d/v1/pixal3d-request', 
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/dog.png",
+  "image_url": "https://example.com/example_inputs/dog.png",
   "resolution": 1024,
   "ss_guidance_strength": 7.5,
   "ss_guidance_rescale": 0.7,

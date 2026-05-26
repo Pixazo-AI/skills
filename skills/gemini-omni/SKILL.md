@@ -1,13 +1,13 @@
 ---
-name: tracks
-description: Music/audio generation with Track Music API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Tracks" or "Track Music API", or when the user asks to generate / make music / a song / a beat / audio track and Tracks is named or implied. DO NOT TRIGGER for image / video / voice / 3d / try-on — each has its own skill.
+name: gemini-omni
+description: Video generation with Gemini Omni API (by Google) via the Pixazo API. TRIGGER when the user mentions "Gemini Omni" or "Gemini Omni API", or when the user asks to generate / make / create a video / clip / animation and Gemini Omni is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Track Music API
+# Gemini Omni API
 
-AI-powered music generation and audio synthesis by Pixazo. Create high-quality original music tracks with advanced AI models that transform creative ideas into professional-sounding compositions for content creators, filmmakers, and musicians.
+Google's Gemini Omni is a multimodal video model that handles image-to-video, reference-to-video, video-to-video, and AI video editing through a single API.
 
-You can ask Tracks to handle music/audio generation. Powered by Pixazo via the Pixazo API gateway.
+You can ask Gemini Omni to handle video generation. Powered by Google via the Pixazo API gateway.
 
 ---
 
@@ -32,52 +32,32 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Track v1.0 | Text to Music | `tracks` / `generate-music` |
+| Gemini Omni v1 | Image to Video | `gemini-omni` / `image-to-video-request` |
+| Gemini Omni v1 | Reference to Video (Ref Images to Video) | `gemini-omni` / `reference-to-video-request` |
+| Gemini Omni v1 | Video to Video | `gemini-omni` / `video-to-video-request` |
+| Gemini Omni v1 | Video to Video (Video Editing) | `gemini-omni` / `video-editor-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/tracks/v1/generate`
+_See the full reference for endpoint URLs._
 
 **Sample request (primary operation)**
 
-```bash
-curl -X POST 'https://gateway.pixazo.ai/tracks/v1/generate' \
-  -H 'Content-Type: application/json' \
-  -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
-  -d '{
-  "prompt": "A cinematic Hans Zimmer style orchestral piece, building tension with heavy percussion and brass, epic atmosphere",
-  "lyrics": "",
-  "instrumental": true,
-  "duration": 120,
-  "bpm": 140,
-  "infer_steps": 25,
-  "guidance_scale": 7.5,
-  "seed": 42
-}'
-```
+_The full reference includes ready-to-paste curl, Python, and JavaScript examples for each operation._
 
 **Python**
 
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/tracks/v1/generate",
+    "<endpoint>",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
-    json={
-  "prompt": "A cinematic Hans Zimmer style orchestral piece, building tension with heavy percussion and brass, epic atmosphere",
-  "lyrics": "",
-  "instrumental": true,
-  "duration": 120,
-  "bpm": 140,
-  "infer_steps": 25,
-  "guidance_scale": 7.5,
-  "seed": 42
-},
+    json={},
     timeout=300,
 )
 r.raise_for_status()
@@ -87,29 +67,20 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/tracks/v1/generate', {
+const res = await fetch('<endpoint>', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({
-  "prompt": "A cinematic Hans Zimmer style orchestral piece, building tension with heavy percussion and brass, epic atmosphere",
-  "lyrics": "",
-  "instrumental": true,
-  "duration": 120,
-  "bpm": 140,
-  "infer_steps": 25,
-  "guidance_scale": 7.5,
-  "seed": 42
-}),
+  body: JSON.stringify({}),
 });
 console.log(await res.json());
 ```
 
 ### Step 4 — Poll until ready, then show the user
 
-Music generation is **asynchronous**. The first response returns a `task_id` (or `request_id`). Then poll a status endpoint until the music is ready.
+Video generation is **asynchronous**. The first response returns a `task_id` (or `request_id`). Then poll a status endpoint until the video is ready.
 
 Typical loop:
 
@@ -120,12 +91,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/tracks/v1/generate", headers=HEADERS, json={...}).json()
+submit = requests.post("PRIMARY_ENDPOINT", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/tracks/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"RESULT_ENDPOINT/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -138,7 +109,7 @@ result_url = status.get("output_url") or status.get("video_url") or status.get("
 
 The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
 
-> **Fetch:** `https://www.pixazo.ai/models/tracks.md`
+> **Fetch:** `https://www.pixazo.ai/models/gemini-omni.md`
 
 Show the result URL to the user when ready (offer to download, share, or generate variations).
 
@@ -168,13 +139,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/tracks.md`
+> **Fetch:** `https://www.pixazo.ai/models/gemini-omni.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/tracks`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gemini-omni`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other music/audio generation models:** `minimax`, `ace-step`, `lyria`, `mmaudio`
+- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

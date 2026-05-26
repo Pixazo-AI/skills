@@ -33,21 +33,21 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | GPT Image v1.5 | Text to Image | `gpt-image-1-5-api-923` / `gpt-image-1-5-api-request` |
-| GPT Image 2 | Image to Image (Image Editing) | `gpt-image-2-image-to-image` / `image-to-image` |
-| GPT Image 2 | Text to Image | `gpt-image-2-text-to-image` / `text-to-image-request` |
+| GPT Image 2 | Text to Image | `gpt-image-2` / `text-to-image` |
+| GPT Image 2 | Image to Image (Image Editing) | `gpt-image-2` / `image-to-image-edit-image` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/gpt-image-1-5-api-923/v1/gpt-image-1-5-api-request`
-- `POST https://gateway.pixazo.ai/gpt-image-2-image-to-image/v1/gpt-image-2-image-to-image/generate`
-- `POST https://gateway.pixazo.ai/gpt-image-2-text-to-image/v1/gpt-image-2-text-to-image/generate`
+- `POST https://gateway.pixazo.ai/gpt-image-2/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/gpt-image-2/v1/image-to-image-edit`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/gpt-image-2-text-to-image/v1/gpt-image-2-text-to-image/generate' \
+curl -X POST 'https://gateway.pixazo.ai/gpt-image-2/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -65,7 +65,7 @@ curl -X POST 'https://gateway.pixazo.ai/gpt-image-2-text-to-image/v1/gpt-image-2
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/gpt-image-2-text-to-image/v1/gpt-image-2-text-to-image/generate",
+    "https://gateway.pixazo.ai/gpt-image-2/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -87,7 +87,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/gpt-image-2-text-to-image/v1/gpt-image-2-text-to-image/generate', {
+const res = await fetch('https://gateway.pixazo.ai/gpt-image-2/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -162,5 +162,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `flux`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
+- **Other image generation/editing models:** `seedream`, `flux`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

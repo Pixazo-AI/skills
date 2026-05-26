@@ -32,30 +32,31 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Kling Video O3 4K | Text to Video | `kling-video-o3-4k-image-to-video` / `kling-video-o3-4k-text-to-video-request` |
+| Kling Video O3 4K | Text to Video | `kling-video-o3-4k-text-to-video` / `kling-video-o3-4k-text-to-video-request` |
 | Kling Video O3 4K | Image to Video | `kling-video-o3-4k-image-to-video` / `kling-video-o3-4k-image-to-video-request` |
 | Kling Video O3 4K | Reference to Video (Ref Images to Video) | `kling-video-o3-4k-reference-to-video` / `kling-video-o3-4k-reference-to-video-request` |
 | Kling Image O3 | Text to Image | `kling-image` / `kling-image-request` |
 | Kling Image O3 | Image to Image (Image Editing) | `kling-image-o3-i2i` / `kling-image-o3-i2i-request` |
 | Kling 3.0 | Text to Video | `kling-3-0-text-to-video-standard` / `kling-3-0-text-to-video-standard-request` |
 | Kling 3.0 | Image to Video | `kling-3-0-image-to-video-standard` / `kling-3-0-image-to-video-standard-request` |
-| Kling Image V3 t2i | Text to Image | `kling-image-t2i` / `kling-image-t2i-request` |
-| Kling Image V3 t2i | Text To Image | `kling-image-t2i` / `kling-image-t2i-request` |
-| Kling Avatar v2 Pro | Audio to Video (Ref Image + Ref Audio to Video — Avatar) | `kling-ai-avatar-v2-pro-789` / `kling-ai-avatar-v2-pro-request` |
+| Kling Image 3 t2i | Text to Image | `kling-image-t2i` / `kling-image-t2i-request` |
+| Kling Image 3 t2i | Text To Image | `kling-image-t2i` / `kling-image-t2i-request` |
+| Kling Avatar 2 Pro | Audio to Video (Ref Image + Ref Audio to Video — Avatar) | `kling-ai-avatar-v2-pro-789` / `kling-ai-avatar-v2-pro-request` |
 | Kling O1 | Video to Video (Video Editing) | `kling-o1-edit-video-video-to-video-634` / `kling-o1-edit-video-video-to-video-request` |
 | Kling O1 | Image to Video (First/Last Frame to Video) | `kling-o1-first-frame-last-frame-to-video-857` / `kling-o1-first-frame-last-frame-to-video-request` |
 | Kling O1 | Image to Image | `kling-o1-image-208` / `kling-o1-image-request` |
 | Kling O1 | Reference to Video (Ref Images to Video) | `kling-o1-reference-image-to-video-382` / `kling-o1-reference-image-to-video-request` |
 | Kling O1 | Reference to Video (Ref Video to Video) | `kling-o1-reference-video-to-video-315` / `kling-o1-reference-video-to-video-request` |
-| Kling v2.6 Standard | Video to Video (Video Editing — Motion Control) | `kling-video-v2-6-standard-motion-control` / `kling-video-v2-6-standard-motion-control-request` |
-| Kling v1 | Image to Image (Virtual Try On) | `kling-virtual-try-on` / `generate-image-request` |
-| Kling v1.6 | Image to Video | `klingai-video` / `image-to-video-request` |
-| Kling v1.6 | Text to Video | `klingai-video` / `video-request` |
+| Kling 2.6 Standard | Video to Video (Video Editing — Motion Control) | `kling-video-v2-6-standard-motion-control` / `kling-video-v2-6-standard-motion-control-request` |
+| Kling Virtual Try-on | Image to Image (Virtual Try On) | `kling-virtual-try-on` / `generate-image-request` |
+| Kling 1.6 | Image to Video | `klingai-video` / `image-to-video-request` |
+| Kling 1.6 | Text to Video | `klingai-video` / `video-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/kling-video-o3-4k-kling-video-o3-4k-text-to-video-request/v1/kling-video-o3-4k-text-to-video-request`
 - `POST https://gateway.pixazo.ai/kling-video-o3-4k-image-to-video/v1/kling-video-o3-4k-image-to-video-request`
 - `POST https://gateway.pixazo.ai/kling-video-o3-4k-reference-to-video/v1/kling-video-o3-4k-reference-to-video-request`
 - `POST https://gateway.pixazo.ai/kling-image/v1/kling-image-request`
@@ -79,15 +80,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/kling-3-0-text-to-video-standard/v1/kling-3-0-text-to-video-standard-request' \
+curl -X POST 'https://gateway.pixazo.ai/kling-video-o3-4k-kling-video-o3-4k-text-to-video-request/v1/kling-video-o3-4k-text-to-video-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg",
-  "prompt": "Cinematic camera move; the subject comes to life, anime style",
-  "duration": "5",
-  "generate_audio": false,
-  "shot_type": "customize"
+  "prompt": "A mecha lands on the ground to save the city, and says I am here, in anime style"
 }'
 ```
 
@@ -96,17 +93,13 @@ curl -X POST 'https://gateway.pixazo.ai/kling-3-0-text-to-video-standard/v1/klin
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/kling-3-0-text-to-video-standard/v1/kling-3-0-text-to-video-standard-request",
+    "https://gateway.pixazo.ai/kling-video-o3-4k-kling-video-o3-4k-text-to-video-request/v1/kling-video-o3-4k-text-to-video-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg",
-  "prompt": "Cinematic camera move; the subject comes to life, anime style",
-  "duration": "5",
-  "generate_audio": false,
-  "shot_type": "customize"
+  "prompt": "A mecha lands on the ground to save the city, and says I am here, in anime style"
 },
     timeout=300,
 )
@@ -117,18 +110,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/kling-3-0-text-to-video-standard/v1/kling-3-0-text-to-video-standard-request', {
+const res = await fetch('https://gateway.pixazo.ai/kling-video-o3-4k-kling-video-o3-4k-text-to-video-request/v1/kling-video-o3-4k-text-to-video-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg",
-  "prompt": "Cinematic camera move; the subject comes to life, anime style",
-  "duration": "5",
-  "generate_audio": false,
-  "shot_type": "customize"
+  "prompt": "A mecha lands on the ground to save the city, and says I am here, in anime style"
 }),
 });
 console.log(await res.json());
@@ -147,12 +136,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/kling-3-0-text-to-video-standard/v1/kling-3-0-text-to-video-standard-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/kling-video-o3-4k-kling-video-o3-4k-text-to-video-request/v1/kling-video-o3-4k-text-to-video-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/kling-3-0-text-to-video-standard/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/kling-video-o3-4k-kling-video-o3-4k-text-to-video-request/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -203,5 +192,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `stable-diffusion`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`
+- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

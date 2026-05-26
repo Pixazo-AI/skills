@@ -1,13 +1,13 @@
 ---
 name: elevenlabs
-description: Music/audio generation with ElevenLabs Audio API (by ElevenLabs) via the Pixazo API. TRIGGER when the user mentions "ElevenLabs" or "ElevenLabs Audio API", or when the user asks to generate / make music / a song / a beat / audio track and ElevenLabs is named or implied. DO NOT TRIGGER for image / video / voice / 3d / try-on — each has its own skill.
+description: Text-to-speech / voice synthesis with ElevenLabs Audio API (by ElevenLabs) via the Pixazo API. TRIGGER when the user mentions "ElevenLabs" or "ElevenLabs Audio API", or when the user asks to speak / read aloud / convert text to speech / generate voice and ElevenLabs is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
 # ElevenLabs Audio API
 
 Advanced audio and music generation.
 
-You can ask ElevenLabs to handle music/audio generation. Powered by ElevenLabs via the Pixazo API gateway.
+You can ask ElevenLabs to handle text-to-speech / voice synthesis. Powered by ElevenLabs via the Pixazo API gateway.
 
 ---
 
@@ -94,40 +94,15 @@ const res = await fetch('https://gateway.pixazo.ai/elevenlabs-music-api-368/v1/e
 console.log(await res.json());
 ```
 
-### Step 4 — Poll until ready, then show the user
+### Step 4 — Show the user the result
 
-Music generation is **asynchronous**. The first response returns a `task_id` (or `request_id`). Then poll a status endpoint until the music is ready.
+text-to-speech / voice synthesis via this model is **synchronous** — no polling. The response is JSON, e.g.:
 
-Typical loop:
-
-```python
-import time, requests, os
-
-KEY = os.environ["PIXAZO_API_KEY"]
-HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
-
-# 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/elevenlabs-music-api-368/v1/elevenlabs-music-api-request", headers=HEADERS, json={...}).json()
-task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
-
-# 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
-while True:
-    status = requests.get(f"https://gateway.pixazo.ai/elevenlabs-music-api-368/v1/result/{task_id}", headers=HEADERS).json()
-    if status.get("status") in ("completed", "succeeded", "ready", "done"):
-        break
-    if status.get("status") in ("failed", "error"):
-        raise RuntimeError(status.get("error") or "generation failed")
-    time.sleep(8)
-
-# 3) Pull the result URL out (field varies — usually output_url, video_url, audio_url, or url)
-result_url = status.get("output_url") or status.get("video_url") or status.get("audio_url") or status.get("url")
+```json
+{ "audio": [{ "url": "https://…" }] }
 ```
 
-The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
-
-> **Fetch:** `https://www.pixazo.ai/models/elevenlabs.md`
-
-Show the result URL to the user when ready (offer to download, share, or generate variations).
+Pull the URL out and show it to the user (in chat, render inline if your environment supports it). Offer to: download it, edit it further, or generate variations.
 
 
 
@@ -163,5 +138,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other music/audio generation models:** `tracks`, `minimax`, `ace-step`, `lyria`, `mmaudio`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `gemini`, `qwen-tts`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

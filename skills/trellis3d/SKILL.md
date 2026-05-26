@@ -32,7 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Trellis v2 | Image to Image ( 3D Models - Image to 3D) | `trellis-2-image-to-3d` / `trellis-2-image-to-3d-request` |
+| Trellis v2 | Image to Image (3D Models — Image to 3D) | `trellis-2-image-to-3d` / `trellis-2-image-to-3d-request` |
 
 ### Step 3 — Make the API call
 

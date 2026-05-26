@@ -33,7 +33,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Vidu Q3 | Text to Video | `vidu` / `vidu-request` |
-| Vidu v1 | Image to Image (Image Background Remover) | `vidu-q2-reference-to-video-pro-api-454` / `vidu-q2-reference-to-video-pro-api-request` |
+| Vidu Q2 | Reference to Video (Ref Image + Ref Video + Ref Audio to Video) | `vidu-q2-reference-to-video-pro-api-454` / `vidu-q2-reference-to-video-pro-api-request` |
 
 ### Step 3 — Make the API call
 
@@ -169,5 +169,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `stable-diffusion`, `veed`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`
+- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

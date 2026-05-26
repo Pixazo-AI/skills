@@ -36,6 +36,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Recraft v3 | Text to Image | `recraft` / `text-to-image-v3` |
 | Recraft V4 Pro | Text to Image | `recraft` / `text-to-image-v4-normal` |
 | Recraft V4 Pro | Text To Image | `recraft` / `text-to-image-v4-pro` |
+| Recraft V4.1 Pro | Text To Image | `recraft-v4-1-pro` / `text-to-image` |
 
 ### Step 3 — Make the API call
 
@@ -45,6 +46,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/recraft/v3/generate`
 - `POST https://gateway.pixazo.ai/recraft/v4/generate`
 - `POST https://gateway.pixazo.ai/recraft/v4-pro/generate`
+- `POST https://gateway.pixazo.ai/recraft-v4-1-pro/v1/recraft-v4-1-pro/generate`
 
 **Sample request (primary operation)**
 
@@ -155,5 +157,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

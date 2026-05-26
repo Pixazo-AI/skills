@@ -1,13 +1,13 @@
 ---
 name: stable-diffusion
-description: Video generation with Stable Diffusion API (by Stability AI) via the Pixazo API. TRIGGER when the user mentions "Stable Diffusion" or "Stable Diffusion API", or when the user asks to generate / make / create a video / clip / animation and Stable Diffusion is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+description: Image generation/editing with Stable Diffusion API (by Stability AI) via the Pixazo API. TRIGGER when the user mentions "Stable Diffusion" or "Stable Diffusion API", or when the user asks to generate / make / create / edit / restyle an image and Stable Diffusion is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # Stable Diffusion API
 
-Industry-leading image and video generation models.
+Industry-leading open image generation by Stability AI
 
-You can ask Stable Diffusion to handle video generation. Powered by Stability AI via the Pixazo API gateway.
+You can ask Stable Diffusion to handle image generation/editing. Powered by Stability AI via the Pixazo API gateway.
 
 ---
 
@@ -119,41 +119,29 @@ const res = await fetch('https://gateway.pixazo.ai/sd3/v1/getData', {
 console.log(await res.json());
 ```
 
-### Step 4 — Poll until ready, then show the user
+### Step 4 — Show the user the result
 
-Video generation is **asynchronous**. The first response returns a `task_id` (or `request_id`). Then poll a status endpoint until the video is ready.
+image generation/editing via this model is **synchronous** — no polling. The response is JSON, e.g.:
 
-Typical loop:
-
-```python
-import time, requests, os
-
-KEY = os.environ["PIXAZO_API_KEY"]
-HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
-
-# 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/sd3/v1/getData", headers=HEADERS, json={...}).json()
-task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
-
-# 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
-while True:
-    status = requests.get(f"https://gateway.pixazo.ai/sd3/v1/result/{task_id}", headers=HEADERS).json()
-    if status.get("status") in ("completed", "succeeded", "ready", "done"):
-        break
-    if status.get("status") in ("failed", "error"):
-        raise RuntimeError(status.get("error") or "generation failed")
-    time.sleep(8)
-
-# 3) Pull the result URL out (field varies — usually output_url, video_url, audio_url, or url)
-result_url = status.get("output_url") or status.get("video_url") or status.get("audio_url") or status.get("url")
+```json
+{ "images": [{ "url": "https://…" }] }
 ```
 
-The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
+Pull the URL out and show it to the user (in chat, render inline if your environment supports it). Offer to: download it, edit it further, or generate variations.
 
-> **Fetch:** `https://www.pixazo.ai/models/stable-diffusion.md`
 
-Show the result URL to the user when ready (offer to download, share, or generate variations).
+---
 
+### Inputs the user might give you
+
+- **Prompt only** — a description. Build the request from Step 3.
+- **A reference image** — passed as a URL or base64 data URL. Use the edit endpoint.
+- **Image size** — translate user phrases to the API's `image_size` enum:
+  - "square / Instagram" → `square_hd`
+  - "portrait / vertical / 9:16" → `portrait_16_9`
+  - "landscape / horizontal / 16:9" → `landscape_16_9`
+- **Number of variations** — `num_images` (1–4). Default 1.
+- **Seed** — for reproducibility. Default 42, or pass through if the user says "same seed".
 
 
 ---
@@ -188,5 +176,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

@@ -32,26 +32,31 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Mirelo SFX 1.6 | Text to Speech | `mirelo-sfx-1-6-text-to-audio` / `mirelo-sfx-1-6-text-to-audio-request` |
+| Mirelo SFX 1.6 | Video to Video | `mirelo-sfx-1-6-video-to-video` / `mirelo-sfx-1-6-video-to-video-request` |
 | Mirelo SFX 1.0 | Video to Audio | `mirelo-sfx-video-to-audio` / `mirelo-sfx-video-to-audio-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request`
+- `POST https://gateway.pixazo.ai/mirelo-sfx-1-6-video-to-video/v1/mirelo-sfx-1-6-video-to-video-request`
 - `POST https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-video-to-audio-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-video-to-audio-request' \
+curl -X POST 'https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "video_url": "https://di3otfzjg1gxa.cloudfront.net/input_example.mp4",
-  "text_prompt": "",
-  "num_samples": 2,
-  "seed": 2105,
-  "duration": 10
+  "text_prompt": "Rainforest ambience with distant birds and rustling leaves",
+  "duration": 10,
+  "ambience": false,
+  "double_output": false,
+  "num_samples": 1,
+  "upload_audio_format": "wav"
 }'
 ```
 
@@ -60,17 +65,18 @@ curl -X POST 'https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-video-to-audio-request",
+    "https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "video_url": "https://di3otfzjg1gxa.cloudfront.net/input_example.mp4",
-  "text_prompt": "",
-  "num_samples": 2,
-  "seed": 2105,
-  "duration": 10
+  "text_prompt": "Rainforest ambience with distant birds and rustling leaves",
+  "duration": 10,
+  "ambience": false,
+  "double_output": false,
+  "num_samples": 1,
+  "upload_audio_format": "wav"
 },
     timeout=300,
 )
@@ -81,18 +87,19 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-video-to-audio-request', {
+const res = await fetch('https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "video_url": "https://di3otfzjg1gxa.cloudfront.net/input_example.mp4",
-  "text_prompt": "",
-  "num_samples": 2,
-  "seed": 2105,
-  "duration": 10
+  "text_prompt": "Rainforest ambience with distant birds and rustling leaves",
+  "duration": 10,
+  "ambience": false,
+  "double_output": false,
+  "num_samples": 1,
+  "upload_audio_format": "wav"
 }),
 });
 console.log(await res.json());
@@ -155,5 +162,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `real-esrgan`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `real-esrgan`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

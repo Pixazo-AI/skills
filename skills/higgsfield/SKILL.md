@@ -32,28 +32,28 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Higgsfield 1.0 | Text to Image | `ai-model-api` / `generate-image` |
 | Higgsfield 1.0 | Image to Video | `ai-model-api` / `image-to-video-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/ai-model-api/v1/generateSoul`
 - `POST https://gateway.pixazo.ai/ai-model-api/v1/generateImageToVideoRequest`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/ai-model-api/v1/generateSoul' \
+curl -X POST 'https://gateway.pixazo.ai/ai-model-api/v1/generateImageToVideoRequest' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Woman on rooftop",
-  "soul_style_id": "a5f63c3b-70eb-4979-af5e-98c7ee1e18e8",
-  "width_and_height": "1536x1152",
-  "image_reference_type": "image_url",
-  "image_reference_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/model.png"
+  "model": "dop-lite",
+  "prompt": "A serene lake with gentle ripples, birds flying overhead, cinematic lighting",
+  "seed": 123456,
+  "motions_id": "[MOTION_ID]",
+  "motions_strength": 0.7,
+  "input_images": ["https://example.com/images/lake-scene.jpg"],
+  "enhance_prompt": true
 }'
 ```
 
@@ -62,17 +62,19 @@ curl -X POST 'https://gateway.pixazo.ai/ai-model-api/v1/generateSoul' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/ai-model-api/v1/generateSoul",
+    "https://gateway.pixazo.ai/ai-model-api/v1/generateImageToVideoRequest",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Woman on rooftop",
-  "soul_style_id": "a5f63c3b-70eb-4979-af5e-98c7ee1e18e8",
-  "width_and_height": "1536x1152",
-  "image_reference_type": "image_url",
-  "image_reference_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/model.png"
+  "model": "dop-lite",
+  "prompt": "A serene lake with gentle ripples, birds flying overhead, cinematic lighting",
+  "seed": 123456,
+  "motions_id": "[MOTION_ID]",
+  "motions_strength": 0.7,
+  "input_images": ["https://example.com/images/lake-scene.jpg"],
+  "enhance_prompt": true
 },
     timeout=300,
 )
@@ -83,18 +85,20 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/ai-model-api/v1/generateSoul', {
+const res = await fetch('https://gateway.pixazo.ai/ai-model-api/v1/generateImageToVideoRequest', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Woman on rooftop",
-  "soul_style_id": "a5f63c3b-70eb-4979-af5e-98c7ee1e18e8",
-  "width_and_height": "1536x1152",
-  "image_reference_type": "image_url",
-  "image_reference_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/model.png"
+  "model": "dop-lite",
+  "prompt": "A serene lake with gentle ripples, birds flying overhead, cinematic lighting",
+  "seed": 123456,
+  "motions_id": "[MOTION_ID]",
+  "motions_strength": 0.7,
+  "input_images": ["https://example.com/images/lake-scene.jpg"],
+  "enhance_prompt": true
 }),
 });
 console.log(await res.json());
@@ -113,7 +117,7 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/ai-model-api/v1/generateSoul", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/ai-model-api/v1/generateImageToVideoRequest", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
@@ -169,5 +173,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `stable-diffusion`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`
+- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

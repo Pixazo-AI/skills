@@ -48,7 +48,7 @@ curl -X POST 'https://gateway.pixazo.ai/kandinsky-5-0-pro-953/v1/kandinsky-5-0-p
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "The white dragon warrior stands still, eyes full of determination and strength. The camera slowly moves closer or circles around the warrior, highlighting the powerful presence and heroic spirit of the character.",
-  "image_url": "https://storage.googleapis.com/falserverless/model_tests/wan/dragon-warrior.jpg"
+  "image_url": "https://example.com/model_tests/wan/dragon-warrior.jpg"
 }'
 ```
 
@@ -64,7 +64,7 @@ r = requests.post(
     },
     json={
   "prompt": "The white dragon warrior stands still, eyes full of determination and strength. The camera slowly moves closer or circles around the warrior, highlighting the powerful presence and heroic spirit of the character.",
-  "image_url": "https://storage.googleapis.com/falserverless/model_tests/wan/dragon-warrior.jpg"
+  "image_url": "https://example.com/model_tests/wan/dragon-warrior.jpg"
 },
     timeout=300,
 )
@@ -83,7 +83,7 @@ const res = await fetch('https://gateway.pixazo.ai/kandinsky-5-0-pro-953/v1/kand
   },
   body: JSON.stringify({
   "prompt": "The white dragon warrior stands still, eyes full of determination and strength. The camera slowly moves closer or circles around the warrior, highlighting the powerful presence and heroic spirit of the character.",
-  "image_url": "https://storage.googleapis.com/falserverless/model_tests/wan/dragon-warrior.jpg"
+  "image_url": "https://example.com/model_tests/wan/dragon-warrior.jpg"
 }),
 });
 console.log(await res.json());
@@ -158,5 +158,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `stable-diffusion`, `veed`, `vidu`, `wan`, `pixverse`, `hunyuan-video`, `heygen`, `grok-imagine-video`
+- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

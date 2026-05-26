@@ -33,7 +33,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Nano Banana 2 | Text to Image | `nano-banana-2` / `nano-banana-2-request` |
-| Nano Banana 2 | Image to Image (Image Editing) | `nano-banana-2` / `image-request` |
+| Nano Banana 2 | Image to Image (Image Editing) | `nano-banana-2-edit` / `nano-banana-2-edit-request` |
 | Nano Banana Standard | Image to Image (Image Editing) | `nano-banana` / `edit-image-request` |
 | Nano Banana Standard | Text to Image | `nano-banana` / `text-to-image-request` |
 | Nano Banana Standard | Image to Image (Image Editing — Batch) | `nano-banana-async-api` / `image-to-image-edit-image` |
@@ -46,7 +46,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/nano-banana-2/v1/nano-banana-2-request`
-- `POST https://gateway.pixazo.ai/nano-banana-2/v1/nano-banana-2/generate`
+- `POST https://gateway.pixazo.ai/nano-banana-2-edit/v1/nano-banana-2-edit-request`
 - `POST https://gateway.pixazo.ai/nano-banana/v1/nano-banana/generateEditImageRequest`
 - `POST https://gateway.pixazo.ai/nano-banana/v1/nano-banana/generateTextToImageRequest`
 - `POST https://gateway.pixazo.ai/nano-banana-async/v1/nano-banana-image-to-image`
@@ -181,5 +181,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
+- **Other image generation/editing models:** `seedream`, `flux`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

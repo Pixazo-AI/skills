@@ -47,8 +47,8 @@ curl -X POST 'https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/v1/bytedanc
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/omnihuman_v15_input_image.png",
-  "audio_url": "https://storage.googleapis.com/falserverless/example_inputs/omnihuman_v15_input_audio.mp3",
+  "image_url": "https://example.com/example_inputs/omnihuman_v15_input_image.png",
+  "audio_url": "https://example.com/example_inputs/omnihuman_v15_input_audio.mp3",
   "resolution": "1080p"
 }'
 ```
@@ -64,8 +64,8 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/omnihuman_v15_input_image.png",
-  "audio_url": "https://storage.googleapis.com/falserverless/example_inputs/omnihuman_v15_input_audio.mp3",
+  "image_url": "https://example.com/example_inputs/omnihuman_v15_input_image.png",
+  "audio_url": "https://example.com/example_inputs/omnihuman_v15_input_audio.mp3",
   "resolution": "1080p"
 },
     timeout=300,
@@ -84,8 +84,8 @@ const res = await fetch('https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/omnihuman_v15_input_image.png",
-  "audio_url": "https://storage.googleapis.com/falserverless/example_inputs/omnihuman_v15_input_audio.mp3",
+  "image_url": "https://example.com/example_inputs/omnihuman_v15_input_image.png",
+  "audio_url": "https://example.com/example_inputs/omnihuman_v15_input_audio.mp3",
   "resolution": "1080p"
 }),
 });
@@ -161,5 +161,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `stable-diffusion`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`
+- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

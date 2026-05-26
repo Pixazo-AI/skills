@@ -52,7 +52,7 @@ curl -X POST 'https://gateway.pixazo.ai/hunyuan-video-image-to-video/v1/hunyuan-
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "Two muscular cats boxing in a boxing ring.",
-  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/hunyuan_i2v.jpg"
+  "image_url": "https://example.com/example_inputs/hunyuan_i2v.jpg"
 }'
 ```
 
@@ -68,7 +68,7 @@ r = requests.post(
     },
     json={
   "prompt": "Two muscular cats boxing in a boxing ring.",
-  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/hunyuan_i2v.jpg"
+  "image_url": "https://example.com/example_inputs/hunyuan_i2v.jpg"
 },
     timeout=300,
 )
@@ -87,7 +87,7 @@ const res = await fetch('https://gateway.pixazo.ai/hunyuan-video-image-to-video/
   },
   body: JSON.stringify({
   "prompt": "Two muscular cats boxing in a boxing ring.",
-  "image_url": "https://storage.googleapis.com/falserverless/example_inputs/hunyuan_i2v.jpg"
+  "image_url": "https://example.com/example_inputs/hunyuan_i2v.jpg"
 }),
 });
 console.log(await res.json());
@@ -162,5 +162,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `stable-diffusion`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `heygen`, `grok-imagine-video`
+- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `heygen`, `grok-imagine-video`, `gemini-omni`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

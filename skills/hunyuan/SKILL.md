@@ -32,9 +32,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Hunyuan3D 3.1 Pro | Text to Image ( 3D Models - Text to 3D) | `hunyuan-3d` / `hunyuan-3d-request` |
-| Hunyuan3D 3.1 Pro | Image to Image ( 3D Models - Image to 3D) | `hunyuan-3d-v3-1-pro-image-to-3d` / `hunyuan-3d-v3-1-pro-image-to-3d-request` |
-| Hunyuan3D 3.0 | Image to Image ( 3D Models - Image to 3D) | `hunyuan3d-3-0-api-294` / `hunyuan3d-3-0-api-request` |
+| Hunyuan3D 3.1 Pro | Text to Image (3D Models — Text to 3D) | `hunyuan-3d` / `hunyuan-3d-request` |
+| Hunyuan3D 3.1 Pro | Image to Image (3D Models — Image to 3D) | `hunyuan-3d-v3-1-pro-image-to-3d` / `hunyuan-3d-v3-1-pro-image-to-3d-request` |
+| Hunyuan3D 3.0 | Image to Image (3D Models — Image to 3D) | `hunyuan3d-3-0-api-294` / `hunyuan3d-3-0-api-request` |
 | Hunyuan Image 3.0 | Text to Image | `hunyuan-image` / `generate-image-request` |
 | Hunyuan Image 3.0 Instruct | Text to Image | `hunyuan-image-3-0-instruct` / `hunyuan-image-3-0-instruct-request` |
 
