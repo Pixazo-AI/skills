@@ -47,7 +47,7 @@ curl -X POST 'https://gateway.pixazo.ai/real-esrgan/v1/real-esrgan/generate' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image": "https://replicate.delivery/pbxt/Ing7Fa4YMk6YtcoG1YZnaK3UwbgDB5guRc5M2dEjV6ODNLMl/cat.jpg"
+  "image": "https://example.com/cat.jpg"
 }'
 ```
 
@@ -62,7 +62,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "image": "https://replicate.delivery/pbxt/Ing7Fa4YMk6YtcoG1YZnaK3UwbgDB5guRc5M2dEjV6ODNLMl/cat.jpg"
+  "image": "https://example.com/cat.jpg"
 },
     timeout=300,
 )
@@ -80,7 +80,7 @@ const res = await fetch('https://gateway.pixazo.ai/real-esrgan/v1/real-esrgan/ge
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image": "https://replicate.delivery/pbxt/Ing7Fa4YMk6YtcoG1YZnaK3UwbgDB5guRc5M2dEjV6ODNLMl/cat.jpg"
+  "image": "https://example.com/cat.jpg"
 }),
 });
 console.log(await res.json());

@@ -136,5 +136,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `elevenlabs`, `gemini`, `qwen-tts`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `elevenlabs`, `gemini`, `qwen-tts`, `openbmb-voxcpm2`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

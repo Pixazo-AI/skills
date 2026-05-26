@@ -77,7 +77,7 @@ curl -X POST 'https://gateway.pixazo.ai/flux-2-pro-text-to-image-799/v1/flux-2-p
   "prompt": "Place realistic flames emerging from the top of the coffee cup, dancing above the rim",
   "image_size": "auto",
   "safety_tolerance": "2",
-  "enable_safety_checker": true,
+  "enable_safety_checker": false,
   "output_format": "jpeg",
   "image_urls": [
     "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/nano-banana/nano-banana-a382a80b-f8df-4de1-a0c1-a5dcfd42dae4-1758783383399.jpg"
@@ -99,7 +99,7 @@ r = requests.post(
   "prompt": "Place realistic flames emerging from the top of the coffee cup, dancing above the rim",
   "image_size": "auto",
   "safety_tolerance": "2",
-  "enable_safety_checker": true,
+  "enable_safety_checker": false,
   "output_format": "jpeg",
   "image_urls": [
     "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/nano-banana/nano-banana-a382a80b-f8df-4de1-a0c1-a5dcfd42dae4-1758783383399.jpg"
@@ -124,7 +124,7 @@ const res = await fetch('https://gateway.pixazo.ai/flux-2-pro-text-to-image-799/
   "prompt": "Place realistic flames emerging from the top of the coffee cup, dancing above the rim",
   "image_size": "auto",
   "safety_tolerance": "2",
-  "enable_safety_checker": true,
+  "enable_safety_checker": false,
   "output_format": "jpeg",
   "image_urls": [
     "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/nano-banana/nano-banana-a382a80b-f8df-4de1-a0c1-a5dcfd42dae4-1758783383399.jpg"

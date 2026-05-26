@@ -1,13 +1,13 @@
 ---
-name: qwen-tts
-description: Text-to-speech / voice synthesis with Qwen TTS API (by Alibaba) via the Pixazo API. TRIGGER when the user mentions "Qwen TTS" or "Qwen TTS API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Qwen TTS is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+name: openbmb-voxcpm2
+description: Text-to-speech / voice synthesis with Openbmb VoxCPM2 API (by Openbmb) via the Pixazo API. TRIGGER when the user mentions "Openbmb VoxCPM2" or "Openbmb VoxCPM2 API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Openbmb VoxCPM2 is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# Qwen TTS API
+# Openbmb VoxCPM2 API
 
-Text-to-speech generation by Alibaba's Qwen.
+Openbmb VoxCPM2 delivers natural-sounding text-to-speech synthesis with voice-design and voice-cloning capabilities for custom voice generation.
 
-You can ask Qwen TTS to handle text-to-speech / voice synthesis. Powered by Alibaba via the Pixazo API gateway.
+You can ask Openbmb VoxCPM2 to handle text-to-speech / voice synthesis. Powered by Openbmb via the Pixazo API gateway.
 
 ---
 
@@ -32,38 +32,30 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Qwen TTS v3 | Text to Speech | `qwen3-tts-1-7b-api-401` / `qwen3-tts-1-7b-api-request-result` |
+| Openbmb VoxCPM2 v1.0 | Text to Speech | `openbmb-voxcpm2` / `text-to-speech` |
+| Openbmb VoxCPM2 v1.0 | Text to Speech (Voice Design) | `openbmb-voxcpm2` / `voice-cloning` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b-api-request-result`
+_See the full reference for endpoint URLs._
 
 **Sample request (primary operation)**
 
-```bash
-curl -X POST 'https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b-api-request-result' \
-  -H 'Content-Type: application/json' \
-  -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
-  -d '{
-  "request_id": "e1a2b3c4-d5f6-7890-e1a2-b3c4d5f67890"
-}'
-```
+_The full reference includes ready-to-paste curl, Python, and JavaScript examples for each operation._
 
 **Python**
 
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b-api-request-result",
+    "<endpoint>",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
-    json={
-  "request_id": "e1a2b3c4-d5f6-7890-e1a2-b3c4d5f67890"
-},
+    json={},
     timeout=300,
 )
 r.raise_for_status()
@@ -73,15 +65,13 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b-api-request-result', {
+const res = await fetch('<endpoint>', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({
-  "request_id": "e1a2b3c4-d5f6-7890-e1a2-b3c4d5f67890"
-}),
+  body: JSON.stringify({}),
 });
 console.log(await res.json());
 ```
@@ -122,13 +112,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/qwen-tts.md`
+> **Fetch:** `https://www.pixazo.ai/models/openbmb-voxcpm2.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/qwen-tts`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/openbmb-voxcpm2`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `openbmb-voxcpm2`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-tts`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
