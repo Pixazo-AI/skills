@@ -38,12 +38,12 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/upscaler/v1/crystal-upscaler/generate`
+- `POST https://gateway.pixazo.ai/upscaler/v1/upscale`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/upscaler/v1/crystal-upscaler/generate' \
+curl -X POST 'https://gateway.pixazo.ai/upscaler/v1/upscale' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -57,7 +57,7 @@ curl -X POST 'https://gateway.pixazo.ai/upscaler/v1/crystal-upscaler/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/upscaler/v1/crystal-upscaler/generate",
+    "https://gateway.pixazo.ai/upscaler/v1/upscale",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/upscaler/v1/crystal-upscaler/generate', {
+const res = await fetch('https://gateway.pixazo.ai/upscaler/v1/upscale', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,

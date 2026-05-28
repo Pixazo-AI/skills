@@ -40,7 +40,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Seedance 2.0 Fast | Image to video | `seedance-2-0-fast` / `image-to-video-first-and-last-frames` |
 | Seedance 2.0 Fast | Reference to Video (Ref Image + Ref Video + Ref Audio to Video) | `seedance-2-0-fast` / `multimodal-reference-image-video-audio` |
 | Seedance 2.0 Fast | Video to Video (Video Editing) | `seedance-2-0-fast` / `video-editing` |
-| Seedance 1.0 Lite | Image to Video (First/Last Frame to Video) | `bytedance-text-to-image` / `frame-to-video` |
 | Seedance 1.0 Pro | Image to Video | `bytedance-text-to-image` / `image-to-video-task` |
 | Seedance 1.0 Pro | Text to Video | `bytedance-text-to-image` / `generate-video-task` |
 
@@ -56,7 +55,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/seedance-2-0-fast/v1/first-last-frame-to-video-fast`
 - `POST https://gateway.pixazo.ai/seedance-2-0-fast/v1/reference-to-video-fast`
 - `POST https://gateway.pixazo.ai/seedance-2-0-fast/v1/edit-video-fast`
-- `POST https://gateway.pixazo.ai/byteplus/v1/generateFrame2VideoTask`
 - `POST https://gateway.pixazo.ai/byteplus/v1/generateImage2VideoTask`
 - `POST https://gateway.pixazo.ai/byteplus/v1/generateVideoTask`
 

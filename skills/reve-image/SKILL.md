@@ -39,14 +39,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/reve-image/v1/reve-edit/generate`
+- `POST https://gateway.pixazo.ai/reve-image/v1/image-edit`
 - `POST https://gateway.pixazo.ai/reve-image/v1/reve-edit/prediction`
-- `POST https://gateway.pixazo.ai/reve-image/v1/reve-remix/generate`
+- `POST https://gateway.pixazo.ai/reve-image/v1/image-edit-remix`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/reve-image/v1/reve-edit/generate' \
+curl -X POST 'https://gateway.pixazo.ai/reve-image/v1/image-edit' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -60,7 +60,7 @@ curl -X POST 'https://gateway.pixazo.ai/reve-image/v1/reve-edit/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/reve-image/v1/reve-edit/generate",
+    "https://gateway.pixazo.ai/reve-image/v1/image-edit",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/reve-image/v1/reve-edit/generate', {
+const res = await fetch('https://gateway.pixazo.ai/reve-image/v1/image-edit', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
