@@ -47,9 +47,9 @@ curl -X POST 'https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Create a 30-second product demo video showcasing our new AI features with professional lighting and modern graphics.",
-  "avatar": "auto",
-  "voice": "auto"
+  "prompt": "A friendly presenter explaining a new mobile app in 30 seconds, with a cheerful tone and modern background.",
+  "mode": "generate",
+  "orientation": "landscape"
 }'
 ```
 
@@ -64,9 +64,9 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Create a 30-second product demo video showcasing our new AI features with professional lighting and modern graphics.",
-  "avatar": "auto",
-  "voice": "auto"
+  "prompt": "A friendly presenter explaining a new mobile app in 30 seconds, with a cheerful tone and modern background.",
+  "mode": "generate",
+  "orientation": "landscape"
 },
     timeout=300,
 )
@@ -84,9 +84,9 @@ const res = await fetch('https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Create a 30-second product demo video showcasing our new AI features with professional lighting and modern graphics.",
-  "avatar": "auto",
-  "voice": "auto"
+  "prompt": "A friendly presenter explaining a new mobile app in 30 seconds, with a cheerful tone and modern background.",
+  "mode": "generate",
+  "orientation": "landscape"
 }),
 });
 console.log(await res.json());

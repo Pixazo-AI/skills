@@ -40,6 +40,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/hunyuan-video/v1/hunyuan-video-request`
 - `POST https://gateway.pixazo.ai/hunyuan-video-image-to-video/v1/hunyuan-video-image-to-video-request`
 - `POST https://gateway.pixazo.ai/hunyuan-video-image-to-video/v1/hunyuan-video-image-to-video-request-result`
 - `POST https://gateway.pixazo.ai/hunyuan-video-video-to-video/v1/hunyuan-video-video-to-video-request`
@@ -47,12 +48,16 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/hunyuan-video-image-to-video/v1/hunyuan-video-image-to-video-request' \
+curl -X POST 'https://gateway.pixazo.ai/hunyuan-video/v1/hunyuan-video-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Two muscular cats boxing in a boxing ring.",
-  "image_url": "https://example.com/example_inputs/hunyuan_i2v.jpg"
+  "prompt": "A cinematic close-up of a wolf walking through a snowy forest at dawn, soft golden light filtering through pine trees.",
+  "aspect_ratio": "16:9",
+  "resolution": "720p",
+  "num_frames": 129,
+  "num_inference_steps": 30,
+  "pro_mode": false
 }'
 ```
 
@@ -61,14 +66,18 @@ curl -X POST 'https://gateway.pixazo.ai/hunyuan-video-image-to-video/v1/hunyuan-
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/hunyuan-video-image-to-video/v1/hunyuan-video-image-to-video-request",
+    "https://gateway.pixazo.ai/hunyuan-video/v1/hunyuan-video-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Two muscular cats boxing in a boxing ring.",
-  "image_url": "https://example.com/example_inputs/hunyuan_i2v.jpg"
+  "prompt": "A cinematic close-up of a wolf walking through a snowy forest at dawn, soft golden light filtering through pine trees.",
+  "aspect_ratio": "16:9",
+  "resolution": "720p",
+  "num_frames": 129,
+  "num_inference_steps": 30,
+  "pro_mode": false
 },
     timeout=300,
 )
@@ -79,15 +88,19 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/hunyuan-video-image-to-video/v1/hunyuan-video-image-to-video-request', {
+const res = await fetch('https://gateway.pixazo.ai/hunyuan-video/v1/hunyuan-video-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Two muscular cats boxing in a boxing ring.",
-  "image_url": "https://example.com/example_inputs/hunyuan_i2v.jpg"
+  "prompt": "A cinematic close-up of a wolf walking through a snowy forest at dawn, soft golden light filtering through pine trees.",
+  "aspect_ratio": "16:9",
+  "resolution": "720p",
+  "num_frames": 129,
+  "num_inference_steps": 30,
+  "pro_mode": false
 }),
 });
 console.log(await res.json());
@@ -106,12 +119,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/hunyuan-video-image-to-video/v1/hunyuan-video-image-to-video-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/hunyuan-video/v1/hunyuan-video-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/hunyuan-video-image-to-video/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/hunyuan-video/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):

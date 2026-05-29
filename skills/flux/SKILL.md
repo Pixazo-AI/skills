@@ -1,13 +1,13 @@
 ---
 name: flux
-description: Image generation/editing with Flux API (by Black Forest Labs) via the Pixazo API. TRIGGER when the user mentions "Flux" or "Flux API", or when the user asks to generate / make / create / edit / restyle an image and Flux is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+description: Virtual try-on with Flux API (by Black Forest Labs) via the Pixazo API. TRIGGER when the user mentions "Flux" or "Flux API", or when the user asks to virtually try on clothing / outfit / virtual fitting and Flux is named or implied. DO NOT TRIGGER for image / video / music / voice / 3d — each has its own skill.
 ---
 
 # Flux API
 
 Flux is a state-of-the-art text-to-image model that generates high-quality images from text descriptions.
 
-You can ask Flux to handle image generation/editing. Powered by Black Forest Labs via the Pixazo API gateway.
+You can ask Flux to handle virtual try-on. Powered by Black Forest Labs via the Pixazo API gateway.
 
 ---
 
@@ -32,6 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Flux Pro VTO | Image to Image (Virtual Try On) | `flux-pro-v1-virtual-try-on` / `flux-pro-v1-virtual-try-on-request` |
 | Flux 2 Pro | Image to Image (Image Editing) | `flux-2-pro-image-to-image-866` / `flux-2-pro-image-to-image-request` |
 | Flux 2 Pro | Image to Image (LoRA Trainer) | `flux-2-pro-image-to-image-trainer-831` / `flux-2-pro-image-to-image-trainer-request` |
 | Flux 2 Pro | Text to Image | `flux-2-pro-text-to-image-799` / `flux-2-pro-text-to-image-request` |
@@ -51,6 +52,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1/flux-pro-v1-virtual-try-on-request`
 - `POST https://gateway.pixazo.ai/flux-2-pro-image-to-image-866/v1/flux-2-pro-image-to-image-request`
 - `POST https://gateway.pixazo.ai/flux-2-pro-image-to-image-trainer-831/v1/flux-2-pro-image-to-image-trainer-request`
 - `POST https://gateway.pixazo.ai/flux-2-pro-text-to-image-799/v1/flux-2-pro-text-to-image-request`
@@ -70,18 +72,16 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/flux-2-pro-text-to-image-799/v1/flux-2-pro-text-to-image-request' \
+curl -X POST 'https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1/flux-pro-v1-virtual-try-on-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Place realistic flames emerging from the top of the coffee cup, dancing above the rim",
-  "image_size": "auto",
-  "safety_tolerance": "2",
-  "enable_safety_checker": false,
+  "prompt": "The garment is worn naturally, tucked in slightly at the waist",
+  "human_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Person.jpeg",
+  "garment_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Garment.jpeg",
+  "num_inference_steps": 4,
   "output_format": "jpeg",
-  "image_urls": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/nano-banana/nano-banana-a382a80b-f8df-4de1-a0c1-a5dcfd42dae4-1758783383399.jpg"
-  ]
+  "sync_mode": false
 }'
 ```
 
@@ -90,20 +90,18 @@ curl -X POST 'https://gateway.pixazo.ai/flux-2-pro-text-to-image-799/v1/flux-2-p
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/flux-2-pro-text-to-image-799/v1/flux-2-pro-text-to-image-request",
+    "https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1/flux-pro-v1-virtual-try-on-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Place realistic flames emerging from the top of the coffee cup, dancing above the rim",
-  "image_size": "auto",
-  "safety_tolerance": "2",
-  "enable_safety_checker": false,
+  "prompt": "The garment is worn naturally, tucked in slightly at the waist",
+  "human_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Person.jpeg",
+  "garment_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Garment.jpeg",
+  "num_inference_steps": 4,
   "output_format": "jpeg",
-  "image_urls": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/nano-banana/nano-banana-a382a80b-f8df-4de1-a0c1-a5dcfd42dae4-1758783383399.jpg"
-  ]
+  "sync_mode": false
 },
     timeout=300,
 )
@@ -114,21 +112,19 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/flux-2-pro-text-to-image-799/v1/flux-2-pro-text-to-image-request', {
+const res = await fetch('https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1/flux-pro-v1-virtual-try-on-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Place realistic flames emerging from the top of the coffee cup, dancing above the rim",
-  "image_size": "auto",
-  "safety_tolerance": "2",
-  "enable_safety_checker": false,
+  "prompt": "The garment is worn naturally, tucked in slightly at the waist",
+  "human_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Person.jpeg",
+  "garment_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Garment.jpeg",
+  "num_inference_steps": 4,
   "output_format": "jpeg",
-  "image_urls": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/nano-banana/nano-banana-a382a80b-f8df-4de1-a0c1-a5dcfd42dae4-1758783383399.jpg"
-  ]
+  "sync_mode": false
 }),
 });
 console.log(await res.json());
@@ -136,27 +132,14 @@ console.log(await res.json());
 
 ### Step 4 — Show the user the result
 
-image generation/editing via this model is **synchronous** — no polling. The response is JSON, e.g.:
+virtual try-on via this model is **synchronous** — no polling. The response is JSON, e.g.:
 
 ```json
-{ "images": [{ "url": "https://…" }] }
+{ "output": [{ "url": "https://…" }] }
 ```
 
 Pull the URL out and show it to the user (in chat, render inline if your environment supports it). Offer to: download it, edit it further, or generate variations.
 
-
----
-
-### Inputs the user might give you
-
-- **Prompt only** — a description. Build the request from Step 3.
-- **A reference image** — passed as a URL or base64 data URL. Use the edit endpoint.
-- **Image size** — translate user phrases to the API's `image_size` enum:
-  - "square / Instagram" → `square_hd`
-  - "portrait / vertical / 9:16" → `portrait_16_9`
-  - "landscape / horizontal / 16:9" → `landscape_16_9`
-- **Number of variations** — `num_images` (1–4). Default 1.
-- **Seed** — for reproducibility. Default 42, or pass through if the user says "same seed".
 
 
 ---
@@ -191,5 +174,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
+- **Other virtual try-on models:** `fashn-vton`, `idm-vton`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
