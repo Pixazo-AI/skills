@@ -32,6 +32,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| LTX 2.3 Quality | Text to Video | `ltx-2-3-quality-text-to-video` / `ltx-2-3-quality-text-to-video-request` |
+| LTX 2.3 Quality | Image to Video | `ltx-2-3-quality-image-to-video` / `ltx-2-3-quality-image-to-video-request` |
+| LTX 2.3 Quality | Audio to Video | `ltx-2-3-quality-audio-to-video` / `ltx-2-3-quality-audio-to-video-request` |
+| LTX 2.3 Quality | Video to Video (Reference Video to Video) | `ltx-2-3-quality-reference-video-to-video` / `ltx-2-3-quality-reference-video-to-video-request` |
+| LTX 2.3 Quality | Video to Video (Video Upscale) | `ltx-2-3-quality-hdr` / `ltx-2-3-quality-hdr-request` |
 | LTX v2.3 | Text to Video | `ltx-2-3-text-to-video` / `ltx-2-3-text-to-video-request` |
 | LTX v2.3 | Image to Video | `ltx-2-3-image-to-video` / `ltx-2-3-image-to-video-request` |
 | LTX v2.3 | Audio to Video | `ltx-2-3-audio-to-video` / `ltx-2-3-audio-to-video-request` |
@@ -44,6 +49,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/ltx-2-3-quality-text-to-video/v1/ltx-2-3-quality-text-to-video-request`
+- `POST https://gateway.pixazo.ai/ltx-2-3-quality-image-to-video/v1/ltx-2-3-quality-image-to-video-request`
+- `POST https://gateway.pixazo.ai/ltx-2-3-quality-audio-to-video/v1/ltx-2-3-quality-audio-to-video-request`
+- `POST https://gateway.pixazo.ai/ltx-2-3-quality-reference-video-to-video/v1/ltx-2-3-quality-reference-video-to-video-request`
+- `POST https://gateway.pixazo.ai/ltx-2-3-quality-hdr/v1/ltx-2-3-quality-hdr-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-text-to-video/v1/ltx-2-3-text-to-video-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-image-to-video/v1/ltx-2-3-image-to-video-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-audio-to-video/v1/ltx-2-3-audio-to-video-request`
@@ -55,16 +65,21 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/ltx-2-3-text-to-video/v1/ltx-2-3-text-to-video-request' \
+curl -X POST 'https://gateway.pixazo.ai/ltx-2-3-quality-text-to-video/v1/ltx-2-3-quality-text-to-video-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Through-the-veil shot of a bride face during an Indian wedding ceremony, embroidered red dupatta texture, eyes lined with kohl, henna-covered hands, marigold garlands in soft bokeh, 85mm f/1.2, warm tungsten and candlelight, cinematic intimacy",
-  "duration": 6,
-  "resolution": "1080p",
-  "aspect_ratio": "16:9",
-  "fps": 25,
-  "generate_audio": true
+  "prompt": "A cinematic drone shot gliding over a misty mountain valley at sunrise, golden light",
+  "num_frames": 121,
+  "resolution": "landscape_16_9",
+  "frames_per_second": 24,
+  "num_inference_steps": 15,
+  "guidance_scale": 1,
+  "generate_audio": true,
+  "enable_prompt_expansion": true,
+  "enable_safety_checker": true,
+  "video_quality": "high",
+  "video_write_mode": "balanced"
 }'
 ```
 
@@ -73,18 +88,23 @@ curl -X POST 'https://gateway.pixazo.ai/ltx-2-3-text-to-video/v1/ltx-2-3-text-to
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/ltx-2-3-text-to-video/v1/ltx-2-3-text-to-video-request",
+    "https://gateway.pixazo.ai/ltx-2-3-quality-text-to-video/v1/ltx-2-3-quality-text-to-video-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Through-the-veil shot of a bride face during an Indian wedding ceremony, embroidered red dupatta texture, eyes lined with kohl, henna-covered hands, marigold garlands in soft bokeh, 85mm f/1.2, warm tungsten and candlelight, cinematic intimacy",
-  "duration": 6,
-  "resolution": "1080p",
-  "aspect_ratio": "16:9",
-  "fps": 25,
-  "generate_audio": true
+  "prompt": "A cinematic drone shot gliding over a misty mountain valley at sunrise, golden light",
+  "num_frames": 121,
+  "resolution": "landscape_16_9",
+  "frames_per_second": 24,
+  "num_inference_steps": 15,
+  "guidance_scale": 1,
+  "generate_audio": true,
+  "enable_prompt_expansion": true,
+  "enable_safety_checker": true,
+  "video_quality": "high",
+  "video_write_mode": "balanced"
 },
     timeout=300,
 )
@@ -95,19 +115,24 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/ltx-2-3-text-to-video/v1/ltx-2-3-text-to-video-request', {
+const res = await fetch('https://gateway.pixazo.ai/ltx-2-3-quality-text-to-video/v1/ltx-2-3-quality-text-to-video-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Through-the-veil shot of a bride face during an Indian wedding ceremony, embroidered red dupatta texture, eyes lined with kohl, henna-covered hands, marigold garlands in soft bokeh, 85mm f/1.2, warm tungsten and candlelight, cinematic intimacy",
-  "duration": 6,
-  "resolution": "1080p",
-  "aspect_ratio": "16:9",
-  "fps": 25,
-  "generate_audio": true
+  "prompt": "A cinematic drone shot gliding over a misty mountain valley at sunrise, golden light",
+  "num_frames": 121,
+  "resolution": "landscape_16_9",
+  "frames_per_second": 24,
+  "num_inference_steps": 15,
+  "guidance_scale": 1,
+  "generate_audio": true,
+  "enable_prompt_expansion": true,
+  "enable_safety_checker": true,
+  "video_quality": "high",
+  "video_write_mode": "balanced"
 }),
 });
 console.log(await res.json());
@@ -126,12 +151,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/ltx-2-3-text-to-video/v1/ltx-2-3-text-to-video-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/ltx-2-3-quality-text-to-video/v1/ltx-2-3-quality-text-to-video-request", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/ltx-2-3-text-to-video/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/ltx-2-3-quality-text-to-video/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -182,5 +207,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`
+- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

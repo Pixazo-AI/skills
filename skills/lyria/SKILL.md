@@ -41,7 +41,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/lyria-2/v1/lyria-2/generate`
-- `POST https://gateway.pixazo.ai/lyria-2/v1/lyria-2/prediction`
+- `POST https://gateway.pixazo.ai/lyria-3/v1/lyria-3/generate`
 - `POST https://gateway.pixazo.ai/lyria-3-pro/v1/lyria-3-pro/generate`
 
 **Sample request (primary operation)**
@@ -159,5 +159,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other music/audio generation models:** `tracks`, `minimax`, `ace-step`, `mmaudio`
+- **Other music/audio generation models:** `tracks`, `minimax`, `ace-step`, `mmaudio`, `stable-audio`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

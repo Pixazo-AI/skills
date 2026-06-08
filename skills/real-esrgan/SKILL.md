@@ -1,13 +1,13 @@
 ---
 name: real-esrgan
-description: Image generation/editing with Real Esrgan API (by NightmareAI) via the Pixazo API. TRIGGER when the user mentions "Real Esrgan API", or when the user asks to generate / make / create / edit / restyle an image and Real Esrgan API is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+description: Image generation/editing with Real-ESRGAN API (by NightmareAI) via the Pixazo API. TRIGGER when the user mentions "Real-ESRGAN" or "Real-ESRGAN API", or when the user asks to generate / make / create / edit / restyle an image and Real-ESRGAN is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Real Esrgan API
+# Real-ESRGAN API
 
 Real-ESRGAN image upscaler / super-resolution. Hosted on Replicate by NightmareAI.
 
-You can ask Real Esrgan API to handle image generation/editing. Powered by NightmareAI via the Pixazo API gateway.
+You can ask Real-ESRGAN to handle image generation/editing. Powered by NightmareAI via the Pixazo API gateway.
 
 ---
 
@@ -143,5 +143,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `mai-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

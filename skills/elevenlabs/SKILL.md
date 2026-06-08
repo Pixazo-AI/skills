@@ -32,26 +32,28 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| ElevenLabs v1 | Text to Music | `elevenlabs-music-api-368` / `elevenlabs-music-api-request` |
-| ElevenLabs v3 | Text to Speech | `eleven-v3-alpha-954` / `eleven-v3-alpha-request` |
+| ElevenLabs Eleven v3 TTS | Text to Speech | `elevenlabs-eleven-v3-tts` / `elevenlabs-eleven-v3-tts-request` |
+| ElevenLabs Music | Text to Music | `elevenlabs-music` / `elevenlabs-music-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/elevenlabs-music-api-368/v1/elevenlabs-music-api-request`
-- `POST https://gateway.pixazo.ai/eleven-v3-alpha-954/v1/eleven-v3-alpha-request`
+- `POST https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-eleven-v3-tts-request`
+- `POST https://gateway.pixazo.ai/elevenlabs-music/v1/elevenlabs-music-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/elevenlabs-music-api-368/v1/elevenlabs-music-api-request' \
+curl -X POST 'https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-eleven-v3-tts-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Mysterious original soundtrack, themes of jungle, rainforest, nature, woodwinds, busy rhythmic tribal percussion.",
-  "respect_sections_durations": true,
-  "output_format": "mp3_44100_128"
+  "text": "[excited] Welcome to the future of voice. [whispers] Listen closely. [laughs] This is amazing.",
+  "voice": "Rachel",
+  "stability": 0.5,
+  "timestamps": false,
+  "apply_text_normalization": "auto"
 }'
 ```
 
@@ -60,15 +62,17 @@ curl -X POST 'https://gateway.pixazo.ai/elevenlabs-music-api-368/v1/elevenlabs-m
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/elevenlabs-music-api-368/v1/elevenlabs-music-api-request",
+    "https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-eleven-v3-tts-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Mysterious original soundtrack, themes of jungle, rainforest, nature, woodwinds, busy rhythmic tribal percussion.",
-  "respect_sections_durations": true,
-  "output_format": "mp3_44100_128"
+  "text": "[excited] Welcome to the future of voice. [whispers] Listen closely. [laughs] This is amazing.",
+  "voice": "Rachel",
+  "stability": 0.5,
+  "timestamps": false,
+  "apply_text_normalization": "auto"
 },
     timeout=300,
 )
@@ -79,16 +83,18 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/elevenlabs-music-api-368/v1/elevenlabs-music-api-request', {
+const res = await fetch('https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-eleven-v3-tts-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Mysterious original soundtrack, themes of jungle, rainforest, nature, woodwinds, busy rhythmic tribal percussion.",
-  "respect_sections_durations": true,
-  "output_format": "mp3_44100_128"
+  "text": "[excited] Welcome to the future of voice. [whispers] Listen closely. [laughs] This is amazing.",
+  "voice": "Rachel",
+  "stability": 0.5,
+  "timestamps": false,
+  "apply_text_normalization": "auto"
 }),
 });
 console.log(await res.json());

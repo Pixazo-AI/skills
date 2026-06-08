@@ -1,13 +1,13 @@
 ---
-name: pixelforge
-description: Image generation/editing with PixelForge API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Pixelforge" or "PixelForge API", or when the user asks to generate / make / create / edit / restyle an image and Pixelforge is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: mai-image
+description: Image generation/editing with MAI Image API (by Microsoft) via the Pixazo API. TRIGGER when the user mentions "MAI Image" or "MAI Image API", or when the user asks to generate / make / create / edit / restyle an image and MAI Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# PixelForge API
+# MAI Image API
 
-Image generation and relighting capabilities.
+MAI Image 2.5 API is Microsoft's proprietary, internally developed text-to-image foundation model interface that allows developers to programmatically generate and edit high-fidelity visuals directly through Microsoft Azure AI Foundry. This diffusion-based cloud programmatic gateway enables enterprise workflows to transition natural language prompts into photorealistic assets, featuring visual reasoning capabilities across scale, complex studio lighting, and spatial relationships. Built specifically to support production-level graphic pipelines, the application interface provides fine-grained, localized edit controls, precise text rendering within layouts, and strict facial identity consistency across consecutive iterations.
 
-You can ask Pixelforge to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
+You can ask MAI Image to handle image generation/editing. Powered by Microsoft via the Pixazo API gateway.
 
 ---
 
@@ -32,27 +32,28 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| PixelForge v1 | Text to Image | `pixelforge-image` / `generate-image` |
-| PixelForge v1 | Image to Image (Image Editing — Relighting) | `pixelforge-relighting-api` / `image-edit-request` |
+| MAI Image 2.5 | Text to Image | `microsoft-mai-image-2-5` / `microsoft-mai-image-2-5-request` |
+| MAI Image 2.5 | Image to Image (Image Editing) | `microsoft-mai-image-2-5-edit` / `microsoft-mai-image-2-5-edit-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve_image`
-- `POST https://gateway.pixazo.ai/pixelforge-relighting-api/v1/relighting/generate`
+- `POST https://gateway.pixazo.ai/microsoft-mai-image-2-5/v1/microsoft-mai-image-2-5-request`
+- `POST https://gateway.pixazo.ai/microsoft-mai-image-2-5-edit/v1/microsoft-mai-image-2-5-edit-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve_image' \
+curl -X POST 'https://gateway.pixazo.ai/microsoft-mai-image-2-5/v1/microsoft-mai-image-2-5-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs",
-  "image_urls": [
-    "https://example.com/reference-image.jpg"
-  ]
+  "prompt": "A photorealistic still life of vintage cameras on a wooden desk, warm window light",
+  "num_images": 1,
+  "aspect_ratio": "auto",
+  "output_format": "png",
+  "sync_mode": false
 }'
 ```
 
@@ -61,16 +62,17 @@ curl -X POST 'https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve_image",
+    "https://gateway.pixazo.ai/microsoft-mai-image-2-5/v1/microsoft-mai-image-2-5-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs",
-  "image_urls": [
-    "https://example.com/reference-image.jpg"
-  ]
+  "prompt": "A photorealistic still life of vintage cameras on a wooden desk, warm window light",
+  "num_images": 1,
+  "aspect_ratio": "auto",
+  "output_format": "png",
+  "sync_mode": false
 },
     timeout=300,
 )
@@ -81,17 +83,18 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve_image', {
+const res = await fetch('https://gateway.pixazo.ai/microsoft-mai-image-2-5/v1/microsoft-mai-image-2-5-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs",
-  "image_urls": [
-    "https://example.com/reference-image.jpg"
-  ]
+  "prompt": "A photorealistic still life of vintage cameras on a wooden desk, warm window light",
+  "num_images": 1,
+  "aspect_ratio": "auto",
+  "output_format": "png",
+  "sync_mode": false
 }),
 });
 console.log(await res.json());
@@ -146,13 +149,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/pixelforge.md`
+> **Fetch:** `https://www.pixazo.ai/models/mai-image.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/pixelforge`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/mai-image`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

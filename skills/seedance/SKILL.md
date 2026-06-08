@@ -56,6 +56,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/seedance-2-0-fast/v1/first-last-frame-to-video-fast`
 - `POST https://gateway.pixazo.ai/seedance-2-0-fast/v1/reference-to-video-fast`
 - `POST https://gateway.pixazo.ai/seedance-2-0-fast/v1/edit-video-fast`
+- `POST https://gateway.pixazo.ai/byteplus/v1/generateFrame2VideoTask`
 - `POST https://gateway.pixazo.ai/byteplus/v1/generateImage2VideoTask`
 - `POST https://gateway.pixazo.ai/byteplus/v1/generateVideoTask`
 
@@ -174,5 +175,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`
+- **Other video generation models:** `happy-horse`, `p-video`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

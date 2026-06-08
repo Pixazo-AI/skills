@@ -42,7 +42,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 - `POST https://gateway.pixazo.ai/seedvr-upscale/v1/upscale-image/generate`
 - `POST https://gateway.pixazo.ai/seedvr-upscale/v1/upscale-video/generate`
-- `POST https://gateway.pixazo.ai/seedvr-upscale/v1/upscale-video/prediction`
 - `POST https://gateway.pixazo.ai/seedvr2-7b-upscale/image-request`
 
 **Sample request (primary operation)**

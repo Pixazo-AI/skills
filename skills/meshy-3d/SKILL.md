@@ -1,13 +1,13 @@
 ---
 name: meshy-3d
-description: 3D model generation with Meshy 6 API (by Meshy) via the Pixazo API. TRIGGER when the user mentions "Meshy 6" or "Meshy 6 API", or when the user asks to generate / make a 3D model / mesh / asset and Meshy 6 is named or implied. DO NOT TRIGGER for image / video / music / voice / try-on — each has its own skill.
+description: 3D model generation with Meshy 6 API (by Meshy) via the Pixazo API. TRIGGER when the user mentions "Meshy" or "Meshy 6 API", or when the user asks to generate / make a 3D model / mesh / asset and Meshy is named or implied. DO NOT TRIGGER for image / video / music / voice / try-on — each has its own skill.
 ---
 
 # Meshy 6 API
 
 Meshy 6 — production-ready 3D model generation from text prompts or reference images.
 
-You can ask Meshy 6 to handle 3D model generation. Powered by Meshy via the Pixazo API gateway.
+You can ask Meshy to handle 3D model generation. Powered by Meshy via the Pixazo API gateway.
 
 ---
 

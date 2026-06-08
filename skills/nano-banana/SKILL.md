@@ -37,7 +37,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Nano Banana Standard | Image to Image (Image Editing) | `nano-banana` / `edit-image-request` |
 | Nano Banana Standard | Text to Image | `nano-banana` / `text-to-image-request` |
 | Nano Banana Standard | Image to Image (Image Editing — Batch) | `nano-banana-async-api` / `image-to-image-edit-image` |
-| Nano Banana Pro | Image to Image (Image Editing) | `nano-banana-pro-770` / `nano-banana-pro-request` |
+| Nano Banana Pro | Image to Image (Image Editing) | `nano-banana-pro` / `image-edit-image-to-image` |
+| Nano Banana Pro | Text to Image | `nano-banana-pro` / `text-to-image` |
 | Nano Banana Pro | Image to Image (Image Editing — Batch) | `nano-banana-pro-async-api` / `image-to-image` |
 | Nano Banana Pro | Text to Image (Batch) | `nano-banana-pro-async-api` / `text-to-image` |
 
@@ -50,14 +51,15 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/nano-banana/v1/nano-banana/generateEditImageRequest`
 - `POST https://gateway.pixazo.ai/nano-banana/v1/nano-banana/generateTextToImageRequest`
 - `POST https://gateway.pixazo.ai/nano-banana-async/v1/nano-banana-image-to-image`
-- `POST https://gateway.pixazo.ai/nano-banana-pro-770/v1/nano-banana-pro-request`
+- `POST https://gateway.pixazo.ai/nano-banana-pro/v1/image-to-image/editing`
+- `POST https://gateway.pixazo.ai/nano-banana-pro/v1/text-to-image`
 - `POST https://gateway.pixazo.ai/nano-banana-pro-async/v1/nano-banana-pro-image-to-image`
 - `POST https://gateway.pixazo.ai/nano-banana-pro-async/v1/nano-banana-pro-text-to-image`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/nano-banana-pro-async/v1/nano-banana-pro-text-to-image' \
+curl -X POST 'https://gateway.pixazo.ai/nano-banana-pro/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -78,7 +80,7 @@ curl -X POST 'https://gateway.pixazo.ai/nano-banana-pro-async/v1/nano-banana-pro
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/nano-banana-pro-async/v1/nano-banana-pro-text-to-image",
+    "https://gateway.pixazo.ai/nano-banana-pro/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -103,7 +105,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/nano-banana-pro-async/v1/nano-banana-pro-text-to-image', {
+const res = await fetch('https://gateway.pixazo.ai/nano-banana-pro/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -181,5 +183,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

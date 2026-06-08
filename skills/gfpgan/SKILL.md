@@ -1,13 +1,13 @@
 ---
 name: gfpgan
-description: Image generation/editing with GFPGAN API (by TencentARC) via the Pixazo API. TRIGGER when the user mentions "GFPGAN API", or when the user asks to generate / make / create / edit / restyle an image and GFPGAN API is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+description: Image generation/editing with GFPGAN API (by TencentARC) via the Pixazo API. TRIGGER when the user mentions "GFPGAN" or "GFPGAN API", or when the user asks to generate / make / create / edit / restyle an image and GFPGAN is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # GFPGAN API
 
 Practical face restoration algorithm leveraging generative facial priors for old and degraded photos.
 
-You can ask GFPGAN API to handle image generation/editing. Powered by TencentARC via the Pixazo API gateway.
+You can ask GFPGAN to handle image generation/editing. Powered by TencentARC via the Pixazo API gateway.
 
 ---
 
@@ -143,5 +143,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

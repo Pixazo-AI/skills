@@ -1,13 +1,13 @@
 ---
 name: mmaudio
-description: Music/audio generation with MMAudio v2 API (by Sony AI) via the Pixazo API. TRIGGER when the user mentions "MMAudio v2" or "MMAudio v2 API", or when the user asks to generate / make music / a song / a beat / audio track and MMAudio v2 is named or implied. DO NOT TRIGGER for image / video / voice / 3d / try-on — each has its own skill.
+description: Music/audio generation with MMAudio v2 API (by Sony AI) via the Pixazo API. TRIGGER when the user mentions "MMAudio" or "MMAudio v2 API", or when the user asks to generate / make music / a song / a beat / audio track and MMAudio is named or implied. DO NOT TRIGGER for image / video / voice / 3d / try-on — each has its own skill.
 ---
 
 # MMAudio v2 API
 
 MMAudio v2 is Sony AI's text-to-audio generation model that synthesizes high-quality sound effects, ambient audio, and music from natural-language prompts.
 
-You can ask MMAudio v2 to handle music/audio generation. Powered by Sony AI via the Pixazo API gateway.
+You can ask MMAudio to handle music/audio generation. Powered by Sony AI via the Pixazo API gateway.
 
 ---
 
@@ -170,5 +170,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other music/audio generation models:** `tracks`, `minimax`, `ace-step`, `lyria`
+- **Other music/audio generation models:** `tracks`, `minimax`, `ace-step`, `lyria`, `stable-audio`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

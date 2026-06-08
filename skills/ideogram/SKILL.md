@@ -32,6 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Ideogram v4 | Text to Image | `ideogram-v4` / `ideogram-v4-request` |
 | Ideogram Remove Background | Image to Image (Image Background Removal) | `ideogram-remove-background` / `ideogram-remove-background-request` |
 | Ideogram v2 | Text to Image | `ideogram-generate` / `get-image` |
 | Ideogram v2 | Utility (Image to Text — Captioning) | `ideogram-generate` / `describe-image` |
@@ -46,6 +47,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-request`
 - `POST https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-remove-background-request`
 - `POST https://gateway.pixazo.ai/v2/requests/status/ideogram-remove-background_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 - `POST https://gateway.pixazo.ai/ideogramV_2/v1/generate`
@@ -60,11 +62,19 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-remove-background-request' \
+curl -X POST 'https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg"
+  "prompt": "A vintage travel poster of Kyoto in autumn, bold hand-painted lettering reading KYOTO across the top",
+  "num_images": 1,
+  "image_size": "square_hd",
+  "output_format": "jpeg",
+  "rendering_speed": "BALANCED",
+  "acceleration": "none",
+  "enable_prompt_expansion": true,
+  "enable_safety_checker": true,
+  "sync_mode": false
 }'
 ```
 
@@ -73,13 +83,21 @@ curl -X POST 'https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-r
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-remove-background-request",
+    "https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg"
+  "prompt": "A vintage travel poster of Kyoto in autumn, bold hand-painted lettering reading KYOTO across the top",
+  "num_images": 1,
+  "image_size": "square_hd",
+  "output_format": "jpeg",
+  "rendering_speed": "BALANCED",
+  "acceleration": "none",
+  "enable_prompt_expansion": true,
+  "enable_safety_checker": true,
+  "sync_mode": false
 },
     timeout=300,
 )
@@ -90,14 +108,22 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-remove-background-request', {
+const res = await fetch('https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Image.jpeg"
+  "prompt": "A vintage travel poster of Kyoto in autumn, bold hand-painted lettering reading KYOTO across the top",
+  "num_images": 1,
+  "image_size": "square_hd",
+  "output_format": "jpeg",
+  "rendering_speed": "BALANCED",
+  "acceleration": "none",
+  "enable_prompt_expansion": true,
+  "enable_safety_checker": true,
+  "sync_mode": false
 }),
 });
 console.log(await res.json());
@@ -160,5 +186,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

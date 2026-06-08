@@ -41,7 +41,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 - `POST https://gateway.pixazo.ai/ernie-image-turbo/v1/ernie-image-turbo-request`
 - `POST https://gateway.pixazo.ai/ernie-image/v1/ernie-image-request`
-- `POST https://gateway.pixazo.ai/v2/requests/status/ernie-image_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 
 **Sample request (primary operation)**
 
@@ -173,5 +172,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `mirelo`, `real-esrgan`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `mirelo`, `real-esrgan`, `mai-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
