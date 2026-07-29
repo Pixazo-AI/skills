@@ -1,13 +1,13 @@
 ---
 name: seedvr
-description: Image upscaling / enhancement with SeedVR Upscale API (by Seed VR) via the Pixazo API. TRIGGER when the user mentions "Seed VR" or "SeedVR Upscale API", or when the user asks to enhance / upscale / improve / sharpen an image or video and Seed VR is named or implied. DO NOT TRIGGER for image / video / music / voice / 3d / try-on — each has its own skill.
+description: Image upscaling / enhancement with SeedVR Upscale API (by Seed VR) via the Pixazo API. TRIGGER when the user mentions "SeedVR2" or "SeedVR Upscale API", or when the user asks to enhance / upscale / improve / sharpen an image or video and SeedVR2 is named or implied. DO NOT TRIGGER for image / video / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # SeedVR Upscale API
 
 Image and video upscaling capabilities.
 
-You can ask Seed VR to handle image upscaling / enhancement. Powered by Seed VR via the Pixazo API gateway.
+You can ask SeedVR2 to handle image upscaling / enhancement. Powered by Seed VR via the Pixazo API gateway.
 
 ---
 

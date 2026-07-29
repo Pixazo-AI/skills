@@ -43,7 +43,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Wan 2.5 | Text to Image | `wan-2-5-image-generation` / `generate-text-to-image` |
 | Wan 2.5 | Image to Video | `wan-image-to-video-2-5` / `generate-image-to-video` |
 | Wan 2.5 | Text to Video | `wan-image-to-video-2-5` / `generate-text-to-viedo-request` |
-| Wan 2.5 | Image to Video | `pixazo-wan-image-to-video-1763709522` / `pixazo-wan-image-to-video-request` |
+| Wan 2.5 | Image to Video (Pixazo) | `pixazo-wan-image-to-video-1763709522` / `pixazo-wan-image-to-video-request` |
 | Wan 2.6 | Image to Video | `wan-2-6-image-to-video-477` / `wan-2-6-image-to-video-request` |
 | Wan 2.6 | Text to Video | `wan-2-6-text-to-video-569` / `wan-2-6-text-to-video-request` |
 | Wan 2.6 | Image to Video (Flash) | `wan-2-6-image-to-video-flash-api-353` / `wan-2-6-image-to-video-flash-api-request` |
@@ -53,6 +53,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Wan 2.7 | Image to Image (Image Editing) | `wan-2-7-api` / `edit-image-request` |
 | Wan 2.7 | Video to Video (Video Editing) | `wan-2-7-video-api` / `edit-video-video-to-video` |
 | Wan 2.7 | Reference to Video (Ref Image + Ref Video to Video) | `wan-2-7-video-api` / `edit-video-video-to-video-by-reference` |
+| Wan 2.7 | Text to Video | `wan-2-7-video-api` / `text-to-video` |
+| Wan 2.7 | Image to Video | `wan-2-7-video-api` / `image-to-video` |
 
 ### Step 3 — Make the API call
 
@@ -77,6 +79,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/wan-2-7-api/v1/generateWan27EditImageRequest`
 - `POST https://gateway.pixazo.ai/wan-2-7-video-api/v1/generateWan27VideoStyleRequest`
 - `POST https://gateway.pixazo.ai/wan-2-7-video-api/v1/generateWan27VideoEditRequest`
+- `POST https://gateway.pixazo.ai/wan-2-7-video-api/v1/generateWan27t2vRequest`
+- `POST https://gateway.pixazo.ai/wan-2-7-video-api/v1/image-to-video`
 
 **Sample request (primary operation)**
 
@@ -199,5 +203,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

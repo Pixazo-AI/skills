@@ -32,22 +32,29 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Qwen TTS v3 | Text to Speech | `qwen3-tts-1-7b-api-401` / `qwen3-tts-1-7b-api-request-result` |
+| Qwen Audio 3.0 TTS Plus | Text to Speech(Audio) | `qwen-audio-3-0-tts-plus` / `text-to-speech` |
+| Qwen Audio 3.0 TTS Flash | Text to Speech(Audio) | `qwen-audio-3-0-tts-flash` / `text-to-speech` |
+| Qwen 3.0 TTS | Text to Speech | `qwen3-tts-1-7b-api-401` / `qwen3-tts-1-7b-api-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/qwen-audio-3-0-tts-plus/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/qwen-audio-3-0-tts-flash/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b-api-request-result`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b-api-request-result' \
+curl -X POST 'https://gateway.pixazo.ai/qwen-audio-3-0-tts-plus/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "request_id": "e1a2b3c4-d5f6-7890-e1a2-b3c4d5f67890"
+  "text": "Welcome to the show. Today we explore the mysteries of deep space and the stories hidden among the stars.",
+  "voice": "longanlingxin",
+  "format": "mp3",
+  "sample_rate": 22050
 }'
 ```
 
@@ -56,13 +63,16 @@ curl -X POST 'https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b-api-request-result",
+    "https://gateway.pixazo.ai/qwen-audio-3-0-tts-plus/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "request_id": "e1a2b3c4-d5f6-7890-e1a2-b3c4d5f67890"
+  "text": "Welcome to the show. Today we explore the mysteries of deep space and the stories hidden among the stars.",
+  "voice": "longanlingxin",
+  "format": "mp3",
+  "sample_rate": 22050
 },
     timeout=300,
 )
@@ -73,14 +83,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b-api-request-result', {
+const res = await fetch('https://gateway.pixazo.ai/qwen-audio-3-0-tts-plus/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "request_id": "e1a2b3c4-d5f6-7890-e1a2-b3c4d5f67890"
+  "text": "Welcome to the show. Today we explore the mysteries of deep space and the stories hidden among the stars.",
+  "voice": "longanlingxin",
+  "format": "mp3",
+  "sample_rate": 22050
 }),
 });
 console.log(await res.json());
@@ -130,5 +143,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `voxcpm`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `voxcpm`, `zonos`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

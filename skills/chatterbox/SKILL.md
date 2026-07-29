@@ -32,7 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Chatterbox v1 | Text to Speech | `chatterbox-text-to-speech` / `chatterbox-text-to-speech-request` |
+| Chatterbox v1 | Text to Speech (Voice Cloning) | `chatterbox-text-to-speech` / `chatterbox-text-to-speech-request` |
 
 ### Step 3 — Make the API call
 
@@ -142,5 +142,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-tts`, `voxcpm`
+- **Other text-to-speech / voice synthesis models:** `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-tts`, `voxcpm`, `zonos`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

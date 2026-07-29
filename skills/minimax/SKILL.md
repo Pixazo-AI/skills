@@ -33,8 +33,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | MiniMax Music 2.6 | Text to Music | `minimax-music-generation-2-6` / `get-music` |
-| MiniMax Speech 2.6 HD | Utility (Get Audio Result) | `minimax-hailuo-audio` / `get-audio-result` |
-| MiniMax Voice Design v1 | Text to Speech (Voice Design) | `minimax-voice-design-api-363` / `minimax-voice-design-api-request` |
+| MiniMax Speech 2.8 HD | Text to Speech | `minimax-speech-2-8-hd` / `minimax-speech-2-8-hd-request` |
+| MiniMax Voice Design v1 | Text to Speech | `minimax-voice-design-api-363` / `minimax-voice-design-api-request` |
 | MiniMax Image 01 | Image to Image (Image Editing) | `minimax-image-generation` / `image-to-image` |
 | MiniMax Image 01 | Text to Image | `minimax-image-generation` / `text-to-image` |
 
@@ -43,7 +43,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/generate`
-- `POST https://gateway.pixazo.ai/minimax-hailuo-ai-music/v1/getAudioResult`
 - `POST https://gateway.pixazo.ai/image-generation/v1/i2i`
 - `POST https://gateway.pixazo.ai/image-generation/v1/t2i`
 

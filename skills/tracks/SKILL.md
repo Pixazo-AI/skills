@@ -32,7 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Track v1.0 | Text to Music | `tracks` / `generate-music` |
+| Track v1.0 | Text to Song | `tracks` / `generate-music` |
 
 ### Step 3 — Make the API call
 
@@ -49,11 +49,10 @@ curl -X POST 'https://gateway.pixazo.ai/tracks/v1/generate' \
   -d '{
   "prompt": "A cinematic Hans Zimmer style orchestral piece, building tension with heavy percussion and brass, epic atmosphere",
   "lyrics": "",
-  "instrumental": true,
   "duration": 120,
   "bpm": 140,
-  "infer_steps": 25,
-  "guidance_scale": 7.5,
+  "key": "E minor",
+  "time_signature": "4/4",
   "seed": 42
 }'
 ```
@@ -71,11 +70,10 @@ r = requests.post(
     json={
   "prompt": "A cinematic Hans Zimmer style orchestral piece, building tension with heavy percussion and brass, epic atmosphere",
   "lyrics": "",
-  "instrumental": true,
   "duration": 120,
   "bpm": 140,
-  "infer_steps": 25,
-  "guidance_scale": 7.5,
+  "key": "E minor",
+  "time_signature": "4/4",
   "seed": 42
 },
     timeout=300,
@@ -96,11 +94,10 @@ const res = await fetch('https://gateway.pixazo.ai/tracks/v1/generate', {
   body: JSON.stringify({
   "prompt": "A cinematic Hans Zimmer style orchestral piece, building tension with heavy percussion and brass, epic atmosphere",
   "lyrics": "",
-  "instrumental": true,
   "duration": 120,
   "bpm": 140,
-  "infer_steps": 25,
-  "guidance_scale": 7.5,
+  "key": "E minor",
+  "time_signature": "4/4",
   "seed": 42
 }),
 });

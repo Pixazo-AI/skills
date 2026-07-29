@@ -32,6 +32,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Qwen Image 3.0 Pro | Text to Image | `qwen-image-3-0-pro` / `text-to-image` |
+| Qwen Image 3.0 Pro | Image to Image (Editing) | `qwen-image-3-0-pro` / `image-to-image-editing` |
+| Qwen Image 3.0 Pro | Image to Image (Fusion) | `qwen-image-3-0-pro` / `image-to-image-fusion` |
 | Qwen Image Max Edit | Image to Image (Image Editing) | `qwen-image-max-edit` / `qwen-image-max-edit-request` |
 | Qwen Image Max t2i | Text to Image | `qwen-image-max` / `qwen-image-max-request` |
 | Qwen Image Edit | Image to Image (Image Editing) | `qwen-image` / `image-edit` |
@@ -39,29 +42,31 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Qwen LoRA v1 | Text to Image (LoRA) | `qwen-image-edit-plus-lora` / `generate-request` |
 | Qwen LoRA v1 | Image to Image (LoRA Trainer) | `qwen-image-edit-plus-trainer` / `training-request` |
 | Qwen LoRA v1 | Image to Image (Image Editing — Layered) | `qwen-image-layered` / `qwen-image-layered-request` |
+| Qwen Image Edit 2509 | Image to Image (Image Editing) | `qwen-image-lite` / `qwen-image-lite-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/qwen-image-3-0-pro/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/qwen-image-3-0-pro/v1/image-to-image/editing`
+- `POST https://gateway.pixazo.ai/qwen-image-3-0-pro/v1/image-to-image/fusion`
 - `POST https://gateway.pixazo.ai/qwen-image-max-edit/v1/qwen-image-max-edit-request`
 - `POST https://gateway.pixazo.ai/qwen-image-max/v1/qwen-image-max-request`
 - `POST https://gateway.pixazo.ai/qwen-image/v1/generateMultimodeTextToImageEditRequest`
 - `POST https://gateway.pixazo.ai/qwen-image-edit-plus/v1/qwen-image-edit-plus-lora/generate`
 - `POST https://gateway.pixazo.ai/qwen-image-edit-plus-trainer/v1/qwen-image-edit-plus-trainer/generate`
 - `POST https://gateway.pixazo.ai/qwen-image-layered/v1/qwen-image-layered-request`
+- `POST https://gateway.pixazo.ai/qwen-image-lite/v1/qwen-image-lite-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/qwen-image-max-edit/v1/qwen-image-max-edit-request' \
+curl -X POST 'https://gateway.pixazo.ai/qwen-image-3-0-pro/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Transform the background into a serene mountain landscape with snow-capped peaks and a clear blue sky",
-  "image_urls": [
-    "https://imagesai.appypie.com/7686410/JUEOHp2Y3FDjmXwOQJVy_017731476841749.png"
-  ]
+  "prompt": "A majestic white tiger resting on a mossy rock beside a waterfall in a tropical rainforest, photorealistic"
 }'
 ```
 
@@ -70,16 +75,13 @@ curl -X POST 'https://gateway.pixazo.ai/qwen-image-max-edit/v1/qwen-image-max-ed
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/qwen-image-max-edit/v1/qwen-image-max-edit-request",
+    "https://gateway.pixazo.ai/qwen-image-3-0-pro/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Transform the background into a serene mountain landscape with snow-capped peaks and a clear blue sky",
-  "image_urls": [
-    "https://imagesai.appypie.com/7686410/JUEOHp2Y3FDjmXwOQJVy_017731476841749.png"
-  ]
+  "prompt": "A majestic white tiger resting on a mossy rock beside a waterfall in a tropical rainforest, photorealistic"
 },
     timeout=300,
 )
@@ -90,17 +92,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/qwen-image-max-edit/v1/qwen-image-max-edit-request', {
+const res = await fetch('https://gateway.pixazo.ai/qwen-image-3-0-pro/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Transform the background into a serene mountain landscape with snow-capped peaks and a clear blue sky",
-  "image_urls": [
-    "https://imagesai.appypie.com/7686410/JUEOHp2Y3FDjmXwOQJVy_017731476841749.png"
-  ]
+  "prompt": "A majestic white tiger resting on a mossy rock beside a waterfall in a tropical rainforest, photorealistic"
 }),
 });
 console.log(await res.json());
@@ -163,5 +162,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

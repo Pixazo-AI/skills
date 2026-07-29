@@ -32,17 +32,19 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Grok Imagine Video v1.5 | Image to Video | `grok-imagine-video-v1-5-image-to-video` / `grok-imagine-video-v1-5-image-to-video-request` |
-| Grok Imagine Video v1 | Text to Video | `grok-imagine-video-text-to-video` / `grok-imagine-video-text-to-video-request` |
-| Grok Imagine Video v1 | Image to Video | `grok-imagine-video-image-to-video` / `grok-imagine-video-image-to-video-request` |
-| Grok Imagine Video v1 | Video to Video (Video Editing) | `grok-imagine-video-edit-video` / `grok-imagine-video-edit-video-request` |
-| Grok Imagine Video v1 | Reference to Video (Ref Images to Video) | `grok-imagine-video-reference-to-video` / `grok-imagine-video-reference-to-video-request` |
+| Grok Imagine Video 1.5 | Image to Video | `grok-imagine-video-v1-5-image-to-video` / `grok-imagine-video-v1-5-image-to-video-request` |
+| Grok Imagine Video 1.5 Turbo | Image to Video | `grok-imagine-video-1-5-preview` / `grok-imagine-video-1-5-preview-request` |
+| Grok Imagine Video 1.0 | Text to Video | `grok-imagine-video-text-to-video` / `grok-imagine-video-text-to-video-request` |
+| Grok Imagine Video 1.0 | Image to Video | `grok-imagine-video-image-to-video` / `grok-imagine-video-image-to-video-request` |
+| Grok Imagine Video 1.0 | Video to Video (Video Editing) | `grok-imagine-video-edit-video` / `grok-imagine-video-edit-video-request` |
+| Grok Imagine Video 1.0 | Reference to Video (Ref Images to Video) | `grok-imagine-video-reference-to-video` / `grok-imagine-video-reference-to-video-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/grok-imagine-video-v1-5-image-to-video/v1/grok-imagine-video-v1-5-image-to-video-request`
+- `POST https://gateway.pixazo.ai/grok-imagine-video-1-5-preview/v1/image-to-video`
 - `POST https://gateway.pixazo.ai/grok-imagine-video-text-to-video/v1/grok-imagine-video-text-to-video-request`
 - `POST https://gateway.pixazo.ai/grok-imagine-video-image-to-video/v1/grok-imagine-video-image-to-video-request`
 - `POST https://gateway.pixazo.ai/grok-imagine-video-edit-video/v1/grok-imagine-video-edit-video-request`
@@ -172,5 +174,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `gemini-omni`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

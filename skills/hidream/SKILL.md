@@ -38,8 +38,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | HiDream O1 Dev | Image to Image (Image Editing) | `hidream-o1-image-dev-edit` / `hidream-o1-image-dev-edit-request` |
 | HiDream I1 Full | Text to Image | `hidream-o1-image` / `hidream-o1-image-request` |
 | HiDream I1 Full | Image to Image (Image Editing) | `hidream-o1-image-edit` / `hidream-o1-image-edit-request` |
-| HiDream O1 Dev | Text to Image | `hidream-o1-image-dev` / `hidream-o1-image-dev-request` |
-| HiDream O1 Dev | Image to Image (Image Editing) | `hidream-o1-image-dev-edit` / `hidream-o1-image-dev-edit-request` |
 
 ### Step 3 — Make the API call
 
@@ -180,5 +178,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

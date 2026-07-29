@@ -5,7 +5,7 @@ description: Video generation with Mochi Video API (by Mochi) via the Pixazo API
 
 # Mochi Video API
 
-Video generation capabilities.
+Video generation capabilities. Note: produces a fixed ~5-second clip — length is not adjustable, and the price is a flat per-video charge.
 
 You can ask Mochi to handle video generation. Powered by Mochi via the Pixazo API gateway.
 
@@ -159,5 +159,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

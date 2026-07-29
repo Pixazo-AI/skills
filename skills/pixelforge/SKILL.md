@@ -32,8 +32,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| PixelForge v1 | Text to Image | `pixelforge-image` / `generate-image` |
-| PixelForge v1 | Image to Image (Image Editing — Relighting) | `pixelforge-relighting-api` / `image-edit-request` |
+| PixelForge 1.0 | Text to Image | `pixelforge-image` / `generate-image` |
+| PixelForge 1.0 | Image to Image (Image Editing — Relighting) | `pixelforge-relighting-api` / `image-edit-request` |
+| PixelForge 2.0 | Text to Image | `pixelforge-image-v2` / `text-to-image` |
+| PixelForge 2.0 | Content Safety | `content-safety` / `image-moderation` |
 
 ### Step 3 — Make the API call
 
@@ -41,18 +43,17 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 - `POST https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve_image`
 - `POST https://gateway.pixazo.ai/pixelforge-relighting-api/v1/relighting/generate`
+- `POST https://gateway.pixazo.ai/pixelforge-image-v2/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/content-safety/v1/image-moderation`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve_image' \
+curl -X POST 'https://gateway.pixazo.ai/pixelforge-image-v2/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs",
-  "image_urls": [
-    "https://example.com/reference-image.jpg"
-  ]
+  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs"
 }'
 ```
 
@@ -61,16 +62,13 @@ curl -X POST 'https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve_image",
+    "https://gateway.pixazo.ai/pixelforge-image-v2/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs",
-  "image_urls": [
-    "https://example.com/reference-image.jpg"
-  ]
+  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs"
 },
     timeout=300,
 )
@@ -81,17 +79,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve_image', {
+const res = await fetch('https://gateway.pixazo.ai/pixelforge-image-v2/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs",
-  "image_urls": [
-    "https://example.com/reference-image.jpg"
-  ]
+  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs"
 }),
 });
 console.log(await res.json());
@@ -154,5 +149,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

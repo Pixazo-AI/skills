@@ -5,7 +5,7 @@ description: Video generation with Gemini Omni API (by Google) via the Pixazo AP
 
 # Gemini Omni API
 
-Google's Gemini Omni is a multimodal video model that handles image-to-video, reference-to-video, video-to-video, and AI video editing through a single API.
+Google's Gemini Omni is a multimodal video model that handles text-to-video, image-to-video, reference-to-video, and video-to-video editing through a single API. Note: produces a short fixed clip (about 3–10 seconds); length is set by the model, not selectable.
 
 You can ask Gemini Omni to handle video generation. Powered by Google via the Pixazo API gateway.
 
@@ -32,32 +32,46 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Gemini Omni v1 | Image to Video | `gemini-omni` / `image-to-video-request` |
-| Gemini Omni v1 | Reference to Video (Ref Images to Video) | `gemini-omni` / `reference-to-video-request` |
-| Gemini Omni v1 | Video to Video | `gemini-omni` / `video-to-video-request` |
-| Gemini Omni v1 | Video to Video (Video Editing) | `gemini-omni` / `video-editor-request` |
+| Gemini Omni Flash | Text to Video | `gemini-omni` / `text-to-video-request` |
+| Gemini Omni Flash | Image to Video | `gemini-omni` / `image-to-video-request` |
+| Gemini Omni Flash | Reference to Video (Ref Images to Video) | `gemini-omni` / `reference-to-video-request` |
+| Gemini Omni Flash | Video to Video(video editing) | `gemini-omni` / `video-to-video-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-_See the full reference for endpoint URLs._
+- `POST https://gateway.pixazo.ai/gemini-omni/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/gemini-omni/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/gemini-omni/v1/reference-to-video`
+- `POST https://gateway.pixazo.ai/gemini-omni/v1/video-to-video`
 
 **Sample request (primary operation)**
 
-_The full reference includes ready-to-paste curl, Python, and JavaScript examples for each operation._
+```bash
+curl -X POST 'https://gateway.pixazo.ai/gemini-omni/v1/text-to-video' \
+  -H 'Content-Type: application/json' \
+  -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
+  -d '{
+  "prompt": "A golden retriever running through a sunlit meadow, slow motion, cinematic.",
+  "aspect_ratio": "16:9"
+}'
+```
 
 **Python**
 
 ```python
 import os, requests
 r = requests.post(
-    "<endpoint>",
+    "https://gateway.pixazo.ai/gemini-omni/v1/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
-    json={},
+    json={
+  "prompt": "A golden retriever running through a sunlit meadow, slow motion, cinematic.",
+  "aspect_ratio": "16:9"
+},
     timeout=300,
 )
 r.raise_for_status()
@@ -67,13 +81,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('<endpoint>', {
+const res = await fetch('https://gateway.pixazo.ai/gemini-omni/v1/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({}),
+  body: JSON.stringify({
+  "prompt": "A golden retriever running through a sunlit meadow, slow motion, cinematic.",
+  "aspect_ratio": "16:9"
+}),
 });
 console.log(await res.json());
 ```
@@ -91,12 +108,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("PRIMARY_ENDPOINT", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/gemini-omni/v1/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"RESULT_ENDPOINT/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/gemini-omni/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -147,5 +164,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

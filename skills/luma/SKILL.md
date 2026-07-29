@@ -32,34 +32,52 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Luma Ray 3.2 | Text to Video | `luma-agent-ray-v3-2-text-to-video` / `luma-agent-ray-v3-2-text-to-video-request` |
+| Luma Ray 3.2 | Image to Video | `luma-agent-ray-v3-2-image-to-video` / `luma-agent-ray-v3-2-image-to-video-request` |
+| Luma Ray 3.2 | Video to Video (Video Editing) | `luma-agent-ray-v3-2-video-to-video` / `luma-agent-ray-v3-2-video-to-video-request` |
+| Luma Ray 3.2 | Video to Video (Reframe) | `luma-agent-ray-v3-2-reframe` / `luma-agent-ray-v3-2-reframe-request` |
+| Luma Uni 1.1 | Text to Image | `luma-agent-uni-1-text-to-image` / `luma-agent-uni-1-text-to-image-request` |
+| Luma Uni 1.1 | Image to Image (Image Editing) | `luma-agent-uni-1-edit` / `luma-agent-uni-1-edit-request` |
 | Luma Dream Machine Ray 2 Flash | Image to Video | `luma-dream-machine-ray-2-flash-image-to-video` / `luma-dream-machine-ray-2-flash-image-to-video-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-_See the full reference for endpoint URLs._
+- `POST https://gateway.pixazo.ai/luma-agent-ray-v3-2-text-to-video/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/luma-agent-ray-v3-2-image-to-video/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/luma-agent-ray-v3-2-video-to-video/v1/video-to-video`
+- `POST https://gateway.pixazo.ai/luma-agent-ray-v3-2-reframe/v1/reframe`
+- `POST https://gateway.pixazo.ai/luma-agent-uni-1-text-to-image/v1/luma-agent-uni-1-text-to-image-request`
+- `POST https://gateway.pixazo.ai/luma-agent-uni-1-edit/v1/luma-agent-uni-1-edit-request`
 
 **Sample request (primary operation)**
 
-_The full reference includes ready-to-paste curl, Python, and JavaScript examples for each operation._
+```bash
+curl -X POST 'https://gateway.pixazo.ai/luma-agent-ray-v3-2-text-to-video/v1/text-to-video' \
+  -H 'Content-Type: application/json' \
+  -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
+  -d '{
+  "prompt": "A herd of wild horses galloping across a dusty desert plain under a blazing midday sun; wide tracking shot.",
+  "aspect_ratio": "16:9",
+  "resolution": "540p",
+  "duration": "5s"
+}'
+```
 
 **Python**
 
 ```python
 import os, requests
 r = requests.post(
-    "<endpoint>",
+    "https://gateway.pixazo.ai/luma-agent-ray-v3-2-text-to-video/v1/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Create a magical timelapse transition. The snow melts rapidly to reveal green grass, and the tree branches burst into bloom with pink flowers in real-time. The lighting shifts from cold winter light to warm spring sunshine. The camera pushes in slowly towards the tree. Disney-style magical transformation, cinematic, 8k.",
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/luma-dream-machine-ray-2-flash-image-to-video.jpg",
-  "end_image_url": "",
+  "prompt": "A herd of wild horses galloping across a dusty desert plain under a blazing midday sun; wide tracking shot.",
   "aspect_ratio": "16:9",
-  "loop": false,
   "resolution": "540p",
   "duration": "5s"
 },
@@ -72,18 +90,15 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('<endpoint>', {
+const res = await fetch('https://gateway.pixazo.ai/luma-agent-ray-v3-2-text-to-video/v1/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Create a magical timelapse transition. The snow melts rapidly to reveal green grass, and the tree branches burst into bloom with pink flowers in real-time. The lighting shifts from cold winter light to warm spring sunshine. The camera pushes in slowly towards the tree. Disney-style magical transformation, cinematic, 8k.",
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/luma-dream-machine-ray-2-flash-image-to-video.jpg",
-  "end_image_url": "",
+  "prompt": "A herd of wild horses galloping across a dusty desert plain under a blazing midday sun; wide tracking shot.",
   "aspect_ratio": "16:9",
-  "loop": false,
   "resolution": "540p",
   "duration": "5s"
 }),
@@ -104,12 +119,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("PRIMARY_ENDPOINT", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/luma-agent-ray-v3-2-text-to-video/v1/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"RESULT_ENDPOINT/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/luma-agent-ray-v3-2-text-to-video/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -160,5 +175,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

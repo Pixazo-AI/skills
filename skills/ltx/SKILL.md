@@ -37,10 +37,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | LTX 2.3 Quality | Audio to Video | `ltx-2-3-quality-audio-to-video` / `ltx-2-3-quality-audio-to-video-request` |
 | LTX 2.3 Quality | Video to Video (Reference Video to Video) | `ltx-2-3-quality-reference-video-to-video` / `ltx-2-3-quality-reference-video-to-video-request` |
 | LTX 2.3 Quality | Video to Video (Video Upscale) | `ltx-2-3-quality-hdr` / `ltx-2-3-quality-hdr-request` |
+| LTX 2.3 | Text to Video | `ltx-video` / `text-to-video` |
+| LTX 2.3 | Image to Video | `ltx-video` / `image-to-video` |
+| LTX 2.3 | Video to Video | `ltx-video` / `video-to-video` |
 | LTX v2.3 | Text to Video | `ltx-2-3-text-to-video` / `ltx-2-3-text-to-video-request` |
 | LTX v2.3 | Image to Video | `ltx-2-3-image-to-video` / `ltx-2-3-image-to-video-request` |
 | LTX v2.3 | Audio to Video | `ltx-2-3-audio-to-video` / `ltx-2-3-audio-to-video-request` |
 | LTX v2.3 | Video to Video (Video Editing) | `ltx-2-3-retake-video` / `ltx-2-3-retake-video-request` |
+| LTX v2.3 | Video to Video (Reframe) | `ltx-2-3-reframe` / `ltx-2-3-reframe-request` |
 | LTX v2 Pro | Text to Video | `lightricks-video` / `ltx-v2-video-generate` |
 | LTX v2 19B | Image to Video | `ltx-2-19b-api-513` / `ltx-2-19b-api-request` |
 | LTX v2 | Image to Video | `ltx-2-video-api-581` / `ltx-2-video-api-request` |
@@ -54,10 +58,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/ltx-2-3-quality-audio-to-video/v1/ltx-2-3-quality-audio-to-video-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-quality-reference-video-to-video/v1/ltx-2-3-quality-reference-video-to-video-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-quality-hdr/v1/ltx-2-3-quality-hdr-request`
+- `POST https://gateway.pixazo.ai/ltx-video/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/ltx-video/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/ltx-video/v1/video-to-video`
 - `POST https://gateway.pixazo.ai/ltx-2-3-text-to-video/v1/ltx-2-3-text-to-video-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-image-to-video/v1/ltx-2-3-image-to-video-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-audio-to-video/v1/ltx-2-3-audio-to-video-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-retake-video/v1/ltx-2-3-retake-video-request`
+- `POST https://gateway.pixazo.ai/ltx-2-3-reframe/v1/video-to-video`
 - `POST https://gateway.pixazo.ai/lightricks/v1/ltx/generate`
 - `POST https://gateway.pixazo.ai/ltx-2-19b-api-513/v1/ltx-2-19b-api-request`
 - `POST https://gateway.pixazo.ai/ltx-2-video-api-581/v1/ltx-2-video-api-request`
@@ -207,5 +215,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

@@ -1,13 +1,13 @@
 ---
 name: heygen
-description: Video generation with Heygen Video Agent API (by HeyGen) via the Pixazo API. TRIGGER when the user mentions "Heygen Video Agent" or "Heygen Video Agent API", or when the user asks to generate / make / create a video / clip / animation and Heygen Video Agent is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+description: Video generation with Heygen Video Agent API (by HeyGen) via the Pixazo API. TRIGGER when the user mentions "Heygen" or "Heygen Video Agent API", or when the user asks to generate / make / create a video / clip / animation and Heygen is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # Heygen Video Agent API
 
 HeyGen Video Agent generates lifelike avatar-driven videos from text prompts with natural lip-sync and expressive delivery.
 
-You can ask Heygen Video Agent to handle video generation. Powered by HeyGen via the Pixazo API gateway.
+You can ask Heygen to handle video generation. Powered by HeyGen via the Pixazo API gateway.
 
 ---
 
@@ -33,12 +33,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Heygen Video Agent 3.0 | Text to Video | `heygen-video-agent` / `heygen-video-agent-request` |
+| HeyGen v3 Lipsync Precision | Video to Video (Ref Video + Ref Audio to Video - Lipsync) | `heygen-v3-lipsync-precision` / `heygen-v3-lipsync-precision-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent-request`
+- `POST https://gateway.pixazo.ai/heygen-v3-lipsync-precision/v1/video-to-video/lip-sync`
 
 **Sample request (primary operation)**
 
@@ -161,5 +163,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `grok-imagine-video`, `gemini-omni`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

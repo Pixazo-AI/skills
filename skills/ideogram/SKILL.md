@@ -33,6 +33,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Ideogram v4 | Text to Image | `ideogram-v4` / `ideogram-v4-request` |
+| Ideogram v4 | Image to Image | `ideogram-v4-image-to-image` / `ideogram-v4-image-to-image-request` |
 | Ideogram Remove Background | Image to Image (Image Background Removal) | `ideogram-remove-background` / `ideogram-remove-background-request` |
 | Ideogram v2 | Text to Image | `ideogram-generate` / `get-image` |
 | Ideogram v2 | Utility (Image to Text — Captioning) | `ideogram-generate` / `describe-image` |
@@ -48,6 +49,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-request`
+- `POST https://gateway.pixazo.ai/ideogram-v4-image-to-image/v1/ideogram-v4-image-to-image-request`
 - `POST https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-remove-background-request`
 - `POST https://gateway.pixazo.ai/v2/requests/status/ideogram-remove-background_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 - `POST https://gateway.pixazo.ai/ideogramV_2/v1/generate`
@@ -186,5 +188,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

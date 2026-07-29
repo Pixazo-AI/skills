@@ -32,7 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Mirelo SFX 1.6 | Text to Speech | `mirelo-sfx-1-6-text-to-audio` / `mirelo-sfx-1-6-text-to-audio-request` |
+| Mirelo SFX 1.6 | Text to Audio | `mirelo-sfx-1-6-text-to-audio` / `mirelo-sfx-1-6-text-to-audio-request` |
 | Mirelo SFX 1.6 | Video to Video | `mirelo-sfx-1-6-video-to-video` / `mirelo-sfx-1-6-video-to-video-request` |
 | Mirelo SFX 1.0 | Video to Audio | `mirelo-sfx-video-to-audio` / `mirelo-sfx-video-to-audio-request` |
 
@@ -162,5 +162,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

@@ -32,6 +32,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Happy Horse 1.1 | Text to Video | `happy-horse-1-1` / `text-to-video` |
+| Happy Horse 1.1 | Image to Video | `happy-horse-1-1` / `image-to-video` |
+| Happy Horse 1.1 | Reference to Video (Ref Images to Video) | `happy-horse-1-1` / `reference-to-video` |
 | Happy Horse 1.0 | Text to Video | `happy-horse-1-0` / `text-to-video` |
 | Happy Horse 1.0 | Image to Video | `happy-horse-1-0` / `image-to-video` |
 | Happy Horse 1.0 | Reference to Video (Ref Images to Video) | `happy-horse-1-0` / `reference-to-video` |
@@ -41,6 +44,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/happy-horse-1-1/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/happy-horse-1-1/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/happy-horse-1-1/v1/reference-to-video`
 - `POST https://gateway.pixazo.ai/happy-horse-1-0/v1/generateHappyhorseT2VRequest`
 - `POST https://gateway.pixazo.ai/happy-horse-1-0/v1/generateHappyhorseI2VRequest`
 - `POST https://gateway.pixazo.ai/happy-horse-1-0/v1/generateHappyhorseR2VRequest`
@@ -49,7 +55,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/happy-horse-1-0/v1/generateHappyhorseT2VRequest' \
+curl -X POST 'https://gateway.pixazo.ai/happy-horse-1-1/v1/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -62,7 +68,7 @@ curl -X POST 'https://gateway.pixazo.ai/happy-horse-1-0/v1/generateHappyhorseT2V
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/happy-horse-1-0/v1/generateHappyhorseT2VRequest",
+    "https://gateway.pixazo.ai/happy-horse-1-1/v1/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -79,7 +85,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/happy-horse-1-0/v1/generateHappyhorseT2VRequest', {
+const res = await fetch('https://gateway.pixazo.ai/happy-horse-1-1/v1/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -105,12 +111,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/happy-horse-1-0/v1/generateHappyhorseT2VRequest", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/happy-horse-1-1/v1/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/happy-horse-1-0/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/happy-horse-1-1/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -161,5 +167,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

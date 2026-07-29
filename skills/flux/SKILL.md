@@ -32,11 +32,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| FLUX 2 Max | Text to Image | `flux-2-max` / `flux-2-max-request` |
+| FLUX 2 Max | Image to Image (Image Editing) | `flux-2-max-edit` / `flux-2-max-edit-request` |
 | Flux Pro VTO | Image to Image (Virtual Try On) | `flux-pro-v1-virtual-try-on` / `flux-pro-v1-virtual-try-on-request` |
 | Flux 2 Pro | Image to Image (Image Editing) | `flux-2-pro-image-to-image-866` / `flux-2-pro-image-to-image-request` |
 | Flux 2 Pro | Image to Image (LoRA Trainer) | `flux-2-pro-image-to-image-trainer-831` / `flux-2-pro-image-to-image-trainer-request` |
 | Flux 2 Pro | Text to Image | `flux-2-pro-text-to-image-799` / `flux-2-pro-text-to-image-request` |
-| Flux 2 Pro | Image to Image (LoRA Trainer) | `flux-2-pro-text-to-image-trainer-712` / `flux-2-pro-text-to-image-trainer-request` |
+| Flux 2 Pro | Text to Image (LoRA Trainer) | `flux-2-pro-text-to-image-trainer-712` / `flux-2-pro-text-to-image-trainer-request` |
+| Flux 2 Pro | Text to Image (LoRA) | `flux-2-lora` / `flux-2-lora-request` |
 | Flux Kontext | Image Restoration | `flux-kontext-restore-image` / `image-restore-request` |
 | Flux 2 Klein | Text to Image | `flux-2-klein-4b` / `text-to-image` |
 | Flux 2 Dev | Text to Image | `flux-2-dev` / `generatet2i` |
@@ -52,11 +55,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/flux-2-max/v1/flux-2-max-request`
+- `POST https://gateway.pixazo.ai/flux-2-max-edit/v1/flux-2-max-edit-request`
 - `POST https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1/flux-pro-v1-virtual-try-on-request`
 - `POST https://gateway.pixazo.ai/flux-2-pro-image-to-image-866/v1/flux-2-pro-image-to-image-request`
 - `POST https://gateway.pixazo.ai/flux-2-pro-image-to-image-trainer-831/v1/flux-2-pro-image-to-image-trainer-request`
 - `POST https://gateway.pixazo.ai/flux-2-pro-text-to-image-799/v1/flux-2-pro-text-to-image-request`
 - `POST https://gateway.pixazo.ai/flux-2-pro-text-to-image-trainer-712/v1/flux-2-pro-text-to-image-trainer-request`
+- `POST https://gateway.pixazo.ai/flux-2-lora/v1/flux-2-lora-request`
 - `POST https://gateway.pixazo.ai/flux-kontext-restore-image/v1/flux-kontext-restore-image/generate`
 - `POST https://gateway.pixazo.ai/flux-2-klein-4b/v1/generateImage`
 - `POST https://gateway.pixazo.ai/flux-2-dev/v1/generateT2I`
@@ -76,10 +82,10 @@ curl -X POST 'https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1/flux-pro-v
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "The garment is worn naturally, tucked in slightly at the waist",
-  "human_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Person.jpeg",
-  "garment_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Garment.jpeg",
-  "num_inference_steps": 4,
+  "prompt": "An intricate fantasy castle on a floating island at dusk, volumetric lighting, photoreal",
+  "image_size": "landscape_4_3",
+  "safety_tolerance": "2",
+  "enable_safety_checker": true,
   "output_format": "jpeg",
   "sync_mode": false
 }'
@@ -96,10 +102,10 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "The garment is worn naturally, tucked in slightly at the waist",
-  "human_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Person.jpeg",
-  "garment_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Garment.jpeg",
-  "num_inference_steps": 4,
+  "prompt": "An intricate fantasy castle on a floating island at dusk, volumetric lighting, photoreal",
+  "image_size": "landscape_4_3",
+  "safety_tolerance": "2",
+  "enable_safety_checker": true,
   "output_format": "jpeg",
   "sync_mode": false
 },
@@ -119,10 +125,10 @@ const res = await fetch('https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "The garment is worn naturally, tucked in slightly at the waist",
-  "human_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Person.jpeg",
-  "garment_image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Garment.jpeg",
-  "num_inference_steps": 4,
+  "prompt": "An intricate fantasy castle on a floating island at dusk, volumetric lighting, photoreal",
+  "image_size": "landscape_4_3",
+  "safety_tolerance": "2",
+  "enable_safety_checker": true,
   "output_format": "jpeg",
   "sync_mode": false
 }),

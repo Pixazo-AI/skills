@@ -34,7 +34,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 |---|---|---|
 | Recraft v3 | Image to Image (Image Editing) | `recraft` / `image-to-image-v3` |
 | Recraft v3 | Text to Image | `recraft` / `text-to-image-v3` |
-| Recraft V4 Pro | Text to Image | `recraft` / `text-to-image-v4-normal` |
+| Recraft V4 | Text to Image | `recraft` / `text-to-image-v4-normal` |
 | Recraft V4 Pro | Text To Image | `recraft` / `text-to-image-v4-pro` |
 | Recraft V4.1 Pro | Text To Image | `recraft-v4-1-pro` / `text-to-image` |
 
@@ -157,5 +157,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

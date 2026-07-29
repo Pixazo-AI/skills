@@ -32,14 +32,18 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Veed Fabric v1.0 | Audio to Video (Ref Image + Ref Audio to Video — Talking Avatar) | `veed-fabric-1-0-api-130` / `veed-fabric-1-0-api-request` |
-| Veed v1 | Video to Video (Video Background Remover) | `veed-video-background-remover-541` / `veed-video-background-remover-request` |
+| Veed Fabric 1.0 | Audio to Video (Ref Image + Ref Audio to Video — Talking Avatar) | `veed-fabric-1-0-api-130` / `veed-fabric-1-0-api-request` |
+| Veed 1.0 | Video to Video (Video Background Remover) | `veed-video-background-remover-541` / `veed-video-background-remover-request` |
+| Veed Lipsync | Video to Video (Ref Video + Ref Audio to Video - Lipsync) | `veed-lipsync` / `veed-lipsync-request` |
+| Veed Lipsync 2.0 | Video to Video (Ref Video + Ref Audio to Video - Lipsync) | `veed-lipsync-v2` / `veed-lipsync-v2-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request`
+- `POST https://gateway.pixazo.ai/veed-lipsync/v1/video-to-video/lip-sync`
+- `POST https://gateway.pixazo.ai/veed-lipsync-v2/v1/video-to-video/lip-sync`
 
 **Sample request (primary operation)**
 
@@ -162,5 +166,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

@@ -32,6 +32,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Reve Image 2.1 | Text to Image | `reve-image-2-1` / `text-to-image` |
+| Reve Image 2.1 | Image to Image (Image Editing) | `reve-image-2-1` / `image-edit` |
+| Reve Image 2.1 | Image to Image (Image Editing — Remix) | `reve-image-2-1` / `image-remix` |
 | Reve Image Generation | Image to Image (Image Editing) | `reve-image-generation` / `image-edit` |
 | Reve Image Generation | Image to Image (Image Editing — Remix) | `reve-image-generation` / `image-remix` |
 
@@ -39,17 +42,19 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/reve-image-2-1/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/reve-image-2-1/v1/image-to-image/edit`
+- `POST https://gateway.pixazo.ai/reve-image-2-1/v1/image-to-image/remix`
 - `POST https://gateway.pixazo.ai/reve-image/v1/image-edit`
 - `POST https://gateway.pixazo.ai/reve-image/v1/image-edit-remix`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/reve-image/v1/image-edit' \
+curl -X POST 'https://gateway.pixazo.ai/reve-image-2-1/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image": "https://example.com/photo.jpg",
   "prompt": "Add \"HELLO WORLD\" text in the middle of this image in a modern font, white text"
 }'
 ```
@@ -59,13 +64,12 @@ curl -X POST 'https://gateway.pixazo.ai/reve-image/v1/image-edit' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/reve-image/v1/image-edit",
+    "https://gateway.pixazo.ai/reve-image-2-1/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "image": "https://example.com/photo.jpg",
   "prompt": "Add \"HELLO WORLD\" text in the middle of this image in a modern font, white text"
 },
     timeout=300,
@@ -77,14 +81,13 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/reve-image/v1/image-edit', {
+const res = await fetch('https://gateway.pixazo.ai/reve-image-2-1/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image": "https://example.com/photo.jpg",
   "prompt": "Add \"HELLO WORLD\" text in the middle of this image in a modern font, white text"
 }),
 });
@@ -148,5 +151,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

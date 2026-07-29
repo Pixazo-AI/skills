@@ -33,6 +33,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | GPT Image v1.5 | Text to Image | `gpt-image-1-5-api-923` / `gpt-image-1-5-api-request` |
+| GPT Image v1.5 | Image to Image (Image Editing) | `gpt-image-1-5` / `gpt-image-1-5-request` |
 | GPT Image 2 | Text to Image | `gpt-image-2` / `text-to-image` |
 | GPT Image 2 | Image to Image (Image Editing) | `gpt-image-2` / `image-to-image-edit-image` |
 
@@ -41,6 +42,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/gpt-image-1-5-api-923/v1/gpt-image-1-5-api-request`
+- `POST https://gateway.pixazo.ai/gpt-image-1-5/v1/image-to-image/editing`
 - `POST https://gateway.pixazo.ai/gpt-image-2/v1/text-to-image`
 - `POST https://gateway.pixazo.ai/gpt-image-2/v1/image-to-image-edit`
 
@@ -162,5 +164,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

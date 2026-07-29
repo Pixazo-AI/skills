@@ -1,11 +1,11 @@
 ---
 name: runway
-description: Video generation with Runway Gen-4.5 API (by Runway) via the Pixazo API. TRIGGER when the user mentions "Runway" or "Runway Gen-4.5 API", or when the user asks to generate / make / create a video / clip / animation and Runway is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+description: Video generation with Runway API (by Runway) via the Pixazo API. TRIGGER when the user mentions "Runway" or "Runway API", or when the user asks to generate / make / create a video / clip / animation and Runway is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Runway Gen-4.5 API
+# Runway API
 
-Runway Gen-4.5 API for professional AI video generation by Runway.
+Runway API for professional AI video by Runway — Gen-4.5 video generation and Aleph 2 video-to-video editing.
 
 You can ask Runway to handle video generation. Powered by Runway via the Pixazo API gateway.
 
@@ -33,17 +33,21 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Runway Gen-4.5 | Image to Video | `runway-gen-4-5` / `video-generation-request` |
+| Runway Gen-4.5 | Text to Video | `runway-gen-4-5` / `text-to-video` |
+| Runway Aleph 2 | Video to Video (Video Editing) | `aleph-2` / `video-to-video` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/generate`
+- `POST https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/image-to-video`
+- `POST https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/text-to-video`
+- `POST https://gateway.pixazo.ai/aleph-2/v1/video-to-video`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/generate' \
+curl -X POST 'https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -56,7 +60,7 @@ curl -X POST 'https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/generate",
+    "https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -73,7 +77,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/generate', {
+const res = await fetch('https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -99,7 +103,7 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/generate", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/runway-gen-4-5/v1/gen-4.5/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
@@ -155,5 +159,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

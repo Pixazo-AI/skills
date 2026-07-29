@@ -32,8 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Ace Step 1.5 | Text to Song (Lyrics to Song) | `ace-step` / `generate-music` |
-| Ace Step 1.5 XL | Text to Song (Lyrics to Song) | `ace-step-xl` / `getGenerationResult` |
+| Ace Step 1.5 | Text to Song | `ace-step` / `generate-music` |
+| Ace Step 1.5 XL | Text to Song | `ace-step-xl` / `getGenerationResult` |
 
 ### Step 3 — Make the API call
 
@@ -51,11 +51,10 @@ curl -X POST 'https://gateway.pixazo.ai/ace-step/v1/generate' \
   -d '{
   "prompt": "A cinematic Hans Zimmer style orchestral piece, building tension with heavy percussion and brass, epic atmosphere",
   "lyrics": "",
-  "instrumental": true,
   "duration": 120,
   "bpm": 140,
-  "infer_steps": 25,
-  "guidance_scale": 7.5,
+  "key": "E minor",
+  "time_signature": "4/4",
   "seed": 42
 }'
 ```
@@ -73,11 +72,10 @@ r = requests.post(
     json={
   "prompt": "A cinematic Hans Zimmer style orchestral piece, building tension with heavy percussion and brass, epic atmosphere",
   "lyrics": "",
-  "instrumental": true,
   "duration": 120,
   "bpm": 140,
-  "infer_steps": 25,
-  "guidance_scale": 7.5,
+  "key": "E minor",
+  "time_signature": "4/4",
   "seed": 42
 },
     timeout=300,
@@ -98,11 +96,10 @@ const res = await fetch('https://gateway.pixazo.ai/ace-step/v1/generate', {
   body: JSON.stringify({
   "prompt": "A cinematic Hans Zimmer style orchestral piece, building tension with heavy percussion and brass, epic atmosphere",
   "lyrics": "",
-  "instrumental": true,
   "duration": 120,
   "bpm": 140,
-  "infer_steps": 25,
-  "guidance_scale": 7.5,
+  "key": "E minor",
+  "time_signature": "4/4",
   "seed": 42
 }),
 });

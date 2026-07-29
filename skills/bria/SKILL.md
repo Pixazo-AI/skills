@@ -34,6 +34,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 |---|---|---|
 | BRIA FIBO | Text to Image | `bria-fibo-bbq-preview` / `bria-fibo-bbq-preview-request` |
 | Bria RMBG 2.0 | Image to Image (Image Background Removal) | `bria-rmbg-2-0-682` / `bria-rmbg-2-0-request` |
+| Bria VRMBG 3.0 | Video to Video (Background Removal) | `bria-video-background-removal-v3` / `bria-video-background-removal-v3-request` |
 
 ### Step 3 — Make the API call
 
@@ -41,6 +42,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 - `POST https://gateway.pixazo.ai/bria-fibo-bbq-preview/v1/bria-fibo-bbq-preview-request`
 - `POST https://gateway.pixazo.ai/bria-rmbg-2-0-682/v1/bria-rmbg-2-0-request`
+- `POST https://gateway.pixazo.ai/bria-video-background-removal-v3/v1/bria-video-background-removal-v3-request`
 
 **Sample request (primary operation)**
 
@@ -145,5 +147,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

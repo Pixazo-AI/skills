@@ -32,9 +32,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Veo v3.1 Fast | Text to Video | `veo-3-1-fast` / `video-generation-request` |
-| Veo v3.1 Fast | Reference to Video (Reference Images to Video) | `veo-3-1-fast-reference-to-video` / `veo-3-1-fast-reference-to-video-request` |
-| Veo v3.1 | Text to Video | `veo-3-1` / `video-generation-request` |
+| Veo 3.1 Fast | Text to Video | `veo-3-1-fast` / `video-generation-request` |
+| Veo 3.1 Fast | Reference to Video (Reference Images to Video) | `veo-3-1-fast-reference-to-video` / `veo-3-1-fast-reference-to-video-request` |
+| Veo 3.1 Standard | Text to Video | `veo-3-1` / `video-generation-request` |
+| Veo 3.1 | Text to Video | `veo-3-1` / `veo-3-1-google-request` |
+| Veo 3.1 | Image to Video | `veo-3-1` / `veo-3-1-google-i2v-request` |
 
 ### Step 3 — Make the API call
 
@@ -43,17 +45,17 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/veo31f/v1/veo-3.1-fast/generate`
 - `POST https://gateway.pixazo.ai/veo-3-1-fast-reference-to-video/v1/veo-3-1-fast-reference-to-video-request`
 - `POST https://gateway.pixazo.ai/veo/v1/veo-3.1/generate`
+- `POST https://gateway.pixazo.ai/veo/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/veo/v1/image-to-video`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/veo31f/v1/veo-3.1-fast/generate' \
+curl -X POST 'https://gateway.pixazo.ai/veo/v1/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "A snow-covered tree gradually transforms as winter melts away, snow dripping from branches as green leaves emerge and colorful flowers bloom around the base, transitioning from a cold white landscape to a vibrant lush green meadow full of life",
-  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png",
-  "last_frame": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f2.png",
   "duration": 8,
   "aspect_ratio": "16:9",
   "resolution": "1080p",
@@ -68,15 +70,13 @@ curl -X POST 'https://gateway.pixazo.ai/veo31f/v1/veo-3.1-fast/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/veo31f/v1/veo-3.1-fast/generate",
+    "https://gateway.pixazo.ai/veo/v1/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
   "prompt": "A snow-covered tree gradually transforms as winter melts away, snow dripping from branches as green leaves emerge and colorful flowers bloom around the base, transitioning from a cold white landscape to a vibrant lush green meadow full of life",
-  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png",
-  "last_frame": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f2.png",
   "duration": 8,
   "aspect_ratio": "16:9",
   "resolution": "1080p",
@@ -93,7 +93,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/veo31f/v1/veo-3.1-fast/generate', {
+const res = await fetch('https://gateway.pixazo.ai/veo/v1/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -101,8 +101,6 @@ const res = await fetch('https://gateway.pixazo.ai/veo31f/v1/veo-3.1-fast/genera
   },
   body: JSON.stringify({
   "prompt": "A snow-covered tree gradually transforms as winter melts away, snow dripping from branches as green leaves emerge and colorful flowers bloom around the base, transitioning from a cold white landscape to a vibrant lush green meadow full of life",
-  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f1.png",
-  "last_frame": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/f2.png",
   "duration": 8,
   "aspect_ratio": "16:9",
   "resolution": "1080p",
@@ -127,12 +125,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/veo31f/v1/veo-3.1-fast/generate", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/veo/v1/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/veo31f/v1/veo-3.1-fast/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/veo/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -183,5 +181,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

@@ -37,6 +37,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Hunyuan3D 3.0 | Image to Image (3D Models — Image to 3D) | `hunyuan3d-3-0-api-294` / `hunyuan3d-3-0-api-request` |
 | Hunyuan Image 3.0 | Text to Image | `hunyuan-image` / `generate-image-request` |
 | Hunyuan Image 3.0 Instruct | Text to Image | `hunyuan-image-3-0-instruct` / `hunyuan-image-3-0-instruct-request` |
+| Hunyuan Image 3.0 Instruct | Image to Image (Image Editing) | `hunyuan-image-v3-instruct-edit` / `hunyuan-image-v3-instruct-edit-request` |
 
 ### Step 3 — Make the API call
 
@@ -47,6 +48,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/hunyuan3d-3-0-api-294/v1/hunyuan3d-3-0-api-request`
 - `POST https://gateway.pixazo.ai/hunyuan-image/v1/hunyuan-image/generateRequest`
 - `POST https://gateway.pixazo.ai/hunyuan-image-3-0-instruct/v1/hunyuan-image-3-0-instruct-request`
+- `POST https://gateway.pixazo.ai/hunyuan-image-v3-instruct-edit/v1/hunyuan-image-v3-instruct-edit-request`
 
 **Sample request (primary operation)**
 

@@ -32,8 +32,12 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Nano Banana 2 | Text to Image | `nano-banana-2` / `nano-banana-2-request` |
-| Nano Banana 2 | Image to Image (Image Editing) | `nano-banana-2-edit` / `nano-banana-2-edit-request` |
+| Nano Banana 2 Lite | Text to Image | `nano-banana-2-lite` / `nano-banana-2-lite-text-to-image-fast-request` |
+| Nano Banana 2 Lite | Image to Image (Image Editing) | `nano-banana-2-lite` / `nano-banana-2-lite-image-to-image-fast-request` |
+| Nano Banana 2 | Text to Image | `nano-banana-2` / `nano-banana-2-text-to-image-fast-request` |
+| Nano Banana 2 | Image to Image (Image Editing) | `nano-banana-2` / `nano-banana-2-image-to-image-fast-request` |
+| Nano Banana 2 | Text to Image (Batch) | `nano-banana-2` / `nano-banana-2-text-to-image-batch-request` |
+| Nano Banana 2 | Image to Image (Image Editing - Batch) | `nano-banana-2` / `nano-banana-2-image-to-image-batch-request` |
 | Nano Banana Standard | Image to Image (Image Editing) | `nano-banana` / `edit-image-request` |
 | Nano Banana Standard | Text to Image | `nano-banana` / `text-to-image-request` |
 | Nano Banana Standard | Image to Image (Image Editing — Batch) | `nano-banana-async-api` / `image-to-image-edit-image` |
@@ -46,8 +50,12 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/nano-banana-2/v1/nano-banana-2-request`
-- `POST https://gateway.pixazo.ai/nano-banana-2-edit/v1/nano-banana-2-edit-request`
+- `POST https://gateway.pixazo.ai/nano-banana-2-lite/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/nano-banana-2-lite/v1/image-to-image/editing`
+- `POST https://gateway.pixazo.ai/nano-banana-2/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/nano-banana-2/v1/image-to-image/editing`
+- `POST https://gateway.pixazo.ai/nano-banana-2/v1/text-to-image-batch`
+- `POST https://gateway.pixazo.ai/nano-banana-2/v1/image-to-image-batch`
 - `POST https://gateway.pixazo.ai/nano-banana/v1/nano-banana/generateEditImageRequest`
 - `POST https://gateway.pixazo.ai/nano-banana/v1/nano-banana/generateTextToImageRequest`
 - `POST https://gateway.pixazo.ai/nano-banana-async/v1/nano-banana-image-to-image`
@@ -59,19 +67,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/nano-banana-pro/v1/text-to-image' \
+curl -X POST 'https://gateway.pixazo.ai/nano-banana-2-lite/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "A futuristic cityscape at golden hour with neon-lit skyscrapers and reflections on wet streets",
   "num_images": 1,
   "aspect_ratio": "16:9",
-  "output_format": "png",
-  "safety_tolerance": "4",
-  "resolution": "1K",
-  "sync_mode": false,
-  "limit_generations": true,
-  "enable_web_search": false
+  "output_format": "jpeg"
 }'
 ```
 
@@ -80,7 +83,7 @@ curl -X POST 'https://gateway.pixazo.ai/nano-banana-pro/v1/text-to-image' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/nano-banana-pro/v1/text-to-image",
+    "https://gateway.pixazo.ai/nano-banana-2-lite/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -89,12 +92,7 @@ r = requests.post(
   "prompt": "A futuristic cityscape at golden hour with neon-lit skyscrapers and reflections on wet streets",
   "num_images": 1,
   "aspect_ratio": "16:9",
-  "output_format": "png",
-  "safety_tolerance": "4",
-  "resolution": "1K",
-  "sync_mode": false,
-  "limit_generations": true,
-  "enable_web_search": false
+  "output_format": "jpeg"
 },
     timeout=300,
 )
@@ -105,7 +103,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/nano-banana-pro/v1/text-to-image', {
+const res = await fetch('https://gateway.pixazo.ai/nano-banana-2-lite/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -115,12 +113,7 @@ const res = await fetch('https://gateway.pixazo.ai/nano-banana-pro/v1/text-to-im
   "prompt": "A futuristic cityscape at golden hour with neon-lit skyscrapers and reflections on wet streets",
   "num_images": 1,
   "aspect_ratio": "16:9",
-  "output_format": "png",
-  "safety_tolerance": "4",
-  "resolution": "1K",
-  "sync_mode": false,
-  "limit_generations": true,
-  "enable_web_search": false
+  "output_format": "jpeg"
 }),
 });
 console.log(await res.json());
@@ -183,5 +176,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

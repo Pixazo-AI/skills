@@ -1,13 +1,13 @@
 ---
 name: seedream
-description: Image generation/editing with Seedream AI API (by BytePlus) via the Pixazo API. TRIGGER when the user mentions "Seedream" or "Seedream AI API", or when the user asks to generate / make / create / edit / restyle an image and Seedream is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+description: Image generation/editing with Seedream 5 AI API (by BytePlus) via the Pixazo API. TRIGGER when the user mentions "Seedream 5" or "Seedream 5 AI API", or when the user asks to generate / make / create / edit / restyle an image and Seedream 5 is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Seedream AI API
+# Seedream 5 AI API
 
 Advanced image generation and editing by ByteDance.
 
-You can ask Seedream to handle image generation/editing. Powered by BytePlus via the Pixazo API gateway.
+You can ask Seedream 5 to handle image generation/editing. Powered by BytePlus via the Pixazo API gateway.
 
 ---
 
@@ -32,8 +32,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Seedream 5 | Image to Image (Image Editing) | `seedream-5-0-lite-edit` / `seedream-5-0-lite-edit-request` |
-| Seedream 5 | Text to Image | `seedream-5-0-lite-text-to-image` / `seedream-5-0-lite-text-to-image-request` |
+| Seedream 5 Pro | Image to Image (Image Editing) | `seedream-5-pro` / `edit-image` |
+| Seedream 5 Pro | Text to Image | `seedream-5-pro` / `text-to-image` |
+| Seedream 5 Lite | Image to Image (Image Editing) | `seedream-5-lite` / `edit-image` |
+| Seedream 5 Lite | Text to Image | `seedream-5-lite` / `text-to-image` |
 | Seedream 4.5 | Image to Image (Image Editing) | `bytedance-text-to-image` / `edit-image` |
 | Seedream 4.5 | Text to Image | `bytedance-text-to-image` / `text-to-image` |
 | Seedream 4 | Image to Image (Image Editing — Multi-Ref) | `bytedance-text-to-image` / `edit-multi-image` |
@@ -42,8 +44,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/seedream-5-0-lite-edit/v1/seedream-5-0-lite-edit-request`
-- `POST https://gateway.pixazo.ai/seedream-5-0-lite-text-to-image/v1/seedream-5-0-lite-text-to-image-request`
+- `POST https://gateway.pixazo.ai/seedream-5-pro/v1/edit-image`
+- `POST https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/seedream-5-lite/v1/edit-image`
+- `POST https://gateway.pixazo.ai/seedream-5-lite/v1/text-to-image`
 - `POST https://gateway.pixazo.ai/byteplus/v1/getEditImage`
 - `POST https://gateway.pixazo.ai/byteplus/v1/getTextToImage`
 - `POST https://gateway.pixazo.ai/byteplus/v1/getEditMultiImage`
@@ -51,18 +55,15 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/seedream-5-0-lite-text-to-image/v1/seedream-5-0-lite-text-to-image-request' \
+curl -X POST 'https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "add sunglasses to the cat",
-  "image_urls": [
+  "image": [
     "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/byteplus/1757499948018-hntkjsg9kj.jpg"
   ],
-  "image_size": "square_hd",
-  "num_images": 1,
-  "seed": 42,
-  "enable_safety_checker": true
+  "size": "2K"
 }'
 ```
 
@@ -71,20 +72,17 @@ curl -X POST 'https://gateway.pixazo.ai/seedream-5-0-lite-text-to-image/v1/seedr
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/seedream-5-0-lite-text-to-image/v1/seedream-5-0-lite-text-to-image-request",
+    "https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
   "prompt": "add sunglasses to the cat",
-  "image_urls": [
+  "image": [
     "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/byteplus/1757499948018-hntkjsg9kj.jpg"
   ],
-  "image_size": "square_hd",
-  "num_images": 1,
-  "seed": 42,
-  "enable_safety_checker": true
+  "size": "2K"
 },
     timeout=300,
 )
@@ -95,7 +93,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/seedream-5-0-lite-text-to-image/v1/seedream-5-0-lite-text-to-image-request', {
+const res = await fetch('https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -103,13 +101,10 @@ const res = await fetch('https://gateway.pixazo.ai/seedream-5-0-lite-text-to-ima
   },
   body: JSON.stringify({
   "prompt": "add sunglasses to the cat",
-  "image_urls": [
+  "image": [
     "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/byteplus/1757499948018-hntkjsg9kj.jpg"
   ],
-  "image_size": "square_hd",
-  "num_images": 1,
-  "seed": 42,
-  "enable_safety_checker": true
+  "size": "2K"
 }),
 });
 console.log(await res.json());
@@ -172,5 +167,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

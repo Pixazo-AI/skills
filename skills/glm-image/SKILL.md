@@ -1,13 +1,13 @@
 ---
 name: glm-image
-description: Image generation/editing with GLM Image API (by Z.ai) via the Pixazo API. TRIGGER when the user mentions "GLM Image" or "GLM Image API", or when the user asks to generate / make / create / edit / restyle an image and GLM Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+description: Image generation/editing with GLM Image API (by Zhipu AI) via the Pixazo API. TRIGGER when the user mentions "GLM Image" or "GLM Image API", or when the user asks to generate / make / create / edit / restyle an image and GLM Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # GLM Image API
 
-Text-to-image and image-editing model from Z.ai with accurate text rendering, style transfer, and consistent character generation across multiple reference images.
+Text-to-image and image-editing model from Zhipu AI with accurate text rendering, style transfer, and consistent character generation across multiple reference images.
 
-You can ask GLM Image to handle image generation/editing. Powered by Z.ai via the Pixazo API gateway.
+You can ask GLM Image to handle image generation/editing. Powered by Zhipu AI via the Pixazo API gateway.
 
 ---
 
@@ -165,5 +165,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

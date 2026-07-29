@@ -38,6 +38,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Pixverse c1 | Image to Video | `pixverse-c1-image-to-video` / `pixverse-c1-image-to-video-request` |
 | Pixverse v5.6 | Text to Video | `pixverse` / `pixverse-request` |
 | Pixverse v5.6 | Image to Video | `pixverse-i2v` / `pixverse-i2v-request` |
+| Pixverse Lipsync | Video to Video (Ref Video + Ref Audio to Video - Lipsync) | `pixverse-lipsync` / `pixverse-lipsync-request` |
 
 ### Step 3 — Make the API call
 
@@ -47,6 +48,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/pixverse-c1-text-to-video/v1/pixverse-c1-text-to-video-request`
 - `POST https://gateway.pixazo.ai/pixverse-c1-image-to-video/v1/pixverse-c1-image-to-video-request`
 - `POST https://gateway.pixazo.ai/pixverse-i2v/v1/pixverse-i2v-request`
+- `POST https://gateway.pixazo.ai/pixverse-lipsync/v1/video-to-video/lip-sync`
 
 **Sample request (primary operation)**
 
@@ -181,5 +183,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `hailuo`, `mochi`, `veed`, `vidu`, `wan`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
