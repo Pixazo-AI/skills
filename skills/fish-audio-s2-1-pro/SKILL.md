@@ -1,13 +1,13 @@
 ---
-name: gemini
-description: Text-to-speech / voice synthesis with Gemini API (by Google) via the Pixazo API. TRIGGER when the user mentions "Gemini" or "Gemini API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Gemini is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+name: fish-audio-s2-1-pro
+description: Text-to-speech / voice synthesis with Fish Audio S2.1 Pro TTS (by Fish Audio) via the Pixazo API. TRIGGER when the user mentions "Fish Audio S2.1 Pro" or "Fish Audio S2.1 Pro TTS", or when the user asks to speak / read aloud / convert text to speech / generate voice and Fish Audio S2.1 Pro is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# Gemini API
+# Fish Audio S2.1 Pro TTS
 
-Google Gemini Flash text-to-speech generation.
+Fish Audio S2.1 Pro text-to-speech. Natural, expressive speech in 83 languages with free-form emotion markers and a library of 2.5M+ community voices.
 
-You can ask Gemini to handle text-to-speech / voice synthesis. Powered by Google via the Pixazo API gateway.
+You can ask Fish Audio S2.1 Pro to handle text-to-speech / voice synthesis. Powered by Fish Audio via the Pixazo API gateway.
 
 ---
 
@@ -32,25 +32,25 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Gemini 3.1 Flash TTS | Text to Speech | `gemini-flash-tts` / `getTtsPrediction` |
+| Fish Audio S2.1 Pro TTS | Text to Speech | `fish-audio-s2-1-pro` / `fish-audio-s2-1-pro-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/gemini-flash-tts/v1/gemini-flash-tts/generate`
+- `POST https://gateway.pixazo.ai/fish-audio-s2-1-pro/v1/text-to-speech`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/gemini-flash-tts/v1/gemini-flash-tts/generate' \
+curl -X POST 'https://gateway.pixazo.ai/fish-audio-s2-1-pro/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "text": "Hey there, I am a new text to speech model and I can say things in many different ways.",
-  "voice": "Algenib",
-  "prompt": "Say this in a dramatic, theatrical tone",
-  "language_code": "en-GB"
+  "text": "[whispering] When you are building something new, there is this mix of wonder and fear. [chuckling] But that is what makes it worth building.",
+  "reference_id": "933563129e564b19a115bedd57b7406a",
+  "format": "mp3",
+  "mp3_bitrate": 128
 }'
 ```
 
@@ -59,16 +59,16 @@ curl -X POST 'https://gateway.pixazo.ai/gemini-flash-tts/v1/gemini-flash-tts/gen
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/gemini-flash-tts/v1/gemini-flash-tts/generate",
+    "https://gateway.pixazo.ai/fish-audio-s2-1-pro/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "text": "Hey there, I am a new text to speech model and I can say things in many different ways.",
-  "voice": "Algenib",
-  "prompt": "Say this in a dramatic, theatrical tone",
-  "language_code": "en-GB"
+  "text": "[whispering] When you are building something new, there is this mix of wonder and fear. [chuckling] But that is what makes it worth building.",
+  "reference_id": "933563129e564b19a115bedd57b7406a",
+  "format": "mp3",
+  "mp3_bitrate": 128
 },
     timeout=300,
 )
@@ -79,17 +79,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/gemini-flash-tts/v1/gemini-flash-tts/generate', {
+const res = await fetch('https://gateway.pixazo.ai/fish-audio-s2-1-pro/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "text": "Hey there, I am a new text to speech model and I can say things in many different ways.",
-  "voice": "Algenib",
-  "prompt": "Say this in a dramatic, theatrical tone",
-  "language_code": "en-GB"
+  "text": "[whispering] When you are building something new, there is this mix of wonder and fear. [chuckling] But that is what makes it worth building.",
+  "reference_id": "933563129e564b19a115bedd57b7406a",
+  "format": "mp3",
+  "mp3_bitrate": 128
 }),
 });
 console.log(await res.json());
@@ -131,13 +131,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/gemini.md`
+> **Fetch:** `https://www.pixazo.ai/models/fish-audio-s2-1-pro.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gemini`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/fish-audio-s2-1-pro`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `qwen-tts`, `voxcpm`, `zonos`, `fish-audio-s2-1-pro`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-tts`, `voxcpm`, `zonos`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

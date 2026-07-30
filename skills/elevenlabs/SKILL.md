@@ -144,5 +144,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `gemini`, `qwen-tts`, `voxcpm`, `zonos`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `gemini`, `qwen-tts`, `voxcpm`, `zonos`, `fish-audio-s2-1-pro`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
