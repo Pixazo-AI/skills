@@ -1,9 +1,9 @@
 ---
 name: fish-audio
-description: Text-to-speech / voice synthesis with Fish Audio TTS API (by Fish Audio) via the Pixazo API. TRIGGER when the user mentions "Fish Audio" or "Fish Audio TTS API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Fish Audio is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+description: Text-to-speech / voice synthesis with Fish Audio API (by Fish Audio) via the Pixazo API. TRIGGER when the user mentions "Fish Audio" or "Fish Audio API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Fish Audio is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# Fish Audio TTS API
+# Fish Audio API
 
 Fish Audio S2.1 Pro text-to-speech. Natural, expressive speech in 83 languages with free-form emotion markers and a library of 2.5M+ community voices.
 
@@ -33,12 +33,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Fish Audio S2.1 Pro | Text to Speech | `fish-audio-s2-1-pro` / `fish-audio-s2-1-pro-request` |
+| Fish Audio Speech to Text | Speech to Text | `fish-audio-speech-to-text` / `fish-audio-speech-to-text-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/fish-audio-s2-1-pro/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/fish-audio-speech-to-text/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
