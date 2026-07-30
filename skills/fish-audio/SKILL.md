@@ -1,13 +1,13 @@
 ---
-name: fish-audio-s2-1-pro
-description: Text-to-speech / voice synthesis with Fish Audio S2.1 Pro TTS (by Fish Audio) via the Pixazo API. TRIGGER when the user mentions "Fish Audio S2.1 Pro" or "Fish Audio S2.1 Pro TTS", or when the user asks to speak / read aloud / convert text to speech / generate voice and Fish Audio S2.1 Pro is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+name: fish-audio
+description: Text-to-speech / voice synthesis with Fish Audio TTS API (by Fish Audio) via the Pixazo API. TRIGGER when the user mentions "Fish Audio" or "Fish Audio TTS API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Fish Audio is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# Fish Audio S2.1 Pro TTS
+# Fish Audio TTS API
 
 Fish Audio S2.1 Pro text-to-speech. Natural, expressive speech in 83 languages with free-form emotion markers and a library of 2.5M+ community voices.
 
-You can ask Fish Audio S2.1 Pro to handle text-to-speech / voice synthesis. Powered by Fish Audio via the Pixazo API gateway.
+You can ask Fish Audio to handle text-to-speech / voice synthesis. Powered by Fish Audio via the Pixazo API gateway.
 
 ---
 
@@ -131,9 +131,9 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/fish-audio-s2-1-pro.md`
+> **Fetch:** `https://www.pixazo.ai/models/fish-audio.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/fish-audio-s2-1-pro`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/fish-audio`.
 
 ---
 
