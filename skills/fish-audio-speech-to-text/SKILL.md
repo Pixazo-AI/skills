@@ -1,13 +1,13 @@
 ---
-name: pixelcut
-description: Image generation/editing with Pixelcut API (by Pixelcut) via the Pixazo API. TRIGGER when the user mentions "Pixelcut Video Background Removal" or "Pixelcut API", or when the user asks to generate / make / create / edit / restyle an image and Pixelcut Video Background Removal is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: fish-audio-speech-to-text
+description: Image generation/editing with Fish Audio Speech to Text API (by Fish Audio) via the Pixazo API. TRIGGER when the user mentions "Fish Audio Speech to Text" or "Fish Audio Speech to Text API", or when the user asks to generate / make / create / edit / restyle an image and Fish Audio Speech to Text is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Pixelcut API
+# Fish Audio Speech to Text API
 
-AI-powered video background removal for clean, professional results.
+Fish Audio speech-to-text transcription. Converts audio to text with automatic language detection and optional word-level timestamps.
 
-You can ask Pixelcut Video Background Removal to handle image generation/editing. Powered by Pixelcut via the Pixazo API gateway.
+You can ask Fish Audio Speech to Text to handle image generation/editing. Powered by Fish Audio via the Pixazo API gateway.
 
 ---
 
@@ -32,24 +32,24 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Pixelcut v1 | Video to Video (Video Background Remover) | `pixelcut-video-background-removal` / `pixelcut-video-background-removal-request` |
+| Fish Audio Speech to Text | Speech to Text | `fish-audio-speech-to-text` / `fish-audio-speech-to-text-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/pixelcut-video-background-removal/v1/pixelcut-video-background-removal-request`
+- `POST https://gateway.pixazo.ai/fish-audio-speech-to-text/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/pixelcut-video-background-removal/v1/pixelcut-video-background-removal-request' \
+curl -X POST 'https://gateway.pixazo.ai/fish-audio-speech-to-text/v1/speech-to-text' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Video.mp4",
-  "background": "transparent",
-  "output_format": "webm_vp9"
+  "audio_url": "https://example.com/interview.mp3",
+  "language": "en",
+  "ignore_timestamps": false
 }'
 ```
 
@@ -58,15 +58,15 @@ curl -X POST 'https://gateway.pixazo.ai/pixelcut-video-background-removal/v1/pix
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/pixelcut-video-background-removal/v1/pixelcut-video-background-removal-request",
+    "https://gateway.pixazo.ai/fish-audio-speech-to-text/v1/speech-to-text",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Video.mp4",
-  "background": "transparent",
-  "output_format": "webm_vp9"
+  "audio_url": "https://example.com/interview.mp3",
+  "language": "en",
+  "ignore_timestamps": false
 },
     timeout=300,
 )
@@ -77,16 +77,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/pixelcut-video-background-removal/v1/pixelcut-video-background-removal-request', {
+const res = await fetch('https://gateway.pixazo.ai/fish-audio-speech-to-text/v1/speech-to-text', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Video.mp4",
-  "background": "transparent",
-  "output_format": "webm_vp9"
+  "audio_url": "https://example.com/interview.mp3",
+  "language": "en",
+  "ignore_timestamps": false
 }),
 });
 console.log(await res.json());
@@ -141,13 +141,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/pixelcut.md`
+> **Fetch:** `https://www.pixazo.ai/models/fish-audio-speech-to-text.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/pixelcut`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/fish-audio-speech-to-text`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `krea`, `boogu-image`, `fish-audio-speech-to-text`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
