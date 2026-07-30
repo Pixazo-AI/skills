@@ -32,7 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Fish Audio S2.1 Pro TTS | Text to Speech | `fish-audio-s2-1-pro` / `fish-audio-s2-1-pro-request` |
+| Fish Audio S2.1 Pro | Text to Speech | `fish-audio-s2-1-pro` / `fish-audio-s2-1-pro-request` |
 
 ### Step 3 — Make the API call
 
