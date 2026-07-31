@@ -1,13 +1,13 @@
 ---
 name: qwen-audio
-description: Text-to-speech / voice synthesis with Qwen TTS API (by Alibaba) via the Pixazo API. TRIGGER when the user mentions "Qwen TTS" or "Qwen TTS API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Qwen TTS is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+description: Text-to-speech / voice synthesis with Qwen Audio API (by Alibaba) via the Pixazo API. TRIGGER when the user mentions "Qwen Audio" or "Qwen Audio API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Qwen Audio is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# Qwen TTS API
+# Qwen Audio API
 
-Text-to-speech generation by Alibaba's Qwen.
+Speech models by Alibaba's Qwen: text-to-speech synthesis and Qwen3 ASR Flash speech-to-text transcription with automatic language and emotion detection.
 
-You can ask Qwen TTS to handle text-to-speech / voice synthesis. Powered by Alibaba via the Pixazo API gateway.
+You can ask Qwen Audio to handle text-to-speech / voice synthesis. Powered by Alibaba via the Pixazo API gateway.
 
 ---
 
@@ -35,6 +35,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Qwen Audio 3.0 TTS Plus | Text to Speech(Audio) | `qwen-audio-3-0-tts-plus` / `text-to-speech` |
 | Qwen Audio 3.0 TTS Flash | Text to Speech(Audio) | `qwen-audio-3-0-tts-flash` / `text-to-speech` |
 | Qwen 3.0 TTS | Text to Speech | `qwen3-tts-1-7b-api-401` / `qwen3-tts-1-7b-api-request` |
+| Qwen3 ASR Flash | Speech to Text | `qwen3-asr-flash` / `qwen3-asr-flash-request` |
 
 ### Step 3 — Make the API call
 
@@ -43,6 +44,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/qwen-audio-3-0-tts-plus/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/qwen-audio-3-0-tts-flash/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b-api-request-result`
+- `POST https://gateway.pixazo.ai/qwen3-asr-flash/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
