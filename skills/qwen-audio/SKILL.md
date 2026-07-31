@@ -5,7 +5,7 @@ description: Text-to-speech / voice synthesis with Qwen Audio API (by Alibaba) v
 
 # Qwen Audio API
 
-Speech models by Alibaba's Qwen: text-to-speech synthesis, and Qwen3 ASR Flash speech-to-text for short clips or long-form audio and video up to 12 hours, with automatic language and emotion detection.
+Speech models by Alibaba's Qwen: text-to-speech synthesis, and Qwen 3.0 ASR Flash speech-to-text for short clips or long-form audio and video up to 12 hours, with automatic language and emotion detection.
 
 You can ask Qwen Audio to handle text-to-speech / voice synthesis. Powered by Alibaba via the Pixazo API gateway.
 
@@ -35,8 +35,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Qwen Audio 3.0 TTS Plus | Text to Speech(Audio) | `qwen-audio-3-0-tts-plus` / `text-to-speech` |
 | Qwen Audio 3.0 TTS Flash | Text to Speech(Audio) | `qwen-audio-3-0-tts-flash` / `text-to-speech` |
 | Qwen 3.0 TTS | Text to Speech | `qwen3-tts-1-7b-api-401` / `qwen3-tts-1-7b-api-request` |
-| Qwen3 ASR Flash | Speech to Text | `qwen3-asr-flash` / `qwen3-asr-flash-request` |
-| Qwen3 ASR Flash Filetrans | Speech to Text (Long-form) | `qwen3-asr-flash-filetrans` / `qwen3-asr-flash-filetrans-request` |
+| Qwen 3.0 ASR Flash | Speech to Text | `qwen3-asr-flash` / `qwen3-asr-flash-request` |
+| Qwen 3.0 ASR Flash Filetrans | Speech to Text (Long-form) | `qwen3-asr-flash-filetrans` / `qwen3-asr-flash-filetrans-request` |
 
 ### Step 3 — Make the API call
 
