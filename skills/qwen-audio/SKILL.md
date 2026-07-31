@@ -1,13 +1,13 @@
 ---
-name: chatterbox
-description: Text-to-speech / voice synthesis with Chatterbox TTS API (by Resemble-ai) via the Pixazo API. TRIGGER when the user mentions "Chatterbox" or "Chatterbox TTS API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Chatterbox is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+name: qwen-audio
+description: Text-to-speech / voice synthesis with Qwen TTS API (by Alibaba) via the Pixazo API. TRIGGER when the user mentions "Qwen TTS" or "Qwen TTS API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Qwen TTS is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# Chatterbox TTS API
+# Qwen TTS API
 
-Advanced text-to-speech generation.
+Text-to-speech generation by Alibaba's Qwen.
 
-You can ask Chatterbox to handle text-to-speech / voice synthesis. Powered by Resemble-ai via the Pixazo API gateway.
+You can ask Qwen TTS to handle text-to-speech / voice synthesis. Powered by Alibaba via the Pixazo API gateway.
 
 ---
 
@@ -32,26 +32,29 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Chatterbox v1 | Text to Speech (Voice Cloning) | `chatterbox-text-to-speech` / `chatterbox-text-to-speech-request` |
+| Qwen Audio 3.0 TTS Plus | Text to Speech(Audio) | `qwen-audio-3-0-tts-plus` / `text-to-speech` |
+| Qwen Audio 3.0 TTS Flash | Text to Speech(Audio) | `qwen-audio-3-0-tts-flash` / `text-to-speech` |
+| Qwen 3.0 TTS | Text to Speech | `qwen3-tts-1-7b-api-401` / `qwen3-tts-1-7b-api-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/chatterbox-text-to-speech/v1/chatterbox-text-to-speech-request`
+- `POST https://gateway.pixazo.ai/qwen-audio-3-0-tts-plus/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/qwen-audio-3-0-tts-flash/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b-api-request-result`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/chatterbox-text-to-speech/v1/chatterbox-text-to-speech-request' \
+curl -X POST 'https://gateway.pixazo.ai/qwen-audio-3-0-tts-plus/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "text": "Hello world, this is a test of the Chatterbox text to speech model.",
-  "audio_url": "https://storage.googleapis.com/chatterbox-demo-samples/prompts/male_rickmorty.mp3",
-  "exaggeration": 0.25,
-  "temperature": 0.7,
-  "cfg": 0.5
+  "text": "Welcome to the show. Today we explore the mysteries of deep space and the stories hidden among the stars.",
+  "voice": "longanlingxin",
+  "format": "mp3",
+  "sample_rate": 22050
 }'
 ```
 
@@ -60,17 +63,16 @@ curl -X POST 'https://gateway.pixazo.ai/chatterbox-text-to-speech/v1/chatterbox-
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/chatterbox-text-to-speech/v1/chatterbox-text-to-speech-request",
+    "https://gateway.pixazo.ai/qwen-audio-3-0-tts-plus/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "text": "Hello world, this is a test of the Chatterbox text to speech model.",
-  "audio_url": "https://storage.googleapis.com/chatterbox-demo-samples/prompts/male_rickmorty.mp3",
-  "exaggeration": 0.25,
-  "temperature": 0.7,
-  "cfg": 0.5
+  "text": "Welcome to the show. Today we explore the mysteries of deep space and the stories hidden among the stars.",
+  "voice": "longanlingxin",
+  "format": "mp3",
+  "sample_rate": 22050
 },
     timeout=300,
 )
@@ -81,18 +83,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/chatterbox-text-to-speech/v1/chatterbox-text-to-speech-request', {
+const res = await fetch('https://gateway.pixazo.ai/qwen-audio-3-0-tts-plus/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "text": "Hello world, this is a test of the Chatterbox text to speech model.",
-  "audio_url": "https://storage.googleapis.com/chatterbox-demo-samples/prompts/male_rickmorty.mp3",
-  "exaggeration": 0.25,
-  "temperature": 0.7,
-  "cfg": 0.5
+  "text": "Welcome to the show. Today we explore the mysteries of deep space and the stories hidden among the stars.",
+  "voice": "longanlingxin",
+  "format": "mp3",
+  "sample_rate": 22050
 }),
 });
 console.log(await res.json());
@@ -134,13 +135,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/chatterbox.md`
+> **Fetch:** `https://www.pixazo.ai/models/qwen-audio.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/chatterbox`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/qwen-audio`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `voxcpm`, `zonos`, `fish-audio`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
