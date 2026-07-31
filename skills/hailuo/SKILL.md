@@ -32,6 +32,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Hailuo H3 | Text to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-text-to-video-request` |
+| Hailuo H3 | Image to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-image-to-video-request` |
+| Hailuo H3 | Last Frame to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-last-frame-to-video-request` |
+| Hailuo H3 | Start and End Frame to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-start-end-to-video-request` |
+| Hailuo H3 | Reference to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-reference-to-video-request` |
 | Hailuo v2.3 | Image to Video | `minimax-hailuo-ai` / `generate-image-to-video-request` |
 | Hailuo v2.3 | Text to Video | `minimax-hailuo-ai` / `generate-video-request` |
 
@@ -39,23 +44,22 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/image-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/last-frame-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/start-end-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/reference-to-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-ai/v1/imageToVideo`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-ai/v1/generate`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/minimax-hailuo-ai/v1/imageToVideo' \
+curl -X POST 'https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Man walked into winter cave with polar bear",
-  "first_frame_image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/manwithbear.jpg",
-  "duration": 6,
-  "resolution": "768P",
-  "prompt_optimizer": true,
-  "fast_pretreatment": false,
-  "aigc_watermark": false
+  "prompt": "A lone lighthouse on a cliff at dusk, the beam sweeping through heavy fog as waves break below. Slow push-in. Audio: wind, surf, a distant foghorn."
 }'
 ```
 
@@ -64,19 +68,13 @@ curl -X POST 'https://gateway.pixazo.ai/minimax-hailuo-ai/v1/imageToVideo' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/minimax-hailuo-ai/v1/imageToVideo",
+    "https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Man walked into winter cave with polar bear",
-  "first_frame_image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/manwithbear.jpg",
-  "duration": 6,
-  "resolution": "768P",
-  "prompt_optimizer": true,
-  "fast_pretreatment": false,
-  "aigc_watermark": false
+  "prompt": "A lone lighthouse on a cliff at dusk, the beam sweeping through heavy fog as waves break below. Slow push-in. Audio: wind, surf, a distant foghorn."
 },
     timeout=300,
 )
@@ -87,20 +85,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/minimax-hailuo-ai/v1/imageToVideo', {
+const res = await fetch('https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Man walked into winter cave with polar bear",
-  "first_frame_image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/manwithbear.jpg",
-  "duration": 6,
-  "resolution": "768P",
-  "prompt_optimizer": true,
-  "fast_pretreatment": false,
-  "aigc_watermark": false
+  "prompt": "A lone lighthouse on a cliff at dusk, the beam sweeping through heavy fog as waves break below. Slow push-in. Audio: wind, surf, a distant foghorn."
 }),
 });
 console.log(await res.json());
@@ -119,12 +111,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/minimax-hailuo-ai/v1/imageToVideo", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/minimax-hailuo-ai/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/minimax-hailuo-h3/v2/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
