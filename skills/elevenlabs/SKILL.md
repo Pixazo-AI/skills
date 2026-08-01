@@ -34,6 +34,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 |---|---|---|
 | ElevenLabs Eleven v3 TTS | Text to Speech (Voice Cloning) | `elevenlabs-eleven-v3-tts` / `elevenlabs-eleven-v3-tts-request` |
 | ElevenLabs Music | Text to Music | `elevenlabs-music` / `elevenlabs-music-request` |
+| ElevenLabs Turbo v2.5 | Text to Speech | `elevenlabs-turbo-v2-5` / `text-to-speech` |
+| ElevenLabs Multilingual v2 | Text to Speech | `elevenlabs-multilingual-v2` / `text-to-speech` |
 
 ### Step 3 — Make the API call
 
@@ -41,11 +43,13 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 - `POST https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-eleven-v3-tts-request`
 - `POST https://gateway.pixazo.ai/elevenlabs-music/v1/elevenlabs-music-request`
+- `POST https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/elevenlabs-multilingual-v2/v1/text-to-speech`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-eleven-v3-tts-request' \
+curl -X POST 'https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -62,7 +66,7 @@ curl -X POST 'https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-e
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-eleven-v3-tts-request",
+    "https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -83,7 +87,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-eleven-v3-tts-request', {
+const res = await fetch('https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -144,5 +148,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

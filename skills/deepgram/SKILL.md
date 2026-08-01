@@ -1,13 +1,13 @@
 ---
-name: gemini
-description: Text-to-speech / voice synthesis with Gemini API (by Google) via the Pixazo API. TRIGGER when the user mentions "Gemini" or "Gemini API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Gemini is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+name: deepgram
+description: Text-to-speech / voice synthesis with Deepgram Aura API (by Deepgram) via the Pixazo API. TRIGGER when the user mentions "Deepgram Aura" or "Deepgram Aura API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Deepgram Aura is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# Gemini API
+# Deepgram Aura API
 
-Google Gemini Flash text-to-speech generation.
+Context-aware text-to-speech from Deepgram. Aura applies natural pacing, emphasis and fillers based on the surrounding text, in English and Spanish.
 
-You can ask Gemini to handle text-to-speech / voice synthesis. Powered by Google via the Pixazo API gateway.
+You can ask Deepgram Aura to handle text-to-speech / voice synthesis. Powered by Deepgram via the Pixazo API gateway.
 
 ---
 
@@ -32,25 +32,26 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Gemini 3.1 Flash TTS | Text to Speech | `gemini-flash-tts` / `getTtsPrediction` |
+| Deepgram Aura 2 English | Text to Speech | `deepgram-aura-2-en` / `text-to-speech` |
+| Deepgram Aura 2 Spanish | Text to Speech | `deepgram-aura-2-es` / `text-to-speech` |
+| Deepgram Aura 1 | Text to Speech | `deepgram-aura-1` / `text-to-speech` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/gemini-flash-tts/v1/gemini-flash-tts/generate`
+- `POST https://gateway.pixazo.ai/deepgram-aura-2-en/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/deepgram-aura-2-es/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/deepgram-aura-1/v1/text-to-speech`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/gemini-flash-tts/v1/gemini-flash-tts/generate' \
+curl -X POST 'https://gateway.pixazo.ai/deepgram-aura-2-en/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "text": "Hey there, I am a new text to speech model and I can say things in many different ways.",
-  "voice": "Algenib",
-  "prompt": "Say this in a dramatic, theatrical tone",
-  "language_code": "en-GB"
+  "text": "Hello from Pixazo. This is a text to speech demo."
 }'
 ```
 
@@ -59,16 +60,13 @@ curl -X POST 'https://gateway.pixazo.ai/gemini-flash-tts/v1/gemini-flash-tts/gen
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/gemini-flash-tts/v1/gemini-flash-tts/generate",
+    "https://gateway.pixazo.ai/deepgram-aura-2-en/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "text": "Hey there, I am a new text to speech model and I can say things in many different ways.",
-  "voice": "Algenib",
-  "prompt": "Say this in a dramatic, theatrical tone",
-  "language_code": "en-GB"
+  "text": "Hello from Pixazo. This is a text to speech demo."
 },
     timeout=300,
 )
@@ -79,17 +77,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/gemini-flash-tts/v1/gemini-flash-tts/generate', {
+const res = await fetch('https://gateway.pixazo.ai/deepgram-aura-2-en/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "text": "Hey there, I am a new text to speech model and I can say things in many different ways.",
-  "voice": "Algenib",
-  "prompt": "Say this in a dramatic, theatrical tone",
-  "language_code": "en-GB"
+  "text": "Hello from Pixazo. This is a text to speech demo."
 }),
 });
 console.log(await res.json());
@@ -131,13 +126,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/gemini.md`
+> **Fetch:** `https://www.pixazo.ai/models/deepgram.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gemini`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/deepgram`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `inworld`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
