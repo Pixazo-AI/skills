@@ -1,13 +1,13 @@
 ---
 name: xtts
-description: Text-to-speech / voice synthesis with XTTS v2 API (by Xtts) via the Pixazo API. TRIGGER when the user mentions "XTTS" or "XTTS v2 API", or when the user asks to speak / read aloud / convert text to speech / generate voice and XTTS is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+description: Text-to-speech / voice synthesis with XTTS v2 API (by Coqui) via the Pixazo API. TRIGGER when the user mentions "XTTS" or "XTTS v2 API", or when the user asks to speak / read aloud / convert text to speech / generate voice and XTTS is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
 # XTTS v2 API
 
-XTTS v2 API by Xtts.
+XTTS v2 turns your text into spoken audio, and it can copy a voice from a short recording sample. It handles many languages, which makes it useful for voiceovers you want in more than one language.
 
-You can ask XTTS to handle text-to-speech / voice synthesis. Powered by Xtts via the Pixazo API gateway.
+You can ask XTTS to handle text-to-speech / voice synthesis. Powered by Coqui via the Pixazo API gateway.
 
 ---
 

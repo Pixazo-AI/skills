@@ -5,7 +5,7 @@ description: Video generation with Cosmos API (by NVIDIA) via the Pixazo API. TR
 
 # Cosmos API
 
-Cosmos 3 Super API delivers a unified, high-performance integration layer designed to streamline complex data workflows and accelerate digital transformation across enterprise ecosystems. This robust solution offers developers seamless connectivity, exceptional uptime, and low-latency processing to handle demanding workloads without compromising on speed or reliability. With its intuitive architecture and advanced security protocols, the platform simplifies API management, automates routine tasks, and scales effortlessly to meet growing business demands. By eliminating operational bottlenecks and ensuring data consistency across various internal endpoints, it empowers organizations to optimize their software architecture and unlock maximum technical efficiency.
+Cosmos 3 Super is an NVIDIA world model that makes an image from a text prompt, and can also turn an image you already have into a short video. Because it understands how the physical world works, the motion it creates looks realistic and follows real physics.
 
 You can ask Cosmos to handle video generation. Powered by NVIDIA via the Pixazo API gateway.
 

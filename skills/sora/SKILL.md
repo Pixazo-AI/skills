@@ -5,7 +5,7 @@ description: Video generation with Sora Video API (by OpenAI) via the Pixazo API
 
 # Sora Video API
 
-Advanced video generation by OpenAI.
+Sora makes short videos from a text prompt or a starting image. It stands out for smooth, realistic motion and detailed scenes, so it is a good pick when you want a clip with a cinematic look.
 
 You can ask Sora to handle video generation. Powered by OpenAI via the Pixazo API gateway.
 

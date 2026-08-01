@@ -5,7 +5,7 @@ description: Image generation/editing with Recraft API (by Recraft) via the Pixa
 
 # Recraft API
 
-Advanced image generation.
+Recraft makes images, logos, and vector art from a text prompt. It really shines at clean text and brand styles, so it's a great pick for icons, logos, and marketing graphics.
 
 You can ask Recraft to handle image generation/editing. Powered by Recraft via the Pixazo API gateway.
 

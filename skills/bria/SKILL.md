@@ -5,7 +5,7 @@ description: Image generation/editing with Bria API (by Bria) via the Pixazo API
 
 # Bria API
 
-Bria API by Bria.
+Bria makes images from a text prompt. It is trained only on properly licensed content, so it is a safer choice for commercial and brand work where you need to avoid copyright trouble.
 
 You can ask Bria to handle image generation/editing. Powered by Bria via the Pixazo API gateway.
 

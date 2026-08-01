@@ -5,7 +5,7 @@ description: Image generation/editing with MAI Image API (by Microsoft) via the 
 
 # MAI Image API
 
-MAI Image 2.5 API is Microsoft's proprietary, internally developed text-to-image foundation model interface that allows developers to programmatically generate and edit high-fidelity visuals directly through Microsoft Azure AI Foundry. This diffusion-based cloud programmatic gateway enables enterprise workflows to transition natural language prompts into photorealistic assets, featuring visual reasoning capabilities across scale, complex studio lighting, and spatial relationships. Built specifically to support production-level graphic pipelines, the application interface provides fine-grained, localized edit controls, precise text rendering within layouts, and strict facial identity consistency across consecutive iterations.
+MAI Image creates and edits detailed images from a text prompt. It handles readable text inside the picture, realistic lighting, and keeping the same face across edits.
 
 You can ask MAI Image to handle image generation/editing. Powered by Microsoft via the Pixazo API gateway.
 

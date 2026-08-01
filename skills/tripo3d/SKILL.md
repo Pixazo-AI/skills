@@ -5,7 +5,7 @@ description: 3D model generation with Tripo3D API (by Tripo) via the Pixazo API.
 
 # Tripo3D API
 
-Tripo3D API by Tripo.
+Tripo3D turns a single photo into a 3D model you can download. It's a quick, low-effort way to get a usable 3D asset for games, AR, or product mockups.
 
 You can ask Tripo3D to handle 3D model generation. Powered by Tripo via the Pixazo API gateway.
 

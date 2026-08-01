@@ -5,7 +5,7 @@ description: Image generation/editing with SDXL API (by Stability AI) via the Pi
 
 # SDXL API
 
-SDXL API by Stability AI.
+Solid open model for fast, cheap image generation from a text prompt, or from an image you upload. It comes in Base, Lightning, and Turbo versions, so you can trade a little quality for even faster results when you need a quick draft.
 
 You can ask SDXL to handle image generation/editing. Powered by Stability AI via the Pixazo API gateway.
 

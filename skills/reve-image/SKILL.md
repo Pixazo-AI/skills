@@ -5,7 +5,7 @@ description: Image generation/editing with Reve Image API (by Reve) via the Pixa
 
 # Reve Image API
 
-Reve Image API by Reve.
+Reve makes images from a text prompt, and it can also edit or remix an image you upload. It stands out for following detailed prompts closely, so it's a good pick when the result needs to match an exact description.
 
 You can ask Reve Image to handle image generation/editing. Powered by Reve via the Pixazo API gateway.
 

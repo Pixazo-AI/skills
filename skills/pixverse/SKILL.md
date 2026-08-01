@@ -5,7 +5,7 @@ description: Video generation with Pixverse Video API (by Pixverse) via the Pixa
 
 # Pixverse Video API
 
-Pixverse Video API by Pixverse.
+PixVerse makes short videos with motion and camera moves. You can start from a text prompt or a photo, and it can add lip-synced talking. It's a fast pick for social-ready clips.
 
 You can ask Pixverse to handle video generation. Powered by Pixverse via the Pixazo API gateway.
 

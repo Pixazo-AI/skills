@@ -5,7 +5,7 @@ description: Video generation with Veed AI API (by Veed) via the Pixazo API. TRI
 
 # Veed AI API
 
-Video editing and processing capabilities.
+VEED turns your audio and video clips into talking-avatar videos and lip-synced presenter footage. Give it a voice track and it matches a speaker's lips to the words, and it can also remove the background from a video. Good for presenter-style clips and clean cutouts.
 
 You can ask Veed to handle video generation. Powered by Veed via the Pixazo API gateway.
 

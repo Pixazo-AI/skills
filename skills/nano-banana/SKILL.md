@@ -5,7 +5,7 @@ description: Image generation/editing with Nano Banana API (by Google) via the P
 
 # Nano Banana API
 
-Advanced image generation and editing by Google.
+Nano Banana is a Google model that makes and edits images from a text prompt. It handles conversational edits well, so you can change one part of a photo while keeping the rest the same. It can also blend several reference images into one.
 
 You can ask Nano Banana 2 to handle image generation/editing. Powered by Google via the Pixazo API gateway.
 
