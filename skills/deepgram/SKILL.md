@@ -1,13 +1,13 @@
 ---
 name: deepgram
-description: Text-to-speech / voice synthesis with Deepgram Aura API (by Deepgram) via the Pixazo API. TRIGGER when the user mentions "Deepgram Aura" or "Deepgram Aura API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Deepgram Aura is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+description: Text-to-speech / voice synthesis with Deepgram Aura API (by Deepgram) via the Pixazo API. TRIGGER when the user mentions "Deepgram" or "Deepgram Aura API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Deepgram is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
 # Deepgram Aura API
 
-Context-aware text-to-speech from Deepgram. Aura applies natural pacing, emphasis and fillers based on the surrounding text, in English and Spanish.
+Deepgram speech models. Aura turns text into context-aware speech with natural pacing; Nova 3 goes the other way, transcribing recordings with per-word timings and optional speaker labels.
 
-You can ask Deepgram Aura to handle text-to-speech / voice synthesis. Powered by Deepgram via the Pixazo API gateway.
+You can ask Deepgram to handle text-to-speech / voice synthesis. Powered by Deepgram via the Pixazo API gateway.
 
 ---
 
@@ -35,6 +35,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Deepgram Aura 2 English | Text to Speech | `deepgram-aura-2-en` / `text-to-speech` |
 | Deepgram Aura 2 Spanish | Text to Speech | `deepgram-aura-2-es` / `text-to-speech` |
 | Deepgram Aura 1 | Text to Speech | `deepgram-aura-1` / `text-to-speech` |
+| Deepgram Nova 3 | Speech to Text | `deepgram-nova-3` / `speech-to-text` |
 
 ### Step 3 — Make the API call
 
@@ -43,6 +44,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/deepgram-aura-2-en/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/deepgram-aura-2-es/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/deepgram-aura-1/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/deepgram-nova-3/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
