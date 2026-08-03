@@ -38,6 +38,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Qwen 3.0 ASR Flash | Speech to Text | `qwen3-asr-flash` / `qwen3-asr-flash-request` |
 | Qwen 3.0 ASR Flash Filetrans | Speech to Text (Long-form) | `qwen3-asr-flash-filetrans` / `qwen3-asr-flash-filetrans-request` |
 | Qwen 3.0 ASR Flash Realtime | Speech to Text (Streaming) | `qwen3-asr-flash-realtime` / `qwen3-asr-flash-realtime-request` |
+| Qwen 3 TTS 0.6B | Text to Speech | `qwen-3-tts-text-to-speech-0-6b` / `text-to-speech` |
+| Qwen 3 TTS Voice Design | Voice Design | `qwen-3-tts-voice-design-1-7b` / `text-to-speech` |
+| Qwen 3 TTS Clone Voice 0.6B | Voice Cloning | `qwen-3-tts-clone-voice-0-6b` / `text-to-speech` |
+| Qwen 3 TTS Clone Voice 1.7B | Voice Cloning | `qwen-3-tts-clone-voice-1-7b` / `text-to-speech` |
 
 ### Step 3 — Make the API call
 
@@ -148,5 +152,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `xai-tts`, `lux-tts`, `tada`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

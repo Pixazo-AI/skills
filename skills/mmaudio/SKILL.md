@@ -33,6 +33,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | MMAudio v2 | Text to Audio | `mmaudio-v2-text-to-audio` / `mmaudio-v2-text-to-audio-request` |
+| MMAudio V2 Video to Audio | Video to Audio | `mmaudio-v2` / `text-to-speech` |
 
 ### Step 3 — Make the API call
 

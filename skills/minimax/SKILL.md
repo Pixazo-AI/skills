@@ -37,6 +37,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | MiniMax Voice Design v1 | Text to Speech | `minimax-voice-design-api-363` / `minimax-voice-design-api-request` |
 | MiniMax Image 01 | Image to Image (Image Editing) | `minimax-image-generation` / `image-to-image` |
 | MiniMax Image 01 | Text to Image | `minimax-image-generation` / `text-to-image` |
+| MiniMax Speech 2.8 Turbo | Text to Speech | `minimax-speech-2-8-turbo` / `text-to-speech` |
 
 ### Step 3 — Make the API call
 
