@@ -1,13 +1,13 @@
 ---
-name: codeformer
-description: Image generation/editing with Codeformer API (by Sczhou) via the Pixazo API. TRIGGER when the user mentions "Codeformer" or "Codeformer API", or when the user asks to generate / make / create / edit / restyle an image and Codeformer is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: audio-diarize
+description: Image generation/editing with Speaker Diarization API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Speaker Diarization" or "Speaker Diarization API", or when the user asks to generate / make / create / edit / restyle an image and Speaker Diarization is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Codeformer API
+# Speaker Diarization API
 
-Robust face restoration algorithm for old photos and AI-generated images.
+Identify who spoke when. Returns speaker-labelled segments with start and end timestamps in seconds for any audio or video file. Pass speaker_count only when the number of speakers is known — otherwise it is determined automatically, and reports null rather than guessing when it genuinely cannot tell.
 
-You can ask Codeformer to handle image generation/editing. Powered by Sczhou via the Pixazo API gateway.
+You can ask Speaker Diarization to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,22 +32,22 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Codeformer | Image Restoration | `codeformer-image-restoration` / `image-restore-request` |
+| Speaker Diarization API | Speaker Diarization API | `audio-diarize` / `audio-diarize-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/codeformer-image-restoration/v1/codeformer/generate`
+- `POST https://gateway.pixazo.ai/audio-tools/v1/diarize`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/codeformer-image-restoration/v1/codeformer/generate' \
+curl -X POST 'https://gateway.pixazo.ai/audio-tools/v1/diarize' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png"
+  "audio_url": "https://media.pixazo.ai/cma/example.mp4"
 }'
 ```
 
@@ -56,13 +56,13 @@ curl -X POST 'https://gateway.pixazo.ai/codeformer-image-restoration/v1/codeform
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/codeformer-image-restoration/v1/codeformer/generate",
+    "https://gateway.pixazo.ai/audio-tools/v1/diarize",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png"
+  "audio_url": "https://media.pixazo.ai/cma/example.mp4"
 },
     timeout=300,
 )
@@ -73,14 +73,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/codeformer-image-restoration/v1/codeformer/generate', {
+const res = await fetch('https://gateway.pixazo.ai/audio-tools/v1/diarize', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png"
+  "audio_url": "https://media.pixazo.ai/cma/example.mp4"
 }),
 });
 console.log(await res.json());
@@ -135,13 +135,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/codeformer.md`
+> **Fetch:** `https://www.pixazo.ai/models/audio-diarize.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/codeformer`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/audio-diarize`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `grok-stt`, `assemblyai`, `audio-separate-stems`, `audio-diarize`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `grok-stt`, `assemblyai`, `audio-separate-stems`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
