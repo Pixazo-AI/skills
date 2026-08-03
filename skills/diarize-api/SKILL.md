@@ -32,7 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Speaker Diarization API | Speaker Diarization API | `audio-diarize` / `audio-diarize-request` |
+| Speaker Diarization 1.0 | Diarize | `audio-diarize` / `audio-diarize-request` |
 
 ### Step 3 — Make the API call
 

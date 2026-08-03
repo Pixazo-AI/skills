@@ -32,7 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Audio Stem Separation API | Audio Stem Separation API | `audio-separate-stems` / `audio-separate-stems-request` |
+| Audio Stem Separation 1.0 | Separate Stems | `audio-separate-stems` / `audio-separate-stems-request` |
 
 ### Step 3 — Make the API call
 
