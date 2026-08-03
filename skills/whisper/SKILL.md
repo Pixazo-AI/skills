@@ -1,13 +1,13 @@
 ---
-name: gfpgan
-description: Image generation/editing with GFPGAN API (by TencentARC) via the Pixazo API. TRIGGER when the user mentions "GFPGAN" or "GFPGAN API", or when the user asks to generate / make / create / edit / restyle an image and GFPGAN is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: whisper
+description: Image generation/editing with Whisper API (by OpenAI) via the Pixazo API. TRIGGER when the user mentions "Whisper" or "Whisper API", or when the user asks to generate / make / create / edit / restyle an image and Whisper is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# GFPGAN API
+# Whisper API
 
-Practical face restoration algorithm leveraging generative facial priors for old and degraded photos.
+OpenAI's Whisper speech recognition, transcribing 99 languages and translating any of them into English. Returns the transcript with per-segment timings, word counts and a ready-made WebVTT subtitle track. Billed per minute of audio, so a whole hour costs about three cents.
 
-You can ask GFPGAN to handle image generation/editing. Powered by TencentARC via the Pixazo API gateway.
+You can ask Whisper to handle image generation/editing. Powered by OpenAI via the Pixazo API gateway.
 
 ---
 
@@ -32,22 +32,26 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| GFPGAN | Image Restore | `gfpgan` / `image-restore-request` |
+| Whisper Large v3 Turbo | Speech to Text | `whisper-large-v3-turbo` / `speech-to-text` |
+| Whisper Tiny English | Speech to Text | `whisper-tiny-en` / `speech-to-text` |
+| Whisper | Speech to Text | `whisper` / `speech-to-text` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/gfpgan/v1/gfpgan/generate`
+- `POST https://gateway.pixazo.ai/whisper-large-v3-turbo/v1/speech-to-text`
+- `POST https://gateway.pixazo.ai/whisper-tiny-en/v1/speech-to-text`
+- `POST https://gateway.pixazo.ai/whisper/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/gfpgan/v1/gfpgan/generate' \
+curl -X POST 'https://gateway.pixazo.ai/whisper-large-v3-turbo/v1/speech-to-text' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png"
+  "audio_url": "https://your-server.com/recording.mp3"
 }'
 ```
 
@@ -56,13 +60,13 @@ curl -X POST 'https://gateway.pixazo.ai/gfpgan/v1/gfpgan/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/gfpgan/v1/gfpgan/generate",
+    "https://gateway.pixazo.ai/whisper-large-v3-turbo/v1/speech-to-text",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png"
+  "audio_url": "https://your-server.com/recording.mp3"
 },
     timeout=300,
 )
@@ -73,14 +77,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/gfpgan/v1/gfpgan/generate', {
+const res = await fetch('https://gateway.pixazo.ai/whisper-large-v3-turbo/v1/speech-to-text', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png"
+  "audio_url": "https://your-server.com/recording.mp3"
 }),
 });
 console.log(await res.json());
@@ -135,13 +139,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/gfpgan.md`
+> **Fetch:** `https://www.pixazo.ai/models/whisper.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gfpgan`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/whisper`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `grok-stt`, `assemblyai`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `grok-stt`, `assemblyai`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

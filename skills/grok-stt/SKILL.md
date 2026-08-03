@@ -1,13 +1,13 @@
 ---
-name: gfpgan
-description: Image generation/editing with GFPGAN API (by TencentARC) via the Pixazo API. TRIGGER when the user mentions "GFPGAN" or "GFPGAN API", or when the user asks to generate / make / create / edit / restyle an image and GFPGAN is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: grok-stt
+description: Image generation/editing with Grok Speech to Text API (by xAI) via the Pixazo API. TRIGGER when the user mentions "Grok Speech to Text" or "Grok Speech to Text API", or when the user asks to generate / make / create / edit / restyle an image and Grok Speech to Text is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# GFPGAN API
+# Grok Speech to Text API
 
-Practical face restoration algorithm leveraging generative facial priors for old and degraded photos.
+xAI's Grok speech-to-text, transcribing 25 languages. Returns the transcript, the detected language and the length of the recording, so you always know what you were billed for. An hour of audio costs ten cents.
 
-You can ask GFPGAN to handle image generation/editing. Powered by TencentARC via the Pixazo API gateway.
+You can ask Grok Speech to Text to handle image generation/editing. Powered by xAI via the Pixazo API gateway.
 
 ---
 
@@ -32,22 +32,22 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| GFPGAN | Image Restore | `gfpgan` / `image-restore-request` |
+| Grok Speech to Text | Speech to Text | `grok-stt` / `speech-to-text` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/gfpgan/v1/gfpgan/generate`
+- `POST https://gateway.pixazo.ai/grok-stt/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/gfpgan/v1/gfpgan/generate' \
+curl -X POST 'https://gateway.pixazo.ai/grok-stt/v1/speech-to-text' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png"
+  "audio_url": "https://your-server.com/recording.mp3"
 }'
 ```
 
@@ -56,13 +56,13 @@ curl -X POST 'https://gateway.pixazo.ai/gfpgan/v1/gfpgan/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/gfpgan/v1/gfpgan/generate",
+    "https://gateway.pixazo.ai/grok-stt/v1/speech-to-text",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png"
+  "audio_url": "https://your-server.com/recording.mp3"
 },
     timeout=300,
 )
@@ -73,14 +73,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/gfpgan/v1/gfpgan/generate', {
+const res = await fetch('https://gateway.pixazo.ai/grok-stt/v1/speech-to-text', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png"
+  "audio_url": "https://your-server.com/recording.mp3"
 }),
 });
 console.log(await res.json());
@@ -135,13 +135,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/gfpgan.md`
+> **Fetch:** `https://www.pixazo.ai/models/grok-stt.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gfpgan`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/grok-stt`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `grok-stt`, `assemblyai`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
