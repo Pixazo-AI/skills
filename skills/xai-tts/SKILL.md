@@ -1,13 +1,13 @@
 ---
 name: xai-tts
-description: Text-to-speech / voice synthesis with Grok TTS API (by xAI) via the Pixazo API. TRIGGER when the user mentions "Grok TTS" or "Grok TTS API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Grok TTS is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+description: Text-to-speech / voice synthesis with Grok Voice API (by xAI) via the Pixazo API. TRIGGER when the user mentions "Grok Voice" or "Grok Voice API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Grok Voice is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# Grok TTS API
+# Grok Voice API
 
-xAI's text-to-speech voice, served through the Pixazo gateway. Five expressive voices with automatic language detection.
+xAI's Grok voice models: text to speech in five expressive voices, and speech to text across 25 languages. Transcription reports the length of the recording alongside the transcript, so you always know what you were billed for.
 
-You can ask Grok TTS to handle text-to-speech / voice synthesis. Powered by xAI via the Pixazo API gateway.
+You can ask Grok Voice to handle text-to-speech / voice synthesis. Powered by xAI via the Pixazo API gateway.
 
 ---
 
@@ -33,28 +33,38 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Grok TTS | Text to Speech | `xai-text-to-speech` / `text-to-speech` |
+| Grok Speech to Text | Speech to Text | `grok-stt` / `speech-to-text` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-_See the full reference for endpoint URLs._
+- `POST https://gateway.pixazo.ai/grok-stt/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
-_The full reference includes ready-to-paste curl, Python, and JavaScript examples for each operation._
+```bash
+curl -X POST 'https://gateway.pixazo.ai/grok-stt/v1/speech-to-text' \
+  -H 'Content-Type: application/json' \
+  -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
+  -d '{
+  "audio_url": "https://your-server.com/recording.mp3"
+}'
+```
 
 **Python**
 
 ```python
 import os, requests
 r = requests.post(
-    "<endpoint>",
+    "https://gateway.pixazo.ai/grok-stt/v1/speech-to-text",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
-    json={},
+    json={
+  "audio_url": "https://your-server.com/recording.mp3"
+},
     timeout=300,
 )
 r.raise_for_status()
@@ -64,13 +74,15 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('<endpoint>', {
+const res = await fetch('https://gateway.pixazo.ai/grok-stt/v1/speech-to-text', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({}),
+  body: JSON.stringify({
+  "audio_url": "https://your-server.com/recording.mp3"
+}),
 });
 console.log(await res.json());
 ```
