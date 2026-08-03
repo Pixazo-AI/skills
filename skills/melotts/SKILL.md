@@ -1,13 +1,13 @@
 ---
-name: vibevoice
-description: Text-to-speech / voice synthesis with VibeVoice TTS API (by Microsoft) via the Pixazo API. TRIGGER when the user mentions "VibeVoice" or "VibeVoice TTS API", or when the user asks to speak / read aloud / convert text to speech / generate voice and VibeVoice is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+name: melotts
+description: Text-to-speech / voice synthesis with MeloTTS API (by MyShell) via the Pixazo API. TRIGGER when the user mentions "MeloTTS" or "MeloTTS API", or when the user asks to speak / read aloud / convert text to speech / generate voice and MeloTTS is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# VibeVoice TTS API
+# MeloTTS API
 
-Text to speech capabilities by Microsoft.
+An open multi-lingual text-to-speech model from MyShell, and by a wide margin the cheapest voice in the catalogue. Billed per minute of audio produced rather than per character.
 
-You can ask VibeVoice to handle text-to-speech / voice synthesis. Powered by Microsoft via the Pixazo API gateway.
+You can ask MeloTTS to handle text-to-speech / voice synthesis. Powered by MyShell via the Pixazo API gateway.
 
 ---
 
@@ -32,29 +32,22 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| VibeVoice v1 | Text to Speech (Voice Cloning) | `vibevoice` / `text-to-speech` |
-| VibeVoice v1 | Text to Speech (Multi-Speaker) | `vibevoice-realtime-0-5b-135` / `vibevoice-realtime-0-5b-request` |
+| MeloTTS | Text to Speech | `melotts` / `text-to-speech` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/vibevoice/v1/vibevoice/generateRequest`
-- `POST https://gateway.pixazo.ai/vibevoice-realtime-0-5b-135/v1/vibevoice-realtime-0-5b-request`
+- `POST https://gateway.pixazo.ai/melotts/v1/text-to-speech`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/vibevoice/v1/vibevoice/generateRequest' \
+curl -X POST 'https://gateway.pixazo.ai/melotts/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "script": "Speaker 0: Hello, this is a test of the VibeVoice API.",
-  "speakers": [
-    {
-      "preset": "Alice [EN]"
-    }
-  ]
+  "text": "Hello from Pixazo. This is a text to speech demo."
 }'
 ```
 
@@ -63,18 +56,13 @@ curl -X POST 'https://gateway.pixazo.ai/vibevoice/v1/vibevoice/generateRequest' 
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/vibevoice/v1/vibevoice/generateRequest",
+    "https://gateway.pixazo.ai/melotts/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "script": "Speaker 0: Hello, this is a test of the VibeVoice API.",
-  "speakers": [
-    {
-      "preset": "Alice [EN]"
-    }
-  ]
+  "text": "Hello from Pixazo. This is a text to speech demo."
 },
     timeout=300,
 )
@@ -85,19 +73,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/vibevoice/v1/vibevoice/generateRequest', {
+const res = await fetch('https://gateway.pixazo.ai/melotts/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "script": "Speaker 0: Hello, this is a test of the VibeVoice API.",
-  "speakers": [
-    {
-      "preset": "Alice [EN]"
-    }
-  ]
+  "text": "Hello from Pixazo. This is a text to speech demo."
 }),
 });
 console.log(await res.json());
@@ -139,13 +122,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/vibevoice.md`
+> **Fetch:** `https://www.pixazo.ai/models/melotts.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/vibevoice`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/melotts`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `xai-tts`, `lux-tts`, `tada`, `melotts`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `xai-tts`, `lux-tts`, `tada`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
