@@ -1,13 +1,13 @@
 ---
 name: minimax
-description: Music/audio generation with MiniMax AI API (by MiniMax) via the Pixazo API. TRIGGER when the user mentions "Minimax" or "MiniMax AI API", or when the user asks to generate / make music / a song / a beat / audio track and Minimax is named or implied. DO NOT TRIGGER for image / video / voice / 3d / try-on — each has its own skill.
+description: Video generation with MiniMax AI API (by MiniMax) via the Pixazo API. TRIGGER when the user mentions "MiniMax" or "MiniMax AI API", or when the user asks to generate / make / create a video / clip / animation and MiniMax is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # MiniMax AI API
 
-Comprehensive multimodal AI generation for video, image, and audio by MiniMax.
+Comprehensive multimodal AI generation by MiniMax: Hailuo video (H3 and 2.3), music, speech, and voice design, all on one unified API.
 
-You can ask Minimax to handle music/audio generation. Powered by MiniMax via the Pixazo API gateway.
+You can ask MiniMax to handle video generation. Powered by MiniMax via the Pixazo API gateway.
 
 ---
 
@@ -32,30 +32,39 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| MiniMax Music 2.6 | Text to Music | `minimax-music-generation-2-6` / `get-music` |
+| MiniMax H3 | Text to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-text-to-video-request` |
+| MiniMax H3 | Image to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-image-to-video-request` |
+| MiniMax H3 | Last Frame to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-last-frame-to-video-request` |
+| MiniMax H3 | Start and End Frame to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-start-end-to-video-request` |
+| MiniMax H3 | Reference to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-reference-to-video-request` |
 | MiniMax Speech 2.8 HD | Text to Speech | `minimax-speech-2-8-hd` / `minimax-speech-2-8-hd-request` |
-| MiniMax Voice Design v1 | Text to Speech | `minimax-voice-design-api-363` / `minimax-voice-design-api-request` |
-| MiniMax Image 01 | Image to Image (Image Editing) | `minimax-image-generation` / `image-to-image` |
-| MiniMax Image 01 | Text to Image | `minimax-image-generation` / `text-to-image` |
 | MiniMax Speech 2.8 Turbo | Text to Speech | `minimax-speech-2-8-turbo` / `text-to-speech` |
+| MiniMax Voice Design v1 | Text to Speech | `minimax-voice-design-api-363` / `minimax-voice-design-api-request` |
+| MiniMax Hailuo 2.3 | Image to Video | `minimax-hailuo-ai` / `generate-image-to-video-request` |
+| MiniMax Hailuo 2.3 | Text to Video | `minimax-hailuo-ai` / `generate-video-request` |
+| MiniMax Music 2.6 | Text to Music | `minimax-music-generation-2-6` / `get-music` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/image-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/last-frame-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/start-end-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/reference-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-ai/v1/imageToVideo`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-ai/v1/generate`
 - `POST https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/generate`
-- `POST https://gateway.pixazo.ai/image-generation/v1/i2i`
-- `POST https://gateway.pixazo.ai/image-generation/v1/t2i`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/generate' \
+curl -X POST 'https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "calm lo-fi hip hop with mellow piano",
-  "is_instrumental": true
+  "prompt": "A lone lighthouse on a cliff at dusk, the beam sweeping through heavy fog as waves break below. Slow push-in. Audio: wind, surf, a distant foghorn."
 }'
 ```
 
@@ -64,14 +73,13 @@ curl -X POST 'https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/generate
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/generate",
+    "https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "calm lo-fi hip hop with mellow piano",
-  "is_instrumental": true
+  "prompt": "A lone lighthouse on a cliff at dusk, the beam sweeping through heavy fog as waves break below. Slow push-in. Audio: wind, surf, a distant foghorn."
 },
     timeout=300,
 )
@@ -82,15 +90,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/generate', {
+const res = await fetch('https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "calm lo-fi hip hop with mellow piano",
-  "is_instrumental": true
+  "prompt": "A lone lighthouse on a cliff at dusk, the beam sweeping through heavy fog as waves break below. Slow push-in. Audio: wind, surf, a distant foghorn."
 }),
 });
 console.log(await res.json());
@@ -98,7 +105,7 @@ console.log(await res.json());
 
 ### Step 4 — Poll until ready, then show the user
 
-Music generation is **asynchronous**. The first response returns a `task_id` (or `request_id`). Then poll a status endpoint until the music is ready.
+Video generation is **asynchronous**. The first response returns a `task_id` (or `request_id`). Then poll a status endpoint until the video is ready.
 
 Typical loop:
 
@@ -109,12 +116,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/generate", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/minimax-hailuo-h3/v2/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -165,5 +172,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other music/audio generation models:** `tracks`, `ace-step`, `lyria`, `mmaudio`, `stable-audio`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `mochi`, `veed`, `vidu`, `wan`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
