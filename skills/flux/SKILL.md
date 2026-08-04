@@ -49,6 +49,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Flux Pro | Text to Image | `flux-pro` / `text-to-image` |
 | Flux Dev | Image to Image (Image Editing) | `flux-dev` / `image-to-image` |
 | Flux Dev | Text to Image | `flux-dev` / `text-to-image` |
+| Flux Dev | Text to Image (LoRA Trainer) | `flux-lora-fast-training` / `train` |
 | Flux Fill Dev | Image to Image (Image Editing — Inpainting) | `flux-fill-dev` / `image-generation-request` |
 
 ### Step 3 — Make the API call
@@ -73,6 +74,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/flux-pro/v1/pro/textToImage`
 - `POST https://gateway.pixazo.ai/flux-dev/v1/dev/imageToImage`
 - `POST https://gateway.pixazo.ai/flux-dev/v1/dev/textToImage`
+- `POST https://gateway.pixazo.ai/flux-lora-fast-training/v1/train`
 - `POST https://gateway.pixazo.ai/flux-fill-dev/v1/flux-fill/generate`
 
 **Sample request (primary operation)**
