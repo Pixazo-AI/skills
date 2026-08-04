@@ -1,13 +1,13 @@
 ---
 name: whisper
-description: Image generation/editing with Whisper API (by OpenAI) via the Pixazo API. TRIGGER when the user mentions "Whisper" or "Whisper API", or when the user asks to generate / make / create / edit / restyle an image and Whisper is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+description: Image generation/editing with OpenAI Speech to Text API (by OpenAI) via the Pixazo API. TRIGGER when the user mentions "OpenAI Speech to Text" or "OpenAI Speech to Text API", or when the user asks to generate / make / create / edit / restyle an image and OpenAI Speech to Text is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Whisper API
+# OpenAI Speech to Text API
 
-OpenAI's Whisper speech recognition, transcribing 99 languages and translating any of them into English. Returns the transcript with per-segment timings, word counts and a ready-made WebVTT subtitle track. Billed per minute of audio, so a whole hour costs about three cents.
+OpenAI's speech recognition on the gateway: Whisper in three sizes, transcribing 99 languages with word timings and subtitles, plus GPT-4o Transcribe for the highest accuracy. Billed per minute of audio.
 
-You can ask Whisper to handle image generation/editing. Powered by OpenAI via the Pixazo API gateway.
+You can ask OpenAI Speech to Text to handle image generation/editing. Powered by OpenAI via the Pixazo API gateway.
 
 ---
 
@@ -35,6 +35,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Whisper Large v3 Turbo | Speech to Text | `whisper-large-v3-turbo` / `speech-to-text` |
 | Whisper Tiny English | Speech to Text | `whisper-tiny-en` / `speech-to-text` |
 | Whisper | Speech to Text | `whisper` / `speech-to-text` |
+| GPT-4o Transcribe | Speech to Text | `gpt-4o-transcribe` / `speech-to-text` |
 
 ### Step 3 — Make the API call
 
@@ -43,6 +44,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/whisper-large-v3-turbo/v1/speech-to-text`
 - `POST https://gateway.pixazo.ai/whisper-tiny-en/v1/speech-to-text`
 - `POST https://gateway.pixazo.ai/whisper/v1/speech-to-text`
+- `POST https://gateway.pixazo.ai/gpt-4o-transcribe/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
