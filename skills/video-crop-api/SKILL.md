@@ -1,13 +1,13 @@
 ---
-name: grok-imagine-image
-description: Image generation/editing with Grok Imagine Image API (by xAI) via the Pixazo API. TRIGGER when the user mentions "Grok Imagine Image" or "Grok Imagine Image API", or when the user asks to generate / make / create / edit / restyle an image and Grok Imagine Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: video-crop-api
+description: Image generation/editing with Video Crop API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video Crop" or "Video Crop API", or when the user asks to generate / make / create / edit / restyle an image and Video Crop is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Grok Imagine Image API
+# Video Crop API
 
-Image generation and editing by xAI.
+Crop a video to an aspect ratio or an exact box. Pass aspect_ratio like "9:16" for Reels, Shorts and TikTok and the frame is centre-cropped without distorting the picture — the subject stays the right shape, it is not squeezed. Or give width and height (with optional x and y) for an exact box. Pass a video_url, poll the request, then download the MP4.
 
-You can ask Grok Imagine Image to handle image generation/editing. Powered by xAI via the Pixazo API gateway.
+You can ask Video Crop to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,28 +32,23 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Grok Imagine Image | Text to Image | `grok-imagine-pro-text-to-image-quality` / `grok-imagine-pro-text-to-image-quality-request` |
-| Grok Imagine Image | Image to Image (Image Editing) | `grok-imagine-pro-edit-quality` / `grok-imagine-pro-edit-quality-request` |
+| Video Crop 1.0 | Crop | `media-crop` / `media-crop-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request`
-- `POST https://gateway.pixazo.ai/grok-imagine-pro-edit-quality/v1/grok-imagine-pro-edit-quality-request`
+- `POST https://gateway.pixazo.ai/media-tools/v1/crop`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request' \
+curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/crop' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
-  "num_images": 1,
-  "aspect_ratio": "1:1",
-  "resolution": "1k",
-  "output_format": "jpeg"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "aspect_ratio": "9:16"
 }'
 ```
 
@@ -62,17 +57,14 @@ curl -X POST 'https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request",
+    "https://gateway.pixazo.ai/media-tools/v1/crop",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
-  "num_images": 1,
-  "aspect_ratio": "1:1",
-  "resolution": "1k",
-  "output_format": "jpeg"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "aspect_ratio": "9:16"
 },
     timeout=300,
 )
@@ -83,18 +75,15 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request', {
+const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/crop', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
-  "num_images": 1,
-  "aspect_ratio": "1:1",
-  "resolution": "1k",
-  "output_format": "jpeg"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "aspect_ratio": "9:16"
 }),
 });
 console.log(await res.json());
@@ -149,13 +138,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/grok-imagine-image.md`
+> **Fetch:** `https://www.pixazo.ai/models/video-crop-api.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/grok-imagine-image`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-crop-api`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
