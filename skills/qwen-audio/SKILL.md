@@ -38,10 +38,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Qwen 3.0 ASR Flash | Speech to Text | `qwen3-asr-flash` / `qwen3-asr-flash-request` |
 | Qwen 3.0 ASR Flash Filetrans | Speech to Text (Long-form) | `qwen3-asr-flash-filetrans` / `qwen3-asr-flash-filetrans-request` |
 | Qwen 3.0 ASR Flash Realtime | Speech to Text (Streaming) | `qwen3-asr-flash-realtime` / `qwen3-asr-flash-realtime-request` |
-| Qwen 3 TTS 0.6B | Text to Speech | `qwen-3-tts-text-to-speech-0-6b` / `text-to-speech` |
-| Qwen 3 TTS Voice Design | Voice Design | `qwen-3-tts-voice-design-1-7b` / `text-to-speech` |
-| Qwen 3 TTS Clone Voice 0.6B | Voice Cloning | `qwen-3-tts-clone-voice-0-6b` / `text-to-speech` |
-| Qwen 3 TTS Clone Voice 1.7B | Voice Cloning | `qwen-3-tts-clone-voice-1-7b` / `text-to-speech` |
+| Qwen 3 TTS 0.6B | Text to Speech | `qwen-3-tts-text-to-speech-0-6b` / `qwen-3-tts-text-to-speech-0-6b-request` |
+| Qwen 3 TTS Voice Design | Voice Design | `qwen-3-tts-voice-design-1-7b` / `qwen-3-tts-voice-design-1-7b-request` |
+| Qwen 3 TTS Clone Voice 0.6B | Voice Cloning | `qwen-3-tts-clone-voice-0-6b` / `qwen-3-tts-clone-voice-0-6b-request` |
+| Qwen 3 TTS Clone Voice 1.7B | Voice Cloning | `qwen-3-tts-clone-voice-1-7b` / `qwen-3-tts-clone-voice-1-7b-request` |
 
 ### Step 3 — Make the API call
 
@@ -52,6 +52,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/qwen3-tts-1-7b-api-401/v1/qwen3-tts-1-7b-api-request-result`
 - `POST https://gateway.pixazo.ai/qwen3-asr-flash/v1/speech-to-text`
 - `POST https://gateway.pixazo.ai/qwen3-asr-flash-filetrans/v1/speech-to-text`
+- `POST https://gateway.pixazo.ai/qwen-3-tts-text-to-speech-0-6b/v1/qwen-3-tts-text-to-speech-0-6b-request`
+- `POST https://gateway.pixazo.ai/qwen-3-tts-voice-design-1-7b/v1/qwen-3-tts-voice-design-1-7b-request`
+- `POST https://gateway.pixazo.ai/qwen-3-tts-clone-voice-0-6b/v1/qwen-3-tts-clone-voice-0-6b-request`
+- `POST https://gateway.pixazo.ai/qwen-3-tts-clone-voice-1-7b/v1/qwen-3-tts-clone-voice-1-7b-request`
 
 **Sample request (primary operation)**
 

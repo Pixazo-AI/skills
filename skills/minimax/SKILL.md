@@ -38,7 +38,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | MiniMax H3 | Start and End Frame to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-start-end-to-video-request` |
 | MiniMax H3 | Reference to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-reference-to-video-request` |
 | MiniMax Speech 2.8 HD | Text to Speech | `minimax-speech-2-8-hd` / `minimax-speech-2-8-hd-request` |
-| MiniMax Speech 2.8 Turbo | Text to Speech | `minimax-speech-2-8-turbo` / `text-to-speech` |
+| MiniMax Speech 2.8 Turbo | Text to Speech | `minimax-speech-2-8-turbo` / `minimax-speech-2-8-turbo-request` |
 | MiniMax Voice Design v1 | Text to Speech | `minimax-voice-design-api-363` / `minimax-voice-design-api-request` |
 | MiniMax Hailuo 2.3 | Image to Video | `minimax-hailuo-ai` / `generate-image-to-video-request` |
 | MiniMax Hailuo 2.3 | Text to Video | `minimax-hailuo-ai` / `generate-video-request` |
@@ -53,6 +53,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/last-frame-to-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/start-end-to-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/reference-to-video`
+- `POST https://gateway.pixazo.ai/minimax-speech-2-8-turbo/v1/minimax-speech-2-8-turbo-request`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-ai/v1/imageToVideo`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-ai/v1/generate`
 - `POST https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/generate`
