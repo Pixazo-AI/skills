@@ -32,8 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| MAI Image 2.5 Pro | Text to Image | `microsoft-mai-image-2-5-pro` / `microsoft-mai-image-2-5-pro-request` |
-| MAI Image 2.5 Pro | Image to Image (Image Editing) | `microsoft-mai-image-2-5-pro-edit` / `microsoft-mai-image-2-5-pro-edit-request` |
+| MAI Image 2.5 Pro | Text to Image | `microsoft-mai-image-2-5-pro` / `text-to-image` |
+| MAI Image 2.5 Pro | Image to Image (Image Editing) | `microsoft-mai-image-2-5-pro` / `image-to-image-editing` |
 | MAI Image 2.5 | Text to Image | `microsoft-mai-image-2-5` / `microsoft-mai-image-2-5-request` |
 | MAI Image 2.5 | Image to Image (Image Editing) | `microsoft-mai-image-2-5-edit` / `microsoft-mai-image-2-5-edit-request` |
 
@@ -41,15 +41,15 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/microsoft-mai-image-2-5-pro/v1/microsoft-mai-image-2-5-pro-request`
-- `POST https://gateway.pixazo.ai/microsoft-mai-image-2-5-pro-edit/v1/microsoft-mai-image-2-5-pro-edit-request`
+- `POST https://gateway.pixazo.ai/microsoft-mai-image-2-5-pro/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/microsoft-mai-image-2-5-pro/v1/image-to-image/editing`
 - `POST https://gateway.pixazo.ai/microsoft-mai-image-2-5/v1/microsoft-mai-image-2-5-request`
 - `POST https://gateway.pixazo.ai/microsoft-mai-image-2-5-edit/v1/microsoft-mai-image-2-5-edit-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/microsoft-mai-image-2-5-pro/v1/microsoft-mai-image-2-5-pro-request' \
+curl -X POST 'https://gateway.pixazo.ai/microsoft-mai-image-2-5-pro/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -66,7 +66,7 @@ curl -X POST 'https://gateway.pixazo.ai/microsoft-mai-image-2-5-pro/v1/microsoft
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/microsoft-mai-image-2-5-pro/v1/microsoft-mai-image-2-5-pro-request",
+    "https://gateway.pixazo.ai/microsoft-mai-image-2-5-pro/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -87,7 +87,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/microsoft-mai-image-2-5-pro/v1/microsoft-mai-image-2-5-pro-request', {
+const res = await fetch('https://gateway.pixazo.ai/microsoft-mai-image-2-5-pro/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,

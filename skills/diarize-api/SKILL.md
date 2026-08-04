@@ -47,7 +47,7 @@ curl -X POST 'https://gateway.pixazo.ai/audio-tools/v1/diarize' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "audio_url": "https://media.pixazo.ai/cma/example.mp4"
+  "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3"
 }'
 ```
 
@@ -62,7 +62,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "audio_url": "https://media.pixazo.ai/cma/example.mp4"
+  "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3"
 },
     timeout=300,
 )
@@ -80,7 +80,7 @@ const res = await fetch('https://gateway.pixazo.ai/audio-tools/v1/diarize', {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "audio_url": "https://media.pixazo.ai/cma/example.mp4"
+  "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3"
 }),
 });
 console.log(await res.json());
