@@ -1,13 +1,13 @@
 ---
-name: seedream
-description: Image generation/editing with Seedream 5 AI API (by BytePlus) via the Pixazo API. TRIGGER when the user mentions "Seedream 5" or "Seedream 5 AI API", or when the user asks to generate / make / create / edit / restyle an image and Seedream 5 is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: video-convert-api
+description: Image generation/editing with Video Convert API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video Convert" or "Video Convert API", or when the user asks to generate / make / create / edit / restyle an image and Video Convert is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Seedream 5 AI API
+# Video Convert API
 
-Advanced image generation and editing by ByteDance.
+Convert any video to MP4 (H.264/AAC) through one call. The source format is identified by file content, not by the file extension, so MOV, AVI, WMV, MKV, FLV, MTS, 3GP and WebM all work — and a file with the wrong extension still converts correctly. Pass a video_url, poll the request, then download the MP4. Output is written with +faststart so it begins playing before it has fully downloaded.
 
-You can ask Seedream 5 to handle image generation/editing. Powered by BytePlus via the Pixazo API gateway.
+You can ask Video Convert to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,38 +32,22 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Seedream 5 Pro | Image to Image (Image Editing) | `seedream-5-pro` / `edit-image` |
-| Seedream 5 Pro | Text to Image | `seedream-5-pro` / `text-to-image` |
-| Seedream 5 Lite | Image to Image (Image Editing) | `seedream-5-lite` / `edit-image` |
-| Seedream 5 Lite | Text to Image | `seedream-5-lite` / `text-to-image` |
-| Seedream 4.5 | Image to Image (Image Editing) | `bytedance-text-to-image` / `edit-image` |
-| Seedream 4.5 | Text to Image | `bytedance-text-to-image` / `text-to-image` |
-| Seedream 4 | Image to Image (Image Editing — Multi-Ref) | `bytedance-text-to-image` / `edit-multi-image` |
+| Video Convert 1.0 | Convert | `media-convert` / `media-convert-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/seedream-5-pro/v1/edit-image`
-- `POST https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image`
-- `POST https://gateway.pixazo.ai/seedream-5-lite/v1/edit-image`
-- `POST https://gateway.pixazo.ai/seedream-5-lite/v1/text-to-image`
-- `POST https://gateway.pixazo.ai/byteplus/v1/getEditImage`
-- `POST https://gateway.pixazo.ai/byteplus/v1/getTextToImage`
-- `POST https://gateway.pixazo.ai/byteplus/v1/getEditMultiImage`
+- `POST https://gateway.pixazo.ai/media-tools/v1/convert`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image' \
+curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/convert' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "add sunglasses to the cat",
-  "image": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/byteplus/1757499948018-hntkjsg9kj.jpg"
-  ],
-  "size": "2K"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov"
 }'
 ```
 
@@ -72,17 +56,13 @@ curl -X POST 'https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image",
+    "https://gateway.pixazo.ai/media-tools/v1/convert",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "add sunglasses to the cat",
-  "image": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/byteplus/1757499948018-hntkjsg9kj.jpg"
-  ],
-  "size": "2K"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov"
 },
     timeout=300,
 )
@@ -93,18 +73,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image', {
+const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/convert', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "add sunglasses to the cat",
-  "image": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/byteplus/1757499948018-hntkjsg9kj.jpg"
-  ],
-  "size": "2K"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov"
 }),
 });
 console.log(await res.json());
@@ -159,13 +135,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/seedream.md`
+> **Fetch:** `https://www.pixazo.ai/models/video-convert-api.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/seedream`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-convert-api`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
