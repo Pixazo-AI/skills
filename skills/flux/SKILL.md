@@ -5,7 +5,7 @@ description: Virtual try-on with Flux API (by Black Forest Labs) via the Pixazo 
 
 # Flux API
 
-Flux is a state-of-the-art text-to-image model that generates high-quality images from text descriptions.
+Flux from Black Forest Labs — state-of-the-art image generation, plus FLUX.3 Video for text-to-video, image-to-video and video continuation with synchronised audio.
 
 You can ask Flux to handle virtual try-on. Powered by Black Forest Labs via the Pixazo API gateway.
 
@@ -32,6 +32,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| FLUX 3 Video | Text to Video | `flux-3-video-text-to-video` / `text-to-video` |
+| FLUX 3 Video | Image to Video | `flux-3-video-image-to-video` / `image-to-video` |
+| FLUX 3 Video | Video to Video | `flux-3-video-video-to-video` / `video-to-video` |
 | FLUX 2 Max | Text to Image | `flux-2-max` / `flux-2-max-request` |
 | FLUX 2 Max | Image to Image (Image Editing) | `flux-2-max-edit` / `flux-2-max-edit-request` |
 | Flux Pro VTO | Image to Image (Virtual Try On) | `flux-pro-v1-virtual-try-on` / `flux-pro-v1-virtual-try-on-request` |
@@ -56,6 +59,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/flux-3-video/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/flux-3-video/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/flux-3-video/v1/video-to-video`
 - `POST https://gateway.pixazo.ai/flux-2-max/v1/flux-2-max-request`
 - `POST https://gateway.pixazo.ai/flux-2-max-edit/v1/flux-2-max-edit-request`
 - `POST https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1/flux-pro-v1-virtual-try-on-request`
@@ -84,12 +90,9 @@ curl -X POST 'https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1/flux-pro-v
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "An intricate fantasy castle on a floating island at dusk, volumetric lighting, photoreal",
-  "image_size": "landscape_4_3",
-  "safety_tolerance": "2",
-  "enable_safety_checker": true,
-  "output_format": "jpeg",
-  "sync_mode": false
+  "prompt": "A cozy ramen shop on a rainy Tokyo night, steam rising from the broth. Rain patter and quiet kitchen sounds.",
+  "resolution": "hd",
+  "duration": 5
 }'
 ```
 
@@ -104,12 +107,9 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "An intricate fantasy castle on a floating island at dusk, volumetric lighting, photoreal",
-  "image_size": "landscape_4_3",
-  "safety_tolerance": "2",
-  "enable_safety_checker": true,
-  "output_format": "jpeg",
-  "sync_mode": false
+  "prompt": "A cozy ramen shop on a rainy Tokyo night, steam rising from the broth. Rain patter and quiet kitchen sounds.",
+  "resolution": "hd",
+  "duration": 5
 },
     timeout=300,
 )
@@ -127,12 +127,9 @@ const res = await fetch('https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "An intricate fantasy castle on a floating island at dusk, volumetric lighting, photoreal",
-  "image_size": "landscape_4_3",
-  "safety_tolerance": "2",
-  "enable_safety_checker": true,
-  "output_format": "jpeg",
-  "sync_mode": false
+  "prompt": "A cozy ramen shop on a rainy Tokyo night, steam rising from the broth. Rain patter and quiet kitchen sounds.",
+  "resolution": "hd",
+  "duration": 5
 }),
 });
 console.log(await res.json());
