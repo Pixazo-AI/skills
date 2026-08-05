@@ -1,13 +1,13 @@
 ---
-name: mirelo
-description: Image generation/editing with Mirelo SFX API (by Mirelo AI) via the Pixazo API. TRIGGER when the user mentions "Mirelo SFX" or "Mirelo SFX API", or when the user asks to generate / make / create / edit / restyle an image and Mirelo SFX is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: video-merge-api
+description: Image generation/editing with Video Merge API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video Merge" or "Video Merge API", or when the user asks to generate / make / create / edit / restyle an image and Video Merge is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Mirelo SFX API
+# Video Merge API
 
-Mirelo SFX generates ambient audio and sound effects from video input, producing synchronized soundscapes that match visual content.
+Join 2 to 6 clips into one video in a single call. Clips are concatenated in the order you send them; when they already share a codec and size the API stream-copies them, which assembles a long timeline in seconds instead of re-encoding it. Mixed sources are normalised to a common format first. MP4/MOV inputs, 150 seconds of combined source.
 
-You can ask Mirelo SFX to handle image generation/editing. Powered by Mirelo AI via the Pixazo API gateway.
+You can ask Video Merge to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,31 +32,25 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Mirelo SFX 1.6 | Text to Audio | `mirelo-sfx-1-6-text-to-audio` / `mirelo-sfx-1-6-text-to-audio-request` |
-| Mirelo SFX 1.6 | Video to Video | `mirelo-sfx-1-6-video-to-video` / `mirelo-sfx-1-6-video-to-video-request` |
-| Mirelo SFX 1.0 | Video to Audio | `mirelo-sfx-video-to-audio` / `mirelo-sfx-video-to-audio-request` |
+| Video Merge 1.0 | Merge | `media-merge` / `media-merge-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request`
-- `POST https://gateway.pixazo.ai/mirelo-sfx-1-6-video-to-video/v1/mirelo-sfx-1-6-video-to-video-request`
-- `POST https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-video-to-audio-request`
+- `POST https://gateway.pixazo.ai/media-tools/v1/video-merge`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request' \
+curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-merge' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "text_prompt": "Rainforest ambience with distant birds and rustling leaves",
-  "duration": 10,
-  "ambience": false,
-  "double_output": false,
-  "num_samples": 1,
-  "upload_audio_format": "wav"
+  "video_urls": [
+    "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "https://api-assets.pixazo.ai/media-api-test/t.mov"
+  ]
 }'
 ```
 
@@ -65,18 +59,16 @@ curl -X POST 'https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-s
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request",
+    "https://gateway.pixazo.ai/media-tools/v1/video-merge",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "text_prompt": "Rainforest ambience with distant birds and rustling leaves",
-  "duration": 10,
-  "ambience": false,
-  "double_output": false,
-  "num_samples": 1,
-  "upload_audio_format": "wav"
+  "video_urls": [
+    "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "https://api-assets.pixazo.ai/media-api-test/t.mov"
+  ]
 },
     timeout=300,
 )
@@ -87,19 +79,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request', {
+const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-merge', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "text_prompt": "Rainforest ambience with distant birds and rustling leaves",
-  "duration": 10,
-  "ambience": false,
-  "double_output": false,
-  "num_samples": 1,
-  "upload_audio_format": "wav"
+  "video_urls": [
+    "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "https://api-assets.pixazo.ai/media-api-test/t.mov"
+  ]
 }),
 });
 console.log(await res.json());
@@ -154,13 +144,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/mirelo.md`
+> **Fetch:** `https://www.pixazo.ai/models/video-merge-api.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/mirelo`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-merge-api`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
