@@ -33,7 +33,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | FLUX 3 Video | Text to Video | `flux-3-video-text-to-video` / `text-to-video` |
-| FLUX 3 Video | Image to Video | `flux-3-video-image-to-video` / `image-to-video` |
+| FLUX 3 Video | Keyframes to Video | `flux-3-video-image-to-video` / `keyframes-to-video` |
 | FLUX 3 Video | Video to Video | `flux-3-video-video-to-video` / `video-to-video` |
 | FLUX 2 Max | Text to Image | `flux-2-max` / `flux-2-max-request` |
 | FLUX 2 Max | Image to Image (Image Editing) | `flux-2-max-edit` / `flux-2-max-edit-request` |
@@ -60,7 +60,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/flux-3-video/v1/text-to-video`
-- `POST https://gateway.pixazo.ai/flux-3-video/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/flux-3-video/v1/keyframes-to-video`
 - `POST https://gateway.pixazo.ai/flux-3-video/v1/video-to-video`
 - `POST https://gateway.pixazo.ai/flux-2-max/v1/flux-2-max-request`
 - `POST https://gateway.pixazo.ai/flux-2-max-edit/v1/flux-2-max-edit-request`
