@@ -1,13 +1,13 @@
 ---
-name: video-trim-api
-description: Image generation/editing with Video Trim API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video Trim" or "Video Trim API", or when the user asks to generate / make / create / edit / restyle an image and Video Trim is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: video-cut-api
+description: Image generation/editing with Video Cut API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video Cut" or "Video Cut API", or when the user asks to generate / make / create / edit / restyle an image and Video Cut is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Video Trim API
+# Video Cut API
 
-Cut a video down to the part you actually want by start and end time. Give a start_seconds with either an end_seconds or a duration_seconds and you get back just that span, re-encoded to clean H.264/AAC so the cut lands exactly where you asked rather than snapping to the nearest keyframe. Clips up to 120 seconds.
+Cut a clip out of a video by timestamp. Give a start_seconds with either an end_seconds or a duration_seconds and you get back just that section, re-encoded to clean H.264/AAC so the cut lands exactly where you asked rather than snapping to the nearest keyframe. Clips up to 120 seconds.
 
-You can ask Video Trim to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
+You can ask Video Cut to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,18 +32,18 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Video Trim 1.0 | Trim | `media-trim` / `media-trim-request` |
+| Video Cut 1.0 | Cut | `media-cut` / `media-cut-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/media-tools/v1/video-trim`
+- `POST https://gateway.pixazo.ai/media-tools/v1/video-cut`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-trim' \
+curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-cut' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -58,7 +58,7 @@ curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-trim' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/media-tools/v1/video-trim",
+    "https://gateway.pixazo.ai/media-tools/v1/video-cut",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-trim', {
+const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-cut', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -141,13 +141,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/video-trim-api.md`
+> **Fetch:** `https://www.pixazo.ai/models/video-cut-api.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-trim-api`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-cut-api`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-cut-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
