@@ -1,13 +1,13 @@
 ---
-name: longcat-image
-description: Image generation/editing with LongCat Image API (by LongCat) via the Pixazo API. TRIGGER when the user mentions "LongCat Image" or "LongCat Image API", or when the user asks to generate / make / create / edit / restyle an image and LongCat Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: video-trim-api
+description: Image generation/editing with Video Trim API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video Trim" or "Video Trim API", or when the user asks to generate / make / create / edit / restyle an image and Video Trim is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# LongCat Image API
+# Video Trim API
 
-Image generation capabilities.
+Cut a video down to the part you actually want by start and end time. Give a start_seconds with either an end_seconds or a duration_seconds and you get back just that span, re-encoded to clean H.264/AAC so the cut lands exactly where you asked rather than snapping to the nearest keyframe. Clips up to 120 seconds.
 
-You can ask LongCat Image to handle image generation/editing. Powered by LongCat via the Pixazo API gateway.
+You can ask Video Trim to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,29 +32,24 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| LongCat v1 | Text to Image | `longcat-image-498` / `longcat-image-request` |
+| Video Trim 1.0 | Trim | `media-trim` / `media-trim-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/longcat-image-498/v1/longcat-image-request`
+- `POST https://gateway.pixazo.ai/media-tools/v1/video-trim`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/longcat-image-498/v1/longcat-image-request' \
+curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-trim' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A lioness crouching in the tall dry grass of the Serengeti during golden hour, intense gaze, telephoto lens with shallow depth of field",
-  "image_size": "landscape_4_3",
-  "num_inference_steps": 28,
-  "guidance_scale": 4.5,
-  "num_images": 1,
-  "enable_safety_checker": true,
-  "output_format": "png",
-  "acceleration": "regular"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "start_seconds": 5,
+    "end_seconds": 12
 }'
 ```
 
@@ -63,20 +58,15 @@ curl -X POST 'https://gateway.pixazo.ai/longcat-image-498/v1/longcat-image-reque
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/longcat-image-498/v1/longcat-image-request",
+    "https://gateway.pixazo.ai/media-tools/v1/video-trim",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A lioness crouching in the tall dry grass of the Serengeti during golden hour, intense gaze, telephoto lens with shallow depth of field",
-  "image_size": "landscape_4_3",
-  "num_inference_steps": 28,
-  "guidance_scale": 4.5,
-  "num_images": 1,
-  "enable_safety_checker": true,
-  "output_format": "png",
-  "acceleration": "regular"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "start_seconds": 5,
+    "end_seconds": 12
 },
     timeout=300,
 )
@@ -87,21 +77,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/longcat-image-498/v1/longcat-image-request', {
+const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-trim', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A lioness crouching in the tall dry grass of the Serengeti during golden hour, intense gaze, telephoto lens with shallow depth of field",
-  "image_size": "landscape_4_3",
-  "num_inference_steps": 28,
-  "guidance_scale": 4.5,
-  "num_images": 1,
-  "enable_safety_checker": true,
-  "output_format": "png",
-  "acceleration": "regular"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "start_seconds": 5,
+    "end_seconds": 12
 }),
 });
 console.log(await res.json());
@@ -156,13 +141,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/longcat-image.md`
+> **Fetch:** `https://www.pixazo.ai/models/video-trim-api.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/longcat-image`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-trim-api`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
