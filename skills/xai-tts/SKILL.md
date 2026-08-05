@@ -39,16 +39,19 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/xai-text-to-speech/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/grok-stt/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/grok-stt/v1/speech-to-text' \
+curl -X POST 'https://gateway.pixazo.ai/xai-text-to-speech/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "audio_url": "https://your-server.com/recording.mp3"
+  "text": "Welcome to the future of artificial intelligence and creative expression",
+  "voice": "eve",
+  "language": "auto"
 }'
 ```
 
@@ -57,13 +60,15 @@ curl -X POST 'https://gateway.pixazo.ai/grok-stt/v1/speech-to-text' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/grok-stt/v1/speech-to-text",
+    "https://gateway.pixazo.ai/xai-text-to-speech/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "audio_url": "https://your-server.com/recording.mp3"
+  "text": "Welcome to the future of artificial intelligence and creative expression",
+  "voice": "eve",
+  "language": "auto"
 },
     timeout=300,
 )
@@ -74,14 +79,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/grok-stt/v1/speech-to-text', {
+const res = await fetch('https://gateway.pixazo.ai/xai-text-to-speech/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "audio_url": "https://your-server.com/recording.mp3"
+  "text": "Welcome to the future of artificial intelligence and creative expression",
+  "voice": "eve",
+  "language": "auto"
 }),
 });
 console.log(await res.json());

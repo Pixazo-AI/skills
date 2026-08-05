@@ -38,23 +38,34 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
-_See the full reference for endpoint URLs._
+- `POST https://gateway.pixazo.ai/lux-tts/v1/text-to-speech`
 
 **Sample request (primary operation)**
 
-_The full reference includes ready-to-paste curl, Python, and JavaScript examples for each operation._
+```bash
+curl -X POST 'https://gateway.pixazo.ai/lux-tts/v1/text-to-speech' \
+  -H 'Content-Type: application/json' \
+  -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
+  -d '{
+  "prompt": "The conference room fell silent as the CEO unveiled the company strategy for the upcoming quarter.",
+  "audio_url": "https://imagesai.appypie.com/7686410/PIfjzAzc6uUHRNgMR3OY_017731469601133.mp3"
+}'
+```
 
 **Python**
 
 ```python
 import os, requests
 r = requests.post(
-    "<endpoint>",
+    "https://gateway.pixazo.ai/lux-tts/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
-    json={},
+    json={
+  "prompt": "The conference room fell silent as the CEO unveiled the company strategy for the upcoming quarter.",
+  "audio_url": "https://imagesai.appypie.com/7686410/PIfjzAzc6uUHRNgMR3OY_017731469601133.mp3"
+},
     timeout=300,
 )
 r.raise_for_status()
@@ -64,13 +75,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('<endpoint>', {
+const res = await fetch('https://gateway.pixazo.ai/lux-tts/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({}),
+  body: JSON.stringify({
+  "prompt": "The conference room fell silent as the CEO unveiled the company strategy for the upcoming quarter.",
+  "audio_url": "https://imagesai.appypie.com/7686410/PIfjzAzc6uUHRNgMR3OY_017731469601133.mp3"
+}),
 });
 console.log(await res.json());
 ```
