@@ -1,13 +1,13 @@
 ---
-name: genflare
-description: Video generation with Genflare AI API (by Baidu) via the Pixazo API. TRIGGER when the user mentions "GenFlare" or "Genflare AI API", or when the user asks to generate / make / create a video / clip / animation and GenFlare is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+name: flux-3-video
+description: Video generation with FLUX 3 Video API (by Black Forest Labs) via the Pixazo API. TRIGGER when the user mentions "FLUX 3 Video" or "FLUX 3 Video API", or when the user asks to generate / make / create a video / clip / animation and FLUX 3 Video is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Genflare AI API
+# FLUX 3 Video API
 
-Advanced AI capabilities for image and video generation by Baidu.
+FLUX.3 Video from Black Forest Labs — text-to-video, image-to-video and video continuation, with synchronised audio, clips up to 20 seconds and HD or FHD output.
 
-You can ask GenFlare to handle video generation. Powered by Baidu via the Pixazo API gateway.
+You can ask FLUX 3 Video to handle video generation. Powered by Black Forest Labs via the Pixazo API gateway.
 
 ---
 
@@ -32,28 +32,28 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Genflare v2 | Image to Video | `baidu-genflare-2-0-api` / `generate-image-to-video` |
+| FLUX 3 Video | Text to Video | `flux-3-video-text-to-video` / `text-to-video` |
+| FLUX 3 Video | Image to Video | `flux-3-video-image-to-video` / `image-to-video` |
+| FLUX 3 Video | Video to Video | `flux-3-video-video-to-video` / `video-to-video` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/baidu-genflare-2-0-api/v1/generateImageToVideo2-5Request`
+- `POST https://gateway.pixazo.ai/flux-3-video-text-to-video/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/flux-3-video-image-to-video/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/flux-3-video-video-to-video/v1/video-to-video`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/baidu-genflare-2-0-api/v1/generateImageToVideo2-5Request' \
+curl -X POST 'https://gateway.pixazo.ai/flux-3-video-text-to-video/v1/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "img_url": "https://example.com/images/cat.png",
-  "prompt": "A cat running on the grass",
-  "resolution": "480P",
-  "duration": 5,
-  "audio": false,
-  "prompt_extend": true,
-  "watermark": false
+  "prompt": "A cozy ramen shop on a rainy Tokyo night, steam rising from the broth. Rain patter and quiet kitchen sounds.",
+  "resolution": "hd",
+  "duration": 5
 }'
 ```
 
@@ -62,19 +62,15 @@ curl -X POST 'https://gateway.pixazo.ai/baidu-genflare-2-0-api/v1/generateImageT
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/baidu-genflare-2-0-api/v1/generateImageToVideo2-5Request",
+    "https://gateway.pixazo.ai/flux-3-video-text-to-video/v1/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "img_url": "https://example.com/images/cat.png",
-  "prompt": "A cat running on the grass",
-  "resolution": "480P",
-  "duration": 5,
-  "audio": false,
-  "prompt_extend": true,
-  "watermark": false
+  "prompt": "A cozy ramen shop on a rainy Tokyo night, steam rising from the broth. Rain patter and quiet kitchen sounds.",
+  "resolution": "hd",
+  "duration": 5
 },
     timeout=300,
 )
@@ -85,20 +81,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/baidu-genflare-2-0-api/v1/generateImageToVideo2-5Request', {
+const res = await fetch('https://gateway.pixazo.ai/flux-3-video-text-to-video/v1/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "img_url": "https://example.com/images/cat.png",
-  "prompt": "A cat running on the grass",
-  "resolution": "480P",
-  "duration": 5,
-  "audio": false,
-  "prompt_extend": true,
-  "watermark": false
+  "prompt": "A cozy ramen shop on a rainy Tokyo night, steam rising from the broth. Rain patter and quiet kitchen sounds.",
+  "resolution": "hd",
+  "duration": 5
 }),
 });
 console.log(await res.json());
@@ -117,12 +109,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/baidu-genflare-2-0-api/v1/generateImageToVideo2-5Request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/flux-3-video-text-to-video/v1/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/baidu-genflare-2-0-api/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/flux-3-video-text-to-video/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -135,7 +127,7 @@ result_url = status.get("output_url") or status.get("video_url") or status.get("
 
 The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
 
-> **Fetch:** `https://www.pixazo.ai/models/genflare.md`
+> **Fetch:** `https://www.pixazo.ai/models/flux-3-video.md`
 
 Show the result URL to the user when ready (offer to download, share, or generate variations).
 
@@ -165,13 +157,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/genflare.md`
+> **Fetch:** `https://www.pixazo.ai/models/flux-3-video.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/genflare`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/flux-3-video`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `mochi`, `veed`, `vidu`, `wan`, `minimax`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`, `flux-3-video`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `mochi`, `veed`, `vidu`, `wan`, `minimax`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
