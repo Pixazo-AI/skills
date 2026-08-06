@@ -1,13 +1,13 @@
 ---
-name: video-crop-api
-description: Image generation/editing with Video Crop API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video Crop" or "Video Crop API", or when the user asks to generate / make / create / edit / restyle an image and Video Crop is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: video-compress-api
+description: Image generation/editing with Video Compress API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video Compress" or "Video Compress API", or when the user asks to generate / make / create / edit / restyle an image and Video Compress is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Video Crop API
+# Video Compress API
 
-Crop a video to an aspect ratio or an exact box. Pass aspect_ratio like "9:16" for Reels, Shorts and TikTok and the frame is centre-cropped without distorting the picture — the subject stays the right shape, it is not squeezed. Or give width and height (with optional x and y) for an exact box. Pass a video_url, poll the request, then download the MP4.
+Make a video file smaller. Pick a quality tier — light, balanced or strong — or give a target_size_mb and the API works out the bitrate for you. Measured on real 1080p-class footage: light returns about 17% of the original size, balanced 11%, strong 7%. Optionally downscale with max_height at the same time. H.264/AAC MP4 out; MP4 or MOV in, up to 120 seconds.
 
-You can ask Video Crop to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
+You can ask Video Compress to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,23 +32,23 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Video Crop 1.0 | Crop | `media-crop` / `media-crop-request` |
+| Video Compress 1.0 | Compress | `media-compress` / `media-compress-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/media-tools/v1/video-crop`
+- `POST https://gateway.pixazo.ai/media-tools/v1/video-compress`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-crop' \
+curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-compress' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "aspect_ratio": "9:16"
+    "quality": "balanced"
 }'
 ```
 
@@ -57,14 +57,14 @@ curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-crop' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/media-tools/v1/video-crop",
+    "https://gateway.pixazo.ai/media-tools/v1/video-compress",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
   "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "aspect_ratio": "9:16"
+    "quality": "balanced"
 },
     timeout=300,
 )
@@ -75,7 +75,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-crop', {
+const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-compress', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -83,7 +83,7 @@ const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-crop', {
   },
   body: JSON.stringify({
   "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "aspect_ratio": "9:16"
+    "quality": "balanced"
 }),
 });
 console.log(await res.json());
@@ -138,13 +138,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/video-crop-api.md`
+> **Fetch:** `https://www.pixazo.ai/models/video-compress-api.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-crop-api`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-compress-api`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
