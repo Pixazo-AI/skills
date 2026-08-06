@@ -1,13 +1,13 @@
 ---
-name: seedream
-description: Image generation/editing with Seedream 5 AI API (by BytePlus) via the Pixazo API. TRIGGER when the user mentions "Seedream 5" or "Seedream 5 AI API", or when the user asks to generate / make / create / edit / restyle an image and Seedream 5 is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: image-vectorize-api
+description: Image generation/editing with Image Vectorizer API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Image Vectorizer" or "Image Vectorizer API", or when the user asks to generate / make / create / edit / restyle an image and Image Vectorizer is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Seedream 5 AI API
+# Image Vectorizer API
 
-Advanced image generation and editing by ByteDance.
+Trace a raster image into a true vector SVG with potrace — real editable paths, not a bitmap wrapped in an SVG tag. The source is flattened onto white and thresholded to black-and-white first, so this is built for logos, line art and silhouettes rather than photographs.
 
-You can ask Seedream 5 to handle image generation/editing. Powered by BytePlus via the Pixazo API gateway.
+You can ask Image Vectorizer to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,38 +32,23 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Seedream 5 Pro | Image to Image (Image Editing) | `seedream-5-pro` / `edit-image` |
-| Seedream 5 Pro | Text to Image | `seedream-5-pro` / `text-to-image` |
-| Seedream 5 Lite | Image to Image (Image Editing) | `seedream-5-lite` / `edit-image` |
-| Seedream 5 Lite | Text to Image | `seedream-5-lite` / `text-to-image` |
-| Seedream 4.5 | Image to Image (Image Editing) | `bytedance-text-to-image` / `edit-image` |
-| Seedream 4.5 | Text to Image | `bytedance-text-to-image` / `text-to-image` |
-| Seedream 4 | Image to Image (Image Editing — Multi-Ref) | `bytedance-text-to-image` / `edit-multi-image` |
+| Image Vectorizer 1.0 | Vectorize | `media-vectorize` / `media-vectorize-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/seedream-5-pro/v1/edit-image`
-- `POST https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image`
-- `POST https://gateway.pixazo.ai/seedream-5-lite/v1/edit-image`
-- `POST https://gateway.pixazo.ai/seedream-5-lite/v1/text-to-image`
-- `POST https://gateway.pixazo.ai/byteplus/v1/getEditImage`
-- `POST https://gateway.pixazo.ai/byteplus/v1/getTextToImage`
-- `POST https://gateway.pixazo.ai/byteplus/v1/getEditMultiImage`
+- `POST https://gateway.pixazo.ai/media-tools/v1/image-vectorize`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image' \
+curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/image-vectorize' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "add sunglasses to the cat",
-  "image": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/byteplus/1757499948018-hntkjsg9kj.jpg"
-  ],
-  "size": "2K"
+  "image_url": "https://api-assets.pixazo.ai/media-api-test/t.png",
+    "threshold": 50
 }'
 ```
 
@@ -72,17 +57,14 @@ curl -X POST 'https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image",
+    "https://gateway.pixazo.ai/media-tools/v1/image-vectorize",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "add sunglasses to the cat",
-  "image": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/byteplus/1757499948018-hntkjsg9kj.jpg"
-  ],
-  "size": "2K"
+  "image_url": "https://api-assets.pixazo.ai/media-api-test/t.png",
+    "threshold": 50
 },
     timeout=300,
 )
@@ -93,18 +75,15 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image', {
+const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/image-vectorize', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "add sunglasses to the cat",
-  "image": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/byteplus/1757499948018-hntkjsg9kj.jpg"
-  ],
-  "size": "2K"
+  "image_url": "https://api-assets.pixazo.ai/media-api-test/t.png",
+    "threshold": 50
 }),
 });
 console.log(await res.json());
@@ -159,13 +138,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/seedream.md`
+> **Fetch:** `https://www.pixazo.ai/models/image-vectorize-api.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/seedream`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/image-vectorize-api`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
