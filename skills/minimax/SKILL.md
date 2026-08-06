@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| MiniMax Music 3.0 | Text to Music | `minimax-music-3-0` / `text-to-music` |
+| MiniMax Music 3.0 Fast | Text to Music | `minimax-music-3-0-fast` / `text-to-music` |
 | MiniMax H3 | Text to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-text-to-video-request` |
 | MiniMax H3 | Image to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-image-to-video-request` |
 | MiniMax H3 | Last Frame to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-last-frame-to-video-request` |
@@ -48,6 +50,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/minimax-music-3-0/v1/text-to-music`
+- `POST https://gateway.pixazo.ai/minimax-music-3-0-fast/v1/text-to-music`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/image-to-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3/v2/last-frame-to-video`
@@ -65,7 +69,11 @@ curl -X POST 'https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A lone lighthouse on a cliff at dusk, the beam sweeping through heavy fog as waves break below. Slow push-in. Audio: wind, surf, a distant foghorn."
+  "prompt": "Indie folk, melancholic, introspective, longing, solitary walk, coffee shop",
+  "lyrics": "[verse]\nStreetlights flicker, the night breeze sighs\nShadows stretch as I walk alone\n[chorus]\nPushing the wooden door, the aroma spreads\nIn a familiar corner, a stranger gazes",
+  "format": "mp3",
+  "sample_rate": 44100,
+  "bitrate": 256000
 }'
 ```
 
@@ -80,7 +88,11 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A lone lighthouse on a cliff at dusk, the beam sweeping through heavy fog as waves break below. Slow push-in. Audio: wind, surf, a distant foghorn."
+  "prompt": "Indie folk, melancholic, introspective, longing, solitary walk, coffee shop",
+  "lyrics": "[verse]\nStreetlights flicker, the night breeze sighs\nShadows stretch as I walk alone\n[chorus]\nPushing the wooden door, the aroma spreads\nIn a familiar corner, a stranger gazes",
+  "format": "mp3",
+  "sample_rate": 44100,
+  "bitrate": 256000
 },
     timeout=300,
 )
@@ -98,7 +110,11 @@ const res = await fetch('https://gateway.pixazo.ai/minimax-hailuo-h3/v2/text-to-
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A lone lighthouse on a cliff at dusk, the beam sweeping through heavy fog as waves break below. Slow push-in. Audio: wind, surf, a distant foghorn."
+  "prompt": "Indie folk, melancholic, introspective, longing, solitary walk, coffee shop",
+  "lyrics": "[verse]\nStreetlights flicker, the night breeze sighs\nShadows stretch as I walk alone\n[chorus]\nPushing the wooden door, the aroma spreads\nIn a familiar corner, a stranger gazes",
+  "format": "mp3",
+  "sample_rate": 44100,
+  "bitrate": 256000
 }),
 });
 console.log(await res.json());
