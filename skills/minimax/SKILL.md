@@ -33,7 +33,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | MiniMax Music 3.0 | Text to Music | `minimax-music-3-0` / `text-to-music` |
-| MiniMax Music 3.0 Fast | Text to Music | `minimax-music-3-0-fast` / `text-to-music` |
+| MiniMax Music 3.0 Fast (Free) | Text to Music | `minimax-music-3-0-fast` / `text-to-music` |
 | MiniMax H3 | Text to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-text-to-video-request` |
 | MiniMax H3 | Image to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-image-to-video-request` |
 | MiniMax H3 | Last Frame to Video | `minimax-hailuo-h3` / `minimax-hailuo-h3-last-frame-to-video-request` |
