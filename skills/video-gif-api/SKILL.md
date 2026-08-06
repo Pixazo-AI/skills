@@ -1,13 +1,13 @@
 ---
-name: grok-imagine-image
-description: Image generation/editing with Grok Imagine Image API (by xAI) via the Pixazo API. TRIGGER when the user mentions "Grok Imagine Image" or "Grok Imagine Image API", or when the user asks to generate / make / create / edit / restyle an image and Grok Imagine Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: video-gif-api
+description: Image generation/editing with Video to GIF API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video to GIF" or "Video to GIF API", or when the user asks to generate / make / create / edit / restyle an image and Video to GIF is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Grok Imagine Image API
+# Video to GIF API
 
-Image generation and editing by xAI.
+Turn a section of a video into a looping GIF. Two-pass palette generation gives clean colour instead of the banding a single pass produces. fps and width are the only quality knobs — height follows the source, so the aspect ratio is always preserved. Give duration_seconds to pick the length; up to 209 seconds at the default 10fps/480px.
 
-You can ask Grok Imagine Image to handle image generation/editing. Powered by xAI via the Pixazo API gateway.
+You can ask Video to GIF to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,28 +32,25 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Grok Imagine Image | Text to Image | `grok-imagine-pro-text-to-image-quality` / `grok-imagine-pro-text-to-image-quality-request` |
-| Grok Imagine Image | Image to Image (Image Editing) | `grok-imagine-pro-edit-quality` / `grok-imagine-pro-edit-quality-request` |
+| Video to GIF 1.0 | Gif | `media-gif` / `media-gif-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request`
-- `POST https://gateway.pixazo.ai/grok-imagine-pro-edit-quality/v1/grok-imagine-pro-edit-quality-request`
+- `POST https://gateway.pixazo.ai/media-tools/v1/video-to-gif`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request' \
+curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-to-gif' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
-  "num_images": 1,
-  "aspect_ratio": "1:1",
-  "resolution": "1k",
-  "output_format": "jpeg"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "duration_seconds": 5,
+    "fps": 10,
+    "width": 480
 }'
 ```
 
@@ -62,17 +59,16 @@ curl -X POST 'https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request",
+    "https://gateway.pixazo.ai/media-tools/v1/video-to-gif",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
-  "num_images": 1,
-  "aspect_ratio": "1:1",
-  "resolution": "1k",
-  "output_format": "jpeg"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "duration_seconds": 5,
+    "fps": 10,
+    "width": 480
 },
     timeout=300,
 )
@@ -83,18 +79,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request', {
+const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-to-gif', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
-  "num_images": 1,
-  "aspect_ratio": "1:1",
-  "resolution": "1k",
-  "output_format": "jpeg"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "duration_seconds": 5,
+    "fps": 10,
+    "width": 480
 }),
 });
 console.log(await res.json());
@@ -149,13 +144,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/grok-imagine-image.md`
+> **Fetch:** `https://www.pixazo.ai/models/video-gif-api.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/grok-imagine-image`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-gif-api`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
