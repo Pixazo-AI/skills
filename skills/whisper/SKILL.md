@@ -5,7 +5,7 @@ description: Image generation/editing with OpenAI Speech to Text API (by OpenAI)
 
 # OpenAI Speech to Text API
 
-OpenAI's speech recognition on the gateway: Whisper in three sizes, transcribing 99 languages with word timings and subtitles, plus GPT-4o Transcribe for the highest accuracy. Billed per minute of audio.
+OpenAI's speech recognition on the gateway: Whisper in three sizes, transcribing 99 languages with word timings and subtitles. Billed per minute of audio.
 
 You can ask OpenAI Speech to Text to handle image generation/editing. Powered by OpenAI via the Pixazo API gateway.
 
@@ -35,7 +35,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Whisper Large v3 Turbo | Speech to Text | `whisper-large-v3-turbo` / `speech-to-text` |
 | Whisper Tiny English | Speech to Text | `whisper-tiny-en` / `speech-to-text` |
 | Whisper | Speech to Text | `whisper` / `speech-to-text` |
-| GPT-4o Transcribe | Speech to Text | `gpt-4o-transcribe` / `speech-to-text` |
 
 ### Step 3 — Make the API call
 
@@ -44,7 +43,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/whisper-large-v3-turbo/v1/speech-to-text`
 - `POST https://gateway.pixazo.ai/whisper-tiny-en/v1/speech-to-text`
 - `POST https://gateway.pixazo.ai/whisper/v1/speech-to-text`
-- `POST https://gateway.pixazo.ai/gpt-4o-transcribe/v1/speech-to-text`
 
 **Sample request (primary operation)**
 

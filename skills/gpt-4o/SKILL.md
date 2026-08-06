@@ -1,11 +1,11 @@
 ---
-name: openai-tts
+name: gpt-4o
 description: Text-to-speech / voice synthesis with OpenAI Text to Speech API (by OpenAI) via the Pixazo API. TRIGGER when the user mentions "OpenAI Text to Speech" or "OpenAI Text to Speech API", or when the user asks to speak / read aloud / convert text to speech / generate voice and OpenAI Text to Speech is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
 # OpenAI Text to Speech API
 
-OpenAI's text-to-speech pair. TTS 1 is the low-latency option; TTS 1 HD trades speed for cleaner audio at twice the price. Six voices and six output containers on both, with speed control from a quarter to four times normal.
+OpenAI's GPT-4o audio models on one API. For text to speech, GPT-4o Mini is the low-latency option and GPT-4o Mini HD trades speed for cleaner audio at twice the price — six voices and six output containers on both, with speed control from a quarter to four times normal. In the other direction, GPT-4o Transcribe converts speech to text with high accuracy.
 
 You can ask OpenAI Text to Speech to handle text-to-speech / voice synthesis. Powered by OpenAI via the Pixazo API gateway.
 
@@ -32,8 +32,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| OpenAI TTS 1 | Text to Speech | `tts-1` / `text-to-speech` |
-| OpenAI TTS 1 HD | Text to Speech | `tts-1-hd` / `text-to-speech` |
+| GPT-4o Mini TTS | Text to Speech | `tts-1` / `text-to-speech` |
+| GPT-4o Mini TTS HD | Text to Speech | `tts-1-hd` / `text-to-speech` |
+| GPT-4o Transcribe | Speech to Text | `gpt-4o-transcribe` / `speech-to-text` |
 
 ### Step 3 — Make the API call
 
@@ -41,6 +42,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 - `POST https://gateway.pixazo.ai/tts-1/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/tts-1-hd/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/gpt-4o-transcribe/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
@@ -124,9 +126,9 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/openai-tts.md`
+> **Fetch:** `https://www.pixazo.ai/models/gpt-4o.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/openai-tts`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gpt-4o`.
 
 ---
 
