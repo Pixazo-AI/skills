@@ -33,10 +33,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Seedance 2.5 | Text to Video | `seedance-2-5` / `text-to-video` |
-| Seedance 2.5 | Reference to Video | `seedance-2-5` / `reference-to-video` |
-| Seedance 2.5 | Video Editing | `seedance-2-5` / `edit-video` |
-| Seedance 2.5 | First and Last Frame to Video | `seedance-2-5` / `first-last-frame-to-video` |
-| Seedance 2.5 | Video Extension | `seedance-2-5` / `extend-video` |
+| Seedance 2.5 | Image to video | `seedance-2-5` / `first-last-frame-to-video` |
+| Seedance 2.5 | Reference to Video (Ref Image / Video / Audio) | `seedance-2-5` / `reference-to-video` |
+| Seedance 2.5 | Video to Video (Video Editing) | `seedance-2-5` / `edit-video` |
+| Seedance 2.5 | Video to Video (Video Extension) | `seedance-2-5` / `extend-video` |
 | Seedance 2.0 Mini | Text to Video | `seedance-2-0-mini` / `text-to-video` |
 | Seedance 2.0 Mini | Image to video | `seedance-2-0-mini` / `image-to-video-first-and-last-frames` |
 | Seedance 2.0 Mini | Reference to Video (Ref Image / Video / Audio) | `seedance-2-0-mini` / `reference-to-video` |
@@ -57,9 +57,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/seedance-2-5/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/seedance-2-5/v1/first-last-frame-to-video`
 - `POST https://gateway.pixazo.ai/seedance-2-5/v1/reference-to-video`
 - `POST https://gateway.pixazo.ai/seedance-2-5/v1/edit-video`
-- `POST https://gateway.pixazo.ai/seedance-2-5/v1/first-last-frame-to-video`
 - `POST https://gateway.pixazo.ai/seedance-2-5/v1/extend-video`
 - `POST https://gateway.pixazo.ai/seedance-2-0-mini/text-to-video`
 - `POST https://gateway.pixazo.ai/seedance-2-0-mini/first-last-frame-to-video`
