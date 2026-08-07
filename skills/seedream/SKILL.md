@@ -34,6 +34,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 |---|---|---|
 | Seedream 5 Pro | Image to Image (Image Editing) | `seedream-5-pro` / `edit-image` |
 | Seedream 5 Pro | Text to Image | `seedream-5-pro` / `text-to-image` |
+| Seedream 5 Pro | Layerize | `seedream-5-0-pro` / `layerize` |
 | Seedream 5 Lite | Image to Image (Image Editing) | `seedream-5-lite` / `edit-image` |
 | Seedream 5 Lite | Text to Image | `seedream-5-lite` / `text-to-image` |
 | Seedream 4.5 | Image to Image (Image Editing) | `bytedance-text-to-image` / `edit-image` |
@@ -46,6 +47,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 - `POST https://gateway.pixazo.ai/seedream-5-pro/v1/edit-image`
 - `POST https://gateway.pixazo.ai/seedream-5-pro/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/seedream-5-0-pro/v1/layerize`
 - `POST https://gateway.pixazo.ai/seedream-5-lite/v1/edit-image`
 - `POST https://gateway.pixazo.ai/seedream-5-lite/v1/text-to-image`
 - `POST https://gateway.pixazo.ai/byteplus/v1/getEditImage`
