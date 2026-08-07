@@ -45,6 +45,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | LTX v2.3 | Audio to Video | `ltx-2-3-audio-to-video` / `ltx-2-3-audio-to-video-request` |
 | LTX v2.3 | Video to Video (Video Editing) | `ltx-2-3-retake-video` / `ltx-2-3-retake-video-request` |
 | LTX v2.3 | Video to Video (Reframe) | `ltx-2-3-reframe` / `ltx-2-3-reframe-request` |
+| LTX-2 Fast | Text to Video | `ltx-2-fast` / `text-to-video` |
+| LTX-2 Fast | Image to Video | `ltx-2-fast` / `image-to-video` |
 | LTX v2 Pro | Text to Video | `lightricks-video` / `ltx-v2-video-generate` |
 | LTX v2 19B | Image to Video | `ltx-2-19b-api-513` / `ltx-2-19b-api-request` |
 | LTX v2 | Image to Video | `ltx-2-video-api-581` / `ltx-2-video-api-request` |
@@ -66,6 +68,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/ltx-2-3-audio-to-video/v1/ltx-2-3-audio-to-video-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-retake-video/v1/ltx-2-3-retake-video-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-reframe/v1/video-to-video`
+- `POST https://gateway.pixazo.ai/ltx-2-fast/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/ltx-2-fast/v1/image-to-video`
 - `POST https://gateway.pixazo.ai/lightricks/v1/ltx/generate`
 - `POST https://gateway.pixazo.ai/ltx-2-19b-api-513/v1/ltx-2-19b-api-request`
 - `POST https://gateway.pixazo.ai/ltx-2-video-api-581/v1/ltx-2-video-api-request`
