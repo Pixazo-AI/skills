@@ -32,6 +32,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Wan 3.0 | Text to Video | `wan-3-0-video` / `text-to-video` |
+| Wan 3.0 | Image to Video (First Frame to Video) | `wan-3-0-video` / `first-frame-to-video` |
+| Wan 3.0 | Image to Video (First & Last Frame to Video) | `wan-3-0-video` / `first-last-frame-to-video` |
+| Wan 3.0 | Reference to Video (Ref Image, Video or Audio) | `wan-3-0-video` / `reference-to-video` |
+| Wan 3.0 | File to Video (Document, Slides or Web Link) | `wan-3-0-video` / `file-to-video` |
 | Wan 2.2 | Audio to Video (Ref Audio to Video) | `wan-2-2-14b-speech-to-video` / `speech-to-video-request` |
 | Wan 2.2 | Audio to Video (Ref Image + Ref Audio to Video — Animate) | `wan-2-2-animate-api-524` / `wan-2-2-animate-api-request` |
 | Wan 2.2 | Image to Video (First Frame to Video) | `wan-image-to-video` / `wan-image-to-video-first-frame` |
@@ -60,6 +65,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/wan-3-0-video/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/wan-3-0-video/v1/first-frame-to-video`
+- `POST https://gateway.pixazo.ai/wan-3-0-video/v1/first-last-frame-to-video`
+- `POST https://gateway.pixazo.ai/wan-3-0-video/v1/reference-to-video`
+- `POST https://gateway.pixazo.ai/wan-3-0-video/v1/file-to-video`
 - `POST https://gateway.pixazo.ai/wan2.2-s2v/v1/generateSpeechToVideoRequest`
 - `POST https://gateway.pixazo.ai/wan-i2v/v1/generateImageToVideoRequest`
 - `POST https://gateway.pixazo.ai/wan-t2i/v1/generateEditImageRequest`
@@ -85,13 +95,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/wan-2-6-text-to-video-569/v1/wan-2-6-text-to-video-request' \
+curl -X POST 'https://gateway.pixazo.ai/wan-3-0-video/v1/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Summer beach vacation style, a man wearing sunglasses Blue Tshirt.",
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_music.mp3"
+  "prompt": "A kitten running across a rooftop under the moonlight, city neon lights flickering in the distance, cinematic quality, smooth camera movement.",
+  "resolution": "480P",
+  "ratio": "adaptive",
+  "duration": 5
 }'
 ```
 
@@ -100,15 +111,16 @@ curl -X POST 'https://gateway.pixazo.ai/wan-2-6-text-to-video-569/v1/wan-2-6-tex
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/wan-2-6-text-to-video-569/v1/wan-2-6-text-to-video-request",
+    "https://gateway.pixazo.ai/wan-3-0-video/v1/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Summer beach vacation style, a man wearing sunglasses Blue Tshirt.",
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_music.mp3"
+  "prompt": "A kitten running across a rooftop under the moonlight, city neon lights flickering in the distance, cinematic quality, smooth camera movement.",
+  "resolution": "480P",
+  "ratio": "adaptive",
+  "duration": 5
 },
     timeout=300,
 )
@@ -119,16 +131,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/wan-2-6-text-to-video-569/v1/wan-2-6-text-to-video-request', {
+const res = await fetch('https://gateway.pixazo.ai/wan-3-0-video/v1/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Summer beach vacation style, a man wearing sunglasses Blue Tshirt.",
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_music.mp3"
+  "prompt": "A kitten running across a rooftop under the moonlight, city neon lights flickering in the distance, cinematic quality, smooth camera movement.",
+  "resolution": "480P",
+  "ratio": "adaptive",
+  "duration": 5
 }),
 });
 console.log(await res.json());
@@ -147,12 +160,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/wan-2-6-text-to-video-569/v1/wan-2-6-text-to-video-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/wan-3-0-video/v1/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/wan-2-6-text-to-video-569/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/wan-3-0-video/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
