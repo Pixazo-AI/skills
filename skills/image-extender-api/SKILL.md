@@ -1,13 +1,13 @@
 ---
-name: pixelcut
-description: Image generation/editing with Pixelcut API (by Pixelcut) via the Pixazo API. TRIGGER when the user mentions "Pixelcut Video Background Removal" or "Pixelcut API", or when the user asks to generate / make / create / edit / restyle an image and Pixelcut Video Background Removal is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: image-extender-api
+description: Image generation/editing with Image Extender API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Image Extender" or "Image Extender API", or when the user asks to generate / make / create / edit / restyle an image and Image Extender is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Pixelcut API
+# Image Extender API
 
-AI-powered video background removal for clean, professional results.
+Extend an image beyond its original borders — directionally or uniformly — with AI-generated content that continues the scene.
 
-You can ask Pixelcut Video Background Removal to handle image generation/editing. Powered by Pixelcut via the Pixazo API gateway.
+You can ask Image Extender to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,24 +32,26 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Pixelcut v1 | Video to Video (Video Background Remover) | `pixelcut-video-background-removal` / `pixelcut-video-background-removal-request` |
+| Image Extender 1.0 | Extend Image | `image-outpaint` / `image-outpaint-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/pixelcut-video-background-removal/v1/pixelcut-video-background-removal-request`
+- `POST https://gateway.pixazo.ai/image-outpaint/v1/image-outpaint-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/pixelcut-video-background-removal/v1/pixelcut-video-background-removal-request' \
+curl -X POST 'https://gateway.pixazo.ai/image-outpaint/v1/image-outpaint-request' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Video.mp4",
-  "background": "transparent",
-  "output_format": "webm_vp9"
+  "image_url": "https://v3.fal.media/files/koala/oei_-iPIYFnhdB8SxojND_qwen-edit-res.png",
+  "zoom_out_percentage": 20,
+  "num_images": 1,
+  "enable_safety_checker": true,
+  "output_format": "png"
 }'
 ```
 
@@ -58,15 +60,17 @@ curl -X POST 'https://gateway.pixazo.ai/pixelcut-video-background-removal/v1/pix
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/pixelcut-video-background-removal/v1/pixelcut-video-background-removal-request",
+    "https://gateway.pixazo.ai/image-outpaint/v1/image-outpaint-request",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Video.mp4",
-  "background": "transparent",
-  "output_format": "webm_vp9"
+  "image_url": "https://v3.fal.media/files/koala/oei_-iPIYFnhdB8SxojND_qwen-edit-res.png",
+  "zoom_out_percentage": 20,
+  "num_images": 1,
+  "enable_safety_checker": true,
+  "output_format": "png"
 },
     timeout=300,
 )
@@ -77,16 +81,18 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/pixelcut-video-background-removal/v1/pixelcut-video-background-removal-request', {
+const res = await fetch('https://gateway.pixazo.ai/image-outpaint/v1/image-outpaint-request', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Video.mp4",
-  "background": "transparent",
-  "output_format": "webm_vp9"
+  "image_url": "https://v3.fal.media/files/koala/oei_-iPIYFnhdB8SxojND_qwen-edit-res.png",
+  "zoom_out_percentage": 20,
+  "num_images": 1,
+  "enable_safety_checker": true,
+  "output_format": "png"
 }),
 });
 console.log(await res.json());
@@ -141,13 +147,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/pixelcut.md`
+> **Fetch:** `https://www.pixazo.ai/models/image-extender-api.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/pixelcut`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/image-extender-api`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

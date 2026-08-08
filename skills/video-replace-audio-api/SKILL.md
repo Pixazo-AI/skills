@@ -48,7 +48,7 @@ curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-replace-audio' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "audio_url": "https://api-assets.pixazo.ai/media-api-test/t.mp3"
+    "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3"
 }'
 ```
 
@@ -64,7 +64,7 @@ r = requests.post(
     },
     json={
   "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "audio_url": "https://api-assets.pixazo.ai/media-api-test/t.mp3"
+    "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3"
 },
     timeout=300,
 )
@@ -83,7 +83,7 @@ const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-replace-
   },
   body: JSON.stringify({
   "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "audio_url": "https://api-assets.pixazo.ai/media-api-test/t.mp3"
+    "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3"
 }),
 });
 console.log(await res.json());
@@ -146,5 +146,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
