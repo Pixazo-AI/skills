@@ -35,7 +35,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | PixelForge 1.0 | Text to Image | `pixelforge-image` / `generate-image` |
 | PixelForge 1.0 | Image to Image (Image Editing — Relighting) | `pixelforge-relighting-api` / `image-edit-request` |
 | PixelForge 2.0 | Text to Image | `pixelforge-image-v2` / `text-to-image` |
-| PixelForge 2.0 | Content Safety | `content-safety` / `image-moderation` |
 
 ### Step 3 — Make the API call
 
@@ -44,7 +43,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve_image`
 - `POST https://gateway.pixazo.ai/pixelforge-relighting-api/v1/relighting/generate`
 - `POST https://gateway.pixazo.ai/pixelforge-image-v2/v1/text-to-image`
-- `POST https://gateway.pixazo.ai/content-safety/v1/image-moderation`
 
 **Sample request (primary operation)**
 
@@ -149,5 +147,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `content-safety-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
