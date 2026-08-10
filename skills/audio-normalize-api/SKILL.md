@@ -47,7 +47,7 @@ curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/audio-normalize' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "audio_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+  "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3",
     "target": "streaming"
 }'
 ```
@@ -63,7 +63,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "audio_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+  "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3",
     "target": "streaming"
 },
     timeout=300,
@@ -82,7 +82,7 @@ const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/audio-normaliz
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "audio_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+  "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3",
     "target": "streaming"
 }),
 });

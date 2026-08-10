@@ -36,6 +36,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | ElevenLabs Music | Text to Music | `elevenlabs-music` / `elevenlabs-music-request` |
 | ElevenLabs Turbo v2.5 | Text to Speech | `elevenlabs-turbo-v2-5` / `text-to-speech` |
 | ElevenLabs Multilingual v2 | Text to Speech | `elevenlabs-multilingual-v2` / `text-to-speech` |
+| ElevenLabs Dubbing | Video & Audio Dubbing | `elevenlabs-dubbing` / `elevenlabs-dubbing-request` |
 
 ### Step 3 — Make the API call
 
@@ -45,6 +46,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/elevenlabs-music/v1/elevenlabs-music-request`
 - `POST https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/elevenlabs-multilingual-v2/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/elevenlabs-dubbing/v1/dub`
 
 **Sample request (primary operation)**
 
