@@ -5,7 +5,7 @@ description: Image generation/editing with Video Transition API (by Pixazo) via 
 
 # Video Transition API
 
-Join 2 to 4 clips with a real transition instead of a hard cut. Pick the look with `family` — a dip to black or white, a dissolve, a wipe, a slide, a circle open or close, a zoom or a pixelate — and set its length with `crossfade_seconds`. Video and audio are crossfaded together. MP4/MOV inputs, 60 seconds of combined source. For a plain join with no transition, use the Video Merge API, which stream-copies and is far cheaper.
+Join 2 to 4 clips with a real transition instead of a hard cut. Choose a `family` — fades, wipes, slides, smooth, geometric, diagonals, slices, wind, cover-reveal or texture — then name the exact effect in `transition`, giving you all 58 of ffmpeg's transitions rather than a handful. Set the length with `crossfade_seconds` and shape the audio crossfade with `audio_curve` (24 curves, including `nofade` to leave a music bed untouched). Video and audio are crossfaded together. MP4/MOV inputs, 60 seconds of combined source. For a plain join with no transition, use the Video Merge API, which stream-copies and is far cheaper.
 
 You can ask Video Transition to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
