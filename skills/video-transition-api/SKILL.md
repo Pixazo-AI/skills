@@ -1,13 +1,13 @@
 ---
-name: firered-image-edit
-description: Image generation/editing with FireRed Image Edit API (by FireRed Image Edit) via the Pixazo API. TRIGGER when the user mentions "FireRed Image Edit" or "FireRed Image Edit API", or when the user asks to generate / make / create / edit / restyle an image and FireRed Image Edit is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: video-transition-api
+description: Image generation/editing with Video Transition API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video Transition" or "Video Transition API", or when the user asks to generate / make / create / edit / restyle an image and Video Transition is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# FireRed Image Edit API
+# Video Transition API
 
-Advanced AI image editing capabilities by FireRed Image Edit.
+Join 2 to 4 clips with a real transition instead of a hard cut. Pick the look with `family` — a dip to black or white, a dissolve, a wipe, a slide, a circle open or close, a zoom or a pixelate — and set its length with `crossfade_seconds`. Video and audio are crossfaded together. MP4/MOV inputs, 60 seconds of combined source. For a plain join with no transition, use the Video Merge API, which stream-copies and is far cheaper.
 
-You can ask FireRed Image Edit to handle image generation/editing. Powered by FireRed Image Edit via the Pixazo API gateway.
+You can ask Video Transition to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,25 +32,27 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| FireRed Image Edit 1 | Image to Image (Image Editing) | `firered-image-edit` / `image-edit-request` |
-| FireRed Image Edit 1.1 | Image to Image (Image Editing) | `firered-image-edit-v1-1` / `firered-image-edit-v1-1-request` |
+| Video Transition 1.0 | Transition | `media-transition` / `media-transition-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/firered-image-edit/v1/firered-image-edit/generate`
-- `POST https://gateway.pixazo.ai/firered-image-edit-v1-1/v1/firered-image-edit-v1-1-request`
+- `POST https://gateway.pixazo.ai/media-tools/v1/video-transition`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/firered-image-edit/v1/firered-image-edit/generate' \
+curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-transition' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "The woman's dress is changed to black",
-  "image": ["https://example.com/photo.jpg"]
+  "video_urls": [
+    "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "https://api-assets.pixazo.ai/media-api-test/t.mov"
+  ],
+  "family": "dissolve",
+  "crossfade_seconds": 1.0
 }'
 ```
 
@@ -59,14 +61,18 @@ curl -X POST 'https://gateway.pixazo.ai/firered-image-edit/v1/firered-image-edit
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/firered-image-edit/v1/firered-image-edit/generate",
+    "https://gateway.pixazo.ai/media-tools/v1/video-transition",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "The woman's dress is changed to black",
-  "image": ["https://example.com/photo.jpg"]
+  "video_urls": [
+    "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "https://api-assets.pixazo.ai/media-api-test/t.mov"
+  ],
+  "family": "dissolve",
+  "crossfade_seconds": 1.0
 },
     timeout=300,
 )
@@ -77,15 +83,19 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/firered-image-edit/v1/firered-image-edit/generate', {
+const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-transition', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "The woman's dress is changed to black",
-  "image": ["https://example.com/photo.jpg"]
+  "video_urls": [
+    "https://api-assets.pixazo.ai/media-api-test/t.mov",
+    "https://api-assets.pixazo.ai/media-api-test/t.mov"
+  ],
+  "family": "dissolve",
+  "crossfade_seconds": 1.0
 }),
 });
 console.log(await res.json());
@@ -140,13 +150,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/firered-image-edit.md`
+> **Fetch:** `https://www.pixazo.ai/models/video-transition-api.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/firered-image-edit`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-transition-api`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-transition-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `content-safety-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `content-safety-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
