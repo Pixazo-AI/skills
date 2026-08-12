@@ -51,7 +51,8 @@ curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-transition' \
     "https://api-assets.pixazo.ai/media-api-test/t.mov",
     "https://api-assets.pixazo.ai/media-api-test/t.mov"
   ],
-  "family": "dissolve",
+  "family": "fades",
+  "transition": "dissolve",
   "crossfade_seconds": 1.0
 }'
 ```
@@ -71,7 +72,8 @@ r = requests.post(
     "https://api-assets.pixazo.ai/media-api-test/t.mov",
     "https://api-assets.pixazo.ai/media-api-test/t.mov"
   ],
-  "family": "dissolve",
+  "family": "fades",
+  "transition": "dissolve",
   "crossfade_seconds": 1.0
 },
     timeout=300,
@@ -94,7 +96,8 @@ const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-transiti
     "https://api-assets.pixazo.ai/media-api-test/t.mov",
     "https://api-assets.pixazo.ai/media-api-test/t.mov"
   ],
-  "family": "dissolve",
+  "family": "fades",
+  "transition": "dissolve",
   "crossfade_seconds": 1.0
 }),
 });
