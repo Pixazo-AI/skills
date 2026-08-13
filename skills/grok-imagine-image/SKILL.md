@@ -5,7 +5,7 @@ description: Image generation/editing with Grok Imagine Image API (by xAI) via t
 
 # Grok Imagine Image API
 
-Image generation and editing by xAI.
+Image generation and editing by xAI. Grok Imagine Image 2.0 adds a four-cell quality x resolution rate table and up to four images per request.
 
 You can ask Grok Imagine Image to handle image generation/editing. Powered by xAI via the Pixazo API gateway.
 
@@ -32,6 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Grok Imagine Image 2.0 | Text to Image | `grok-imagine-image-v2` / `text-to-image` |
 | Grok Imagine Image | Text to Image | `grok-imagine-pro-text-to-image-quality` / `grok-imagine-pro-text-to-image-quality-request` |
 | Grok Imagine Image | Image to Image (Image Editing) | `grok-imagine-pro-edit-quality` / `grok-imagine-pro-edit-quality-request` |
 
@@ -39,20 +40,22 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/grok-imagine-image-v2/v1/text-to-image`
 - `POST https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request`
 - `POST https://gateway.pixazo.ai/grok-imagine-pro-edit-quality/v1/grok-imagine-pro-edit-quality-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request' \
+curl -X POST 'https://gateway.pixazo.ai/grok-imagine-image-v2/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
+  "prompt": "Abstract human silhouette, golden particles bursting outward representing joy, data visualization style",
   "num_images": 1,
   "aspect_ratio": "1:1",
   "resolution": "1k",
+  "quality": "medium",
   "output_format": "jpeg"
 }'
 ```
@@ -62,16 +65,17 @@ curl -X POST 'https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request",
+    "https://gateway.pixazo.ai/grok-imagine-image-v2/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
+  "prompt": "Abstract human silhouette, golden particles bursting outward representing joy, data visualization style",
   "num_images": 1,
   "aspect_ratio": "1:1",
   "resolution": "1k",
+  "quality": "medium",
   "output_format": "jpeg"
 },
     timeout=300,
@@ -83,17 +87,18 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request', {
+const res = await fetch('https://gateway.pixazo.ai/grok-imagine-image-v2/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Abstract human silhouette, golden particles ready to burst outward representing joy, data visualization style",
+  "prompt": "Abstract human silhouette, golden particles bursting outward representing joy, data visualization style",
   "num_images": 1,
   "aspect_ratio": "1:1",
   "resolution": "1k",
+  "quality": "medium",
   "output_format": "jpeg"
 }),
 });
