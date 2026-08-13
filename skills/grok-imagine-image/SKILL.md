@@ -33,6 +33,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Grok Imagine Image 2.0 | Text to Image | `grok-imagine-image-v2` / `text-to-image` |
+| Grok Imagine Image 2.0 | Image to Image (Edit Image) | `grok-imagine-image-v2` / `edit` |
 | Grok Imagine Image | Text to Image | `grok-imagine-pro-text-to-image-quality` / `grok-imagine-pro-text-to-image-quality-request` |
 | Grok Imagine Image | Image to Image (Image Editing) | `grok-imagine-pro-edit-quality` / `grok-imagine-pro-edit-quality-request` |
 
@@ -41,6 +42,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/grok-imagine-image-v2/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/grok-imagine-image-v2/v1/edit`
 - `POST https://gateway.pixazo.ai/grok-imagine-pro-text-to-image-quality/v1/grok-imagine-pro-text-to-image-quality-request`
 - `POST https://gateway.pixazo.ai/grok-imagine-pro-edit-quality/v1/grok-imagine-pro-edit-quality-request`
 
