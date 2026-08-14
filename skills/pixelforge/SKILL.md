@@ -34,7 +34,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 |---|---|---|
 | PixelForge 1.0 | Text to Image | `pixelforge-image` / `generate-image` |
 | PixelForge 1.0 | Image to Image (Image Editing — Relighting) | `pixelforge-relighting-api` / `image-edit-request` |
-| PixelForge 2.0 | Text to Image | `pixelforge-image-v2` / `text-to-image` |
+| PixelForge 2.0 | Text to Image (Library Search) | `pixelforge-image-v2` / `text-to-image` |
 
 ### Step 3 — Make the API call
 
