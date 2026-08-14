@@ -51,7 +51,7 @@ curl -X POST 'https://gateway.pixazo.ai/whisper-large-v3-turbo/v1/speech-to-text
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "audio_url": "https://your-server.com/recording.mp3"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3"
 }'
 ```
 
@@ -66,7 +66,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "audio_url": "https://your-server.com/recording.mp3"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3"
 },
     timeout=300,
 )
@@ -84,7 +84,7 @@ const res = await fetch('https://gateway.pixazo.ai/whisper-large-v3-turbo/v1/spe
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "audio_url": "https://your-server.com/recording.mp3"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3"
 }),
 });
 console.log(await res.json());

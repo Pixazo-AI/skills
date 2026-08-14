@@ -47,8 +47,8 @@ curl -X POST 'https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/v1/bytedanc
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://example.com/example_inputs/omnihuman_v15_input_image.png",
-  "audio_url": "https://example.com/example_inputs/omnihuman_v15_input_audio.mp3",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3",
   "resolution": "1080p"
 }'
 ```
@@ -64,8 +64,8 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://example.com/example_inputs/omnihuman_v15_input_image.png",
-  "audio_url": "https://example.com/example_inputs/omnihuman_v15_input_audio.mp3",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3",
   "resolution": "1080p"
 },
     timeout=300,
@@ -84,8 +84,8 @@ const res = await fetch('https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://example.com/example_inputs/omnihuman_v15_input_image.png",
-  "audio_url": "https://example.com/example_inputs/omnihuman_v15_input_audio.mp3",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3",
   "resolution": "1080p"
 }),
 });

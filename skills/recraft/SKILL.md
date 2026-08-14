@@ -55,7 +55,7 @@ curl -X POST 'https://gateway.pixazo.ai/recraft/v3/image-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image": "https://example.com/source.png",
+  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "prompt": "winter landscape",
   "strength": 0.5
 }'
@@ -72,7 +72,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "image": "https://example.com/source.png",
+  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "prompt": "winter landscape",
   "strength": 0.5
 },
@@ -92,7 +92,7 @@ const res = await fetch('https://gateway.pixazo.ai/recraft/v3/image-to-image', {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image": "https://example.com/source.png",
+  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "prompt": "winter landscape",
   "strength": 0.5
 }),

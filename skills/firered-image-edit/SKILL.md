@@ -50,7 +50,7 @@ curl -X POST 'https://gateway.pixazo.ai/firered-image-edit/v1/firered-image-edit
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "The woman's dress is changed to black",
-  "image": ["https://example.com/photo.jpg"]
+  "image": ["https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"]
 }'
 ```
 
@@ -66,7 +66,7 @@ r = requests.post(
     },
     json={
   "prompt": "The woman's dress is changed to black",
-  "image": ["https://example.com/photo.jpg"]
+  "image": ["https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"]
 },
     timeout=300,
 )
@@ -85,7 +85,7 @@ const res = await fetch('https://gateway.pixazo.ai/firered-image-edit/v1/firered
   },
   body: JSON.stringify({
   "prompt": "The woman's dress is changed to black",
-  "image": ["https://example.com/photo.jpg"]
+  "image": ["https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"]
 }),
 });
 console.log(await res.json());

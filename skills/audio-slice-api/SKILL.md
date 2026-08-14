@@ -47,7 +47,7 @@ curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/audio-slice' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "audio_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3",
     "start_seconds": 30,
     "duration_seconds": 15
 }'
@@ -64,7 +64,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "audio_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3",
     "start_seconds": 30,
     "duration_seconds": 15
 },
@@ -84,7 +84,7 @@ const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/audio-slice', 
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "audio_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3",
     "start_seconds": 30,
     "duration_seconds": 15
 }),

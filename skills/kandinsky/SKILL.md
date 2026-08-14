@@ -48,7 +48,7 @@ curl -X POST 'https://gateway.pixazo.ai/kandinsky-5-0-pro-953/v1/kandinsky-5-0-p
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "The white dragon warrior stands still, eyes full of determination and strength. The camera slowly moves closer or circles around the warrior, highlighting the powerful presence and heroic spirit of the character.",
-  "image_url": "https://example.com/model_tests/wan/dragon-warrior.jpg"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
 }'
 ```
 
@@ -64,7 +64,7 @@ r = requests.post(
     },
     json={
   "prompt": "The white dragon warrior stands still, eyes full of determination and strength. The camera slowly moves closer or circles around the warrior, highlighting the powerful presence and heroic spirit of the character.",
-  "image_url": "https://example.com/model_tests/wan/dragon-warrior.jpg"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
 },
     timeout=300,
 )
@@ -83,7 +83,7 @@ const res = await fetch('https://gateway.pixazo.ai/kandinsky-5-0-pro-953/v1/kand
   },
   body: JSON.stringify({
   "prompt": "The white dragon warrior stands still, eyes full of determination and strength. The camera slowly moves closer or circles around the warrior, highlighting the powerful presence and heroic spirit of the character.",
-  "image_url": "https://example.com/model_tests/wan/dragon-warrior.jpg"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
 }),
 });
 console.log(await res.json());

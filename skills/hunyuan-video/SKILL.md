@@ -55,7 +55,7 @@ curl -X POST 'https://gateway.pixazo.ai/hunyuan-video/v1/hunyuan-video-request' 
   "prompt": "A cinematic close-up of a wolf walking through a snowy forest at dawn, soft golden light filtering through pine trees.",
   "aspect_ratio": "16:9",
   "resolution": "720p",
-  "num_frames": 129,
+  "num_frames": "129",
   "num_inference_steps": 30,
   "pro_mode": false
 }'
@@ -75,7 +75,7 @@ r = requests.post(
   "prompt": "A cinematic close-up of a wolf walking through a snowy forest at dawn, soft golden light filtering through pine trees.",
   "aspect_ratio": "16:9",
   "resolution": "720p",
-  "num_frames": 129,
+  "num_frames": "129",
   "num_inference_steps": 30,
   "pro_mode": false
 },
@@ -98,7 +98,7 @@ const res = await fetch('https://gateway.pixazo.ai/hunyuan-video/v1/hunyuan-vide
   "prompt": "A cinematic close-up of a wolf walking through a snowy forest at dawn, soft golden light filtering through pine trees.",
   "aspect_ratio": "16:9",
   "resolution": "720p",
-  "num_frames": 129,
+  "num_frames": "129",
   "num_inference_steps": 30,
   "pro_mode": false
 }),

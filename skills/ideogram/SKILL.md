@@ -74,7 +74,7 @@ curl -X POST 'https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-request' \
   "output_format": "jpeg",
   "rendering_speed": "BALANCED",
   "acceleration": "none",
-  "enable_prompt_expansion": true,
+  "expansion_model": "Medium",
   "enable_safety_checker": true,
   "sync_mode": false
 }'
@@ -97,7 +97,7 @@ r = requests.post(
   "output_format": "jpeg",
   "rendering_speed": "BALANCED",
   "acceleration": "none",
-  "enable_prompt_expansion": true,
+  "expansion_model": "Medium",
   "enable_safety_checker": true,
   "sync_mode": false
 },
@@ -123,7 +123,7 @@ const res = await fetch('https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-re
   "output_format": "jpeg",
   "rendering_speed": "BALANCED",
   "acceleration": "none",
-  "enable_prompt_expansion": true,
+  "expansion_model": "Medium",
   "enable_safety_checker": true,
   "sync_mode": false
 }),

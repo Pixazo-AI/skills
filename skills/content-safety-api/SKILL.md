@@ -47,7 +47,7 @@ curl -X POST 'https://gateway.pixazo.ai/content-safety/v1/image-moderation' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://example.com/photo.jpg"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
 }'
 ```
 
@@ -62,7 +62,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://example.com/photo.jpg"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
 },
     timeout=300,
 )
@@ -80,7 +80,7 @@ const res = await fetch('https://gateway.pixazo.ai/content-safety/v1/image-moder
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://example.com/photo.jpg"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
 }),
 });
 console.log(await res.json());

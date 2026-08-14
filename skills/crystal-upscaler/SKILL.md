@@ -47,7 +47,7 @@ curl -X POST 'https://gateway.pixazo.ai/upscaler/v1/upscale' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image": "https://example.com/portrait.jpg",
+  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "scale_factor": 4
 }'
 ```
@@ -63,7 +63,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "image": "https://example.com/portrait.jpg",
+  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "scale_factor": 4
 },
     timeout=300,
@@ -82,7 +82,7 @@ const res = await fetch('https://gateway.pixazo.ai/upscaler/v1/upscale', {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image": "https://example.com/portrait.jpg",
+  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "scale_factor": 4
 }),
 });
