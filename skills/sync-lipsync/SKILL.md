@@ -49,8 +49,8 @@ curl -X POST 'https://gateway.pixazo.ai/sync-lipsync-v3/v1/video-to-video/lip-sy
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "video_url": "https://example.com/input.mp4",
-  "audio_url": "https://example.com/voice.mp3",
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/lipsync/talking-head-17s.mp4",
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/test-audio/hg_audio17.mp3",
   "sync_mode": "cut_off"
 }'
 ```
@@ -66,8 +66,8 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "video_url": "https://example.com/input.mp4",
-  "audio_url": "https://example.com/voice.mp3",
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/lipsync/talking-head-17s.mp4",
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/test-audio/hg_audio17.mp3",
   "sync_mode": "cut_off"
 },
     timeout=300,
@@ -86,8 +86,8 @@ const res = await fetch('https://gateway.pixazo.ai/sync-lipsync-v3/v1/video-to-v
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "video_url": "https://example.com/input.mp4",
-  "audio_url": "https://example.com/voice.mp3",
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/lipsync/talking-head-17s.mp4",
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/test-audio/hg_audio17.mp3",
   "sync_mode": "cut_off"
 }),
 });

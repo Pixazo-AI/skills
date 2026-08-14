@@ -50,9 +50,7 @@ curl -X POST 'https://gateway.pixazo.ai/ai-model-api/v1/image-to-video' \
   "model": "dop-lite",
   "prompt": "A serene lake with gentle ripples, birds flying overhead, cinematic lighting",
   "seed": 123456,
-  "motions_id": "[MOTION_ID]",
-  "motions_strength": 0.7,
-  "input_images": ["https://example.com/images/lake-scene.jpg"],
+  "input_images": ["https://pub-582b7213209642b9b995c96c95a30381.r2.dev/model.png"],
   "enhance_prompt": true
 }'
 ```
@@ -71,9 +69,7 @@ r = requests.post(
   "model": "dop-lite",
   "prompt": "A serene lake with gentle ripples, birds flying overhead, cinematic lighting",
   "seed": 123456,
-  "motions_id": "[MOTION_ID]",
-  "motions_strength": 0.7,
-  "input_images": ["https://example.com/images/lake-scene.jpg"],
+  "input_images": ["https://pub-582b7213209642b9b995c96c95a30381.r2.dev/model.png"],
   "enhance_prompt": true
 },
     timeout=300,
@@ -95,9 +91,7 @@ const res = await fetch('https://gateway.pixazo.ai/ai-model-api/v1/image-to-vide
   "model": "dop-lite",
   "prompt": "A serene lake with gentle ripples, birds flying overhead, cinematic lighting",
   "seed": 123456,
-  "motions_id": "[MOTION_ID]",
-  "motions_strength": 0.7,
-  "input_images": ["https://example.com/images/lake-scene.jpg"],
+  "input_images": ["https://pub-582b7213209642b9b995c96c95a30381.r2.dev/model.png"],
   "enhance_prompt": true
 }),
 });

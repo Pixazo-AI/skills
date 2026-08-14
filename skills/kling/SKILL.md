@@ -93,7 +93,7 @@ curl -X POST 'https://gateway.pixazo.ai/kling-lipsync-text-to-video/v1/text-to-v
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "video_url": "https://example.com/input.mp4",
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/lipsync/talking-head-17s.mp4",
   "text": "Mental health is as important as physical health.",
   "voice_id": "genshin_klee2",
   "voice_language": "en",
@@ -112,7 +112,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "video_url": "https://example.com/input.mp4",
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/lipsync/talking-head-17s.mp4",
   "text": "Mental health is as important as physical health.",
   "voice_id": "genshin_klee2",
   "voice_language": "en",
@@ -134,7 +134,7 @@ const res = await fetch('https://gateway.pixazo.ai/kling-lipsync-text-to-video/v
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "video_url": "https://example.com/input.mp4",
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/lipsync/talking-head-17s.mp4",
   "text": "Mental health is as important as physical health.",
   "voice_id": "genshin_klee2",
   "voice_language": "en",

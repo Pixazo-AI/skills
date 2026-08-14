@@ -50,7 +50,6 @@ curl -X POST 'https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "A friendly presenter explaining a new mobile app in 30 seconds, with a cheerful tone and modern background.",
-  "mode": "generate",
   "orientation": "landscape"
 }'
 ```
@@ -67,7 +66,6 @@ r = requests.post(
     },
     json={
   "prompt": "A friendly presenter explaining a new mobile app in 30 seconds, with a cheerful tone and modern background.",
-  "mode": "generate",
   "orientation": "landscape"
 },
     timeout=300,
@@ -87,7 +85,6 @@ const res = await fetch('https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-
   },
   body: JSON.stringify({
   "prompt": "A friendly presenter explaining a new mobile app in 30 seconds, with a cheerful tone and modern background.",
-  "mode": "generate",
   "orientation": "landscape"
 }),
 });

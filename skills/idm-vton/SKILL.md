@@ -50,7 +50,7 @@ curl -X POST 'https://gateway.pixazo.ai/idm-vton-api/v1/r-idm-vton' \
   "garm_img": "https://example.com/garment.jpg",
   "human_img": "https://example.com/human.jpg",
   "garment_des": "A blue cotton dress",
-  "category": "dress"
+  "category": "dresses"
 }'
 ```
 
@@ -68,7 +68,7 @@ r = requests.post(
   "garm_img": "https://example.com/garment.jpg",
   "human_img": "https://example.com/human.jpg",
   "garment_des": "A blue cotton dress",
-  "category": "dress"
+  "category": "dresses"
 },
     timeout=300,
 )
@@ -89,7 +89,7 @@ const res = await fetch('https://gateway.pixazo.ai/idm-vton-api/v1/r-idm-vton', 
   "garm_img": "https://example.com/garment.jpg",
   "human_img": "https://example.com/human.jpg",
   "garment_des": "A blue cotton dress",
-  "category": "dress"
+  "category": "dresses"
 }),
 });
 console.log(await res.json());

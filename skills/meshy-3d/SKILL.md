@@ -57,7 +57,7 @@ curl -X POST 'https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d
   "should_remesh": true,
   "symmetry_mode": "auto",
   "rigging_height_meters": 1.7,
-  "animation_action_id": 1001,
+  "animation_action_id": 92,
   "enable_safety_checker": true
 }'
 ```
@@ -80,7 +80,7 @@ r = requests.post(
   "should_remesh": true,
   "symmetry_mode": "auto",
   "rigging_height_meters": 1.7,
-  "animation_action_id": 1001,
+  "animation_action_id": 92,
   "enable_safety_checker": true
 },
     timeout=300,
@@ -106,7 +106,7 @@ const res = await fetch('https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6
   "should_remesh": true,
   "symmetry_mode": "auto",
   "rigging_height_meters": 1.7,
-  "animation_action_id": 1001,
+  "animation_action_id": 92,
   "enable_safety_checker": true
 }),
 });
