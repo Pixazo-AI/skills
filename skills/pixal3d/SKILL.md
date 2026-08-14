@@ -5,7 +5,7 @@ description: 3D model generation with Pixal3D API (by Pixal3D) via the Pixazo AP
 
 # Pixal3D API
 
-Pixal3D — generate a single GLB 3D model from a reference image. Backed by fal.ai's pixal3d endpoint.
+Pixal3D — generate a single GLB 3D model from a reference image.
 
 You can ask Pixal3D to handle 3D model generation. Powered by Pixal3D via the Pixazo API gateway.
 

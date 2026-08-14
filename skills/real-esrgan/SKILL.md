@@ -5,7 +5,7 @@ description: Image generation/editing with Real-ESRGAN API (by NightmareAI) via 
 
 # Real-ESRGAN API
 
-Real-ESRGAN image upscaler / super-resolution. Hosted on Replicate by NightmareAI.
+Real-ESRGAN image upscaler / super-resolution, originally created by NightmareAI.
 
 You can ask Real-ESRGAN to handle image generation/editing. Powered by NightmareAI via the Pixazo API gateway.
 

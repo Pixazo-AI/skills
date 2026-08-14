@@ -5,7 +5,7 @@ description: Video generation with Sync Lipsync API (by Sync.so) via the Pixazo 
 
 # Sync Lipsync API
 
-Lip-sync any talking-head video to a separate audio track with Sync.so v3 (via fal.ai). Submit a video URL + audio URL; the model re-syncs the speaker's mouth to the audio.
+Lip-sync any talking-head video to a separate audio track with Sync.so v3. Submit a video URL + audio URL; the model re-syncs the speaker's mouth to the audio.
 
 You can ask Sync to handle video generation. Powered by Sync.so via the Pixazo API gateway.
 
