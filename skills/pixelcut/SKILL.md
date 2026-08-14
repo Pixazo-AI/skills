@@ -47,7 +47,7 @@ curl -X POST 'https://gateway.pixazo.ai/pixelcut-video-background-removal/v1/pix
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Video.mp4",
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/v1/topaz-upscale-video-753_019ffb10-e9d5-7c30-d9d5-939714350af0c/output.mp4",
   "background": "transparent",
   "output_format": "webm_vp9"
 }'
@@ -64,7 +64,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Video.mp4",
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/v1/topaz-upscale-video-753_019ffb10-e9d5-7c30-d9d5-939714350af0c/output.mp4",
   "background": "transparent",
   "output_format": "webm_vp9"
 },
@@ -84,7 +84,7 @@ const res = await fetch('https://gateway.pixazo.ai/pixelcut-video-background-rem
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Video.mp4",
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/v1/topaz-upscale-video-753_019ffb10-e9d5-7c30-d9d5-939714350af0c/output.mp4",
   "background": "transparent",
   "output_format": "webm_vp9"
 }),
