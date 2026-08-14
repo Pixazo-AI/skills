@@ -36,8 +36,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | HiDream O1 | Image to Image (Image Editing) | `hidream-o1-image-edit` / `hidream-o1-image-edit-request` |
 | HiDream O1 Dev | Text to Image | `hidream-o1-image-dev` / `hidream-o1-image-dev-request` |
 | HiDream O1 Dev | Image to Image (Image Editing) | `hidream-o1-image-dev-edit` / `hidream-o1-image-dev-edit-request` |
-| HiDream I1 Full | Text to Image | `hidream-o1-image` / `hidream-o1-image-request` |
-| HiDream I1 Full | Image to Image (Image Editing) | `hidream-o1-image-edit` / `hidream-o1-image-edit-request` |
 
 ### Step 3 — Make the API call
 
