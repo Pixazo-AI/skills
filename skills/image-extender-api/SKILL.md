@@ -47,7 +47,7 @@ curl -X POST 'https://gateway.pixazo.ai/image-outpaint/v1/image-outpaint-request
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://v3.fal.media/files/koala/oei_-iPIYFnhdB8SxojND_qwen-edit-res.png",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "zoom_out_percentage": 20,
   "num_images": 1,
   "enable_safety_checker": true,
@@ -66,7 +66,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://v3.fal.media/files/koala/oei_-iPIYFnhdB8SxojND_qwen-edit-res.png",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "zoom_out_percentage": 20,
   "num_images": 1,
   "enable_safety_checker": true,
@@ -88,7 +88,7 @@ const res = await fetch('https://gateway.pixazo.ai/image-outpaint/v1/image-outpa
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://v3.fal.media/files/koala/oei_-iPIYFnhdB8SxojND_qwen-edit-res.png",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "zoom_out_percentage": 20,
   "num_images": 1,
   "enable_safety_checker": true,

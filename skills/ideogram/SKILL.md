@@ -35,14 +35,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Ideogram v4 | Text to Image | `ideogram-v4` / `ideogram-v4-request` |
 | Ideogram v4 | Image to Image | `ideogram-v4-image-to-image` / `ideogram-v4-image-to-image-request` |
 | Ideogram Remove Background | Image to Image (Image Background Removal) | `ideogram-remove-background` / `ideogram-remove-background-request` |
-| Ideogram v2 | Text to Image | `ideogram-generate` / `get-image` |
-| Ideogram v2 | Utility (Image to Text — Captioning) | `ideogram-generate` / `describe-image` |
-| Ideogram v2 | Image to Image (Image Editing) | `ideogram-generate` / `edit-image` |
-| Ideogram v2 | Image to Image (Image Editing — Remix) | `ideogram-generate` / `remix-image` |
-| Ideogram Turbo | Text to Image | `ideogram-image-turbo` / `create-image` |
-| Ideogram Turbo | Utility (Image to Text — Captioning) | `ideogram-image-turbo` / `describe-image` |
-| Ideogram Turbo | Image to Image (Image Editing) | `ideogram-image-turbo` / `edit-image` |
-| Ideogram Turbo | Image to Image (Image Editing — Remix) | `ideogram-image-turbo` / `remix-image` |
 
 ### Step 3 — Make the API call
 
@@ -52,14 +44,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/ideogram-v4-image-to-image/v1/ideogram-v4-image-to-image-request`
 - `POST https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-remove-background-request`
 - `POST https://gateway.pixazo.ai/v2/requests/status/ideogram-remove-background_019dxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
-- `POST https://gateway.pixazo.ai/ideogramV_2/v1/generate`
-- `POST https://gateway.pixazo.ai/ideogramV_2/v1/describe`
-- `POST https://gateway.pixazo.ai/ideogramV_2/v1/edit`
-- `POST https://gateway.pixazo.ai/ideogramV_2/v1/remix`
-- `POST https://gateway.pixazo.ai/ideogramV_2_Turbo/v1/generate`
-- `POST https://gateway.pixazo.ai/ideogramV_2_Turbo/v1/describe`
-- `POST https://gateway.pixazo.ai/ideogramV_2_Turbo/v1/edit`
-- `POST https://gateway.pixazo.ai/ideogramV_2_Turbo/v1/remix`
 
 **Sample request (primary operation)**
 
