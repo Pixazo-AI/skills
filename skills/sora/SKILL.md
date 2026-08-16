@@ -51,7 +51,7 @@ curl -X POST 'https://gateway.pixazo.ai/sora-video/v1/video/i2v/generate' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "The woman turns her head and smiles",
-  "image": "https://example.com/image-1280x720.jpg"
+  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
 }'
 ```
 
@@ -67,7 +67,7 @@ r = requests.post(
     },
     json={
   "prompt": "The woman turns her head and smiles",
-  "image": "https://example.com/image-1280x720.jpg"
+  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
 },
     timeout=300,
 )
@@ -86,7 +86,7 @@ const res = await fetch('https://gateway.pixazo.ai/sora-video/v1/video/i2v/gener
   },
   body: JSON.stringify({
   "prompt": "The woman turns her head and smiles",
-  "image": "https://example.com/image-1280x720.jpg"
+  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
 }),
 });
 console.log(await res.json());

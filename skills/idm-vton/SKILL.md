@@ -47,8 +47,8 @@ curl -X POST 'https://gateway.pixazo.ai/idm-vton-api/v1/r-idm-vton' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "garm_img": "https://example.com/garment.jpg",
-  "human_img": "https://example.com/human.jpg",
+  "garm_img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/tshirtShortSleeve.jpg",
+  "human_img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/model.png",
   "garment_des": "A blue cotton dress",
   "category": "dresses"
 }'
@@ -65,8 +65,8 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "garm_img": "https://example.com/garment.jpg",
-  "human_img": "https://example.com/human.jpg",
+  "garm_img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/tshirtShortSleeve.jpg",
+  "human_img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/model.png",
   "garment_des": "A blue cotton dress",
   "category": "dresses"
 },
@@ -86,8 +86,8 @@ const res = await fetch('https://gateway.pixazo.ai/idm-vton-api/v1/r-idm-vton', 
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "garm_img": "https://example.com/garment.jpg",
-  "human_img": "https://example.com/human.jpg",
+  "garm_img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/tshirtShortSleeve.jpg",
+  "human_img": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/model.png",
   "garment_des": "A blue cotton dress",
   "category": "dresses"
 }),

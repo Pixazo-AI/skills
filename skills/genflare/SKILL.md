@@ -47,7 +47,7 @@ curl -X POST 'https://gateway.pixazo.ai/baidu-genflare-2-0-api/v1/generateImageT
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "img_url": "https://example.com/images/cat.png",
+  "img_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "prompt": "A cat running on the grass",
   "resolution": "480P",
   "duration": 5,
@@ -68,7 +68,7 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "img_url": "https://example.com/images/cat.png",
+  "img_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "prompt": "A cat running on the grass",
   "resolution": "480P",
   "duration": 5,
@@ -92,7 +92,7 @@ const res = await fetch('https://gateway.pixazo.ai/baidu-genflare-2-0-api/v1/gen
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "img_url": "https://example.com/images/cat.png",
+  "img_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "prompt": "A cat running on the grass",
   "resolution": "480P",
   "duration": 5,
