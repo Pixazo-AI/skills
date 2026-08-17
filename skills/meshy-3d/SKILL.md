@@ -1,11 +1,11 @@
 ---
 name: meshy-3d
-description: 3D model generation with Meshy 6 API (by Meshy) via the Pixazo API. TRIGGER when the user mentions "Meshy" or "Meshy 6 API", or when the user asks to generate / make a 3D model / mesh / asset and Meshy is named or implied. DO NOT TRIGGER for image / video / music / voice / try-on — each has its own skill.
+description: 3D model generation with Meshy API (by Meshy) via the Pixazo API. TRIGGER when the user mentions "Meshy" or "Meshy API", or when the user asks to generate / make a 3D model / mesh / asset and Meshy is named or implied. DO NOT TRIGGER for image / video / music / voice / try-on — each has its own skill.
 ---
 
-# Meshy 6 API
+# Meshy API
 
-Meshy 6 — production-ready 3D model generation from text prompts or reference images.
+Meshy — production-ready 3D model generation from text prompts or reference images. Meshy 7 adds single-image and multi-image reconstruction with optional auto-rigging and animation.
 
 You can ask Meshy to handle 3D model generation. Powered by Meshy via the Pixazo API gateway.
 
@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Meshy 7 | Image to Image (3D Models — Image to 3D) | `meshy-7` / `image-to-3d` |
+| Meshy 7 | Image to Image (3D Models — Multi-Image to 3D) | `meshy-7` / `multi-image-to-3d` |
 | Meshy 6 | Text to Image (3D Models — Text to 3D) | `meshy-6-text-to-3d` / `meshy-6-text-to-3d-request` |
 | Meshy 6 | Image to Image (3D Models — Image to 3D) | `meshy-6-i2-3d` / `meshy-6-i2-3d-request` |
 
@@ -39,6 +41,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/meshy-7/v1/image-to-3d`
+- `POST https://gateway.pixazo.ai/meshy-7/v1/multi-image-to-3d`
 - `POST https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request`
 - `POST https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request-result`
 - `POST https://gateway.pixazo.ai/meshy-6-i2-3d/v1/meshy-6-i2-3d-request`
@@ -50,15 +54,12 @@ curl -X POST 'https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A rustic antique wooden treasure chest with iron bands and ornate metalwork",
-  "mode": "full",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/meshy-7/single.png",
   "topology": "triangle",
   "target_polycount": 30000,
-  "should_remesh": true,
   "symmetry_mode": "auto",
-  "rigging_height_meters": 1.7,
-  "animation_action_id": 92,
-  "enable_safety_checker": true
+  "should_remesh": true,
+  "should_texture": true
 }'
 ```
 
@@ -73,15 +74,12 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A rustic antique wooden treasure chest with iron bands and ornate metalwork",
-  "mode": "full",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/meshy-7/single.png",
   "topology": "triangle",
   "target_polycount": 30000,
-  "should_remesh": true,
   "symmetry_mode": "auto",
-  "rigging_height_meters": 1.7,
-  "animation_action_id": 92,
-  "enable_safety_checker": true
+  "should_remesh": true,
+  "should_texture": true
 },
     timeout=300,
 )
@@ -99,15 +97,12 @@ const res = await fetch('https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A rustic antique wooden treasure chest with iron bands and ornate metalwork",
-  "mode": "full",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/meshy-7/single.png",
   "topology": "triangle",
   "target_polycount": 30000,
-  "should_remesh": true,
   "symmetry_mode": "auto",
-  "rigging_height_meters": 1.7,
-  "animation_action_id": 92,
-  "enable_safety_checker": true
+  "should_remesh": true,
+  "should_texture": true
 }),
 });
 console.log(await res.json());
