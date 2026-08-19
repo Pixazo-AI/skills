@@ -1,13 +1,13 @@
 ---
-name: gemini-omni
-description: Video generation with Gemini Omni API (by Google) via the Pixazo API. TRIGGER when the user mentions "Gemini Omni" or "Gemini Omni API", or when the user asks to generate / make / create a video / clip / animation and Gemini Omni is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+name: magi
+description: Video generation with Magi API (by Sand AI) via the Pixazo API. TRIGGER when the user mentions "Magi" or "Magi API", or when the user asks to generate / make / create a video / clip / animation and Magi is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Gemini Omni API
+# Magi API
 
-Google's Gemini Omni is a multimodal video model that handles text-to-video, image-to-video, reference-to-video, and video-to-video editing through a single API. Note: produces a short fixed clip (about 3–10 seconds); length is set by the model, not selectable.
+Video generation by Sand AI. Magi animates a still image or restyles an existing clip, driven by a text instruction. Output is 720p at the requested duration.
 
-You can ask Gemini Omni to handle video generation. Powered by Google via the Pixazo API gateway.
+You can ask Magi to handle video generation. Powered by Sand AI via the Pixazo API gateway.
 
 ---
 
@@ -32,29 +32,26 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Gemini Omni Flash | Text to Video | `gemini-omni` / `text-to-video-request` |
-| Gemini Omni Flash | Image to Video | `gemini-omni` / `image-to-video-request` |
-| Gemini Omni Flash | Reference to Video (Ref Images to Video) | `gemini-omni` / `reference-to-video-request` |
-| Gemini Omni Flash | Video to Video(video editing) | `gemini-omni` / `video-to-video-request` |
+| Magi | Image to Video | `magi` / `magi-image-to-video` |
+| Magi | Video to Video (Video Editing) | `magi` / `magi-video-to-video` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/gemini-omni/v1/text-to-video`
-- `POST https://gateway.pixazo.ai/gemini-omni/v1/image-to-video`
-- `POST https://gateway.pixazo.ai/gemini-omni/v1/reference-to-video`
-- `POST https://gateway.pixazo.ai/gemini-omni/v1/video-to-video`
+- `POST https://gateway.pixazo.ai/magi/v1/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/magi/v1/v1/video-to-video`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/gemini-omni/v1/text-to-video' \
+curl -X POST 'https://gateway.pixazo.ai/magi/v1/v1/image-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A golden retriever running through a sunlit meadow, slow motion, cinematic.",
-  "aspect_ratio": "16:9"
+  "prompt": "A cat riding a bicycle",
+  "image_url": "https://example.com/cat.jpg",
+  "duration": 5
 }'
 ```
 
@@ -63,14 +60,15 @@ curl -X POST 'https://gateway.pixazo.ai/gemini-omni/v1/text-to-video' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/gemini-omni/v1/text-to-video",
+    "https://gateway.pixazo.ai/magi/v1/v1/image-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A golden retriever running through a sunlit meadow, slow motion, cinematic.",
-  "aspect_ratio": "16:9"
+  "prompt": "A cat riding a bicycle",
+  "image_url": "https://example.com/cat.jpg",
+  "duration": 5
 },
     timeout=300,
 )
@@ -81,15 +79,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/gemini-omni/v1/text-to-video', {
+const res = await fetch('https://gateway.pixazo.ai/magi/v1/v1/image-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A golden retriever running through a sunlit meadow, slow motion, cinematic.",
-  "aspect_ratio": "16:9"
+  "prompt": "A cat riding a bicycle",
+  "image_url": "https://example.com/cat.jpg",
+  "duration": 5
 }),
 });
 console.log(await res.json());
@@ -108,12 +107,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/gemini-omni/v1/text-to-video", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/magi/v1/v1/image-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/gemini-omni/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/magi/v1/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -126,7 +125,7 @@ result_url = status.get("output_url") or status.get("video_url") or status.get("
 
 The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
 
-> **Fetch:** `https://www.pixazo.ai/models/gemini-omni.md`
+> **Fetch:** `https://www.pixazo.ai/models/magi.md`
 
 Show the result URL to the user when ready (offer to download, share, or generate variations).
 
@@ -156,13 +155,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/gemini-omni.md`
+> **Fetch:** `https://www.pixazo.ai/models/magi.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gemini-omni`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/magi`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `mochi`, `veed`, `vidu`, `wan`, `minimax`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `cosmos`, `video-to-previs`, `magi`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `mochi`, `veed`, `vidu`, `wan`, `minimax`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
