@@ -38,7 +38,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Wan 3.0 | Reference to Video (Ref Image, Video or Audio) | `wan-3-0-video` / `reference-to-video` |
 | Wan 3.0 | File to Video (Document, Slides or Web Link) | `wan-3-0-video` / `file-to-video` |
 | Wan 2.2 | Audio to Video (Ref Audio to Video) | `wan-2-2-14b-speech-to-video` / `speech-to-video-request` |
-| Wan 2.2 | Audio to Video (Ref Image + Ref Audio to Video — Animate) | `wan-2-2-animate-api-524` / `wan-2-2-animate-api-request` |
+| Wan 2.2 | Video to Video (Ref Image + Ref Video — Animate) | `wan-2-2-animate-api-524` / `wan-2-2-animate-api-request` |
 | Wan 2.2 | Image to Video (First Frame to Video) | `wan-image-to-video` / `wan-image-to-video-first-frame` |
 | Wan 2.2 | Image to Video (Keyframe to Video) | `wan-image-to-video` / `wan-keyframe-to-video` |
 | Wan 2.2 | Image to Image (Image Editing) | `wan-text-to-image` / `edit-image-request` |
