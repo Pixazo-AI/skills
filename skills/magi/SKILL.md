@@ -39,13 +39,13 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/magi/v1/v1/image-to-video`
-- `POST https://gateway.pixazo.ai/magi/v1/v1/video-to-video`
+- `POST https://gateway.pixazo.ai/magi/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/magi/v1/video-to-video`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/magi/v1/v1/image-to-video' \
+curl -X POST 'https://gateway.pixazo.ai/magi/v1/image-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -60,7 +60,7 @@ curl -X POST 'https://gateway.pixazo.ai/magi/v1/v1/image-to-video' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/magi/v1/v1/image-to-video",
+    "https://gateway.pixazo.ai/magi/v1/image-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/magi/v1/v1/image-to-video', {
+const res = await fetch('https://gateway.pixazo.ai/magi/v1/image-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -107,12 +107,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/magi/v1/v1/image-to-video", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/magi/v1/image-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/magi/v1/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/magi/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
