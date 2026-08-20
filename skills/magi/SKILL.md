@@ -50,7 +50,7 @@ curl -X POST 'https://gateway.pixazo.ai/magi/v1/image-to-video' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "A cat riding a bicycle",
-  "image_url": "https://example.com/cat.jpg",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "duration": 5
 }'
 ```
@@ -67,7 +67,7 @@ r = requests.post(
     },
     json={
   "prompt": "A cat riding a bicycle",
-  "image_url": "https://example.com/cat.jpg",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "duration": 5
 },
     timeout=300,
@@ -87,7 +87,7 @@ const res = await fetch('https://gateway.pixazo.ai/magi/v1/image-to-video', {
   },
   body: JSON.stringify({
   "prompt": "A cat riding a bicycle",
-  "image_url": "https://example.com/cat.jpg",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
   "duration": 5
 }),
 });
