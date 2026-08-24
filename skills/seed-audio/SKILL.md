@@ -1,13 +1,13 @@
 ---
-name: elevenlabs
-description: Text-to-speech / voice synthesis with ElevenLabs Audio API (by ElevenLabs) via the Pixazo API. TRIGGER when the user mentions "ElevenLabs" or "ElevenLabs Audio API", or when the user asks to speak / read aloud / convert text to speech / generate voice and ElevenLabs is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+name: seed-audio
+description: Text-to-speech / voice synthesis with Seed Audio API (by BytePlus) via the Pixazo API. TRIGGER when the user mentions "Seed Audio" or "Seed Audio API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Seed Audio is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# ElevenLabs Audio API
+# Seed Audio API
 
-Advanced audio and music generation.
+Seed Audio 1.0 generates speech, ambience and multi-speaker scenes from a text prompt, and can match a reference voice. Billed per minute of generated audio.
 
-You can ask ElevenLabs to handle text-to-speech / voice synthesis. Powered by ElevenLabs via the Pixazo API gateway.
+You can ask Seed Audio to handle text-to-speech / voice synthesis. Powered by BytePlus via the Pixazo API gateway.
 
 ---
 
@@ -32,34 +32,35 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| ElevenLabs Eleven v3 TTS | Text to Speech (Voice Cloning) | `elevenlabs-eleven-v3-tts` / `elevenlabs-eleven-v3-tts-request` |
-| ElevenLabs Music | Text to Music | `elevenlabs-music` / `elevenlabs-music-request` |
-| ElevenLabs Turbo v2.5 | Text to Speech | `elevenlabs-turbo-v2-5` / `text-to-speech` |
-| ElevenLabs Multilingual v2 | Text to Speech | `elevenlabs-multilingual-v2` / `text-to-speech` |
-| ElevenLabs Dubbing | Video & Audio Dubbing | `elevenlabs-dubbing` / `elevenlabs-dubbing-request` |
+| Seed Audio 1.0 | Text to Audio | `seed-audio-1-0` / `seed-audio-1-0-text-to-audio` |
+| Seed Audio 1.0 | Reference to Audio (Voice Reference) | `seed-audio-1-0` / `seed-audio-1-0-reference-to-audio` |
+| Seed Audio 1.0 | Reference to Audio (Image + Voice Reference) | `seed-audio-1-0` / `seed-audio-1-0-reference-to-audio-image` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-eleven-v3-tts-request`
-- `POST https://gateway.pixazo.ai/elevenlabs-music/v1/elevenlabs-music-request`
-- `POST https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech`
-- `POST https://gateway.pixazo.ai/elevenlabs-multilingual-v2/v1/text-to-speech`
-- `POST https://gateway.pixazo.ai/elevenlabs-dubbing/v1/dub`
+- `POST https://gateway.pixazo.ai/seed-audio-1-0/v1/text-to-audio`
+- `POST https://gateway.pixazo.ai/seed-audio-1-0/v1/reference-to-audio`
+- `POST https://gateway.pixazo.ai/seed-audio-1-0/v1/reference-to-audio/image`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech' \
+curl -X POST 'https://gateway.pixazo.ai/seed-audio-1-0/v1/text-to-audio' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "text": "[excited] Welcome to the future of voice. [whispers] Listen closely. [laughs] This is amazing.",
-  "voice": "Rachel",
-  "stability": 0.5,
-  "timestamps": false,
-  "apply_text_normalization": "auto"
+  "model": "seed-audio-1.0",
+  "text_prompt": "A rainy late-night convenience store ambience with two characters speaking softly.",
+  "audio_config": {
+    "format": "mp3",
+    "sample_rate": 24000,
+    "speech_rate": 0,
+    "loudness_rate": 0,
+    "pitch_rate": 0
+  },
+  "watermark": {}
 }'
 ```
 
@@ -68,17 +69,22 @@ curl -X POST 'https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech'
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech",
+    "https://gateway.pixazo.ai/seed-audio-1-0/v1/text-to-audio",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "text": "[excited] Welcome to the future of voice. [whispers] Listen closely. [laughs] This is amazing.",
-  "voice": "Rachel",
-  "stability": 0.5,
-  "timestamps": false,
-  "apply_text_normalization": "auto"
+  "model": "seed-audio-1.0",
+  "text_prompt": "A rainy late-night convenience store ambience with two characters speaking softly.",
+  "audio_config": {
+    "format": "mp3",
+    "sample_rate": 24000,
+    "speech_rate": 0,
+    "loudness_rate": 0,
+    "pitch_rate": 0
+  },
+  "watermark": {}
 },
     timeout=300,
 )
@@ -89,18 +95,23 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech', {
+const res = await fetch('https://gateway.pixazo.ai/seed-audio-1-0/v1/text-to-audio', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "text": "[excited] Welcome to the future of voice. [whispers] Listen closely. [laughs] This is amazing.",
-  "voice": "Rachel",
-  "stability": 0.5,
-  "timestamps": false,
-  "apply_text_normalization": "auto"
+  "model": "seed-audio-1.0",
+  "text_prompt": "A rainy late-night convenience store ambience with two characters speaking softly.",
+  "audio_config": {
+    "format": "mp3",
+    "sample_rate": 24000,
+    "speech_rate": 0,
+    "loudness_rate": 0,
+    "pitch_rate": 0
+  },
+  "watermark": {}
 }),
 });
 console.log(await res.json());
@@ -142,13 +153,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/elevenlabs.md`
+> **Fetch:** `https://www.pixazo.ai/models/seed-audio.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/elevenlabs`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/seed-audio`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `xai-tts`, `lux-tts`, `tada`, `melotts`, `gpt-4o`, `seed-audio`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `xai-tts`, `lux-tts`, `tada`, `melotts`, `gpt-4o`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
