@@ -5,7 +5,7 @@ description: Text-to-speech / voice synthesis with MAI Voice API (by Microsoft) 
 
 # MAI Voice API
 
-Microsoft AI's speech family on Azure Speech. MAI-Voice-2 turns text into expressive, multilingual speech across 47 voices and 18 locales with SSML emotion control; MAI-Transcribe-1.5 transcribes audio across 44 languages.
+Microsoft AI's speech family on Azure Speech. MAI-Voice-2 turns text into expressive, multilingual speech across 47 voices and 18 locales with SSML emotion control; MAI-Transcribe-1.5 transcribes audio across 43 languages.
 
 You can ask MAI Voice to handle text-to-speech / voice synthesis. Powered by Microsoft via the Pixazo API gateway.
 
@@ -50,8 +50,9 @@ curl -X POST 'https://gateway.pixazo.ai/microsoft-mai-voice-2/v1/text-to-speech'
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "text": "Hello from Pixazo. This is MAI Voice 2.",
-  "language": "en",
-  "context": "Acme Corp, Dr. Yamada, quarterly earnings"
+  "voice": "en-US-Harper:MAI-Voice-2",
+  "style": "excited",
+  "styledegree": 1
 }'
 ```
 
@@ -67,8 +68,9 @@ r = requests.post(
     },
     json={
   "text": "Hello from Pixazo. This is MAI Voice 2.",
-  "language": "en",
-  "context": "Acme Corp, Dr. Yamada, quarterly earnings"
+  "voice": "en-US-Harper:MAI-Voice-2",
+  "style": "excited",
+  "styledegree": 1
 },
     timeout=300,
 )
@@ -87,8 +89,9 @@ const res = await fetch('https://gateway.pixazo.ai/microsoft-mai-voice-2/v1/text
   },
   body: JSON.stringify({
   "text": "Hello from Pixazo. This is MAI Voice 2.",
-  "language": "en",
-  "context": "Acme Corp, Dr. Yamada, quarterly earnings"
+  "voice": "en-US-Harper:MAI-Voice-2",
+  "style": "excited",
+  "styledegree": 1
 }),
 });
 console.log(await res.json());
