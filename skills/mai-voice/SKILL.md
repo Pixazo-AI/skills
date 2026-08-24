@@ -1,13 +1,13 @@
 ---
-name: tada
-description: Text-to-speech / voice synthesis with Tada TTS API (by Tada) via the Pixazo API. TRIGGER when the user mentions "Tada TTS" or "Tada TTS API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Tada TTS is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+name: mai-voice
+description: Text-to-speech / voice synthesis with MAI Voice API (by Microsoft) via the Pixazo API. TRIGGER when the user mentions "MAI Voice" or "MAI Voice API", or when the user asks to speak / read aloud / convert text to speech / generate voice and MAI Voice is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# Tada TTS API
+# MAI Voice API
 
-Expressive voice cloning from a reference clip, in two sizes. The 3B model trades speed for a more natural read; the 1B is the budget tier.
+Microsoft AI's speech family on Azure Speech. MAI-Voice-2 turns text into expressive, multilingual speech across 47 voices and 18 locales with SSML emotion control; MAI-Transcribe-1.5 transcribes audio across 44 languages.
 
-You can ask Tada TTS to handle text-to-speech / voice synthesis. Powered by Tada via the Pixazo API gateway.
+You can ask MAI Voice to handle text-to-speech / voice synthesis. Powered by Microsoft via the Pixazo API gateway.
 
 ---
 
@@ -32,26 +32,26 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Tada 3B TTS | Voice Cloning | `tada-3b-tts` / `text-to-speech` |
-| Tada 1B TTS | Voice Cloning | `tada-1b-tts` / `text-to-speech` |
+| MAI Voice 2 | Text to Speech | `microsoft-mai-voice-2` / `microsoft-mai-voice-2-request` |
+| MAI Transcribe 1.5 | Speech to Text | `microsoft-mai-transcribe` / `microsoft-mai-transcribe-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/tada-3b-tts/v1/text-to-speech`
-- `POST https://gateway.pixazo.ai/tada-1b-tts/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/microsoft-mai-voice-2/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/microsoft-mai-transcribe/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/tada-3b-tts/v1/text-to-speech' \
+curl -X POST 'https://gateway.pixazo.ai/microsoft-mai-voice-2/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "audio_url": "https://imagesai.appypie.com/7686410/K1D5kDJQ68R3DGvo6aKQ_017731469361782.mp3",
-  "prompt": "Under the starlit sky, the storyteller began weaving tales of ancient kingdoms and forgotten heroes.",
-  "language": "en"
+  "text": "Hello from Pixazo. This is MAI Voice 2.",
+  "language": "en",
+  "context": "Acme Corp, Dr. Yamada, quarterly earnings"
 }'
 ```
 
@@ -60,15 +60,15 @@ curl -X POST 'https://gateway.pixazo.ai/tada-3b-tts/v1/text-to-speech' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/tada-3b-tts/v1/text-to-speech",
+    "https://gateway.pixazo.ai/microsoft-mai-voice-2/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "audio_url": "https://imagesai.appypie.com/7686410/K1D5kDJQ68R3DGvo6aKQ_017731469361782.mp3",
-  "prompt": "Under the starlit sky, the storyteller began weaving tales of ancient kingdoms and forgotten heroes.",
-  "language": "en"
+  "text": "Hello from Pixazo. This is MAI Voice 2.",
+  "language": "en",
+  "context": "Acme Corp, Dr. Yamada, quarterly earnings"
 },
     timeout=300,
 )
@@ -79,16 +79,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/tada-3b-tts/v1/text-to-speech', {
+const res = await fetch('https://gateway.pixazo.ai/microsoft-mai-voice-2/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "audio_url": "https://imagesai.appypie.com/7686410/K1D5kDJQ68R3DGvo6aKQ_017731469361782.mp3",
-  "prompt": "Under the starlit sky, the storyteller began weaving tales of ancient kingdoms and forgotten heroes.",
-  "language": "en"
+  "text": "Hello from Pixazo. This is MAI Voice 2.",
+  "language": "en",
+  "context": "Acme Corp, Dr. Yamada, quarterly earnings"
 }),
 });
 console.log(await res.json());
@@ -130,13 +130,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/tada.md`
+> **Fetch:** `https://www.pixazo.ai/models/mai-voice.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/tada`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/mai-voice`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `xai-tts`, `lux-tts`, `melotts`, `gpt-4o`, `seed-audio`, `mai-voice`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `xai-tts`, `lux-tts`, `tada`, `melotts`, `gpt-4o`, `seed-audio`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

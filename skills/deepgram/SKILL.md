@@ -136,5 +136,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `inworld`, `xai-tts`, `lux-tts`, `tada`, `melotts`, `gpt-4o`, `seed-audio`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `inworld`, `xai-tts`, `lux-tts`, `tada`, `melotts`, `gpt-4o`, `seed-audio`, `mai-voice`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
