@@ -32,20 +32,20 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| MAI Voice 2 | Text to Speech | `microsoft-mai-voice-2` / `microsoft-mai-voice-2-request` |
-| MAI Transcribe 1.5 | Speech to Text | `microsoft-mai-transcribe` / `microsoft-mai-transcribe-request` |
+| MAI Voice 2 | Text to Speech | `mai-voice-2` / `microsoft-mai-voice-2-request` |
+| MAI Transcribe 1.5 | Speech to Text | `mai-transcribe` / `microsoft-mai-transcribe-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/microsoft-mai-voice-2/v1/text-to-speech`
-- `POST https://gateway.pixazo.ai/microsoft-mai-transcribe/v1/speech-to-text`
+- `POST https://gateway.pixazo.ai/mai-voice-2/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/mai-transcribe/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/microsoft-mai-voice-2/v1/text-to-speech' \
+curl -X POST 'https://gateway.pixazo.ai/mai-voice-2/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -61,7 +61,7 @@ curl -X POST 'https://gateway.pixazo.ai/microsoft-mai-voice-2/v1/text-to-speech'
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/microsoft-mai-voice-2/v1/text-to-speech",
+    "https://gateway.pixazo.ai/mai-voice-2/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/microsoft-mai-voice-2/v1/text-to-speech', {
+const res = await fetch('https://gateway.pixazo.ai/mai-voice-2/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
