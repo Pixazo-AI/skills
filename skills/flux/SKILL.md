@@ -54,6 +54,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Flux Dev | Text to Image | `flux-dev` / `text-to-image` |
 | Flux Dev | Text to Image (LoRA Fast Trainer) | `flux-lora-fast-training` / `train` |
 | Flux Fill Dev | Image to Image (Image Editing — Inpainting) | `flux-fill-dev` / `image-generation-request` |
+| Flux Video Upscale | Video to Video (Video Upscaler) | `flux-video-upscale` / `flux-video-upscale-request` |
 
 ### Step 3 — Make the API call
 
@@ -82,6 +83,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/flux-dev/v1/dev/textToImage`
 - `POST https://gateway.pixazo.ai/flux-lora-fast-training/v1/train`
 - `POST https://gateway.pixazo.ai/flux-fill-dev/v1/flux-fill/generate`
+- `POST https://gateway.pixazo.ai/flux-video-upscale/v1/flux-video-upscale-request`
 
 **Sample request (primary operation)**
 
