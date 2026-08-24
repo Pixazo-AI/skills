@@ -83,7 +83,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/flux-dev/v1/dev/textToImage`
 - `POST https://gateway.pixazo.ai/flux-lora-fast-training/v1/train`
 - `POST https://gateway.pixazo.ai/flux-fill-dev/v1/flux-fill/generate`
-- `POST https://gateway.pixazo.ai/flux-video-upscale/v1/flux-video-upscale-request`
+- `POST https://gateway.pixazo.ai/flux-video-upscale/v1/video-to-video`
 
 **Sample request (primary operation)**
 
