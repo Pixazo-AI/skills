@@ -33,8 +33,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Seed Audio 1.0 | Text to Audio | `seed-audio-1-0` / `seed-audio-1-0-text-to-audio` |
-| Seed Audio 1.0 | Reference to Audio (Voice Reference) | `seed-audio-1-0` / `seed-audio-1-0-reference-to-audio` |
-| Seed Audio 1.0 | Reference to Audio (Image + Voice Reference) | `seed-audio-1-0` / `seed-audio-1-0-reference-to-audio-image` |
+| Seed Audio 1.0 | Audio to Audio (Voice Reference Audio to Audio) | `seed-audio-1-0` / `seed-audio-1-0-reference-to-audio` |
+| Seed Audio 1.0 | Reference to Audio (Image + Voice Reference Audio to Audio) | `seed-audio-1-0` / `seed-audio-1-0-reference-to-audio-image` |
 
 ### Step 3 — Make the API call
 
