@@ -5,7 +5,7 @@ description: Image generation/editing with PixelForge API (by Pixazo) via the Pi
 
 # PixelForge API
 
-Image generation and relighting capabilities.
+Image generation, editing and multi-image composition, plus reference-anchored generation and relighting.
 
 You can ask Pixelforge to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
@@ -32,6 +32,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| PixelForge 3.0 | Text to Image | `pixelforge-v3` / `text-to-image` |
+| PixelForge 3.0 | Image to Image (Image Editing) | `pixelforge-v3` / `image-to-image-editing` |
+| PixelForge 3.0 | Image to Image (Multi-Image Compose) | `pixelforge-v3` / `image-to-image-compose` |
+| PixelForge 3.0 | Reference to Image | `pixelforge-v3` / `reference-to-image` |
 | PixelForge 1.0 | Text to Image | `pixelforge-image` / `generate-image` |
 | PixelForge 1.0 | Image to Image (Image Editing — Relighting) | `pixelforge-relighting-api` / `image-edit-request` |
 | PixelForge 2.0 | Text to Image (Library Search) | `pixelforge-image-v2` / `text-to-image` |
@@ -40,6 +44,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/pixelforge-v3/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/pixelforge-v3/v1/image-to-image/editing`
+- `POST https://gateway.pixazo.ai/pixelforge-v3/v1/image-to-image/compose`
+- `POST https://gateway.pixazo.ai/pixelforge-v3/v1/reference-to-image`
 - `POST https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve_image`
 - `POST https://gateway.pixazo.ai/pixelforge-relighting-api/v1/relighting/generate`
 - `POST https://gateway.pixazo.ai/pixelforge-image-v2/v1/text-to-image`
@@ -47,11 +55,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/pixelforge-image-v2/v1/text-to-image' \
+curl -X POST 'https://gateway.pixazo.ai/pixelforge-v3/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs"
+  "prompt": "A single red maple leaf centred on a plain white background, studio lighting"
 }'
 ```
 
@@ -60,13 +68,13 @@ curl -X POST 'https://gateway.pixazo.ai/pixelforge-image-v2/v1/text-to-image' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/pixelforge-image-v2/v1/text-to-image",
+    "https://gateway.pixazo.ai/pixelforge-v3/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs"
+  "prompt": "A single red maple leaf centred on a plain white background, studio lighting"
 },
     timeout=300,
 )
@@ -77,14 +85,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/pixelforge-image-v2/v1/text-to-image', {
+const res = await fetch('https://gateway.pixazo.ai/pixelforge-v3/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A futuristic city skyline at sunset with flying cars and neon signs"
+  "prompt": "A single red maple leaf centred on a plain white background, studio lighting"
 }),
 });
 console.log(await res.json());
