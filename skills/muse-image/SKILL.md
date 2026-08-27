@@ -1,13 +1,13 @@
 ---
-name: content-safety-api
-description: Image generation/editing with Content Safety API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Content Safety" or "Content Safety API", or when the user asks to generate / make / create / edit / restyle an image and Content Safety is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: muse-image
+description: Image generation/editing with Muse Image API (by Meta) via the Pixazo API. TRIGGER when the user mentions "Muse Image" or "Muse Image API", or when the user asks to generate / make / create / edit / restyle an image and Muse Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Content Safety API
+# Muse Image API
 
-Moderate images for unsafe content — returns severity scores across Sexual, Violence, Hate and Self-Harm categories, with a configurable flag threshold.
+Muse Image is Meta's image generation model. It creates images from a text prompt, edits an existing image from an instruction, blends several images into one scene, and holds a subject or product steady across a series using reference images.
 
-You can ask Content Safety to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
+You can ask Muse Image to handle image generation/editing. Powered by Meta via the Pixazo API gateway.
 
 ---
 
@@ -32,22 +32,28 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Content Safety 1.0 | Image Moderation | `content-safety` / `image-moderation` |
+| Muse Image | Text to Image | `muse-image` / `text-to-image` |
+| Muse Image | Image to Image (Image Editing) | `muse-image` / `image-to-image-editing` |
+| Muse Image | Image to Image (Multi-Image Compose) | `muse-image` / `image-to-image-compose` |
+| Muse Image | Reference to Image | `muse-image` / `reference-to-image` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/content-safety/v1/image-moderation`
+- `POST https://gateway.pixazo.ai/muse-image/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/muse-image/v1/image-to-image/editing`
+- `POST https://gateway.pixazo.ai/muse-image/v1/image-to-image/compose`
+- `POST https://gateway.pixazo.ai/muse-image/v1/reference-to-image`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/content-safety/v1/image-moderation' \
+curl -X POST 'https://gateway.pixazo.ai/muse-image/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
+  "prompt": "A single red maple leaf centred on a plain white background, studio lighting"
 }'
 ```
 
@@ -56,13 +62,13 @@ curl -X POST 'https://gateway.pixazo.ai/content-safety/v1/image-moderation' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/content-safety/v1/image-moderation",
+    "https://gateway.pixazo.ai/muse-image/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
+  "prompt": "A single red maple leaf centred on a plain white background, studio lighting"
 },
     timeout=300,
 )
@@ -73,14 +79,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/content-safety/v1/image-moderation', {
+const res = await fetch('https://gateway.pixazo.ai/muse-image/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
+  "prompt": "A single red maple leaf centred on a plain white background, studio lighting"
 }),
 });
 console.log(await res.json());
@@ -135,13 +141,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/content-safety-api.md`
+> **Fetch:** `https://www.pixazo.ai/models/muse-image.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/content-safety-api`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/muse-image`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-transition-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `muse-image`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-transition-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `content-safety-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
