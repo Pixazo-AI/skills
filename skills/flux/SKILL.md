@@ -181,5 +181,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other virtual try-on models:** `fashn-vton`, `idm-vton`, `google-vton`
+- **Other virtual try-on models:** `fashn-vton`, `idm-vton`, `google-virtual-try-on`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

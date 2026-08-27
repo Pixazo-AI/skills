@@ -1,5 +1,5 @@
 ---
-name: google-vton
+name: google-virtual-try-on
 description: Virtual try-on with Google Virtual Try On API (by Google) via the Pixazo API. TRIGGER when the user mentions "Google Virtual Try On" or "Google Virtual Try On API", or when the user asks to virtually try on clothing / outfit / virtual fitting and Google Virtual Try On is named or implied. DO NOT TRIGGER for image / video / music / voice / 3d — each has its own skill.
 ---
 
@@ -128,9 +128,9 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/google-vton.md`
+> **Fetch:** `https://www.pixazo.ai/models/google-virtual-try-on.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/google-vton`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/google-virtual-try-on`.
 
 ---
 
