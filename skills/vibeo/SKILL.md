@@ -1,13 +1,13 @@
 ---
-name: vibeo-mode
-description: Video generation with Vibeo Mode API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Vibeo Mode" or "Vibeo Mode API", or when the user asks to generate / make / create a video / clip / animation and Vibeo Mode is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+name: vibeo
+description: Video generation with Vibeo API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Vibeo" or "Vibeo API", or when the user asks to generate / make / create a video / clip / animation and Vibeo is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Vibeo Mode API
+# Vibeo API
 
-Vibeo Mode generates short cinematic video with synchronised native audio from either a text prompt or a single still image, at 480P or 768P.
+Vibeo generates short cinematic video with synchronised native audio from either a text prompt or a single still image, at 480P or 768P.
 
-You can ask Vibeo Mode to handle video generation. Powered by Pixazo via the Pixazo API gateway.
+You can ask Vibeo to handle video generation. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,8 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Vibeo Mode | Text to Video | `vibeo-mode` / `text-to-video` |
-| Vibeo Mode | Image to Video | `vibeo-mode` / `image-to-video` |
+| Vibeo | Text to Video | `vibeo-mode` / `text-to-video` |
+| Vibeo | Image to Video | `vibeo-mode` / `image-to-video` |
 
 ### Step 3 — Make the API call
 
@@ -131,7 +131,7 @@ result_url = status.get("output_url") or status.get("video_url") or status.get("
 
 The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
 
-> **Fetch:** `https://www.pixazo.ai/models/vibeo-mode.md`
+> **Fetch:** `https://www.pixazo.ai/models/vibeo.md`
 
 Show the result URL to the user when ready (offer to download, share, or generate variations).
 
@@ -161,9 +161,9 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/vibeo-mode.md`
+> **Fetch:** `https://www.pixazo.ai/models/vibeo.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/vibeo-mode`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/vibeo`.
 
 ---
 
