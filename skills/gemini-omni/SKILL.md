@@ -5,7 +5,7 @@ description: Video generation with Gemini Omni API (by Google) via the Pixazo AP
 
 # Gemini Omni API
 
-Google's Gemini Omni is a multimodal video model that handles text-to-video, image-to-video, reference-to-video, and video-to-video editing through a single API. Note: produces a short fixed clip (about 3–10 seconds); length is set by the model, not selectable.
+Google's Gemini Omni is a multimodal video model that handles text-to-video, image-to-video, reference-to-video, and video-to-video editing through a single API. Clip length is selectable from 3 to 10 seconds via the duration parameter; video-to-video edits inherit the source clip's length.
 
 You can ask Gemini Omni to handle video generation. Powered by Google via the Pixazo API gateway.
 
@@ -164,5 +164,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `mochi`, `veed`, `vidu`, `wan`, `minimax`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `cosmos`, `video-to-previs`, `magi`, `vibeo`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `mochi`, `veed`, `vidu`, `wan`, `minimax`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni-1-1`, `cosmos`, `video-to-previs`, `magi`, `vibeo`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

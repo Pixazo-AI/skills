@@ -158,5 +158,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `mochi`, `veed`, `vidu`, `wan`, `minimax`, `pixverse`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`, `magi`, `vibeo`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `mochi`, `veed`, `vidu`, `wan`, `minimax`, `pixverse`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `gemini-omni-1-1`, `cosmos`, `video-to-previs`, `magi`, `vibeo`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`

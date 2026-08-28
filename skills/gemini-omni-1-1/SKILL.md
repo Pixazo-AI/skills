@@ -1,13 +1,13 @@
 ---
-name: vidu
-description: Video generation with Vidu Video API (by Vidu) via the Pixazo API. TRIGGER when the user mentions "Vidu" or "Vidu Video API", or when the user asks to generate / make / create a video / clip / animation and Vidu is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+name: gemini-omni-1-1
+description: Video generation with Gemini Omni 1.1 Flash API (by Google) via the Pixazo API. TRIGGER when the user mentions "Gemini Omni 1.1" or "Gemini Omni 1.1 Flash API", or when the user asks to generate / make / create a video / clip / animation and Gemini Omni 1.1 is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Vidu Video API
+# Gemini Omni 1.1 Flash API
 
-Vidu Q3 Pro — high-quality video generation supporting text-to-video, image-to-video, and start/end-frame-to-video, with audio and clips up to 16 seconds.
+Google's Gemini Omni 1.1 Flash is a multimodal video model that handles text-to-video, image-to-video, reference-to-video, and video-to-video editing through a single API. Clip length is selectable from 3 to 10 seconds via the duration parameter; video-to-video edits inherit the source clip's length. Successor to Gemini Omni Flash, which Google retires on 30 September 2026.
 
-You can ask Vidu to handle video generation. Powered by Vidu via the Pixazo API gateway.
+You can ask Gemini Omni 1.1 to handle video generation. Powered by Google via the Pixazo API gateway.
 
 ---
 
@@ -32,36 +32,29 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Vidu Q3 Pro | Text to Video | `vidu-q3-pro` / `text-to-video` |
-| Vidu Q3 Pro | Image to Video | `vidu-q3-pro` / `image-to-video` |
-| Vidu Q3 Pro | Start / End Frame to Video | `vidu-q3-pro` / `start-end-to-video` |
-| Vidu Q3 Turbo | Text to Video | `vidu-q3-turbo` / `text-to-video` |
-| Vidu Q3 Turbo | Image to Video | `vidu-q3-turbo` / `image-to-video` |
-| Vidu Q3 Turbo | Reference to Video | `vidu-q3-turbo` / `reference-to-video` |
-| Vidu Q3 | Text to Video | `vidu` / `vidu-request` |
-| Vidu Q2 | Reference to Video (Ref Image / Video / Audio) | `vidu-q2-reference-to-video-pro-api-454` / `vidu-q2-reference-to-video-pro-api-request` |
+| Gemini Omni 1.1 Flash | Text to Video | `gemini-omni-1-1` / `text-to-video-request` |
+| Gemini Omni 1.1 Flash | Image to Video | `gemini-omni-1-1` / `image-to-video-request` |
+| Gemini Omni 1.1 Flash | Reference to Video (Ref Images to Video) | `gemini-omni-1-1` / `reference-to-video-request` |
+| Gemini Omni 1.1 Flash | Video to Video(video editing) | `gemini-omni-1-1` / `video-to-video-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/vidu-q3-pro/v1/text-to-video`
-- `POST https://gateway.pixazo.ai/vidu-q3-pro/v1/image-to-video`
-- `POST https://gateway.pixazo.ai/vidu-q3-pro/v1/start-end-to-video`
-- `POST https://gateway.pixazo.ai/vidu-q3-turbo/v1/text-to-video`
-- `POST https://gateway.pixazo.ai/vidu-q3-turbo/v1/image-to-video`
-- `POST https://gateway.pixazo.ai/vidu-q3-turbo/v1/reference-to-video`
-- `POST https://gateway.pixazo.ai/vidu/v1/vidu-request`
-- `POST https://gateway.pixazo.ai/vidu-q2-reference-to-video-pro-api-454/v1/vidu-q2-reference-to-video-pro-api-request`
+- `POST https://gateway.pixazo.ai/gemini-omni-1-1/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/gemini-omni-1-1/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/gemini-omni-1-1/v1/reference-to-video`
+- `POST https://gateway.pixazo.ai/gemini-omni-1-1/v1/video-to-video`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/vidu-q3-pro/v1/text-to-video' \
+curl -X POST 'https://gateway.pixazo.ai/gemini-omni-1-1/v1/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A golden retriever running through a sunlit meadow in slow motion"
+  "prompt": "A golden retriever running through a sunlit meadow, slow motion, cinematic.",
+  "aspect_ratio": "16:9"
 }'
 ```
 
@@ -70,13 +63,14 @@ curl -X POST 'https://gateway.pixazo.ai/vidu-q3-pro/v1/text-to-video' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/vidu-q3-pro/v1/text-to-video",
+    "https://gateway.pixazo.ai/gemini-omni-1-1/v1/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A golden retriever running through a sunlit meadow in slow motion"
+  "prompt": "A golden retriever running through a sunlit meadow, slow motion, cinematic.",
+  "aspect_ratio": "16:9"
 },
     timeout=300,
 )
@@ -87,14 +81,15 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/vidu-q3-pro/v1/text-to-video', {
+const res = await fetch('https://gateway.pixazo.ai/gemini-omni-1-1/v1/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A golden retriever running through a sunlit meadow in slow motion"
+  "prompt": "A golden retriever running through a sunlit meadow, slow motion, cinematic.",
+  "aspect_ratio": "16:9"
 }),
 });
 console.log(await res.json());
@@ -113,12 +108,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/vidu-q3-pro/v1/text-to-video", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/gemini-omni-1-1/v1/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/vidu-q3-pro/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/gemini-omni-1-1/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -131,7 +126,7 @@ result_url = status.get("output_url") or status.get("video_url") or status.get("
 
 The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
 
-> **Fetch:** `https://www.pixazo.ai/models/vidu.md`
+> **Fetch:** `https://www.pixazo.ai/models/gemini-omni-1-1.md`
 
 Show the result URL to the user when ready (offer to download, share, or generate variations).
 
@@ -161,13 +156,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/vidu.md`
+> **Fetch:** `https://www.pixazo.ai/models/gemini-omni-1-1.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/vidu`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gemini-omni-1-1`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `mochi`, `veed`, `wan`, `minimax`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `gemini-omni-1-1`, `cosmos`, `video-to-previs`, `magi`, `vibeo`
+- **Other video generation models:** `sync-lipsync`, `happy-horse`, `p-video`, `seedance`, `sora`, `veo`, `runway`, `kling`, `pika`, `higgsfield`, `genflare`, `omnihuman`, `lucy-edit`, `ltx`, `luma`, `mochi`, `veed`, `vidu`, `wan`, `minimax`, `pixverse`, `kandinsky`, `hunyuan-video`, `heygen`, `grok-imagine-video`, `gemini-omni`, `cosmos`, `video-to-previs`, `magi`, `vibeo`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
