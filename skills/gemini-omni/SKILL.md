@@ -36,6 +36,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Gemini Omni Flash | Image to Video | `gemini-omni` / `image-to-video-request` |
 | Gemini Omni Flash | Reference to Video (Ref Images to Video) | `gemini-omni` / `reference-to-video-request` |
 | Gemini Omni Flash | Video to Video(video editing) | `gemini-omni` / `video-to-video-request` |
+| Gemini Omni 1.1 Flash | Text to Video | `gemini-omni-1-1` / `text-to-video-request` |
+| Gemini Omni 1.1 Flash | Image to Video | `gemini-omni-1-1` / `image-to-video-request` |
+| Gemini Omni 1.1 Flash | Reference to Video (Ref Images to Video) | `gemini-omni-1-1` / `reference-to-video-request` |
+| Gemini Omni 1.1 Flash | Video to Video(video editing) | `gemini-omni-1-1` / `video-to-video-request` |
 
 ### Step 3 — Make the API call
 
@@ -45,6 +49,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/gemini-omni/v1/image-to-video`
 - `POST https://gateway.pixazo.ai/gemini-omni/v1/reference-to-video`
 - `POST https://gateway.pixazo.ai/gemini-omni/v1/video-to-video`
+- `POST https://gateway.pixazo.ai/gemini-omni-1-1/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/gemini-omni-1-1/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/gemini-omni-1-1/v1/reference-to-video`
+- `POST https://gateway.pixazo.ai/gemini-omni-1-1/v1/video-to-video`
 
 **Sample request (primary operation)**
 
