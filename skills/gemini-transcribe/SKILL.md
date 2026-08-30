@@ -1,5 +1,5 @@
 ---
-name: gemini-3-5-transcribe
+name: gemini-transcribe
 description: Image generation/editing with Gemini 3.5 Transcribe API (by Google) via the Pixazo API. TRIGGER when the user mentions "Gemini 3.5 Transcribe" or "Gemini 3.5 Transcribe API", or when the user asks to generate / make / create / edit / restyle an image and Gemini 3.5 Transcribe is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
@@ -135,9 +135,9 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/gemini-3-5-transcribe.md`
+> **Fetch:** `https://www.pixazo.ai/models/gemini-transcribe.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gemini-3-5-transcribe`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gemini-transcribe`.
 
 ---
 
