@@ -1,13 +1,13 @@
 ---
 name: gemini-voice
-description: Image generation/editing with Gemini 3.5 Transcribe API (by Google) via the Pixazo API. TRIGGER when the user mentions "Gemini 3.5 Transcribe" or "Gemini 3.5 Transcribe API", or when the user asks to generate / make / create / edit / restyle an image and Gemini 3.5 Transcribe is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+description: Text-to-speech / voice synthesis with Gemini Voice API (by Google) via the Pixazo API. TRIGGER when the user mentions "Gemini Voice" or "Gemini Voice API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Gemini Voice is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# Gemini 3.5 Transcribe API
+# Gemini Voice API
 
-Google's Gemini 3.5 Transcribe converts pre-recorded speech to text, identifying the language automatically across 85+ locales, labelling who is speaking, and returning word-level timestamps. Audio up to 1 hour per request; 30 minutes when diarization or timestamps are enabled. Billed per minute of input audio.
+Google's Gemini voice models on one endpoint pair: Gemini 3.5 Transcribe turns recorded speech into text with speaker labels and word-level timestamps across 85+ locales, and Gemini 3.1 Flash TTS turns text into speech with 30 voices, natural-language delivery control and two-speaker dialogue. Both are billed per minute of audio.
 
-You can ask Gemini 3.5 Transcribe to handle image generation/editing. Powered by Google via the Pixazo API gateway.
+You can ask Gemini Voice to handle text-to-speech / voice synthesis. Powered by Google via the Pixazo API gateway.
 
 ---
 
@@ -33,17 +33,19 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Gemini 3.5 Transcribe | Speech to Text | `gemini-3-5-transcribe` / `speech-to-text-request` |
+| Gemini 3.1 Flash TTS | Text to Speech | `gemini-3-1-flash-tts` / `text-to-speech-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/gemini-3-5-transcribe/v1/speech-to-text`
+- `POST https://gateway.pixazo.ai/gemini-3-1-flash-tts/v1/text-to-speech`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/gemini-3-5-transcribe/v1/speech-to-text' \
+curl -X POST 'https://gateway.pixazo.ai/gemini-3-1-flash-tts/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -56,7 +58,7 @@ curl -X POST 'https://gateway.pixazo.ai/gemini-3-5-transcribe/v1/speech-to-text'
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/gemini-3-5-transcribe/v1/speech-to-text",
+    "https://gateway.pixazo.ai/gemini-3-1-flash-tts/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -73,7 +75,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/gemini-3-5-transcribe/v1/speech-to-text', {
+const res = await fetch('https://gateway.pixazo.ai/gemini-3-1-flash-tts/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -88,27 +90,14 @@ console.log(await res.json());
 
 ### Step 4 — Show the user the result
 
-image generation/editing via this model is **synchronous** — no polling. The response is JSON, e.g.:
+text-to-speech / voice synthesis via this model is **synchronous** — no polling. The response is JSON, e.g.:
 
 ```json
-{ "images": [{ "url": "https://…" }] }
+{ "audio": [{ "url": "https://…" }] }
 ```
 
 Pull the URL out and show it to the user (in chat, render inline if your environment supports it). Offer to: download it, edit it further, or generate variations.
 
-
----
-
-### Inputs the user might give you
-
-- **Prompt only** — a description. Build the request from Step 3.
-- **A reference image** — passed as a URL or base64 data URL. Use the edit endpoint.
-- **Image size** — translate user phrases to the API's `image_size` enum:
-  - "square / Instagram" → `square_hd`
-  - "portrait / vertical / 9:16" → `portrait_16_9`
-  - "landscape / horizontal / 16:9" → `landscape_16_9`
-- **Number of variations** — `num_images` (1–4). Default 1.
-- **Seed** — for reproducibility. Default 42, or pass through if the user says "same seed".
 
 
 ---
@@ -143,5 +132,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-transition-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `content-safety-api`, `muse-image`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `xai-tts`, `lux-tts`, `tada`, `melotts`, `gpt-4o`, `seed-audio`, `mai-voice`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
