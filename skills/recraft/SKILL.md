@@ -32,6 +32,12 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Recraft V4 Styles | Create Style | `recraft-v4-styles` / `create-style` |
+| Recraft V4 Styles | Create Style Pro | `recraft-v4-styles` / `create-style-pro` |
+| Recraft V4 Styles | Text to Image | `recraft-v4-styles` / `text-to-image` |
+| Recraft V4 Styles | Text to Image Pro | `recraft-v4-styles` / `text-to-image-pro` |
+| Recraft V4 Styles | Text to Vector | `recraft-v4-styles` / `text-to-vector` |
+| Recraft V4 Styles | Text to Vector Pro | `recraft-v4-styles` / `text-to-vector-pro` |
 | Recraft v3 | Image to Image (Image Editing) | `recraft` / `image-to-image-v3` |
 | Recraft v3 | Text to Image | `recraft` / `text-to-image-v3` |
 | Recraft V4 | Text to Image | `recraft` / `text-to-image-v4-normal` |
@@ -42,6 +48,12 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/recraft-v4-styles/v1/create-style`
+- `POST https://gateway.pixazo.ai/recraft-v4-styles/v1/create-style-pro`
+- `POST https://gateway.pixazo.ai/recraft-v4-styles/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/recraft-v4-styles/v1/text-to-image-pro`
+- `POST https://gateway.pixazo.ai/recraft-v4-styles/v1/text-to-vector`
+- `POST https://gateway.pixazo.ai/recraft-v4-styles/v1/text-to-vector-pro`
 - `POST https://gateway.pixazo.ai/recraft/v3/image-to-image`
 - `POST https://gateway.pixazo.ai/recraft/v3/generate`
 - `POST https://gateway.pixazo.ai/recraft/v4/generate`
@@ -51,13 +63,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/recraft/v3/image-to-image' \
+curl -X POST 'https://gateway.pixazo.ai/recraft-v4-styles/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
-  "prompt": "winter landscape",
-  "strength": 0.5
+  "image_urls": ["https://example.com/reference-1.png"]
 }'
 ```
 
@@ -66,15 +76,13 @@ curl -X POST 'https://gateway.pixazo.ai/recraft/v3/image-to-image' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/recraft/v3/image-to-image",
+    "https://gateway.pixazo.ai/recraft-v4-styles/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
-  "prompt": "winter landscape",
-  "strength": 0.5
+  "image_urls": ["https://example.com/reference-1.png"]
 },
     timeout=300,
 )
@@ -85,16 +93,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/recraft/v3/image-to-image', {
+const res = await fetch('https://gateway.pixazo.ai/recraft-v4-styles/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
-  "prompt": "winter landscape",
-  "strength": 0.5
+  "image_urls": ["https://example.com/reference-1.png"]
 }),
 });
 console.log(await res.json());
