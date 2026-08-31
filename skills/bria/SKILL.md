@@ -35,6 +35,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | BRIA FIBO | Text to Image | `bria-fibo-bbq-preview` / `bria-fibo-bbq-preview-request` |
 | Bria RMBG 2.0 | Image to Image (Image Background Removal) | `bria-rmbg-2-0-682` / `bria-rmbg-2-0-request` |
 | Bria VRMBG 3.0 | Video to Video (Background Removal) | `bria-video-background-removal-v3` / `bria-video-background-removal-v3-request` |
+| Bria VRMBG 3.0 | Video to Video (Green Screen Despill) | `bria-video-background-removal-green-screen-despill` / `bria-video-background-removal-green-screen-despill-request` |
 
 ### Step 3 — Make the API call
 
@@ -43,6 +44,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/bria-fibo-bbq-preview/v1/bria-fibo-bbq-preview-request`
 - `POST https://gateway.pixazo.ai/bria-rmbg-2-0-682/v1/bria-rmbg-2-0-request`
 - `POST https://gateway.pixazo.ai/bria-video-background-removal-v3/v1/bria-video-background-removal-v3-request`
+- `POST https://gateway.pixazo.ai/bria-video-background-removal-green-screen-despill/v1/bria-video-background-removal-green-screen-despill-request`
 
 **Sample request (primary operation)**
 
