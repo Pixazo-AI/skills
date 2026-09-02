@@ -47,7 +47,8 @@ curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-convert' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+  "to_format": "mp4"
 }'
 ```
 
@@ -62,7 +63,8 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+  "to_format": "mp4"
 },
     timeout=300,
 )
@@ -80,7 +82,8 @@ const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-convert'
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov"
+  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
+  "to_format": "mp4"
 }),
 });
 console.log(await res.json());
