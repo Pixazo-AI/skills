@@ -68,6 +68,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/kling-video-o3-4k-text-to-video/v1/kling-video-o3-4k-text-to-video-request`
 - `POST https://gateway.pixazo.ai/kling-video-o3-4k-image-to-video/v1/kling-video-o3-4k-image-to-video-request`
 - `POST https://gateway.pixazo.ai/kling-video-o3-4k-reference-to-video/v1/kling-video-o3-4k-reference-to-video-request`
+- `POST https://gateway.pixazo.ai/kling-video-o3-4k/v1/video-to-video/reference`
+- `POST https://gateway.pixazo.ai/kling-video-o3-4k/v1/video-to-video/edit`
 - `POST https://gateway.pixazo.ai/kling-image/v1/kling-image-request`
 - `POST https://gateway.pixazo.ai/kling-image-o3-i2i/v1/kling-image-o3-i2i-request`
 - `POST https://gateway.pixazo.ai/kling-3-0-text-to-video-standard/v1/kling-3-0-text-to-video-standard-request`
