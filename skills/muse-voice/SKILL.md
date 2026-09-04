@@ -1,13 +1,13 @@
 ---
-name: video-resize-api
-description: Image generation/editing with Video Resize API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video Resize" or "Video Resize API", or when the user asks to generate / make / create / edit / restyle an image and Video Resize is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: muse-voice
+description: Image generation/editing with Muse Voice API (by Meta) via the Pixazo API. TRIGGER when the user mentions "Muse Voice" or "Muse Voice API", or when the user asks to generate / make / create / edit / restyle an image and Muse Voice is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Video Resize API
+# Muse Voice API
 
-Resize a video to a resolution preset or exact dimensions. Presets target the SHORT side and never upscale, so "720p" makes a vertical video smaller rather than blowing a small one up. Give width and height together and the picture is fitted inside and padded — never stretched.
+Muse Voice Transcribe is Meta's speech-to-text model. It turns a recording into text, splits it into turns with speaker labels, and biases towards the languages and keywords you name. It reads mono 16-bit PCM or WAV audio up to ten minutes per request.
 
-You can ask Video Resize to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
+You can ask Muse Voice to handle image generation/editing. Powered by Meta via the Pixazo API gateway.
 
 ---
 
@@ -32,23 +32,24 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Video Resize 1.0 | Resize | `media-resize` / `media-resize-request` |
+| Muse Voice Transcribe | Speech to Text | `muse-voice-transcribe` / `speech-to-text` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/media-tools/v1/video-resize`
+- `POST https://gateway.pixazo.ai/muse-voice-transcribe/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-resize' \
+curl -X POST 'https://gateway.pixazo.ai/muse-voice-transcribe/v1/speech-to-text' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "preset": "720p"
+  "audio_url": "https://example.com/interview.wav",
+  "audio_encoding": "WAV",
+  "mode": "DIARIZATION"
 }'
 ```
 
@@ -57,14 +58,15 @@ curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-resize' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/media-tools/v1/video-resize",
+    "https://gateway.pixazo.ai/muse-voice-transcribe/v1/speech-to-text",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "preset": "720p"
+  "audio_url": "https://example.com/interview.wav",
+  "audio_encoding": "WAV",
+  "mode": "DIARIZATION"
 },
     timeout=300,
 )
@@ -75,15 +77,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-resize', {
+const res = await fetch('https://gateway.pixazo.ai/muse-voice-transcribe/v1/speech-to-text', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "preset": "720p"
+  "audio_url": "https://example.com/interview.wav",
+  "audio_encoding": "WAV",
+  "mode": "DIARIZATION"
 }),
 });
 console.log(await res.json());
@@ -138,13 +141,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/video-resize-api.md`
+> **Fetch:** `https://www.pixazo.ai/models/muse-voice.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-resize-api`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/muse-voice`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-transition-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `content-safety-api`, `muse-image`, `muse-voice`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-transition-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `content-safety-api`, `muse-image`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
