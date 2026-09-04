@@ -1,13 +1,13 @@
 ---
-name: audio-extract-api
-description: Image generation/editing with Audio Extractor API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Audio Extractor" or "Audio Extractor API", or when the user asks to generate / make / create / edit / restyle an image and Audio Extractor is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: image-to-video-api
+description: Image generation/editing with Image to Video API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Image to MP4" or "Image to Video API", or when the user asks to generate / make / create / edit / restyle an image and Image to MP4 is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Audio Extractor API
+# Image to Video API
 
-Pull the audio out of a video. format is mp3 (VBR, around 190 kbps) or m4a (AAC 192 kbps); mp3 is the default. Sources up to about 32 minutes. A video with no audio track is rejected up front rather than charged for.
+Turn a still image into a video file of a chosen length. This is a deterministic hold, not generation — there is no prompt, no motion and no model inventing frames: the picture is held for duration_seconds and encoded as a silent H.264 MP4 at the source’s own dimensions. Use it to give a still a slot on a timeline, pad a sequence, or feed a photograph into a tool that only accepts video. duration_seconds runs from 1 to 60 and defaults to 5.
 
-You can ask Audio Extractor to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
+You can ask Image to MP4 to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
 
 ---
 
@@ -32,23 +32,23 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Audio Extract 1.0 | Extract Audio | `media-extract-audio` / `media-extract-audio-request` |
+| Image to Video 1.0 | Image to Video | `media-image-to-video` / `media-image-to-video-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/media-tools/v1/audio-extract`
+- `POST https://gateway.pixazo.ai/media-tools/v1/image-to-video`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/audio-extract' \
+curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/image-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "format": "mp3"
+  "image_url": "https://api-assets.pixazo.ai/media-api-test/sample.png",
+  "duration_seconds": 5
 }'
 ```
 
@@ -57,14 +57,14 @@ curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/audio-extract' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/media-tools/v1/audio-extract",
+    "https://gateway.pixazo.ai/media-tools/v1/image-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "format": "mp3"
+  "image_url": "https://api-assets.pixazo.ai/media-api-test/sample.png",
+  "duration_seconds": 5
 },
     timeout=300,
 )
@@ -75,15 +75,15 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/audio-extract', {
+const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/image-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "format": "mp3"
+  "image_url": "https://api-assets.pixazo.ai/media-api-test/sample.png",
+  "duration_seconds": 5
 }),
 });
 console.log(await res.json());
@@ -138,13 +138,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/audio-extract-api.md`
+> **Fetch:** `https://www.pixazo.ai/models/image-to-video-api.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/audio-extract-api`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/image-to-video-api`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-transition-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `content-safety-api`, `muse-image`, `muse-voice`, `image-to-video-api`, `image-dpi-api`, `image-compose-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `bria`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-transition-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `content-safety-api`, `muse-image`, `muse-voice`, `image-dpi-api`, `image-compose-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
