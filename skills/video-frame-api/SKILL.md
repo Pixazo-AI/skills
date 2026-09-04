@@ -48,7 +48,8 @@ curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-extract-frame' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "position": 5
+  "position": 5,
+  "to_format": "jpg"
 }'
 ```
 
@@ -64,7 +65,8 @@ r = requests.post(
     },
     json={
   "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "position": 5
+  "position": 5,
+  "to_format": "jpg"
 },
     timeout=300,
 )
@@ -83,7 +85,8 @@ const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-extract-
   },
   body: JSON.stringify({
   "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "position": 5
+  "position": 5,
+  "to_format": "jpg"
 }),
 });
 console.log(await res.json());
