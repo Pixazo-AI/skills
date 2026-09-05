@@ -47,6 +47,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | MiniMax Music 2.6 | Text to Music | `minimax-music-generation-2-6` / `get-music` |
 | MiniMax H3 Max | Text to Video | `minimax-hailuo-h3-max` / `text-to-video` |
 | MiniMax H3 Max | Image to Video | `minimax-hailuo-h3-max` / `image-to-video` |
+| MiniMax H3 Max | Reference to Video | `minimax-hailuo-h3-max` / `reference-to-video` |
 
 ### Step 3 — Make the API call
 
@@ -65,6 +66,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/minimax-music-generation-2-6/v1/generate`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max/v1/text-to-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max/v1/reference-to-video`
 
 **Sample request (primary operation)**
 
