@@ -32,26 +32,30 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Lyria 2 | Text to Music | `lyria-2` / `music-request` |
-| Lyria 3 | Text to Music | `lyria-3` / `music-request` |
+| Lyria 3.5 | Text to Music | `lyria-3-5` / `music-request` |
+| Lyria 3 Clip | Text to Music | `lyria-3-clip` / `music-request` |
 | Lyria 3 Pro | Text to Music | `lyria-3-pro` / `music-request` |
+| Lyria 3 | Text to Music | `lyria-3` / `music-request` |
+| Lyria 2 | Text to Music | `lyria-2` / `music-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/lyria-2/v1/lyria-2/generate`
-- `POST https://gateway.pixazo.ai/lyria-3/v1/lyria-3/generate`
+- `POST https://gateway.pixazo.ai/lyria-3-5/v1/text-to-music`
+- `POST https://gateway.pixazo.ai/lyria-3-clip/v1/text-to-music`
 - `POST https://gateway.pixazo.ai/lyria-3-pro/v1/lyria-3-pro/generate`
+- `POST https://gateway.pixazo.ai/lyria-3/v1/lyria-3/generate`
+- `POST https://gateway.pixazo.ai/lyria-2/v1/lyria-2/generate`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/lyria-2/v1/lyria-2/generate' \
+curl -X POST 'https://gateway.pixazo.ai/lyria-3-5/v1/text-to-music' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Futuristic country music, steel guitar, huge 808s"
+  "prompt": "A calm acoustic folk song with gentle guitar and soft strings. Instrumental only."
 }'
 ```
 
@@ -60,13 +64,13 @@ curl -X POST 'https://gateway.pixazo.ai/lyria-2/v1/lyria-2/generate' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/lyria-2/v1/lyria-2/generate",
+    "https://gateway.pixazo.ai/lyria-3-5/v1/text-to-music",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Futuristic country music, steel guitar, huge 808s"
+  "prompt": "A calm acoustic folk song with gentle guitar and soft strings. Instrumental only."
 },
     timeout=300,
 )
@@ -77,14 +81,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/lyria-2/v1/lyria-2/generate', {
+const res = await fetch('https://gateway.pixazo.ai/lyria-3-5/v1/text-to-music', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Futuristic country music, steel guitar, huge 808s"
+  "prompt": "A calm acoustic folk song with gentle guitar and soft strings. Instrumental only."
 }),
 });
 console.log(await res.json());
@@ -103,12 +107,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/lyria-2/v1/lyria-2/generate", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/lyria-3-5/v1/text-to-music", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/lyria-2/v1/lyria-2/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/lyria-3-5/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
