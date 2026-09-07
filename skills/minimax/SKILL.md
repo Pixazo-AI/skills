@@ -69,6 +69,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max/v1/text-to-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max/v1/image-to-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max/v1/reference-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max-turbo/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max-turbo/v1/image-to-video`
 
 **Sample request (primary operation)**
 
