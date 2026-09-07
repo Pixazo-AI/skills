@@ -48,6 +48,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | MiniMax H3 Max | Text to Video | `minimax-hailuo-h3-max` / `text-to-video` |
 | MiniMax H3 Max | Image to Video | `minimax-hailuo-h3-max` / `image-to-video` |
 | MiniMax H3 Max | Reference to Video | `minimax-hailuo-h3-max` / `reference-to-video` |
+| MiniMax H3 Max Turbo | Text to Video | `minimax-hailuo-h3-max-turbo` / `text-to-video` |
+| MiniMax H3 Max Turbo | Image to Video | `minimax-hailuo-h3-max-turbo` / `image-to-video` |
 
 ### Step 3 — Make the API call
 
