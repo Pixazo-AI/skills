@@ -41,8 +41,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/fashn-virtual-try-on/v1/fashn-virtual-try-on-request`
-- `POST https://gateway.pixazo.ai/glass-virtual-try-on/v1/api/glass-virtual-tryon`
+- `POST https://gateway.pixazo.ai/glass-virtual-try-on/v1/api/edit-image`
 - `POST https://gateway.pixazo.ai/glass-virtual-try-on-polling/api/glass-virtual-tryon-result`
+- `POST https://gateway.pixazo.ai/glass-virtual-try-on/v1/api/glass-virtual-tryon`
 
 **Sample request (primary operation)**
 
