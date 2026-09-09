@@ -1,13 +1,13 @@
 ---
 name: gpt-image
-description: Image generation/editing with GPT Image API (by OpenAI) via the Pixazo API. TRIGGER when the user mentions "GPT Image 2" or "GPT Image API", or when the user asks to generate / make / create / edit / restyle an image and GPT Image 2 is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+description: Image generation/editing with GPT Image API (by OpenAI) via the Pixazo API. TRIGGER when the user mentions "GPT Image 2.5" or "GPT Image API", or when the user asks to generate / make / create / edit / restyle an image and GPT Image 2.5 is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
 # GPT Image API
 
 Advanced image generation by OpenAI.
 
-You can ask GPT Image 2 to handle image generation/editing. Powered by OpenAI via the Pixazo API gateway.
+You can ask GPT Image 2.5 to handle image generation/editing. Powered by OpenAI via the Pixazo API gateway.
 
 ---
 
@@ -32,6 +32,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| GPT Image 2.5 Flare | Text to Image | `gpt-image-2-5-flare` / `text-to-image` |
+| GPT Image 2.5 Flare | Image to Image (Image Editing) | `gpt-image-2-5-flare` / `image-to-image-editing` |
+| GPT Image 2.5 Sunburst | Text to Image | `gpt-image-2-5-sunburst` / `text-to-image` |
+| GPT Image 2.5 Sunburst | Image to Image (Image Editing) | `gpt-image-2-5-sunburst` / `image-to-image-editing` |
 | GPT Image v1.5 | Text to Image | `gpt-image-1-5-api-923` / `gpt-image-1-5-api-request` |
 | GPT Image v1.5 | Image to Image (Image Editing) | `gpt-image-1-5` / `gpt-image-1-5-request` |
 | GPT Image 2 | Text to Image | `gpt-image-2` / `text-to-image` |
@@ -41,6 +45,10 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/gpt-image-2-5-flare/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/gpt-image-2-5-flare/v1/image-to-image/editing`
+- `POST https://gateway.pixazo.ai/gpt-image-2-5-sunburst/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/gpt-image-2-5-sunburst/v1/image-to-image/editing`
 - `POST https://gateway.pixazo.ai/gpt-image-1-5-api-923/v1/gpt-image-1-5-api-request`
 - `POST https://gateway.pixazo.ai/gpt-image-1-5/v1/image-to-image/editing`
 - `POST https://gateway.pixazo.ai/gpt-image-2/v1/text-to-image`
@@ -49,16 +57,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/gpt-image-2/v1/text-to-image' \
+curl -X POST 'https://gateway.pixazo.ai/gpt-image-2-5-flare/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "create a realistic image taken with iphone at these coordinates 41°43′32″N 49°56′49″W 15 April 1912",
-  "image_size": "1024x1024",
-  "background": "auto",
-  "quality": "high",
-  "num_images": 1,
-  "output_format": "png"
+  "prompt": "A serene sunset over mountains"
 }'
 ```
 
@@ -67,18 +70,13 @@ curl -X POST 'https://gateway.pixazo.ai/gpt-image-2/v1/text-to-image' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/gpt-image-2/v1/text-to-image",
+    "https://gateway.pixazo.ai/gpt-image-2-5-flare/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "create a realistic image taken with iphone at these coordinates 41°43′32″N 49°56′49″W 15 April 1912",
-  "image_size": "1024x1024",
-  "background": "auto",
-  "quality": "high",
-  "num_images": 1,
-  "output_format": "png"
+  "prompt": "A serene sunset over mountains"
 },
     timeout=300,
 )
@@ -89,19 +87,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/gpt-image-2/v1/text-to-image', {
+const res = await fetch('https://gateway.pixazo.ai/gpt-image-2-5-flare/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "create a realistic image taken with iphone at these coordinates 41°43′32″N 49°56′49″W 15 April 1912",
-  "image_size": "1024x1024",
-  "background": "auto",
-  "quality": "high",
-  "num_images": 1,
-  "output_format": "png"
+  "prompt": "A serene sunset over mountains"
 }),
 });
 console.log(await res.json());
