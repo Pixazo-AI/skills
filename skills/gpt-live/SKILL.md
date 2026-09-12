@@ -1,13 +1,13 @@
 ---
-name: zonos
-description: Text-to-speech / voice synthesis with Zonos API (by Zyphra) via the Pixazo API. TRIGGER when the user mentions "Zonos2" or "Zonos API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Zonos2 is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+name: gpt-live
+description: Text-to-speech / voice synthesis with GPT Live API (by OpenAI) via the Pixazo API. TRIGGER when the user mentions "GPT Live" or "GPT Live API", or when the user asks to speak / read aloud / convert text to speech / generate voice and GPT Live is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# Zonos API
+# GPT Live API
 
-AI-powered text-to-speech and voice cloning by Zonos.
+GPT Live is OpenAI's real-time, full-duplex voice conversation API. Stream live audio to the model over a persistent session and get spoken responses back, while backend model and tool work runs without interrupting the conversation.
 
-You can ask Zonos2 to handle text-to-speech / voice synthesis. Powered by Zyphra via the Pixazo API gateway.
+You can ask GPT Live to handle text-to-speech / voice synthesis. Powered by OpenAI via the Pixazo API gateway.
 
 ---
 
@@ -32,31 +32,21 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Zonos 2 | Text to Speech (Voice Cloning) | `zonos-2` / `zonos-2-request` |
+| GPT Live | Live Voice Session | `gpt-live` / `session-create` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/zonos-2/v1/zonos-2-request`
+- `POST https://gateway.pixazo.ai/v2/live/sessions`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/zonos-2/v1/zonos-2-request' \
+curl -X POST 'https://gateway.pixazo.ai/v2/live/sessions' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
-  -d '{
-  "reference_audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Reference.wav",
-  "text": "Hello, this is a sample of my cloned voice speaking naturally.",
-  "language": "en_us",
-  "accurate_mode": true,
-  "clean_speaker_background": false,
-  "temperature": 1.15,
-  "top_p": 0,
-  "min_p": 0.18,
-  "top_k": 106
-}'
+  -d '{}'
 ```
 
 **Python**
@@ -64,22 +54,12 @@ curl -X POST 'https://gateway.pixazo.ai/zonos-2/v1/zonos-2-request' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/zonos-2/v1/zonos-2-request",
+    "https://gateway.pixazo.ai/v2/live/sessions",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
-    json={
-  "reference_audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Reference.wav",
-  "text": "Hello, this is a sample of my cloned voice speaking naturally.",
-  "language": "en_us",
-  "accurate_mode": true,
-  "clean_speaker_background": false,
-  "temperature": 1.15,
-  "top_p": 0,
-  "min_p": 0.18,
-  "top_k": 106
-},
+    json={},
     timeout=300,
 )
 r.raise_for_status()
@@ -89,23 +69,13 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/zonos-2/v1/zonos-2-request', {
+const res = await fetch('https://gateway.pixazo.ai/v2/live/sessions', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({
-  "reference_audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Reference.wav",
-  "text": "Hello, this is a sample of my cloned voice speaking naturally.",
-  "language": "en_us",
-  "accurate_mode": true,
-  "clean_speaker_background": false,
-  "temperature": 1.15,
-  "top_p": 0,
-  "min_p": 0.18,
-  "top_k": 106
-}),
+  body: JSON.stringify({}),
 });
 console.log(await res.json());
 ```
@@ -146,13 +116,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/zonos.md`
+> **Fetch:** `https://www.pixazo.ai/models/gpt-live.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/zonos`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gpt-live`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `gemini-voice`, `voxcpm`, `fish-audio`, `deepgram`, `inworld`, `xai-tts`, `lux-tts`, `tada`, `melotts`, `gpt-4o`, `seed-audio`, `mai-voice`, `gpt-live`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `gemini-voice`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `xai-tts`, `lux-tts`, `tada`, `melotts`, `gpt-4o`, `seed-audio`, `mai-voice`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
