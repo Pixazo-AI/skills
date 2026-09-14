@@ -39,6 +39,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | PixelForge 1.0 | Text to Image | `pixelforge-image` / `generate-image` |
 | PixelForge 1.0 | Image to Image (Image Editing — Relighting) | `pixelforge-relighting-api` / `image-edit-request` |
 | PixelForge 2.0 | Text to Image (Library Search) | `pixelforge-image-v2` / `text-to-image` |
+| PixelForge 2.0 | Content Safety | `content-safety` / `image-moderation` |
 
 ### Step 3 — Make the API call
 
@@ -51,6 +52,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/pixelforge-image/v1/qwen_image_gen/serve_image`
 - `POST https://gateway.pixazo.ai/pixelforge-relighting-api/v1/relighting/generate`
 - `POST https://gateway.pixazo.ai/pixelforge-image-v2/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/content-safety/v1/image-moderation`
 
 **Sample request (primary operation)**
 
