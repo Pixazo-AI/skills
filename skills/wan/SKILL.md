@@ -37,7 +37,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Wan 3.0 | Image to Video (First & Last Frame to Video) | `wan-3-0-video` / `first-last-frame-to-video` |
 | Wan 3.0 | Reference to Video (Ref Image, Video or Audio) | `wan-3-0-video` / `reference-to-video` |
 | Wan 3.0 | File to Video (Document, Slides or Web Link) | `wan-3-0-video` / `file-to-video` |
-| Wan 2.2 | Audio to Video (Ref Audio to Video) | `wan-2-2-14b-speech-to-video` / `speech-to-video-request` |
 | Wan 2.2 | Video to Video (Ref Image + Ref Video — Animate) | `wan-2-2-animate-api-524` / `wan-2-2-animate-api-request` |
 | Wan 2.2 | Image to Video (Wan 2.2 Plus) | `pixazo-wan-image-to-video-1763709522` / `pixazo-wan-image-to-video-request` |
 | Wan 2.2 | Image to Video (First Frame to Video) | `wan-image-to-video` / `wan-image-to-video-first-frame` |
@@ -70,7 +69,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/wan-3-0-video/v1/first-last-frame-to-video`
 - `POST https://gateway.pixazo.ai/wan-3-0-video/v1/reference-to-video`
 - `POST https://gateway.pixazo.ai/wan-3-0-video/v1/file-to-video`
-- `POST https://gateway.pixazo.ai/wan2.2-s2v/v1/generateSpeechToVideoRequest`
 - `POST https://gateway.pixazo.ai/pixazo-wan-image-to-video-1763709522/v1/pixazo-wan-image-to-video-request`
 - `POST https://gateway.pixazo.ai/wan-i2v/v1/generateImageToVideoRequest`
 - `POST https://gateway.pixazo.ai/wan-t2i/v1/generateEditImageRequest`
