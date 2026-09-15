@@ -32,25 +32,31 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| ElevenLabs Eleven v3 TTS | Text to Speech (Voice Cloning) | `elevenlabs-eleven-v3-tts` / `elevenlabs-eleven-v3-tts-request` |
-| ElevenLabs Music | Text to Music | `elevenlabs-music` / `elevenlabs-music-request` |
-| ElevenLabs Turbo v2.5 | Text to Speech | `elevenlabs-turbo-v2-5` / `text-to-speech` |
-| ElevenLabs Multilingual v2 | Text to Speech | `elevenlabs-multilingual-v2` / `text-to-speech` |
-| ElevenLabs Dubbing | Video & Audio Dubbing | `elevenlabs-dubbing` / `elevenlabs-dubbing-request` |
 | ElevenLabs Music v2.5 | Text to Music | `elevenlabs-music-v2-5` / `text-to-music` |
 | ElevenLabs Music v2 | Text to Music | `elevenlabs-music-v2` / `text-to-music` |
+| ElevenLabs Video to Music | Video to Music | `elevenlabs-video-to-music` / `video-to-music` |
+| ElevenLabs Sound Effects v2 | Text to Sound Effects | `elevenlabs-sound-effects` / `text-to-sound-effects` |
+| ElevenLabs Music | Text to Music | `elevenlabs-music` / `elevenlabs-music-request` |
+| ElevenLabs Eleven v3 TTS | Text to Speech (Voice Cloning) | `elevenlabs-eleven-v3-tts` / `elevenlabs-eleven-v3-tts-request` |
+| ElevenLabs Turbo v2.5 | Text to Speech | `elevenlabs-turbo-v2-5` / `text-to-speech` |
+| ElevenLabs Voice Changer | Speech to Speech | `elevenlabs-voice-changer` / `speech-to-speech` |
+| ElevenLabs Dubbing | Video & Audio Dubbing | `elevenlabs-dubbing` / `elevenlabs-dubbing-request` |
+| ElevenLabs Multilingual v2 | Text to Speech | `elevenlabs-multilingual-v2` / `text-to-speech` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-eleven-v3-tts-request`
-- `POST https://gateway.pixazo.ai/elevenlabs-music/v1/elevenlabs-music-request`
-- `POST https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech`
-- `POST https://gateway.pixazo.ai/elevenlabs-multilingual-v2/v1/text-to-speech`
-- `POST https://gateway.pixazo.ai/elevenlabs-dubbing/v1/dub`
 - `POST https://gateway.pixazo.ai/elevenlabs-music/v2.5/text-to-music`
 - `POST https://gateway.pixazo.ai/elevenlabs-music/v2/text-to-music`
+- `POST https://gateway.pixazo.ai/elevenlabs-video-to-music/v1/video-to-music`
+- `POST https://gateway.pixazo.ai/elevenlabs-sound-effects/v1/text-to-sound-effects`
+- `POST https://gateway.pixazo.ai/elevenlabs-music/v1/elevenlabs-music-request`
+- `POST https://gateway.pixazo.ai/elevenlabs-eleven-v3-tts/v1/elevenlabs-eleven-v3-tts-request`
+- `POST https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/elevenlabs-voice-changer/v1/speech-to-speech`
+- `POST https://gateway.pixazo.ai/elevenlabs-dubbing/v1/dub`
+- `POST https://gateway.pixazo.ai/elevenlabs-multilingual-v2/v1/text-to-speech`
 
 **Sample request (primary operation)**
 
@@ -59,11 +65,8 @@ curl -X POST 'https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech'
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "text": "[excited] Welcome to the future of voice. [whispers] Listen closely. [laughs] This is amazing.",
-  "voice": "Rachel",
-  "stability": 0.5,
-  "timestamps": false,
-  "apply_text_normalization": "auto"
+  "prompt": "Upbeat lofi hip hop with warm piano chords and a relaxed drum groove",
+  "music_length_ms": 30000
 }'
 ```
 
@@ -78,11 +81,8 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "text": "[excited] Welcome to the future of voice. [whispers] Listen closely. [laughs] This is amazing.",
-  "voice": "Rachel",
-  "stability": 0.5,
-  "timestamps": false,
-  "apply_text_normalization": "auto"
+  "prompt": "Upbeat lofi hip hop with warm piano chords and a relaxed drum groove",
+  "music_length_ms": 30000
 },
     timeout=300,
 )
@@ -100,11 +100,8 @@ const res = await fetch('https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "text": "[excited] Welcome to the future of voice. [whispers] Listen closely. [laughs] This is amazing.",
-  "voice": "Rachel",
-  "stability": 0.5,
-  "timestamps": false,
-  "apply_text_normalization": "auto"
+  "prompt": "Upbeat lofi hip hop with warm piano chords and a relaxed drum groove",
+  "music_length_ms": 30000
 }),
 });
 console.log(await res.json());
