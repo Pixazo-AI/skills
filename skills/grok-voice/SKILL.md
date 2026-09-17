@@ -1,13 +1,13 @@
 ---
-name: gpt-4o
-description: Text-to-speech / voice synthesis with OpenAI Text to Speech API (by OpenAI) via the Pixazo API. TRIGGER when the user mentions "OpenAI Text to Speech" or "OpenAI Text to Speech API", or when the user asks to speak / read aloud / convert text to speech / generate voice and OpenAI Text to Speech is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
+name: grok-voice
+description: Text-to-speech / voice synthesis with Grok Voice API (by xAI) via the Pixazo API. TRIGGER when the user mentions "Grok Voice" or "Grok Voice API", or when the user asks to speak / read aloud / convert text to speech / generate voice and Grok Voice is named or implied. DO NOT TRIGGER for image / video / music / 3d / try-on — each has its own skill.
 ---
 
-# OpenAI Text to Speech API
+# Grok Voice API
 
-OpenAI's GPT-4o audio models on one API. For text to speech, GPT-4o Mini is the low-latency option and GPT-4o Mini HD trades speed for cleaner audio at twice the price — six voices and six output containers on both, with speed control from a quarter to four times normal. In the other direction, GPT-4o Transcribe converts speech to text with high accuracy.
+xAI's Grok voice models: text to speech in five expressive voices, and speech to text across 25 languages. Transcription reports the length of the recording alongside the transcript, so you always know what you were billed for.
 
-You can ask OpenAI Text to Speech to handle text-to-speech / voice synthesis. Powered by OpenAI via the Pixazo API gateway.
+You can ask Grok Voice to handle text-to-speech / voice synthesis. Powered by xAI via the Pixazo API gateway.
 
 ---
 
@@ -32,26 +32,26 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| GPT-4o Mini TTS | Text to Speech | `tts-1` / `text-to-speech` |
-| GPT-4o Mini TTS HD | Text to Speech | `tts-1-hd` / `text-to-speech` |
-| GPT-4o Transcribe | Speech to Text | `gpt-4o-transcribe` / `speech-to-text` |
+| Grok Voice API | Text to Speech | `xai-text-to-speech` / `text-to-speech` |
+| Grok Voice Speech to Text API | Speech to Text | `grok-stt` / `speech-to-text` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/tts-1/v1/text-to-speech`
-- `POST https://gateway.pixazo.ai/tts-1-hd/v1/text-to-speech`
-- `POST https://gateway.pixazo.ai/gpt-4o-transcribe/v1/speech-to-text`
+- `POST https://gateway.pixazo.ai/xai-text-to-speech/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/grok-stt/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/tts-1/v1/text-to-speech' \
+curl -X POST 'https://gateway.pixazo.ai/xai-text-to-speech/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "text": "Hello from Pixazo. This is a text to speech demo."
+  "text": "Welcome to the future of artificial intelligence and creative expression",
+  "voice": "eve",
+  "language": "auto"
 }'
 ```
 
@@ -60,13 +60,15 @@ curl -X POST 'https://gateway.pixazo.ai/tts-1/v1/text-to-speech' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/tts-1/v1/text-to-speech",
+    "https://gateway.pixazo.ai/xai-text-to-speech/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "text": "Hello from Pixazo. This is a text to speech demo."
+  "text": "Welcome to the future of artificial intelligence and creative expression",
+  "voice": "eve",
+  "language": "auto"
 },
     timeout=300,
 )
@@ -77,14 +79,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/tts-1/v1/text-to-speech', {
+const res = await fetch('https://gateway.pixazo.ai/xai-text-to-speech/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "text": "Hello from Pixazo. This is a text to speech demo."
+  "text": "Welcome to the future of artificial intelligence and creative expression",
+  "voice": "eve",
+  "language": "auto"
 }),
 });
 console.log(await res.json());
@@ -126,13 +130,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/gpt-4o.md`
+> **Fetch:** `https://www.pixazo.ai/models/grok-voice.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/gpt-4o`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/grok-voice`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `gemini-voice`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `grok-voice`, `lux-tts`, `tada`, `melotts`, `seed-audio`, `mai-voice`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `gemini-voice`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `lux-tts`, `tada`, `melotts`, `gpt-4o`, `seed-audio`, `mai-voice`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
