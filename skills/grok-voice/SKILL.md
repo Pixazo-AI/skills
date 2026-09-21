@@ -5,7 +5,7 @@ description: Text-to-speech / voice synthesis with Grok Voice API (by xAI) via t
 
 # Grok Voice API
 
-xAI's Grok voice models: text to speech in five expressive voices, and speech to text across 25 languages. Transcription reports the length of the recording alongside the transcript, so you always know what you were billed for.
+xAI's Grok voice models: a speech-to-speech voice agent that listens to a recording and answers aloud in one of 28 voices, text to speech in five expressive voices, and speech to text across 25 languages. Every response reports the length of audio it was billed on, so you always know what you paid for.
 
 You can ask Grok Voice to handle text-to-speech / voice synthesis. Powered by xAI via the Pixazo API gateway.
 
@@ -32,13 +32,15 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Grok Voice API | Text to Speech | `xai-text-to-speech` / `text-to-speech` |
+| Grok Voice Agent API | Speech to Speech | `grok-voice` / `speech-to-speech` |
+| Grok Voice Text to Speech API | Text to Speech | `xai-text-to-speech` / `text-to-speech` |
 | Grok Voice Speech to Text API | Speech to Text | `grok-stt` / `speech-to-text` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/grok-voice/v1/speech-to-speech`
 - `POST https://gateway.pixazo.ai/xai-text-to-speech/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/grok-stt/v1/speech-to-text`
 
@@ -49,9 +51,9 @@ curl -X POST 'https://gateway.pixazo.ai/xai-text-to-speech/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "text": "Welcome to the future of artificial intelligence and creative expression",
-  "voice": "eve",
-  "language": "auto"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/transcribe-sample.wav",
+  "prompt": "You are a friendly assistant. Answer briefly and concretely.",
+  "voice": "eve"
 }'
 ```
 
@@ -66,9 +68,9 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "text": "Welcome to the future of artificial intelligence and creative expression",
-  "voice": "eve",
-  "language": "auto"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/transcribe-sample.wav",
+  "prompt": "You are a friendly assistant. Answer briefly and concretely.",
+  "voice": "eve"
 },
     timeout=300,
 )
@@ -86,9 +88,9 @@ const res = await fetch('https://gateway.pixazo.ai/xai-text-to-speech/v1/text-to
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "text": "Welcome to the future of artificial intelligence and creative expression",
-  "voice": "eve",
-  "language": "auto"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/transcribe-sample.wav",
+  "prompt": "You are a friendly assistant. Answer briefly and concretely.",
+  "voice": "eve"
 }),
 });
 console.log(await res.json());
