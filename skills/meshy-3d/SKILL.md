@@ -5,7 +5,7 @@ description: 3D model generation with Meshy API (by Meshy) via the Pixazo API. T
 
 # Meshy API
 
-Meshy — production-ready 3D model generation from text prompts or reference images. Meshy 7 adds single-image and multi-image reconstruction with optional auto-rigging and animation.
+Meshy — production-ready 3D model generation from text prompts or reference images. Meshy 7.1 is the current generation: text to 3D, single-image reconstruction, and multi-image reconstruction from up to four angles of the same object. Every request returns a GLB.
 
 You can ask Meshy to handle 3D model generation. Powered by Meshy via the Pixazo API gateway.
 
@@ -32,6 +32,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Meshy 7.1 | Text to Image (3D Models — Text to 3D) | `meshy-7-1` / `text-to-3d` |
+| Meshy 7.1 | Image to Image (3D Models — Image to 3D) | `meshy-7-1` / `image-to-3d` |
+| Meshy 7.1 | Image to Image (3D Models — Multi-Image to 3D) | `meshy-7-1` / `multi-image-to-3d` |
 | Meshy 7 | Image to Image (3D Models — Image to 3D) | `meshy-7` / `image-to-3d` |
 | Meshy 7 | Image to Image (3D Models — Multi-Image to 3D) | `meshy-7` / `multi-image-to-3d` |
 | Meshy 6 | Text to Image (3D Models — Text to 3D) | `meshy-6-text-to-3d` / `meshy-6-text-to-3d-request` |
@@ -41,6 +44,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/meshy-7-1/v1/text-to-3d`
+- `POST https://gateway.pixazo.ai/meshy-7-1/v1/image-to-3d`
+- `POST https://gateway.pixazo.ai/meshy-7-1/v1/multi-image-to-3d`
 - `POST https://gateway.pixazo.ai/meshy-7/v1/image-to-3d`
 - `POST https://gateway.pixazo.ai/meshy-7/v1/multi-image-to-3d`
 - `POST https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request`
@@ -50,16 +56,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request' \
+curl -X POST 'https://gateway.pixazo.ai/meshy-7-1/v1/text-to-3d' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/meshy-7/single.png",
+  "prompt": "a weathered wooden treasure chest with iron bands",
+  "mode": "full",
   "topology": "triangle",
-  "target_polycount": 30000,
-  "symmetry_mode": "auto",
-  "should_remesh": true,
-  "should_texture": true
+  "target_polycount": 30000
 }'
 ```
 
@@ -68,18 +72,16 @@ curl -X POST 'https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request",
+    "https://gateway.pixazo.ai/meshy-7-1/v1/text-to-3d",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/meshy-7/single.png",
+  "prompt": "a weathered wooden treasure chest with iron bands",
+  "mode": "full",
   "topology": "triangle",
-  "target_polycount": 30000,
-  "symmetry_mode": "auto",
-  "should_remesh": true,
-  "should_texture": true
+  "target_polycount": 30000
 },
     timeout=300,
 )
@@ -90,19 +92,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request', {
+const res = await fetch('https://gateway.pixazo.ai/meshy-7-1/v1/text-to-3d', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/meshy-7/single.png",
+  "prompt": "a weathered wooden treasure chest with iron bands",
+  "mode": "full",
   "topology": "triangle",
-  "target_polycount": 30000,
-  "symmetry_mode": "auto",
-  "should_remesh": true,
-  "should_texture": true
+  "target_polycount": 30000
 }),
 });
 console.log(await res.json());
@@ -121,12 +121,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/meshy-7-1/v1/text-to-3d", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/meshy-7-1/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
