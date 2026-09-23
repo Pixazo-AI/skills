@@ -5,7 +5,7 @@ description: 3D model generation with Tripo3D API (by Tripo) via the Pixazo API.
 
 # Tripo3D API
 
-Tripo3D turns a text prompt or a single photo into a 3D model you can download. Tripo P2 is the current generation: text to 3D and image to 3D, with optional PBR textures, adjustable face counts and quad topology. Every request returns one ready-to-use model file for games, AR, or product mockups.
+Tripo3D turns a text prompt or a single photo into a 3D model you can download. Tripo3D P2 is the current generation: text to 3D and image to 3D, with optional PBR textures, adjustable face counts and quad topology. Every request returns one ready-to-use model file for games, AR, or product mockups.
 
 You can ask Tripo3D to handle 3D model generation. Powered by Tripo via the Pixazo API gateway.
 
@@ -32,8 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Tripo P2 | Text to Image (3D Models — Text to 3D) | `tripo3d-p2` / `text-to-3d` |
-| Tripo P2 | Image to Image (3D Models — Image to 3D) | `tripo3d-p2` / `image-to-3d` |
+| Tripo3D P2 | Text to Image (3D Models — Text to 3D) | `tripo3d-p2` / `text-to-3d` |
+| Tripo3D P2 | Image to Image (3D Models — Image to 3D) | `tripo3d-p2` / `image-to-3d` |
 | Tripo3D v2.5 | Image to Image (3D Models — Image to 3D) | `tripo3d-v2-5-413` / `tripo3d-v2-5-request` |
 
 ### Step 3 — Make the API call
