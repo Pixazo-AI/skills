@@ -5,7 +5,7 @@ description: 3D model generation with Tripo3D API (by Tripo) via the Pixazo API.
 
 # Tripo3D API
 
-Tripo3D turns a single photo into a 3D model you can download. It's a quick, low-effort way to get a usable 3D asset for games, AR, or product mockups.
+Tripo3D turns a text prompt or a single photo into a 3D model you can download. Tripo P2 is the current generation: text to 3D and image to 3D, with optional PBR textures, adjustable face counts and quad topology. Every request returns one ready-to-use model file for games, AR, or product mockups.
 
 You can ask Tripo3D to handle 3D model generation. Powered by Tripo via the Pixazo API gateway.
 
@@ -32,25 +32,28 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Tripo P2 | Text to Image (3D Models — Text to 3D) | `tripo3d-p2` / `text-to-3d` |
+| Tripo P2 | Image to Image (3D Models — Image to 3D) | `tripo3d-p2` / `image-to-3d` |
 | Tripo3D v2.5 | Image to Image (3D Models — Image to 3D) | `tripo3d-v2-5-413` / `tripo3d-v2-5-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/tripo3d-p2/v1/text-to-3d`
+- `POST https://gateway.pixazo.ai/tripo3d-p2/v1/image-to-3d`
 - `POST https://gateway.pixazo.ai/tripo3d-v2-5-413/v1/tripo3d-v2-5-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/tripo3d-v2-5-413/v1/tripo3d-v2-5-request' \
+curl -X POST 'https://gateway.pixazo.ai/tripo3d-p2/v1/text-to-3d' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "texture": "standard",
-  "texture_alignment": "original_image",
-  "orientation": "default",
-  "image_url": "https://api-assets.pixazo.ai/media/tripo3d.png"
+  "prompt": "a small wooden stool with three legs",
+  "texture_quality": "standard",
+  "face_limit": 20000
 }'
 ```
 
@@ -59,16 +62,15 @@ curl -X POST 'https://gateway.pixazo.ai/tripo3d-v2-5-413/v1/tripo3d-v2-5-request
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/tripo3d-v2-5-413/v1/tripo3d-v2-5-request",
+    "https://gateway.pixazo.ai/tripo3d-p2/v1/text-to-3d",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "texture": "standard",
-  "texture_alignment": "original_image",
-  "orientation": "default",
-  "image_url": "https://api-assets.pixazo.ai/media/tripo3d.png"
+  "prompt": "a small wooden stool with three legs",
+  "texture_quality": "standard",
+  "face_limit": 20000
 },
     timeout=300,
 )
@@ -79,17 +81,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/tripo3d-v2-5-413/v1/tripo3d-v2-5-request', {
+const res = await fetch('https://gateway.pixazo.ai/tripo3d-p2/v1/text-to-3d', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "texture": "standard",
-  "texture_alignment": "original_image",
-  "orientation": "default",
-  "image_url": "https://api-assets.pixazo.ai/media/tripo3d.png"
+  "prompt": "a small wooden stool with three legs",
+  "texture_quality": "standard",
+  "face_limit": 20000
 }),
 });
 console.log(await res.json());
@@ -108,12 +109,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/tripo3d-v2-5-413/v1/tripo3d-v2-5-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/tripo3d-p2/v1/text-to-3d", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/tripo3d-v2-5-413/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/tripo3d-p2/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
