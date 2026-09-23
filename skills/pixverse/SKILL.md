@@ -5,7 +5,7 @@ description: Video generation with Pixverse Video API (by Pixverse) via the Pixa
 
 # Pixverse Video API
 
-PixVerse makes short videos with motion and camera moves. You can start from a text prompt or a photo, and it can add lip-synced talking. It's a fast pick for social-ready clips.
+PixVerse makes short videos with motion and camera moves. You can start from a text prompt or a photo, add lip-synced talking, or turn a whole song into a music video. It's a fast pick for social-ready clips.
 
 You can ask Pixverse to handle video generation. Powered by Pixverse via the Pixazo API gateway.
 
@@ -39,6 +39,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Pixverse v5.6 | Text to Video | `pixverse` / `pixverse-request` |
 | Pixverse v5.6 | Image to Video | `pixverse-i2v` / `pixverse-i2v-request` |
 | Pixverse Lipsync | Video to Video (Ref Video + Ref Audio to Video - Lipsync) | `pixverse-lipsync` / `pixverse-lipsync-request` |
+| Pixverse Music Video | Audio to Video (Music to Video) | `pixverse-music-video` / `music-to-video` |
 
 ### Step 3 — Make the API call
 
@@ -49,6 +50,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/pixverse-c1-image-to-video/v1/pixverse-c1-image-to-video-request`
 - `POST https://gateway.pixazo.ai/pixverse-i2v/v1/pixverse-i2v-request`
 - `POST https://gateway.pixazo.ai/pixverse-lipsync/v1/video-to-video/lip-sync`
+- `POST https://gateway.pixazo.ai/pixverse-music-video/v1/music-to-video`
 
 **Sample request (primary operation)**
 
