@@ -43,8 +43,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | LTX 2.3 Quality | Audio to Video | `ltx-2-3-quality-audio-to-video` / `ltx-2-3-quality-audio-to-video-request` |
 | LTX 2.3 Quality | Video to Video (Reference Video to Video) | `ltx-2-3-quality-reference-video-to-video` / `ltx-2-3-quality-reference-video-to-video-request` |
 | LTX 2.3 Quality | Video to Video (Video Upscale) | `ltx-2-3-quality-hdr` / `ltx-2-3-quality-hdr-request` |
-| LTX 2.5 Free | Text to Video | `ltx-video` / `text-to-video` |
-| LTX 2.5 Free | Image to Video | `ltx-video` / `image-to-video` |
+| LTX Video 2.5 | Text to Video | `ltx-video` / `text-to-video` |
+| LTX Video 2.5 | Image to Video | `ltx-video` / `image-to-video` |
 | LTX v2.3 | Text to Video | `ltx-2-3-text-to-video` / `ltx-2-3-text-to-video-request` |
 | LTX v2.3 | Image to Video | `ltx-2-3-image-to-video` / `ltx-2-3-image-to-video-request` |
 | LTX v2.3 | Audio to Video | `ltx-2-3-audio-to-video` / `ltx-2-3-audio-to-video-request` |
