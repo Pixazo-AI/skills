@@ -1,13 +1,13 @@
 ---
-name: video-replace-audio-api
-description: Image generation/editing with Video Replace Audio API (by Pixazo) via the Pixazo API. TRIGGER when the user mentions "Video Replace Audio" or "Video Replace Audio API", or when the user asks to generate / make / create / edit / restyle an image and Video Replace Audio is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
+name: ming-image
+description: Image generation/editing with Ming Image API (by Ant Ling) via the Pixazo API. TRIGGER when the user mentions "Ming Image" or "Ming Image API", or when the user asks to generate / make / create / edit / restyle an image and Ming Image is named or implied. DO NOT TRIGGER for video / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Video Replace Audio API
+# Ming Image API
 
-Replace a video’s audio track with a different one. The picture is untouched: an H.264 source is stream-copied rather than re-encoded, and anything else (VP9/WebM and friends) is re-encoded to H.264 so the result is a normal MP4. The output runs for as long as the SHORTER of the two inputs — a 60-second video given a 5-second track comes back 5 seconds long.
+Ming Image 0.1 is Ant Ling's design-focused image model. It generates posters, UI mockups, infographics and other text-rich layouts with sharp, legible typography from a text prompt, and splits a flattened design into editable transparent layers (text, images, containers and background) that can be moved, restyled or replaced one by one.
 
-You can ask Video Replace Audio to handle image generation/editing. Powered by Pixazo via the Pixazo API gateway.
+You can ask Ming Image to handle image generation/editing. Powered by Ant Ling via the Pixazo API gateway.
 
 ---
 
@@ -32,23 +32,25 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Video Replace Audio 1.0 | Replace Audio | `media-mux` / `media-mux-request` |
+| Ming Image 0.1 | Text to Image | `ming-image` / `text-to-image` |
+| Ming Image 0.1 | Image to Image (Layer Decomposition) | `ming-image` / `layer-decompose` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/media-tools/v1/video-replace-audio`
+- `POST https://gateway.pixazo.ai/ming-image/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/ming-image/v1/layer-decompose`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-replace-audio' \
+curl -X POST 'https://gateway.pixazo.ai/ming-image/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3"
+  "prompt": "Minimalist event poster, bold title \"PIXAZO SUMMIT 2026\", date line \"October 12\", geometric shapes, warm orange and navy",
+  "output_format": "png"
 }'
 ```
 
@@ -57,14 +59,14 @@ curl -X POST 'https://gateway.pixazo.ai/media-tools/v1/video-replace-audio' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/media-tools/v1/video-replace-audio",
+    "https://gateway.pixazo.ai/ming-image/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3"
+  "prompt": "Minimalist event poster, bold title \"PIXAZO SUMMIT 2026\", date line \"October 12\", geometric shapes, warm orange and navy",
+  "output_format": "png"
 },
     timeout=300,
 )
@@ -75,15 +77,15 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/media-tools/v1/video-replace-audio', {
+const res = await fetch('https://gateway.pixazo.ai/ming-image/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "video_url": "https://api-assets.pixazo.ai/media-api-test/t.mov",
-    "audio_url": "https://api-assets.pixazo.ai/media/audio-tools-example.mp3"
+  "prompt": "Minimalist event poster, bold title \"PIXAZO SUMMIT 2026\", date line \"October 12\", geometric shapes, warm orange and navy",
+  "output_format": "png"
 }),
 });
 console.log(await res.json());
@@ -138,13 +140,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/video-replace-audio-api.md`
+> **Fetch:** `https://www.pixazo.ai/models/ming-image.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/video-replace-audio-api`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/ming-image`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-transition-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `content-safety-api`, `muse-image`, `ming-image`, `muse-voice`, `image-to-video-api`, `image-dpi-api`, `image-compose-api`
+- **Other image generation/editing models:** `seedream`, `gpt-image`, `grok-imagine-image`, `ideogram`, `longcat-image`, `nano-banana`, `pixelforge`, `qwen-image`, `recraft`, `reve-image`, `stable-diffusion`, `studio-ghibli`, `auraflow`, `z-image`, `sdxl`, `firered-image-edit`, `codeformer`, `gfpgan`, `smart-resize`, `nucleus`, `glm-image`, `hidream`, `ernie-image`, `mirelo`, `real-esrgan`, `mai-image`, `pixelcut`, `krea`, `boogu-image`, `whisper`, `assemblyai`, `separate-stems-api`, `diarize-api`, `video-convert-api`, `video-crop-api`, `video-resize-api`, `video-speed-api`, `video-trim-api`, `video-cut-api`, `video-merge-api`, `video-transition-api`, `video-compress-api`, `video-gif-api`, `video-frame-api`, `video-audio-remover-api`, `audio-normalize-api`, `audio-denoise-api`, `audio-slice-api`, `audio-extract-api`, `video-replace-audio-api`, `media-probe-api`, `image-convert-api`, `image-vectorize-api`, `image-extender-api`, `content-safety-api`, `muse-image`, `muse-voice`, `image-to-video-api`, `image-dpi-api`, `image-compose-api`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
