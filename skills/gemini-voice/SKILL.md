@@ -5,7 +5,7 @@ description: Text-to-speech / voice synthesis with Gemini Voice API (by Google) 
 
 # Gemini Voice API
 
-Google's Gemini voice models on one endpoint pair: Gemini 3.5 Transcribe turns recorded speech into text with speaker labels and word-level timestamps across 85+ locales, and Gemini 3.1 Flash TTS turns text into speech with 30 voices, natural-language delivery control and two-speaker dialogue. Both are billed per minute of audio.
+Google's Gemini voice models: Gemini 3.5 Transcribe turns recorded speech into text with speaker labels and word-level timestamps across 85+ locales, and Gemini 3.8 Flash TTS, 3.8 Flash-Lite TTS and 3.1 Flash TTS turn text into speech with 30 voices, natural-language delivery control and two-speaker dialogue. All are priced per minute of audio; the 3.8 TTS models bill per second.
 
 You can ask Gemini Voice to handle text-to-speech / voice synthesis. Powered by Google via the Pixazo API gateway.
 
@@ -33,6 +33,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Version | Operation | apiId / operationId |
 |---|---|---|
 | Gemini 3.5 Transcribe | Speech to Text | `gemini-3-5-transcribe` / `speech-to-text-request` |
+| Gemini 3.8 Flash TTS | Text to Speech | `gemini-3-8-flash-tts` / `text-to-speech-request` |
+| Gemini 3.8 Flash-Lite TTS | Text to Speech | `gemini-3-8-flash-lite-tts` / `text-to-speech-request` |
 | Gemini 3.1 Flash TTS | Text to Speech | `gemini-3-1-flash-tts` / `text-to-speech-request` |
 
 ### Step 3 — Make the API call
@@ -40,12 +42,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Endpoints**
 
 - `POST https://gateway.pixazo.ai/gemini-3-5-transcribe/v1/speech-to-text`
+- `POST https://gateway.pixazo.ai/gemini-3-8-flash-tts/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/gemini-3-8-flash-lite-tts/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/gemini-3-1-flash-tts/v1/text-to-speech`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/gemini-3-1-flash-tts/v1/text-to-speech' \
+curl -X POST 'https://gateway.pixazo.ai/gemini-3-8-flash-tts/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
@@ -58,7 +62,7 @@ curl -X POST 'https://gateway.pixazo.ai/gemini-3-1-flash-tts/v1/text-to-speech' 
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/gemini-3-1-flash-tts/v1/text-to-speech",
+    "https://gateway.pixazo.ai/gemini-3-8-flash-tts/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -75,7 +79,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/gemini-3-1-flash-tts/v1/text-to-speech', {
+const res = await fetch('https://gateway.pixazo.ai/gemini-3-8-flash-tts/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
