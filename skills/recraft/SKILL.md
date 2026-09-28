@@ -43,6 +43,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Recraft V4 | Text to Image | `recraft` / `text-to-image-v4-normal` |
 | Recraft V4 Pro | Text To Image | `recraft` / `text-to-image-v4-pro` |
 | Recraft V4.1 Pro | Text To Image | `recraft-v4-1-pro` / `text-to-image` |
+| Recraft V4.1 Flash | Text To Image | `recraft-v4-1-flash` / `text-to-image` |
 
 ### Step 3 — Make the API call
 
@@ -59,6 +60,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/recraft/v4/generate`
 - `POST https://gateway.pixazo.ai/recraft/v4-pro/generate`
 - `POST https://gateway.pixazo.ai/recraft-v4-1-pro/v1/recraft-v4-1-pro/generate`
+- `POST https://gateway.pixazo.ai/recraft-v4-1-flash/v1/text-to-image`
 
 **Sample request (primary operation)**
 
