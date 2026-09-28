@@ -5,7 +5,7 @@ description: Text-to-speech / voice synthesis with Gemini Voice API (by Google) 
 
 # Gemini Voice API
 
-Google's Gemini voice models: Gemini 3.5 Transcribe turns recorded speech into text with speaker labels and word-level timestamps across 85+ locales, and Gemini 3.8 Flash TTS, 3.8 Flash-Lite TTS and 3.1 Flash TTS turn text into speech with 30 voices, natural-language delivery control and two-speaker dialogue. All are priced per minute of audio; the 3.8 TTS models bill per second.
+Google's Gemini voice models: Gemini 3.5 Transcribe turns recorded speech into text with speaker labels and word-level timestamps across 85+ locales, and Gemini 3.8 Flash TTS, 3.8 Flash-Lite TTS and 3.1 Flash TTS turn text into speech with 30 voices, natural-language delivery control and two-speaker dialogue. Transcribe and 3.1 Flash TTS are priced per minute of audio, the 3.8 TTS models bill per second, and 3.1 Flash TTS (per request) is a flat price per request.
 
 You can ask Gemini Voice to handle text-to-speech / voice synthesis. Powered by Google via the Pixazo API gateway.
 
@@ -36,6 +36,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Gemini 3.8 Flash TTS | Text to Speech | `gemini-3-8-flash-tts` / `text-to-speech-request` |
 | Gemini 3.8 Flash-Lite TTS | Text to Speech | `gemini-3-8-flash-lite-tts` / `text-to-speech-request` |
 | Gemini 3.1 Flash TTS | Text to Speech | `gemini-3-1-flash-tts` / `text-to-speech-request` |
+| Gemini 3.1 Flash TTS (per request) | Text to Speech | `gemini-flash-tts` / `getTtsPrediction` |
 
 ### Step 3 — Make the API call
 
@@ -45,6 +46,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/gemini-3-8-flash-tts/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/gemini-3-8-flash-lite-tts/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/gemini-3-1-flash-tts/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/gemini-flash-tts/v1/gemini-flash-tts/generate`
 
 **Sample request (primary operation)**
 
@@ -136,5 +138,5 @@ Load that URL when you need exact parameter names, accepted values, or aren't su
 
 ## Related Pixazo skills
 
-- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `gemini`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `grok-voice`, `lux-tts`, `tada`, `melotts`, `gpt-4o`, `seed-audio`, `mai-voice`
+- **Other text-to-speech / voice synthesis models:** `chatterbox`, `vibevoice`, `xtts`, `elevenlabs`, `qwen-audio`, `voxcpm`, `zonos`, `fish-audio`, `deepgram`, `inworld`, `grok-voice`, `lux-tts`, `tada`, `melotts`, `gpt-4o`, `seed-audio`, `mai-voice`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
