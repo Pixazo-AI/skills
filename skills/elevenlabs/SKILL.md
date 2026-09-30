@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| ElevenLabs Eleven v4 | Text to Speech | `elevenlabs-eleven-v4-tts` / `text-to-speech` |
+| ElevenLabs Eleven v4 Turbo | Text to Speech | `elevenlabs-eleven-v4-turbo-tts` / `text-to-speech` |
 | ElevenLabs Music v2.5 | Text to Music | `elevenlabs-music-v2-5` / `text-to-music` |
 | ElevenLabs Music v2 | Text to Music | `elevenlabs-music-v2` / `text-to-music` |
 | ElevenLabs Video to Music | Video to Music | `elevenlabs-video-to-music` / `video-to-music` |
@@ -47,6 +49,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/elevenlabs-eleven-v4-tts/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/elevenlabs-eleven-v4-turbo-tts/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/elevenlabs-music/v2.5/text-to-music`
 - `POST https://gateway.pixazo.ai/elevenlabs-music/v2/text-to-music`
 - `POST https://gateway.pixazo.ai/elevenlabs-video-to-music/v1/video-to-music`
@@ -61,12 +65,12 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech' \
+curl -X POST 'https://gateway.pixazo.ai/elevenlabs-eleven-v4-tts/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Upbeat lofi hip hop with warm piano chords and a relaxed drum groove",
-  "music_length_ms": 30000
+  "text": "Welcome to Pixazo. [whispers] This is Eleven v4, the most expressive voice model from ElevenLabs.",
+  "stability": 0.5
 }'
 ```
 
@@ -75,14 +79,14 @@ curl -X POST 'https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech'
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech",
+    "https://gateway.pixazo.ai/elevenlabs-eleven-v4-tts/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Upbeat lofi hip hop with warm piano chords and a relaxed drum groove",
-  "music_length_ms": 30000
+  "text": "Welcome to Pixazo. [whispers] This is Eleven v4, the most expressive voice model from ElevenLabs.",
+  "stability": 0.5
 },
     timeout=300,
 )
@@ -93,15 +97,15 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/elevenlabs-turbo-v2-5/v1/text-to-speech', {
+const res = await fetch('https://gateway.pixazo.ai/elevenlabs-eleven-v4-tts/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Upbeat lofi hip hop with warm piano chords and a relaxed drum groove",
-  "music_length_ms": 30000
+  "text": "Welcome to Pixazo. [whispers] This is Eleven v4, the most expressive voice model from ElevenLabs.",
+  "stability": 0.5
 }),
 });
 console.log(await res.json());
