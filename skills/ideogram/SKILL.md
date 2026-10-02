@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Ideogram 4.5 | Text to Image | `ideogram-v4-5` / `text-to-image` |
+| Ideogram 4.5 | Image to Image (Image Editing) | `ideogram-v4-5-edit` / `edit-image` |
 | Ideogram v4 | Text to Image | `ideogram-v4` / `ideogram-v4-request` |
 | Ideogram v4 | Image to Image | `ideogram-v4-image-to-image` / `ideogram-v4-image-to-image-request` |
 | Ideogram Remove Background | Image to Image (Image Background Removal) | `ideogram-remove-background` / `ideogram-remove-background-request` |
@@ -40,6 +42,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/ideogram-v4-5/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/ideogram-v4-5-edit/v1/edit-image`
 - `POST https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-request`
 - `POST https://gateway.pixazo.ai/ideogram-v4-image-to-image/v1/ideogram-v4-image-to-image-request`
 - `POST https://gateway.pixazo.ai/ideogram-remove-background/v1/ideogram-remove-background-request`
@@ -48,19 +52,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-request' \
+curl -X POST 'https://gateway.pixazo.ai/ideogram-v4-5/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A vintage travel poster of Kyoto in autumn, bold hand-painted lettering reading KYOTO across the top",
-  "num_images": 1,
-  "image_size": "square_hd",
-  "output_format": "jpeg",
-  "rendering_speed": "BALANCED",
-  "acceleration": "none",
-  "expansion_model": "Medium",
-  "enable_safety_checker": true,
-  "sync_mode": false
+  "prompt": "A vintage travel poster of Kyoto in autumn, bold hand-lettered title reading \"KYOTO\" across the top",
+  "image_size": "portrait_4_3",
+  "quality": "medium",
+  "num_images": 1
 }'
 ```
 
@@ -69,21 +68,16 @@ curl -X POST 'https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-request' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-request",
+    "https://gateway.pixazo.ai/ideogram-v4-5/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A vintage travel poster of Kyoto in autumn, bold hand-painted lettering reading KYOTO across the top",
-  "num_images": 1,
-  "image_size": "square_hd",
-  "output_format": "jpeg",
-  "rendering_speed": "BALANCED",
-  "acceleration": "none",
-  "expansion_model": "Medium",
-  "enable_safety_checker": true,
-  "sync_mode": false
+  "prompt": "A vintage travel poster of Kyoto in autumn, bold hand-lettered title reading \"KYOTO\" across the top",
+  "image_size": "portrait_4_3",
+  "quality": "medium",
+  "num_images": 1
 },
     timeout=300,
 )
@@ -94,22 +88,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/ideogram-v4/v1/ideogram-v4-request', {
+const res = await fetch('https://gateway.pixazo.ai/ideogram-v4-5/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A vintage travel poster of Kyoto in autumn, bold hand-painted lettering reading KYOTO across the top",
-  "num_images": 1,
-  "image_size": "square_hd",
-  "output_format": "jpeg",
-  "rendering_speed": "BALANCED",
-  "acceleration": "none",
-  "expansion_model": "Medium",
-  "enable_safety_checker": true,
-  "sync_mode": false
+  "prompt": "A vintage travel poster of Kyoto in autumn, bold hand-lettered title reading \"KYOTO\" across the top",
+  "image_size": "portrait_4_3",
+  "quality": "medium",
+  "num_images": 1
 }),
 });
 console.log(await res.json());
