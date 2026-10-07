@@ -32,31 +32,32 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Veed Clean Audio | Audio to Audio (Clean Audio — Noise Removal) | `veed-clean-audio` / `clean-audio` |
 | Veed Fabric 1.0 | Audio to Video (Ref Image + Ref Audio to Video — Talking Avatar) | `veed-fabric-1-0-api-130` / `veed-fabric-1-0-api-request` |
 | Veed 1.0 | Video to Video (Video Background Remover) | `veed-video-background-remover-541` / `veed-video-background-remover-request` |
 | Veed Lipsync | Video to Video (Ref Video + Ref Audio to Video - Lipsync) | `veed-lipsync` / `veed-lipsync-request` |
 | Veed Lipsync 2.0 | Video to Video (Ref Video + Ref Audio to Video - Lipsync) | `veed-lipsync-v2` / `veed-lipsync-v2-request` |
-| Veed Clean Audio | Audio to Audio (Clean Audio — Noise Removal) | `veed-clean-audio` / `clean-audio` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/veed-clean-audio/v1/clean-audio`
 - `POST https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request`
 - `POST https://gateway.pixazo.ai/veed-lipsync/v1/video-to-video/lip-sync`
 - `POST https://gateway.pixazo.ai/veed-lipsync-v2/v1/video-to-video/lip-sync`
-- `POST https://gateway.pixazo.ai/veed-clean-audio/v1/clean-audio`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request' \
+curl -X POST 'https://gateway.pixazo.ai/veed-clean-audio/v1/clean-audio' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Oz_g4AwQvXtXpUHL3Pa7u_Hope.mp3",
-  "resolution": "720p"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/transcribe-sample.wav",
+  "output_format": "flac",
+  "target_lufs": -19,
+  "strength": 0.874
 }'
 ```
 
@@ -65,15 +66,16 @@ curl -X POST 'https://gateway.pixazo.ai/veed-video-background-remover-541/v1/vee
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request",
+    "https://gateway.pixazo.ai/veed-clean-audio/v1/clean-audio",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Oz_g4AwQvXtXpUHL3Pa7u_Hope.mp3",
-  "resolution": "720p"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/transcribe-sample.wav",
+  "output_format": "flac",
+  "target_lufs": -19,
+  "strength": 0.874
 },
     timeout=300,
 )
@@ -84,16 +86,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request', {
+const res = await fetch('https://gateway.pixazo.ai/veed-clean-audio/v1/clean-audio', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/input_model.png",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/Oz_g4AwQvXtXpUHL3Pa7u_Hope.mp3",
-  "resolution": "720p"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/transcribe-sample.wav",
+  "output_format": "flac",
+  "target_lufs": -19,
+  "strength": 0.874
 }),
 });
 console.log(await res.json());
@@ -112,12 +115,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/veed-clean-audio/v1/clean-audio", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/veed-video-background-remover-541/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/veed-clean-audio/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
