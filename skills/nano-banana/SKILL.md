@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Nano Banana 2.1 | Text to Image | `nano-banana-2-1` / `nano-banana-2-1-text-to-image-fast-request` |
+| Nano Banana 2.1 | Image to Image (Image Editing) | `nano-banana-2-1` / `nano-banana-2-1-image-to-image-fast-request` |
 | Nano Banana 2 Lite | Text to Image | `nano-banana-2-lite` / `nano-banana-2-lite-text-to-image-fast-request` |
 | Nano Banana 2 Lite | Image to Image (Image Editing) | `nano-banana-2-lite` / `nano-banana-2-lite-image-to-image-fast-request` |
 | Nano Banana 2 | Text to Image | `nano-banana-2` / `nano-banana-2-text-to-image-fast-request` |
@@ -50,6 +52,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/nano-banana-2-1/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/nano-banana-2-1/v1/image-to-image/editing`
 - `POST https://gateway.pixazo.ai/nano-banana-2-lite/v1/text-to-image`
 - `POST https://gateway.pixazo.ai/nano-banana-2-lite/v1/image-to-image/editing`
 - `POST https://gateway.pixazo.ai/nano-banana-2/v1/text-to-image`
@@ -67,14 +71,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/nano-banana-2-lite/v1/text-to-image' \
+curl -X POST 'https://gateway.pixazo.ai/nano-banana-2-1/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "A futuristic cityscape at golden hour with neon-lit skyscrapers and reflections on wet streets",
   "num_images": 1,
   "aspect_ratio": "16:9",
-  "output_format": "jpeg"
+  "resolution": "1K"
 }'
 ```
 
@@ -83,7 +87,7 @@ curl -X POST 'https://gateway.pixazo.ai/nano-banana-2-lite/v1/text-to-image' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/nano-banana-2-lite/v1/text-to-image",
+    "https://gateway.pixazo.ai/nano-banana-2-1/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
@@ -92,7 +96,7 @@ r = requests.post(
   "prompt": "A futuristic cityscape at golden hour with neon-lit skyscrapers and reflections on wet streets",
   "num_images": 1,
   "aspect_ratio": "16:9",
-  "output_format": "jpeg"
+  "resolution": "1K"
 },
     timeout=300,
 )
@@ -103,7 +107,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/nano-banana-2-lite/v1/text-to-image', {
+const res = await fetch('https://gateway.pixazo.ai/nano-banana-2-1/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -113,7 +117,7 @@ const res = await fetch('https://gateway.pixazo.ai/nano-banana-2-lite/v1/text-to
   "prompt": "A futuristic cityscape at golden hour with neon-lit skyscrapers and reflections on wet streets",
   "num_images": 1,
   "aspect_ratio": "16:9",
-  "output_format": "jpeg"
+  "resolution": "1K"
 }),
 });
 console.log(await res.json());
