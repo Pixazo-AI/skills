@@ -36,6 +36,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Veed 1.0 | Video to Video (Video Background Remover) | `veed-video-background-remover-541` / `veed-video-background-remover-request` |
 | Veed Lipsync | Video to Video (Ref Video + Ref Audio to Video - Lipsync) | `veed-lipsync` / `veed-lipsync-request` |
 | Veed Lipsync 2.0 | Video to Video (Ref Video + Ref Audio to Video - Lipsync) | `veed-lipsync-v2` / `veed-lipsync-v2-request` |
+| Veed Clean Audio | Audio to Audio (Clean Audio — Noise Removal) | `veed-clean-audio` / `clean-audio` |
 
 ### Step 3 — Make the API call
 
@@ -44,6 +45,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/veed-video-background-remover-541/v1/veed-video-background-remover-request`
 - `POST https://gateway.pixazo.ai/veed-lipsync/v1/video-to-video/lip-sync`
 - `POST https://gateway.pixazo.ai/veed-lipsync-v2/v1/video-to-video/lip-sync`
+- `POST https://gateway.pixazo.ai/veed-clean-audio/v1/clean-audio`
 
 **Sample request (primary operation)**
 
