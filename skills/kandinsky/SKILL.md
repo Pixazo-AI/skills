@@ -32,23 +32,37 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Kandinsky 6.0 Lite | Text to Video | `kandinsky-6-lite` / `text-to-video` |
+| Kandinsky 6.0 Lite | Image to Video | `kandinsky-6-lite` / `image-to-video` |
+| Kandinsky 6.0 Pro | Text to Video | `kandinsky-6-pro` / `text-to-video` |
+| Kandinsky 6.0 Pro | Image to Video | `kandinsky-6-pro` / `image-to-video` |
+| Kandinsky 6.0 VSR | Video to Video (Upscale) | `kandinsky-6-vsr` / `upscale-video` |
+| Kandinsky 6.0 VSR Lite | Video to Video (Upscale) | `kandinsky-6-vsr-lite` / `upscale-video` |
 | Kandinsky v5 Pro | Image to Video | `kandinsky-5-0-pro-953` / `kandinsky-5-0-pro-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/kandinsky-6-lite/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/kandinsky-6-lite/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/kandinsky-6-pro/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/kandinsky-6-pro/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/kandinsky-6-vsr/v1/upscale-video`
+- `POST https://gateway.pixazo.ai/kandinsky-6-vsr-lite/v1/upscale-video`
 - `POST https://gateway.pixazo.ai/kandinsky-5-0-pro-953/v1/kandinsky-5-0-pro-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/kandinsky-5-0-pro-953/v1/kandinsky-5-0-pro-request' \
+curl -X POST 'https://gateway.pixazo.ai/kandinsky-6-lite/v1/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "The white dragon warrior stands still, eyes full of determination and strength. The camera slowly moves closer or circles around the warrior, highlighting the powerful presence and heroic spirit of the character.",
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
+  "prompt": "A paper boat drifting down a rain-soaked city street at night, neon reflections rippling on the water, low tracking shot. Rain patters on the pavement and distant traffic hums.",
+  "aspect_ratio": "16:9",
+  "num_inference_steps": 10,
+  "upscale_factor": 2.25
 }'
 ```
 
@@ -57,14 +71,16 @@ curl -X POST 'https://gateway.pixazo.ai/kandinsky-5-0-pro-953/v1/kandinsky-5-0-p
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/kandinsky-5-0-pro-953/v1/kandinsky-5-0-pro-request",
+    "https://gateway.pixazo.ai/kandinsky-6-lite/v1/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "The white dragon warrior stands still, eyes full of determination and strength. The camera slowly moves closer or circles around the warrior, highlighting the powerful presence and heroic spirit of the character.",
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
+  "prompt": "A paper boat drifting down a rain-soaked city street at night, neon reflections rippling on the water, low tracking shot. Rain patters on the pavement and distant traffic hums.",
+  "aspect_ratio": "16:9",
+  "num_inference_steps": 10,
+  "upscale_factor": 2.25
 },
     timeout=300,
 )
@@ -75,15 +91,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/kandinsky-5-0-pro-953/v1/kandinsky-5-0-pro-request', {
+const res = await fetch('https://gateway.pixazo.ai/kandinsky-6-lite/v1/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "The white dragon warrior stands still, eyes full of determination and strength. The camera slowly moves closer or circles around the warrior, highlighting the powerful presence and heroic spirit of the character.",
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
+  "prompt": "A paper boat drifting down a rain-soaked city street at night, neon reflections rippling on the water, low tracking shot. Rain patters on the pavement and distant traffic hums.",
+  "aspect_ratio": "16:9",
+  "num_inference_steps": 10,
+  "upscale_factor": 2.25
 }),
 });
 console.log(await res.json());
@@ -102,12 +120,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/kandinsky-5-0-pro-953/v1/kandinsky-5-0-pro-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/kandinsky-6-lite/v1/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/kandinsky-5-0-pro-953/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/kandinsky-6-lite/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
