@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Vidu Q4 | Image to Video | `vidu-q4` / `image-to-video` |
+| Vidu Q4 | Reference to Video | `vidu-q4` / `reference-to-video` |
 | Vidu Q3 Pro | Text to Video | `vidu-q3-pro` / `text-to-video` |
 | Vidu Q3 Pro | Image to Video | `vidu-q3-pro` / `image-to-video` |
 | Vidu Q3 Pro | Start / End Frame to Video | `vidu-q3-pro` / `start-end-to-video` |
@@ -45,6 +47,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/vidu-q4/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/vidu-q4/v1/reference-to-video`
 - `POST https://gateway.pixazo.ai/vidu-q3-pro/v1/text-to-video`
 - `POST https://gateway.pixazo.ai/vidu-q3-pro/v1/image-to-video`
 - `POST https://gateway.pixazo.ai/vidu-q3-pro/v1/start-end-to-video`
@@ -61,7 +65,10 @@ curl -X POST 'https://gateway.pixazo.ai/vidu-q3-pro/v1/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A golden retriever running through a sunlit meadow in slow motion"
+  "prompt": "The subject turns slowly toward the camera and smiles, gentle push-in.",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
+  "duration": 5,
+  "resolution": "720p"
 }'
 ```
 
@@ -76,7 +83,10 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A golden retriever running through a sunlit meadow in slow motion"
+  "prompt": "The subject turns slowly toward the camera and smiles, gentle push-in.",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
+  "duration": 5,
+  "resolution": "720p"
 },
     timeout=300,
 )
@@ -94,7 +104,10 @@ const res = await fetch('https://gateway.pixazo.ai/vidu-q3-pro/v1/text-to-video'
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A golden retriever running through a sunlit meadow in slow motion"
+  "prompt": "The subject turns slowly toward the camera and smiles, gentle push-in.",
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
+  "duration": 5,
+  "resolution": "720p"
 }),
 });
 console.log(await res.json());
