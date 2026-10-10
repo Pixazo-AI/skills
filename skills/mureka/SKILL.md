@@ -1,13 +1,13 @@
 ---
-name: mmaudio
-description: Music/audio generation with MMAudio v2 API (by Sony AI) via the Pixazo API. TRIGGER when the user mentions "MMAudio" or "MMAudio v2 API", or when the user asks to generate / make music / a song / a beat / audio track and MMAudio is named or implied. DO NOT TRIGGER for image / video / voice / 3d / try-on — each has its own skill.
+name: mureka
+description: Music/audio generation with Mureka API (by Mureka) via the Pixazo API. TRIGGER when the user mentions "Mureka" or "Mureka API", or when the user asks to generate / make music / a song / a beat / audio track and Mureka is named or implied. DO NOT TRIGGER for image / video / voice / 3d / try-on — each has its own skill.
 ---
 
-# MMAudio v2 API
+# Mureka API
 
-MMAudio v2 is Sony AI's text-to-audio generation model that synthesizes high-quality sound effects, ambient audio, and music from natural-language prompts.
+Music generation by Mureka. Generate a song from your own lyrics or from a short description of the song you want, or an instrumental track from a text prompt. Choose the model version with the model field; mureka-9.5 is the default.
 
-You can ask MMAudio to handle music/audio generation. Powered by Sony AI via the Pixazo API gateway.
+You can ask Mureka to handle music/audio generation. Powered by Mureka via the Pixazo API gateway.
 
 ---
 
@@ -32,29 +32,31 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| MMAudio v2 | Text to Audio | `mmaudio-v2-text-to-audio` / `mmaudio-v2-text-to-audio-request` |
-| MMAudio V2 Video to Audio | Video to Audio | `mmaudio-v2` / `mmaudio-v2-request` |
+| Mureka Song | Prompt to Song | `mureka-song-prompt` / `prompt-to-song` |
+| Mureka Song | Lyrics to Song | `mureka-song` / `lyrics-to-song` |
+| Mureka Instrumental | Text to Music (Instrumental) | `mureka-instrumental` / `text-to-music` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
-- `POST https://gateway.pixazo.ai/mmaudio-v2-text-to-audio/v1/mmaudio-v2-text-to-audio-request`
-- `POST https://gateway.pixazo.ai/mmaudio-v2/v1/mmaudio-v2-request`
+- `POST https://gateway.pixazo.ai/mureka-song-prompt/v1/prompt-to-song`
+- `POST https://gateway.pixazo.ai/mureka-song/v1/lyrics-to-song`
+- `POST https://gateway.pixazo.ai/mureka-instrumental/v1/text-to-music`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/mmaudio-v2-text-to-audio/v1/mmaudio-v2-text-to-audio-request' \
+curl -X POST 'https://gateway.pixazo.ai/mureka-instrumental/v1/text-to-music' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "Gentle ocean waves crashing on a sandy beach with seagulls",
-  "negative_prompt": "",
-  "num_steps": 25,
-  "duration": 8,
-  "cfg_strength": 4.5,
-  "mask_away_clip": false
+  "prompt": "An upbeat summer song about a road trip with friends, with a catchy chorus",
+  "styles": [
+    "pop",
+    "rock"
+  ],
+  "model": "mureka-9.5"
 }'
 ```
 
@@ -63,18 +65,18 @@ curl -X POST 'https://gateway.pixazo.ai/mmaudio-v2-text-to-audio/v1/mmaudio-v2-t
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/mmaudio-v2-text-to-audio/v1/mmaudio-v2-text-to-audio-request",
+    "https://gateway.pixazo.ai/mureka-instrumental/v1/text-to-music",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "Gentle ocean waves crashing on a sandy beach with seagulls",
-  "negative_prompt": "",
-  "num_steps": 25,
-  "duration": 8,
-  "cfg_strength": 4.5,
-  "mask_away_clip": false
+  "prompt": "An upbeat summer song about a road trip with friends, with a catchy chorus",
+  "styles": [
+    "pop",
+    "rock"
+  ],
+  "model": "mureka-9.5"
 },
     timeout=300,
 )
@@ -85,19 +87,19 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/mmaudio-v2-text-to-audio/v1/mmaudio-v2-text-to-audio-request', {
+const res = await fetch('https://gateway.pixazo.ai/mureka-instrumental/v1/text-to-music', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "Gentle ocean waves crashing on a sandy beach with seagulls",
-  "negative_prompt": "",
-  "num_steps": 25,
-  "duration": 8,
-  "cfg_strength": 4.5,
-  "mask_away_clip": false
+  "prompt": "An upbeat summer song about a road trip with friends, with a catchy chorus",
+  "styles": [
+    "pop",
+    "rock"
+  ],
+  "model": "mureka-9.5"
 }),
 });
 console.log(await res.json());
@@ -116,12 +118,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/mmaudio-v2-text-to-audio/v1/mmaudio-v2-text-to-audio-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/mureka-instrumental/v1/text-to-music", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/mmaudio-v2-text-to-audio/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/mureka-instrumental/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
@@ -134,7 +136,7 @@ result_url = status.get("output_url") or status.get("video_url") or status.get("
 
 The exact polling endpoint and "done" status string vary by model — fetch the full reference for this model's polling shape:
 
-> **Fetch:** `https://www.pixazo.ai/models/mmaudio.md`
+> **Fetch:** `https://www.pixazo.ai/models/mureka.md`
 
 Show the result URL to the user when ready (offer to download, share, or generate variations).
 
@@ -164,13 +166,13 @@ Per-call cost varies by model and resolution. The user can check their balance a
 
 For complete schemas, every parameter, error codes, and per-version differences:
 
-> **Fetch:** `https://www.pixazo.ai/models/mmaudio.md`
+> **Fetch:** `https://www.pixazo.ai/models/mureka.md`
 
-Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/mmaudio`.
+Load that URL when you need exact parameter names, accepted values, or aren't sure about a field. The HTML version is at `https://www.pixazo.ai/models/mureka`.
 
 ---
 
 ## Related Pixazo skills
 
-- **Other music/audio generation models:** `tracks`, `ace-step`, `lyria`, `stable-audio`, `mureka`
+- **Other music/audio generation models:** `tracks`, `ace-step`, `lyria`, `mmaudio`, `stable-audio`
 - **Want everything?** `npx skills add Pixazo-AI/skills --skill '*'`
