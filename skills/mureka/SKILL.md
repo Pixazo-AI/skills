@@ -35,6 +35,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Mureka Song | Prompt to Song | `mureka-song-prompt` / `prompt-to-song` |
 | Mureka Song | Lyrics to Song | `mureka-song` / `lyrics-to-song` |
 | Mureka Instrumental | Text to Music (Instrumental) | `mureka-instrumental` / `text-to-music` |
+| Mureka Podcast | Text to Speech (Podcast) | `mureka-podcast` / `text-to-podcast` |
+| Mureka Lyrics | Text to Lyrics | `mureka-lyrics` / `text-to-lyrics` |
 
 ### Step 3 — Make the API call
 
@@ -43,6 +45,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/mureka-song-prompt/v1/prompt-to-song`
 - `POST https://gateway.pixazo.ai/mureka-song/v1/lyrics-to-song`
 - `POST https://gateway.pixazo.ai/mureka-instrumental/v1/text-to-music`
+- `POST https://gateway.pixazo.ai/mureka-podcast/v1/text-to-podcast`
+- `POST https://gateway.pixazo.ai/mureka-lyrics/v1/text-to-lyrics`
 
 **Sample request (primary operation)**
 
