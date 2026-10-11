@@ -37,6 +37,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Mureka Instrumental | Text to Music (Instrumental) | `mureka-instrumental` / `text-to-music` |
 | Mureka Podcast | Text to Speech (Podcast) | `mureka-podcast` / `text-to-podcast` |
 | Mureka Lyrics | Text to Lyrics | `mureka-lyrics` / `text-to-lyrics` |
+| Mureka Lyrics Video | Audio to Video (Lyrics Video) | `mureka-lyrics-video` / `song-to-video` |
 
 ### Step 3 — Make the API call
 
@@ -47,6 +48,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/mureka-instrumental/v1/text-to-music`
 - `POST https://gateway.pixazo.ai/mureka-podcast/v1/text-to-podcast`
 - `POST https://gateway.pixazo.ai/mureka-lyrics/v1/text-to-lyrics`
+- `POST https://gateway.pixazo.ai/mureka-lyrics-video/v1/song-to-video`
 
 **Sample request (primary operation)**
 
