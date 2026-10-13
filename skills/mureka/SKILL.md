@@ -32,11 +32,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
-| Mureka Song | Prompt to Song | `mureka-song-prompt` / `prompt-to-song` |
-| Mureka Song | Lyrics to Song | `mureka-song` / `lyrics-to-song` |
+| Mureka Song | Text to Song | `mureka-song-prompt` / `prompt-to-song` |
+| Mureka Song | Text to Song (Lyrics) | `mureka-song` / `lyrics-to-song` |
 | Mureka Instrumental | Text to Music (Instrumental) | `mureka-instrumental` / `text-to-music` |
 | Mureka Podcast | Text to Speech (Podcast) | `mureka-podcast` / `text-to-podcast` |
-| Mureka Lyrics | Text to Lyrics | `mureka-lyrics` / `text-to-lyrics` |
+| Mureka Lyrics | Text to Song (Lyrics) | `mureka-lyrics` / `text-to-lyrics` |
 | Mureka Lyrics Video | Audio to Video (Lyrics Video) | `mureka-lyrics-video` / `song-to-video` |
 
 ### Step 3 — Make the API call
