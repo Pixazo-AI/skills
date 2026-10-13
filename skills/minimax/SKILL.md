@@ -51,6 +51,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | MiniMax H3 Max | Audio to Video (Ref Audio + Ref Image to Video) - Lipsync | `minimax-hailuo-h3-max-lip-sync` / `image-to-video` |
 | MiniMax H3 Max | Video to Video (Video Extension) | `minimax-hailuo-h3-max-edit` / `extend-video` |
 | MiniMax H3 Max | Video to Video (Scene Insertion) | `minimax-hailuo-h3-max-edit` / `insert-video` |
+| MiniMax H3 Max | Video to Video (Relighting) | `minimax-hailuo-h3-max-v2v` / `relight-video` |
+| MiniMax H3 Max | Video to Video (Character Replacement) | `minimax-hailuo-h3-max-v2v` / `recast-video` |
 | MiniMax H3 Max Turbo | Text to Video | `minimax-hailuo-h3-max-turbo` / `text-to-video` |
 | MiniMax H3 Max Turbo | Image to Video | `minimax-hailuo-h3-max-turbo` / `image-to-video` |
 
@@ -75,6 +77,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max-lip-sync/v1/image-to-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max-edit/v1/extend-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max-edit/v1/insert-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max-v2v/v1/relight-video`
+- `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max-v2v/v1/recast-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max-turbo/v1/text-to-video`
 - `POST https://gateway.pixazo.ai/minimax-hailuo-h3-max-turbo/v1/image-to-video`
 
