@@ -5,7 +5,7 @@ description: Text-to-speech / voice synthesis with Fish Audio API (by Fish Audio
 
 # Fish Audio API
 
-Fish Audio S2.1 Pro text-to-speech. Natural, expressive speech in 83 languages with free-form emotion markers and a library of 2.5M+ community voices.
+Fish Audio S2.1 Pro text-to-speech. Natural, expressive speech in 83 languages with free-form emotion markers and a library of 2.5M+ community voices. Drama 3 (preview), Fish Audio's most emotive and controllable model, plays each line the way you direct it in plain language; paired tags change only the words they wrap, and one request can voice a multi-speaker dialogue.
 
 You can ask Fish Audio to handle text-to-speech / voice synthesis. Powered by Fish Audio via the Pixazo API gateway.
 
@@ -32,6 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Fish Audio Drama 3 | Text to Speech | `fish-audio-drama-3` / `fish-audio-drama-3-request` |
 | Fish Audio S2.1 Pro | Text to Speech | `fish-audio-s2-1-pro` / `fish-audio-s2-1-pro-request` |
 | Fish Audio Speech to Text | Speech to Text | `fish-audio-speech-to-text` / `fish-audio-speech-to-text-request` |
 
@@ -39,20 +40,20 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/fish-audio-drama-3/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/fish-audio-s2-1-pro/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/fish-audio-speech-to-text/v1/speech-to-text`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/fish-audio-s2-1-pro/v1/text-to-speech' \
+curl -X POST 'https://gateway.pixazo.ai/fish-audio-drama-3/v1/text-to-speech' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "text": "[whispering] When you are building something new, there is this mix of wonder and fear. [chuckling] But that is what makes it worth building.",
-  "reference_id": "933563129e564b19a115bedd57b7406a",
-  "format": "mp3",
-  "mp3_bitrate": 128
+  "text": "[tired, trying to sound upbeat] I told you this would happen. [sigh] <whisper>But I am glad you came back.</whisper>",
+  "reference_id": "f3a2b90078d54a65af4b95f63bc7798e",
+  "format": "mp3"
 }'
 ```
 
@@ -61,16 +62,15 @@ curl -X POST 'https://gateway.pixazo.ai/fish-audio-s2-1-pro/v1/text-to-speech' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/fish-audio-s2-1-pro/v1/text-to-speech",
+    "https://gateway.pixazo.ai/fish-audio-drama-3/v1/text-to-speech",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "text": "[whispering] When you are building something new, there is this mix of wonder and fear. [chuckling] But that is what makes it worth building.",
-  "reference_id": "933563129e564b19a115bedd57b7406a",
-  "format": "mp3",
-  "mp3_bitrate": 128
+  "text": "[tired, trying to sound upbeat] I told you this would happen. [sigh] <whisper>But I am glad you came back.</whisper>",
+  "reference_id": "f3a2b90078d54a65af4b95f63bc7798e",
+  "format": "mp3"
 },
     timeout=300,
 )
@@ -81,17 +81,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/fish-audio-s2-1-pro/v1/text-to-speech', {
+const res = await fetch('https://gateway.pixazo.ai/fish-audio-drama-3/v1/text-to-speech', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "text": "[whispering] When you are building something new, there is this mix of wonder and fear. [chuckling] But that is what makes it worth building.",
-  "reference_id": "933563129e564b19a115bedd57b7406a",
-  "format": "mp3",
-  "mp3_bitrate": 128
+  "text": "[tired, trying to sound upbeat] I told you this would happen. [sigh] <whisper>But I am glad you came back.</whisper>",
+  "reference_id": "f3a2b90078d54a65af4b95f63bc7798e",
+  "format": "mp3"
 }),
 });
 console.log(await res.json());
