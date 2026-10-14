@@ -37,8 +37,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Qwen Image 3.0 Pro | Image to Image (Fusion) | `qwen-image-3-0-pro` / `image-to-image-fusion` |
 | Qwen Image Max Edit | Image to Image (Image Editing) | `qwen-image-max-edit` / `qwen-image-max-edit-request` |
 | Qwen Image Max t2i | Text to Image | `qwen-image-max` / `qwen-image-max-request` |
-| Qwen Image Edit | Image to Image (Image Editing) | `qwen-image` / `image-edit` |
-| Qwen Image | Text to Image | `qwen-image` / `text-to-image-request` |
 | Qwen LoRA v1 | Text to Image (LoRA) | `qwen-image-edit-plus-lora` / `generate-request` |
 | Qwen LoRA v1 | Image to Image (LoRA Trainer) | `qwen-image-edit-plus-trainer` / `training-request` |
 | Qwen LoRA v1 | Image to Image (Image Editing — Layered) | `qwen-image-layered` / `qwen-image-layered-request` |
@@ -53,7 +51,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/qwen-image-3-0-pro/v1/image-to-image/fusion`
 - `POST https://gateway.pixazo.ai/qwen-image-max-edit/v1/qwen-image-max-edit-request`
 - `POST https://gateway.pixazo.ai/qwen-image-max/v1/qwen-image-max-request`
-- `POST https://gateway.pixazo.ai/qwen-image/v1/generateMultimodeTextToImageEditRequest`
 - `POST https://gateway.pixazo.ai/qwen-image-edit-plus/v1/qwen-image-edit-plus-lora/generate`
 - `POST https://gateway.pixazo.ai/qwen-image-edit-plus-trainer/v1/qwen-image-edit-plus-trainer/generate`
 - `POST https://gateway.pixazo.ai/qwen-image-layered/v1/qwen-image-layered-request`
