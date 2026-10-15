@@ -32,6 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Bria Guided Remove Background | Image to Image (Guided Background Removal) | `bria-guided-remove-background` / `remove-background` |
 | BRIA FIBO Gen 1.5 | Text to Image | `fibo-gen-1-5` / `text-to-image` |
 | BRIA FIBO Edit 1.5 | Image to Image (Image Editing) | `fibo-edit-1-5` / `edit` |
 | BRIA FIBO Edit 1.5 | Image to Image (Virtual Try On) | `fibo-edit-1-5` / `virtual-try-on` |
@@ -45,6 +46,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/bria-guided-remove-background/v1/remove-background`
 - `POST https://gateway.pixazo.ai/fibo-gen-1-5/v1/text-to-image`
 - `POST https://gateway.pixazo.ai/fibo-edit-1-5/v1/edit`
 - `POST https://gateway.pixazo.ai/fibo-edit-1-5/v1/virtual-try-on`
@@ -61,9 +63,8 @@ curl -X POST 'https://gateway.pixazo.ai/fibo-edit-1-5/v1/virtual-try-on' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A weathered brown leather armchair in a sunlit study, cracked grain texture, soft afternoon light raking across the surface.",
-  "aspect_ratio": "1:1",
-  "resolution": "1MP"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
+  "prompt": "only the t-shirt"
 }'
 ```
 
@@ -78,9 +79,8 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A weathered brown leather armchair in a sunlit study, cracked grain texture, soft afternoon light raking across the surface.",
-  "aspect_ratio": "1:1",
-  "resolution": "1MP"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
+  "prompt": "only the t-shirt"
 },
     timeout=300,
 )
@@ -98,9 +98,8 @@ const res = await fetch('https://gateway.pixazo.ai/fibo-edit-1-5/v1/virtual-try-
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A weathered brown leather armchair in a sunlit study, cracked grain texture, soft afternoon light raking across the surface.",
-  "aspect_ratio": "1:1",
-  "resolution": "1MP"
+  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
+  "prompt": "only the t-shirt"
 }),
 });
 console.log(await res.json());
