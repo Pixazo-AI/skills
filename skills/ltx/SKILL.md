@@ -5,7 +5,7 @@ description: Video generation with LTX Video API (by Lightricks) via the Pixazo 
 
 # LTX Video API
 
-Advanced video generation by Lightricks. The LTX 2.5 generation adds a Pro tier and a faster Lite tier, both with native audio and audio-to-video, on top of the existing 2.3 T2V / I2V / retake pipeline. LTX 2.3 Transition turns a prompt and an optional first frame into a short clip, or moves from a first frame to a last frame; LTX 2.5 Alpha Matte turns a video into a black-and-white matte of its subject; and LTX 2.5 SDR to HDR converts a standard video into 10-bit HLG HDR at the same size and length, up to 1920x1088 and the first 145 frames (about 6 seconds at 24 fps).
+Advanced video generation by Lightricks. The LTX 2.5 generation adds a Pro tier and a faster Lite tier, both with native audio and audio-to-video, on top of the existing 2.3 T2V / I2V / retake pipeline. LTX 2.3 Transition turns a prompt and an optional first frame into a short clip, or moves from a first frame to a last frame; LTX 2.5 Alpha Matte turns a video into a black-and-white matte of its subject; and LTX 2.5 SDR to HDR converts a standard video into 10-bit HLG HDR at the same size and length, up to 1920x1088 and the first 145 frames (about 6 seconds at 24 fps). LTX 2.3 Sun Relight relights an outdoor video to a chosen sun direction, sun height and lighting look, keeping its content and motion.
 
 You can ask LTX to handle video generation. Powered by Lightricks via the Pixazo API gateway.
 
@@ -41,6 +41,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | LTX 2.3 Transition | Image to Video | `ltx-2-3-transition` / `image-to-video` |
 | LTX 2.5 Alpha Matte | Video to Video (Alpha Matte) | `ltx-2-5-alpha` / `alpha-matte` |
 | LTX 2.5 SDR to HDR | Video to Video (SDR to HDR) | `ltx-2-5-sdr-to-hdr` / `sdr-to-hdr` |
+| LTX 2.3 Sun Relight | Video to Video (Sun Relight) | `ltx-2-3-relight` / `relight` |
 | LTX 2.3 Quality | Text to Video | `ltx-2-3-quality-text-to-video` / `ltx-2-3-quality-text-to-video-request` |
 | LTX 2.3 Quality | Image to Video | `ltx-2-3-quality-image-to-video` / `ltx-2-3-quality-image-to-video-request` |
 | LTX 2.3 Quality | Audio to Video | `ltx-2-3-quality-audio-to-video` / `ltx-2-3-quality-audio-to-video-request` |
@@ -72,6 +73,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/ltx-2-3-transition/v1/image-to-video`
 - `POST https://gateway.pixazo.ai/ltx-2-5-alpha/v1/alpha-matte`
 - `POST https://gateway.pixazo.ai/ltx-2-5-sdr-to-hdr/v1/sdr-to-hdr`
+- `POST https://gateway.pixazo.ai/ltx-2-3-relight/v1/relight`
 - `POST https://gateway.pixazo.ai/ltx-2-3-quality-text-to-video/v1/ltx-2-3-quality-text-to-video-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-quality-image-to-video/v1/ltx-2-3-quality-image-to-video-request`
 - `POST https://gateway.pixazo.ai/ltx-2-3-quality-audio-to-video/v1/ltx-2-3-quality-audio-to-video-request`
