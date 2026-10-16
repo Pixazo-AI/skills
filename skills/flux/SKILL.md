@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| FLUX 3 Klein | Text to Image | `flux-3-klein` / `text-to-image` |
+| FLUX 3 Klein | Image to Image (Image Editing) | `flux-3-klein-edit` / `edit-image` |
 | FLUX 3 Image | Text to Image | `flux-3-image` / `text-to-image` |
 | FLUX 3 Image | Image to Image (Image Editing) | `flux-3-image-edit` / `edit-image` |
 | FLUX 3 Video | Text to Video | `flux-3-video-text-to-video` / `text-to-video` |
@@ -62,6 +64,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/flux-3-klein/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/flux-3-klein-edit/v1/edit-image`
 - `POST https://gateway.pixazo.ai/flux-3-image/v1/text-to-image`
 - `POST https://gateway.pixazo.ai/flux-3-image-edit/v1/edit-image`
 - `POST https://gateway.pixazo.ai/flux-3-video/v1/text-to-video`
@@ -96,9 +100,8 @@ curl -X POST 'https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1/flux-pro-v
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A red fox leaping over a stream in a pine forest, low-angle wildlife photograph",
-  "aspect_ratio": "16:9",
-  "resolution": "1k"
+  "prompt": "A red fox standing in fresh snow at sunrise, soft golden light, pine forest in the background",
+  "image_size": "square_hd"
 }'
 ```
 
@@ -113,9 +116,8 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A red fox leaping over a stream in a pine forest, low-angle wildlife photograph",
-  "aspect_ratio": "16:9",
-  "resolution": "1k"
+  "prompt": "A red fox standing in fresh snow at sunrise, soft golden light, pine forest in the background",
+  "image_size": "square_hd"
 },
     timeout=300,
 )
@@ -133,9 +135,8 @@ const res = await fetch('https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A red fox leaping over a stream in a pine forest, low-angle wildlife photograph",
-  "aspect_ratio": "16:9",
-  "resolution": "1k"
+  "prompt": "A red fox standing in fresh snow at sunrise, soft golden light, pine forest in the background",
+  "image_size": "square_hd"
 }),
 });
 console.log(await res.json());
