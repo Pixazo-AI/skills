@@ -32,24 +32,25 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| OmniHuman v2 | Audio to Video (Lipsync) | `omnihuman-v2` / `audio-to-video` |
 | OmniHuman v1.5 | Audio to Video (Ref Image + Ref Audio to Video — Lipsync) | `bytedance-omnihuman-v1-5-290` / `bytedance-omnihuman-v1-5-request` |
 
 ### Step 3 — Make the API call
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/omnihuman-v2/v1/audio-to-video`
 - `POST https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/v1/bytedance-omnihuman-v1-5-request`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/v1/bytedance-omnihuman-v1-5-request' \
+curl -X POST 'https://gateway.pixazo.ai/omnihuman-v2/v1/audio-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3",
-  "resolution": "1080p"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-6s.mp3"
 }'
 ```
 
@@ -58,15 +59,14 @@ curl -X POST 'https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/v1/bytedanc
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/v1/bytedance-omnihuman-v1-5-request",
+    "https://gateway.pixazo.ai/omnihuman-v2/v1/audio-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
   "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3",
-  "resolution": "1080p"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-6s.mp3"
 },
     timeout=300,
 )
@@ -77,7 +77,7 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/v1/bytedance-omnihuman-v1-5-request', {
+const res = await fetch('https://gateway.pixazo.ai/omnihuman-v2/v1/audio-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
@@ -85,8 +85,7 @@ const res = await fetch('https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/
   },
   body: JSON.stringify({
   "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
-  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-17s.mp3",
-  "resolution": "1080p"
+  "audio_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/audio/speech-6s.mp3"
 }),
 });
 console.log(await res.json());
@@ -105,12 +104,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/v1/bytedance-omnihuman-v1-5-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/omnihuman-v2/v1/audio-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/bytedance-omnihuman-v1-5-290/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/omnihuman-v2/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
