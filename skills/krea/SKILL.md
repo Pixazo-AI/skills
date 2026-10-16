@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Krea 3 | Text to Image | `krea-3` / `text-to-image` |
+| Krea 3 | Image to Image (Image Editing) | `krea-3-edit` / `edit` |
 | Krea 2 Turbo | Text to Image | `krea-2-turbo` / `krea-2-turbo-request` |
 | Krea 2 Turbo | Text to Image (LoRA) | `krea-2-turbo-lora` / `krea-2-turbo-lora-request` |
 | Krea 2 Large | Text to Image | `krea-2-large` / `text-to-image` |
@@ -42,6 +44,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/krea-3/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/krea-3-edit/v1/edit`
 - `POST https://gateway.pixazo.ai/krea-2-turbo/v1/krea-2-turbo-request`
 - `POST https://gateway.pixazo.ai/krea-2-turbo-lora/v1/krea-2-turbo-lora-request`
 - `POST https://gateway.pixazo.ai/krea-2-large/v1/text-to-image`
@@ -51,17 +55,15 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/krea-2-large/v1/text-to-image' \
+curl -X POST 'https://gateway.pixazo.ai/krea-3/v1/text-to-image' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A surreal floating island with waterfalls cascading into the clouds, soft golden light",
-  "image_size": "square_hd",
-  "num_images": 1,
-  "acceleration": "none",
-  "output_format": "png",
-  "enable_safety_checker": true,
-  "sync_mode": false
+  "prompt": "A red fox curled up asleep in fresh snow at dawn, soft pink light on the pine trees behind it",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  }
 }'
 ```
 
@@ -70,19 +72,17 @@ curl -X POST 'https://gateway.pixazo.ai/krea-2-large/v1/text-to-image' \
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/krea-2-large/v1/text-to-image",
+    "https://gateway.pixazo.ai/krea-3/v1/text-to-image",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A surreal floating island with waterfalls cascading into the clouds, soft golden light",
-  "image_size": "square_hd",
-  "num_images": 1,
-  "acceleration": "none",
-  "output_format": "png",
-  "enable_safety_checker": true,
-  "sync_mode": false
+  "prompt": "A red fox curled up asleep in fresh snow at dawn, soft pink light on the pine trees behind it",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  }
 },
     timeout=300,
 )
@@ -93,20 +93,18 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/krea-2-large/v1/text-to-image', {
+const res = await fetch('https://gateway.pixazo.ai/krea-3/v1/text-to-image', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A surreal floating island with waterfalls cascading into the clouds, soft golden light",
-  "image_size": "square_hd",
-  "num_images": 1,
-  "acceleration": "none",
-  "output_format": "png",
-  "enable_safety_checker": true,
-  "sync_mode": false
+  "prompt": "A red fox curled up asleep in fresh snow at dawn, soft pink light on the pine trees behind it",
+  "image_size": {
+    "width": 1024,
+    "height": 1024
+  }
 }),
 });
 console.log(await res.json());
