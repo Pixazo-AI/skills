@@ -35,9 +35,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Mirelo SFX 2.0 | Video to Audio | `mirelo-sfx-2-0-video-to-audio` / `video-to-audio` |
 | Mirelo SFX 2.0 | Text to Audio | `mirelo-sfx-2-0-text-to-audio` / `text-to-audio` |
 | Mirelo SFX 2.0 | Video to Video | `mirelo-sfx-2-0-video-to-video` / `video-to-video` |
-| Mirelo SFX 1.6 | Text to Audio | `mirelo-sfx-1-6-text-to-audio` / `mirelo-sfx-1-6-text-to-audio-request` |
-| Mirelo SFX 1.6 | Video to Video | `mirelo-sfx-1-6-video-to-video` / `mirelo-sfx-1-6-video-to-video-request` |
-| Mirelo SFX 1.0 | Video to Audio | `mirelo-sfx-video-to-audio` / `mirelo-sfx-video-to-audio-request` |
 
 ### Step 3 — Make the API call
 
@@ -46,9 +43,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/mirelo-sfx-2-0-video-to-audio/v1/video-to-audio`
 - `POST https://gateway.pixazo.ai/mirelo-sfx-2-0-text-to-audio/v1/text-to-audio`
 - `POST https://gateway.pixazo.ai/mirelo-sfx-2-0-video-to-video/v1/video-to-video`
-- `POST https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request`
-- `POST https://gateway.pixazo.ai/mirelo-sfx-1-6-video-to-video/v1/mirelo-sfx-1-6-video-to-video-request`
-- `POST https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-video-to-audio-request`
 
 **Sample request (primary operation)**
 
