@@ -32,6 +32,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Mirelo SFX 2.0 | Video to Audio | `mirelo-sfx-2-0-video-to-audio` / `video-to-audio` |
+| Mirelo SFX 2.0 | Text to Audio | `mirelo-sfx-2-0-text-to-audio` / `text-to-audio` |
+| Mirelo SFX 2.0 | Video to Video | `mirelo-sfx-2-0-video-to-video` / `video-to-video` |
 | Mirelo SFX 1.6 | Text to Audio | `mirelo-sfx-1-6-text-to-audio` / `mirelo-sfx-1-6-text-to-audio-request` |
 | Mirelo SFX 1.6 | Video to Video | `mirelo-sfx-1-6-video-to-video` / `mirelo-sfx-1-6-video-to-video-request` |
 | Mirelo SFX 1.0 | Video to Audio | `mirelo-sfx-video-to-audio` / `mirelo-sfx-video-to-audio-request` |
@@ -40,6 +43,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/mirelo-sfx-2-0-video-to-audio/v1/video-to-audio`
+- `POST https://gateway.pixazo.ai/mirelo-sfx-2-0-text-to-audio/v1/text-to-audio`
+- `POST https://gateway.pixazo.ai/mirelo-sfx-2-0-video-to-video/v1/video-to-video`
 - `POST https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request`
 - `POST https://gateway.pixazo.ai/mirelo-sfx-1-6-video-to-video/v1/mirelo-sfx-1-6-video-to-video-request`
 - `POST https://gateway.pixazo.ai/mirelo-sfx-video-to-audio/v1/mirelo-sfx-video-to-audio-request`
@@ -47,16 +53,14 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request' \
+curl -X POST 'https://gateway.pixazo.ai/mirelo-sfx-2-0-video-to-audio/v1/video-to-audio' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "text_prompt": "Rainforest ambience with distant birds and rustling leaves",
-  "duration": 10,
-  "ambience": false,
-  "double_output": false,
-  "num_samples": 1,
-  "upload_audio_format": "wav"
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/video/input-3s.mp4",
+  "text_prompt": "footsteps on gravel and a light breeze",
+  "duration": 3,
+  "num_samples": 1
 }'
 ```
 
@@ -65,18 +69,16 @@ curl -X POST 'https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-s
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request",
+    "https://gateway.pixazo.ai/mirelo-sfx-2-0-video-to-audio/v1/video-to-audio",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "text_prompt": "Rainforest ambience with distant birds and rustling leaves",
-  "duration": 10,
-  "ambience": false,
-  "double_output": false,
-  "num_samples": 1,
-  "upload_audio_format": "wav"
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/video/input-3s.mp4",
+  "text_prompt": "footsteps on gravel and a light breeze",
+  "duration": 3,
+  "num_samples": 1
 },
     timeout=300,
 )
@@ -87,19 +89,17 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/mirelo-sfx-1-6-text-to-audio/v1/mirelo-sfx-1-6-text-to-audio-request', {
+const res = await fetch('https://gateway.pixazo.ai/mirelo-sfx-2-0-video-to-audio/v1/video-to-audio', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "text_prompt": "Rainforest ambience with distant birds and rustling leaves",
-  "duration": 10,
-  "ambience": false,
-  "double_output": false,
-  "num_samples": 1,
-  "upload_audio_format": "wav"
+  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/video/input-3s.mp4",
+  "text_prompt": "footsteps on gravel and a light breeze",
+  "duration": 3,
+  "num_samples": 1
 }),
 });
 console.log(await res.json());
