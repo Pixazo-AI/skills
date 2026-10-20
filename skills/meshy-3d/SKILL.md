@@ -37,6 +37,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Meshy 7.1 | Image to Image (3D Models — Multi-Image to 3D) | `meshy-7-1` / `multi-image-to-3d` |
 | Meshy 7 | Image to Image (3D Models — Image to 3D) | `meshy-7` / `image-to-3d` |
 | Meshy 7 | Image to Image (3D Models — Multi-Image to 3D) | `meshy-7` / `multi-image-to-3d` |
+| Meshy 7 | Image to Image (3D Models — Retexture) | `meshy-7-retexture` / `retexture` |
 | Meshy 6 | Text to Image (3D Models — Text to 3D) | `meshy-6-text-to-3d` / `meshy-6-text-to-3d-request` |
 | Meshy 6 | Image to Image (3D Models — Image to 3D) | `meshy-6-i2-3d` / `meshy-6-i2-3d-request` |
 | Meshy 6 Lite | Image to Image (3D Models — Retexture) | `meshy-6-lite` / `retexture` |
@@ -50,6 +51,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/meshy-7-1/v1/multi-image-to-3d`
 - `POST https://gateway.pixazo.ai/meshy-7/v1/image-to-3d`
 - `POST https://gateway.pixazo.ai/meshy-7/v1/multi-image-to-3d`
+- `POST https://gateway.pixazo.ai/meshy-7-retexture/v1/retexture`
 - `POST https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request`
 - `POST https://gateway.pixazo.ai/meshy-6-text-to-3d/v1/meshy-6-text-to-3d-request-result`
 - `POST https://gateway.pixazo.ai/meshy-6-i2-3d/v1/meshy-6-i2-3d-request`
