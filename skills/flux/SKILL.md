@@ -32,6 +32,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| FLUX 3 Max | Text to Video | `flux-3-max` / `text-to-video` |
+| FLUX 3 Max | Image to Video | `flux-3-max` / `image-to-video` |
+| FLUX 3 Max | Keyframes to Video | `flux-3-max` / `keyframes-to-video` |
 | FLUX 3 Klein | Text to Image | `flux-3-klein` / `text-to-image` |
 | FLUX 3 Klein | Image to Image (Image Editing) | `flux-3-klein-edit` / `edit-image` |
 | FLUX 3 Image | Text to Image | `flux-3-image` / `text-to-image` |
@@ -64,6 +67,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/flux-3-max/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/flux-3-max/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/flux-3-max/v1/keyframes-to-video`
 - `POST https://gateway.pixazo.ai/flux-3-klein/v1/text-to-image`
 - `POST https://gateway.pixazo.ai/flux-3-klein-edit/v1/edit-image`
 - `POST https://gateway.pixazo.ai/flux-3-image/v1/text-to-image`
@@ -100,9 +106,9 @@ curl -X POST 'https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1/flux-pro-v
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A red fox standing in fresh snow at sunrise, soft golden light, pine forest in the background",
-  "aspect_ratio": "16:9",
-  "resolution": "1k"
+  "prompt": "A red panda walks along a mossy log in a sunlit forest, pausing to sniff the air.",
+  "duration": 5,
+  "resolution": "720p"
 }'
 ```
 
@@ -117,9 +123,9 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A red fox standing in fresh snow at sunrise, soft golden light, pine forest in the background",
-  "aspect_ratio": "16:9",
-  "resolution": "1k"
+  "prompt": "A red panda walks along a mossy log in a sunlit forest, pausing to sniff the air.",
+  "duration": 5,
+  "resolution": "720p"
 },
     timeout=300,
 )
@@ -137,9 +143,9 @@ const res = await fetch('https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A red fox standing in fresh snow at sunrise, soft golden light, pine forest in the background",
-  "aspect_ratio": "16:9",
-  "resolution": "1k"
+  "prompt": "A red panda walks along a mossy log in a sunlit forest, pausing to sniff the air.",
+  "duration": 5,
+  "resolution": "720p"
 }),
 });
 console.log(await res.json());
