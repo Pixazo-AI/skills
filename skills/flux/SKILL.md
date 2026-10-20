@@ -101,7 +101,8 @@ curl -X POST 'https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1/flux-pro-v
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
   "prompt": "A red fox standing in fresh snow at sunrise, soft golden light, pine forest in the background",
-  "image_size": "square_hd"
+  "aspect_ratio": "16:9",
+  "resolution": "1k"
 }'
 ```
 
@@ -117,7 +118,8 @@ r = requests.post(
     },
     json={
   "prompt": "A red fox standing in fresh snow at sunrise, soft golden light, pine forest in the background",
-  "image_size": "square_hd"
+  "aspect_ratio": "16:9",
+  "resolution": "1k"
 },
     timeout=300,
 )
@@ -136,7 +138,8 @@ const res = await fetch('https://gateway.pixazo.ai/flux-pro-v1-virtual-try-on/v1
   },
   body: JSON.stringify({
   "prompt": "A red fox standing in fresh snow at sunrise, soft golden light, pine forest in the background",
-  "image_size": "square_hd"
+  "aspect_ratio": "16:9",
+  "resolution": "1k"
 }),
 });
 console.log(await res.json());
