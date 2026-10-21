@@ -37,7 +37,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | BRIA FIBO Edit 1.5 | Image to Image (Image Editing) | `fibo-edit-1-5` / `edit` |
 | BRIA FIBO Edit 1.5 | Image to Image (Virtual Try On) | `fibo-edit-1-5` / `virtual-try-on` |
 | BRIA FIBO Edit 1.5 | Image to Image (Product Holding) | `fibo-edit-1-5` / `product-holding` |
-| BRIA FIBO Edit 1.5 | Image to Image (Image Expansion) | `fibo-edit-1-5-expand` / `expand` |
 | BRIA FIBO Preview | Text to Image | `bria-fibo-bbq-preview` / `bria-fibo-bbq-preview-request` |
 | Bria RMBG 2.0 | Image to Image (Image Background Removal) | `bria-rmbg-2-0-682` / `bria-rmbg-2-0-request` |
 | Bria VRMBG 3.0 | Video to Video (Background Removal) | `bria-video-background-removal-v3` / `bria-video-background-removal-v3-request` |
@@ -52,7 +51,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/fibo-edit-1-5/v1/edit`
 - `POST https://gateway.pixazo.ai/fibo-edit-1-5/v1/virtual-try-on`
 - `POST https://gateway.pixazo.ai/fibo-edit-1-5/v1/product-holding`
-- `POST https://gateway.pixazo.ai/fibo-edit-1-5-expand/v1/expand`
 - `POST https://gateway.pixazo.ai/bria-fibo-bbq-preview/v1/bria-fibo-bbq-preview-request`
 - `POST https://gateway.pixazo.ai/bria-rmbg-2-0-682/v1/bria-rmbg-2-0-request`
 - `POST https://gateway.pixazo.ai/bria-video-background-removal-v3/v1/bria-video-background-removal-v3-request`
