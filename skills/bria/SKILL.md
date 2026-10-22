@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| BRIA FIBO Gen 2 | Text to Image | `fibo-gen-2` / `text-to-image` |
+| BRIA FIBO Edit 2 | Image to Image (Image Editing) | `fibo-edit-2` / `edit` |
 | Bria Guided Remove Background | Image to Image (Guided Background Removal) | `bria-guided-remove-background` / `remove-background` |
 | BRIA FIBO Gen 1.5 | Text to Image | `fibo-gen-1-5` / `text-to-image` |
 | BRIA FIBO Edit 1.5 | Image to Image (Image Editing) | `fibo-edit-1-5` / `edit` |
@@ -46,6 +48,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/fibo-gen-2/v1/text-to-image`
+- `POST https://gateway.pixazo.ai/fibo-edit-2/v1/edit`
 - `POST https://gateway.pixazo.ai/bria-guided-remove-background/v1/remove-background`
 - `POST https://gateway.pixazo.ai/fibo-gen-1-5/v1/text-to-image`
 - `POST https://gateway.pixazo.ai/fibo-edit-1-5/v1/edit`
@@ -63,8 +67,8 @@ curl -X POST 'https://gateway.pixazo.ai/fibo-edit-1-5/v1/virtual-try-on' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
-  "prompt": "only the t-shirt"
+  "prompt": "A ceramic coffee cup on a wooden cafe table by a sunny window",
+  "aspect_ratio": "16:9"
 }'
 ```
 
@@ -79,8 +83,8 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
-  "prompt": "only the t-shirt"
+  "prompt": "A ceramic coffee cup on a wooden cafe table by a sunny window",
+  "aspect_ratio": "16:9"
 },
     timeout=300,
 )
@@ -98,8 +102,8 @@ const res = await fetch('https://gateway.pixazo.ai/fibo-edit-1-5/v1/virtual-try-
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "image_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg",
-  "prompt": "only the t-shirt"
+  "prompt": "A ceramic coffee cup on a wooden cafe table by a sunny window",
+  "aspect_ratio": "16:9"
 }),
 });
 console.log(await res.json());
