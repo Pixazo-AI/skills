@@ -40,7 +40,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Qwen LoRA v1 | Text to Image (LoRA) | `qwen-image-edit-plus-lora` / `generate-request` |
 | Qwen LoRA v1 | Image to Image (LoRA Trainer) | `qwen-image-edit-plus-trainer` / `training-request` |
 | Qwen LoRA v1 | Image to Image (Image Editing — Layered) | `qwen-image-layered` / `qwen-image-layered-request` |
-| Qwen Image Edit 2509 | Image to Image (Image Editing) | `qwen-image-lite` / `qwen-image-lite-request` |
 
 ### Step 3 — Make the API call
 
@@ -54,7 +53,6 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/qwen-image-edit-plus/v1/qwen-image-edit-plus-lora/generate`
 - `POST https://gateway.pixazo.ai/qwen-image-edit-plus-trainer/v1/qwen-image-edit-plus-trainer/generate`
 - `POST https://gateway.pixazo.ai/qwen-image-layered/v1/qwen-image-layered-request`
-- `POST https://gateway.pixazo.ai/qwen-image-lite/v1/qwen-image-lite-request`
 
 **Sample request (primary operation)**
 
