@@ -32,6 +32,9 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| HeyGen Video | Text to Video | `heygen-video` / `text-to-video` |
+| HeyGen Video | Image to Video | `heygen-video` / `image-to-video` |
+| HeyGen Video | Reference to Video | `heygen-video` / `reference-to-video` |
 | Heygen Video Agent 3.0 | Text to Video | `heygen-video-agent` / `heygen-video-agent-request` |
 | HeyGen v3 Lipsync Precision | Video to Video (Ref Video + Ref Audio to Video - Lipsync) | `heygen-v3-lipsync-precision` / `heygen-v3-lipsync-precision-request` |
 
@@ -39,18 +42,22 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/heygen-video/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/heygen-video/v1/image-to-video`
+- `POST https://gateway.pixazo.ai/heygen-video/v1/reference-to-video`
 - `POST https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent-request`
 - `POST https://gateway.pixazo.ai/heygen-v3-lipsync-precision/v1/video-to-video/lip-sync`
 
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent-request' \
+curl -X POST 'https://gateway.pixazo.ai/heygen-video/v1/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A friendly presenter explaining a new mobile app in 30 seconds, with a cheerful tone and modern background.",
-  "orientation": "landscape"
+  "prompt": "A red panda walks along a mossy log in a sunlit forest, pausing to sniff the air.",
+  "duration": 5,
+  "resolution": "768p"
 }'
 ```
 
@@ -59,14 +66,15 @@ curl -X POST 'https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent-request",
+    "https://gateway.pixazo.ai/heygen-video/v1/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A friendly presenter explaining a new mobile app in 30 seconds, with a cheerful tone and modern background.",
-  "orientation": "landscape"
+  "prompt": "A red panda walks along a mossy log in a sunlit forest, pausing to sniff the air.",
+  "duration": 5,
+  "resolution": "768p"
 },
     timeout=300,
 )
@@ -77,15 +85,16 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent-request', {
+const res = await fetch('https://gateway.pixazo.ai/heygen-video/v1/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A friendly presenter explaining a new mobile app in 30 seconds, with a cheerful tone and modern background.",
-  "orientation": "landscape"
+  "prompt": "A red panda walks along a mossy log in a sunlit forest, pausing to sniff the air.",
+  "duration": 5,
+  "resolution": "768p"
 }),
 });
 console.log(await res.json());
@@ -104,12 +113,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/heygen-video-agent/v1/heygen-video-agent-request", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/heygen-video/v1/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/heygen-video-agent/v1/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/heygen-video/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
