@@ -1,11 +1,11 @@
 ---
 name: heygen
-description: Video generation with Heygen Video Agent API (by HeyGen) via the Pixazo API. TRIGGER when the user mentions "Heygen" or "Heygen Video Agent API", or when the user asks to generate / make / create a video / clip / animation and Heygen is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
+description: Video generation with HeyGen API (by HeyGen) via the Pixazo API. TRIGGER when the user mentions "Heygen" or "HeyGen API", or when the user asks to generate / make / create a video / clip / animation and Heygen is named or implied. DO NOT TRIGGER for image / music / voice / 3d / try-on — each has its own skill.
 ---
 
-# Heygen Video Agent API
+# HeyGen API
 
-HeyGen Video Agent generates lifelike avatar-driven videos from text prompts with natural lip-sync and expressive delivery.
+HeyGen's voice and video models: HeyGen Voice and Voice Turbo turn text into speech with 24 voices or a cloned voice in 39 languages, HeyGen Video makes clips of 5 to 15 seconds with sound, Video Agent 3.0 produces an avatar video from a single prompt, and v3 Lipsync Precision re-syncs the lips in a talking-head video to new audio.
 
 You can ask Heygen to handle video generation. Powered by HeyGen via the Pixazo API gateway.
 
