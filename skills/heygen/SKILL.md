@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| HeyGen Voice | Text to Speech | `heygen-voice` / `text-to-speech` |
+| HeyGen Voice Turbo | Text to Speech | `heygen-voice-turbo` / `text-to-speech` |
 | HeyGen Video | Text to Video | `heygen-video` / `text-to-video` |
 | HeyGen Video | Image to Video | `heygen-video` / `image-to-video` |
 | HeyGen Video | Reference to Video | `heygen-video` / `reference-to-video` |
@@ -42,6 +44,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/heygen-voice/v1/text-to-speech`
+- `POST https://gateway.pixazo.ai/heygen-voice-turbo/v1/text-to-speech`
 - `POST https://gateway.pixazo.ai/heygen-video/v1/text-to-video`
 - `POST https://gateway.pixazo.ai/heygen-video/v1/image-to-video`
 - `POST https://gateway.pixazo.ai/heygen-video/v1/reference-to-video`
@@ -55,9 +59,8 @@ curl -X POST 'https://gateway.pixazo.ai/heygen-video/v1/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "A red panda walks along a mossy log in a sunlit forest, pausing to sniff the air.",
-  "duration": 5,
-  "resolution": "768p"
+  "text": "Welcome to the city museum. The east wing is open today until six in the evening.",
+  "voice": "Nadine"
 }'
 ```
 
@@ -72,9 +75,8 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "A red panda walks along a mossy log in a sunlit forest, pausing to sniff the air.",
-  "duration": 5,
-  "resolution": "768p"
+  "text": "Welcome to the city museum. The east wing is open today until six in the evening.",
+  "voice": "Nadine"
 },
     timeout=300,
 )
@@ -92,9 +94,8 @@ const res = await fetch('https://gateway.pixazo.ai/heygen-video/v1/text-to-video
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "A red panda walks along a mossy log in a sunlit forest, pausing to sniff the air.",
-  "duration": 5,
-  "resolution": "768p"
+  "text": "Welcome to the city museum. The east wing is open today until six in the evening.",
+  "voice": "Nadine"
 }),
 });
 console.log(await res.json());
