@@ -32,6 +32,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Kling 4.0 | Reference to Video | `kling-video-v4` / `reference-to-video` |
 | Kling Lipsync | Video to Video (Ref Video + Text to Video - Lipsync) | `kling-lipsync-text-to-video` / `kling-lipsync-text-to-video-request` |
 | Kling Video 3 Turbo Pro | Text to Video | `kling-video-v3-turbo-pro-text-to-video` / `kling-video-v3-turbo-pro-text-to-video-request` |
 | Kling Video 3 Turbo Pro | Image to Video | `kling-video-v3-turbo-pro-image-to-video` / `kling-video-v3-turbo-pro-image-to-video-request` |
@@ -62,6 +63,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/kling-video-v4/v1/reference-to-video`
 - `POST https://gateway.pixazo.ai/kling-lipsync-text-to-video/v1/text-to-video/lip-sync`
 - `POST https://gateway.pixazo.ai/kling-video-v3-turbo-pro-text-to-video/v1/kling-video-v3-turbo-pro-text-to-video-request`
 - `POST https://gateway.pixazo.ai/kling-video-v3-turbo-pro-image-to-video/v1/kling-video-v3-turbo-pro-image-to-video-request`
@@ -97,11 +99,12 @@ curl -X POST 'https://gateway.pixazo.ai/kling-lipsync-text-to-video/v1/text-to-v
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/lipsync/talking-head-17s.mp4",
-  "text": "Mental health is as important as physical health.",
-  "voice_id": "genshin_klee2",
-  "voice_language": "en",
-  "voice_speed": 1
+  "prompt": "The person in @Image1 walks through a busy street market at dusk.",
+  "image_urls": [
+    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
+  ],
+  "duration": 5,
+  "resolution": "1080p"
 }'
 ```
 
@@ -116,11 +119,12 @@ r = requests.post(
         "Content-Type": "application/json",
     },
     json={
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/lipsync/talking-head-17s.mp4",
-  "text": "Mental health is as important as physical health.",
-  "voice_id": "genshin_klee2",
-  "voice_language": "en",
-  "voice_speed": 1
+  "prompt": "The person in @Image1 walks through a busy street market at dusk.",
+  "image_urls": [
+    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
+  ],
+  "duration": 5,
+  "resolution": "1080p"
 },
     timeout=300,
 )
@@ -138,11 +142,12 @@ const res = await fetch('https://gateway.pixazo.ai/kling-lipsync-text-to-video/v
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "video_url": "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/lipsync/talking-head-17s.mp4",
-  "text": "Mental health is as important as physical health.",
-  "voice_id": "genshin_klee2",
-  "voice_language": "en",
-  "voice_speed": 1
+  "prompt": "The person in @Image1 walks through a busy street market at dusk.",
+  "image_urls": [
+    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
+  ],
+  "duration": 5,
+  "resolution": "1080p"
 }),
 });
 console.log(await res.json());
