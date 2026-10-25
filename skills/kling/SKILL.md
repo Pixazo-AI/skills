@@ -35,6 +35,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 | Kling 4.0 | Text to Video | `kling-video-v4` / `text-to-video` |
 | Kling 4.0 | Image to Video | `kling-video-v4` / `image-to-video` |
 | Kling 4.0 | Reference to Video | `kling-video-v4` / `reference-to-video` |
+| Kling 4.0 | Video to Video (Video Editing) | `kling-video-v4` / `v2v-edit` |
 | Kling Lipsync | Video to Video (Ref Video + Text to Video - Lipsync) | `kling-lipsync-text-to-video` / `kling-lipsync-text-to-video-request` |
 | Kling Video 3 Turbo Pro | Text to Video | `kling-video-v3-turbo-pro-text-to-video` / `kling-video-v3-turbo-pro-text-to-video-request` |
 | Kling Video 3 Turbo Pro | Image to Video | `kling-video-v3-turbo-pro-image-to-video` / `kling-video-v3-turbo-pro-image-to-video-request` |
@@ -68,6 +69,7 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 - `POST https://gateway.pixazo.ai/kling-video-v4/v1/text-to-video`
 - `POST https://gateway.pixazo.ai/kling-video-v4/v1/image-to-video`
 - `POST https://gateway.pixazo.ai/kling-video-v4/v1/reference-to-video`
+- `POST https://gateway.pixazo.ai/kling-video-v4/v1/v2v-edit`
 - `POST https://gateway.pixazo.ai/kling-lipsync-text-to-video/v1/text-to-video/lip-sync`
 - `POST https://gateway.pixazo.ai/kling-video-v3-turbo-pro-text-to-video/v1/kling-video-v3-turbo-pro-text-to-video-request`
 - `POST https://gateway.pixazo.ai/kling-video-v3-turbo-pro-image-to-video/v1/kling-video-v3-turbo-pro-image-to-video-request`
