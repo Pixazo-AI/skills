@@ -32,6 +32,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 | Version | Operation | apiId / operationId |
 |---|---|---|
+| Kling 4.0 | Text to Video | `kling-video-v4` / `text-to-video` |
+| Kling 4.0 | Image to Video | `kling-video-v4` / `image-to-video` |
 | Kling 4.0 | Reference to Video | `kling-video-v4` / `reference-to-video` |
 | Kling Lipsync | Video to Video (Ref Video + Text to Video - Lipsync) | `kling-lipsync-text-to-video` / `kling-lipsync-text-to-video-request` |
 | Kling Video 3 Turbo Pro | Text to Video | `kling-video-v3-turbo-pro-text-to-video` / `kling-video-v3-turbo-pro-text-to-video-request` |
@@ -63,6 +65,8 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 
 **Endpoints**
 
+- `POST https://gateway.pixazo.ai/kling-video-v4/v1/text-to-video`
+- `POST https://gateway.pixazo.ai/kling-video-v4/v1/image-to-video`
 - `POST https://gateway.pixazo.ai/kling-video-v4/v1/reference-to-video`
 - `POST https://gateway.pixazo.ai/kling-lipsync-text-to-video/v1/text-to-video/lip-sync`
 - `POST https://gateway.pixazo.ai/kling-video-v3-turbo-pro-text-to-video/v1/kling-video-v3-turbo-pro-text-to-video-request`
@@ -95,14 +99,11 @@ When they paste the key, save it to `~/.pixazo/api-key` (`chmod 600`) and procee
 **Sample request (primary operation)**
 
 ```bash
-curl -X POST 'https://gateway.pixazo.ai/kling-lipsync-text-to-video/v1/text-to-video/lip-sync' \
+curl -X POST 'https://gateway.pixazo.ai/kling-video-v4/v1/text-to-video' \
   -H 'Content-Type: application/json' \
   -H "Ocp-Apim-Subscription-Key: $PIXAZO_API_KEY" \
   -d '{
-  "prompt": "The person in @Image1 walks through a busy street market at dusk.",
-  "image_urls": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
-  ],
+  "prompt": "A detective in a black trench coat stands on a rooftop in the rain, looking through a telescope at the street below.",
   "duration": 5,
   "resolution": "1080p"
 }'
@@ -113,16 +114,13 @@ curl -X POST 'https://gateway.pixazo.ai/kling-lipsync-text-to-video/v1/text-to-v
 ```python
 import os, requests
 r = requests.post(
-    "https://gateway.pixazo.ai/kling-lipsync-text-to-video/v1/text-to-video/lip-sync",
+    "https://gateway.pixazo.ai/kling-video-v4/v1/text-to-video",
     headers={
         "Ocp-Apim-Subscription-Key": os.environ["PIXAZO_API_KEY"],
         "Content-Type": "application/json",
     },
     json={
-  "prompt": "The person in @Image1 walks through a busy street market at dusk.",
-  "image_urls": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
-  ],
+  "prompt": "A detective in a black trench coat stands on a rooftop in the rain, looking through a telescope at the street below.",
   "duration": 5,
   "resolution": "1080p"
 },
@@ -135,17 +133,14 @@ print(r.json())
 **Node.js**
 
 ```js
-const res = await fetch('https://gateway.pixazo.ai/kling-lipsync-text-to-video/v1/text-to-video/lip-sync', {
+const res = await fetch('https://gateway.pixazo.ai/kling-video-v4/v1/text-to-video', {
   method: 'POST',
   headers: {
     'Ocp-Apim-Subscription-Key': process.env.PIXAZO_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-  "prompt": "The person in @Image1 walks through a busy street market at dusk.",
-  "image_urls": [
-    "https://pub-582b7213209642b9b995c96c95a30381.r2.dev/doc-assets/images/input.jpg"
-  ],
+  "prompt": "A detective in a black trench coat stands on a rooftop in the rain, looking through a telescope at the street below.",
   "duration": 5,
   "resolution": "1080p"
 }),
@@ -166,12 +161,12 @@ KEY = os.environ["PIXAZO_API_KEY"]
 HEADERS = {"Ocp-Apim-Subscription-Key": KEY, "Content-Type": "application/json"}
 
 # 1) Submit
-submit = requests.post("https://gateway.pixazo.ai/kling-lipsync-text-to-video/v1/text-to-video/lip-sync", headers=HEADERS, json={...}).json()
+submit = requests.post("https://gateway.pixazo.ai/kling-video-v4/v1/text-to-video", headers=HEADERS, json={...}).json()
 task_id = submit.get("task_id") or submit.get("request_id") or submit.get("id")
 
 # 2) Poll (every 5–10s; total cap ~10 min for video, ~3 min for music)
 while True:
-    status = requests.get(f"https://gateway.pixazo.ai/kling-lipsync-text-to-video/v1/text-to-video/result/{task_id}", headers=HEADERS).json()
+    status = requests.get(f"https://gateway.pixazo.ai/kling-video-v4/v1/result/{task_id}", headers=HEADERS).json()
     if status.get("status") in ("completed", "succeeded", "ready", "done"):
         break
     if status.get("status") in ("failed", "error"):
