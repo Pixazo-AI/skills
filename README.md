@@ -34,7 +34,7 @@ A Pixazo API key. Get one free at **https://api-console.pixazo.ai/api_keys** —
 
 ### Video generation
 
-`hailuo` · `higgsfield` · `hunyuan-video` · `kling` · `ltx` · `lucy-edit` · `luma` · `minimax` · `omnihuman` · `p-video` · `pixverse` · `runway` · `seedance` · `sora` · `veed` · `veo` · `vidu` · `wan`
+`hailuo` · `higgsfield` · `hunyuan-video` · `kling` · `ltx` · `luma` · `minimax` · `omnihuman` · `p-video` · `pixverse` · `runway` · `seedance` · `sora` · `veed` · `veo` · `vidu` · `wan`
 
 ### Music & audio
 
